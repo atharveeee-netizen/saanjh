@@ -10,6 +10,7 @@ import yaml
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONFIG_PATH = os.path.join(REPO_ROOT, "config", "saanjh.yaml")
+SEGMENTS_PATH = os.path.join(REPO_ROOT, "config", "load_segments.yaml")
 
 
 def deep_update(base, overrides):
@@ -24,8 +25,14 @@ def deep_update(base, overrides):
 
 
 def load_config(overrides=None, path=CONFIG_PATH):
+    """Load config/saanjh.yaml plus the calibrated segments in config/load_segments.yaml."""
     with open(path, "r", encoding="utf-8") as f:
         cfg = yaml.safe_load(f)
+    if os.path.exists(SEGMENTS_PATH):
+        with open(SEGMENTS_PATH, "r", encoding="utf-8") as f:
+            seg = yaml.safe_load(f)
+        cfg.setdefault("segments", {}).update(seg.get("segments", {}))
+        cfg["calibration_targets"] = seg.get("calibration_targets", {})
     return deep_update(cfg, overrides)
 
 

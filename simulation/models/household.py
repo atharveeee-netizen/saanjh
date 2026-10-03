@@ -27,6 +27,10 @@ class Household:
         # Per-home scale factors so homes differ even with identical schedules.
         self.scale = {name: rng.uniform(0.8, 1.2) for name in seg_cfg["appliances"]}
         self.shift_h = {name: rng.uniform(-0.25, 0.25) for name in seg_cfg["appliances"]}
+        # Home-level usage intensity (mean 1) for continuous loads; sessions keep their
+        # rated power since an appliance draws its rating when on.
+        sigma = seg_cfg.get("home_intensity_sigma", 0.0)
+        self.intensity = float(rng.lognormal(-sigma ** 2 / 2, sigma)) if sigma > 0 else 1.0
 
         self.loads = {}       # name -> np.ndarray of kW per step for the current day
         self.inverter = None  # set by the engine when the home has an inverter
@@ -37,12 +41,17 @@ class Household:
         return f"H-{self.hid + 1:03d}"
 
     # ------------------------------------------------------------------ load generation
-    def generate_day(self, rng, steps_per_day, step_h, multipliers=None, start_hour=0.0):
+    def generate_day(self, rng, steps_per_day, step_h, multipliers=None, start_hour=0.0,
+                     season=None):
         """Generate kW arrays for every owned appliance for one day.
 
-        ``multipliers`` optionally scales appliances by name for the day (e.g. season).
+        ``multipliers`` scales appliances by name for the day (e.g. a heatwave).
+        ``season`` applies each appliance's per-season factor: kW for profiles, daily
+        probability for sessions.
         ``start_hour`` lets a run start at a clock time other than midnight (the evening
         case runs noon to noon so that rebound and recharge finish inside the run).
+        Sessions that run past the end of the day wrap to its start; for a run of similar
+        days this is equivalent to spilling into the next day.
         """
         multipliers = multipliers or {}
         hours = (start_hour + np.arange(steps_per_day) * step_h) % 24
@@ -50,28 +59,29 @@ class Household:
         for name, spec in self.seg_cfg["appliances"].items():
             if not self.owned[name]:
                 continue
-            mult = multipliers.get(name, 1.0) * self.scale[name]
-            if mult <= 0:
+            seasonal = spec.get("season", {}).get(season, 1.0) if season else 1.0
+            mult = multipliers.get(name, 1.0) * self.scale[name] * self.intensity
+            if mult <= 0 or seasonal <= 0:
                 continue
             arr = np.zeros(steps_per_day)
             if "profile" in spec:
                 for start, end, kw in spec["profile"]:
                     s = start + self.shift_h[name] if 0 < start < 24 else start
                     e = end + self.shift_h[name] if 0 < end < 24 else end
-                    arr[(hours >= s) & (hours < e)] += kw * mult
+                    arr[(hours >= s) & (hours < e)] += kw * mult * seasonal
                 # Small step-to-step variation around the profile.
                 arr *= rng.uniform(0.9, 1.1, steps_per_day)
             if "session" in spec:
                 sess = spec["session"]
-                n_sessions = sess.get("per_day", 1)
-                for _ in range(n_sessions):
-                    if rng.random() > sess.get("probability", 1.0):
+                p = min(1.0, sess.get("probability", 1.0) * seasonal)
+                for _ in range(sess.get("per_day", 1)):
+                    if rng.random() > p:
                         continue
                     start_h = rng.normal(sess["start_mean"], sess.get("start_sd", 0.0))
                     start = int(round(((start_h - start_hour) % 24) / step_h)) % steps_per_day
                     n = max(1, int(round(sess["duration_min"] / (step_h * 60))))
-                    idx = np.arange(start, min(start + n, steps_per_day))
-                    arr[idx] += sess["kw"] * mult
+                    idx = np.arange(start, start + n) % steps_per_day
+                    arr[idx] += sess["kw"] * multipliers.get(name, 1.0) * self.scale[name]
             self.loads[name] = arr
         return self.loads
 

@@ -45,6 +45,31 @@ appliance_flex:
 forecast:
   model_path: artifacts/models/real_xgboost_model.pkl   # trained on UCI (non-Indian) data
 
+site:                             # weather for PV and day types (REAL DATA, NASA POWER)
+  name: lucknow
+  year: 2023
+  latitude: 26.85
+  longitude: 80.95
+
+# Baseline outage calibration. REAL DATA (published aggregates): Prayas (Energy Group),
+# "ESMI in Uttar Pradesh", ESMI monitoring locations 2016-19. Used unless
+# data/processed/esmi_stats.json (built from the raw ESMI files) is present.
+outage_calibration:
+  source: "Prayas (Energy Group), ESMI in Uttar Pradesh (blog series on ESMI data, 2016-19 locations)"
+  url: https://energy.prayaspune.org/our-work/article-and-blog/esmi-in-uttar-pradesh
+  categories:
+    megacity:        {daily_outage_min: 21,  evening_outage_min: 12, outages_per_day: 2}
+    other_municipal: {daily_outage_min: 90,  evening_outage_min: 53, outages_per_day: 5}
+    rural:           {daily_outage_min: 240, evening_outage_min: 90, outages_per_day: 10}
+  duration_mix: {under_1h: 0.30, one_to_3h: 0.33, over_3h: 0.37}
+  evening_window_h: [17, 23]
+  # Outages are more frequent toward the end of summer and least frequent in winter
+  # (same source). Relative weights below are an [ASSUMPTION] encoding that statement.
+  season_weight: {winter: 0.6, spring: 0.9, summer: 1.4, monsoon: 1.2, post_monsoon: 0.8}
+  # [ASSUMPTION] share of evening outage minutes caused by supply shortfall (rationing /
+  # load shedding) rather than faults. SAANJH only addresses shortfall outages.
+  deficit_share: 0.5
+
 # ---------------------------------------------------------------------------
 # Household segments. Load shapes are piecewise (start_h, end_h, kW) profiles
 # or sessions (start time distribution, duration, kW). Each home gets random
@@ -70,6 +95,26 @@ segments:
       ev_charger:   {own: 0.08, critical: false, flex: defer,    session: {start_mean: 20.00, start_sd: 0.50, duration_min: 180, kw: 1.50}}
 
 scenarios:
+  peri_urban_low_income:
+    label: CALIBRATED TO REAL DATA
+    description: >
+      A peri-urban DT on the edge of a mid-sized Uttar Pradesh town. Mostly low-income
+      homes; baseline outages calibrated to ESMI "other municipal area" locations.
+    num_homes: 250
+    transformer_kva: 100
+    segment_mix: {low_income: 0.70, middle: 0.25, affluent: 0.05}
+    esmi_category: other_municipal
+    opted_out_homes: 2
+  mixed_urban:
+    label: CALIBRATED TO REAL DATA
+    description: >
+      A mixed-income urban DT in Lucknow; baseline outages calibrated to ESMI megacity
+      locations.
+    num_homes: 200
+    transformer_kva: 100
+    segment_mix: {low_income: 0.40, middle: 0.45, affluent: 0.15}
+    esmi_category: megacity
+    opted_out_homes: 2
   evening_peak_legacy:
     label: SIMULATED
     description: >

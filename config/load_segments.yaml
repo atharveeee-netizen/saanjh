@@ -1,0 +1,94 @@
+# Household load segments, CALIBRATED TO REAL DATA.
+#
+# Calibration targets come from Prayas eMARC published load patterns
+# (https://energy.prayaspune.org/electricity-load-patterns, see docs/PROJECT_BRIEF.md):
+#   - typical ("middle") home, non-summer months: night 100-150 W, evening peak near
+#     21:00 of 200-250 W
+#   - AC-owning homes: about 600 W at their peak (we calibrate the summer peak hour)
+#   - water-heater homes: about 500 W at their peak (we calibrate the winter morning peak)
+# scripts/calibrate_loads.py checks the generated profiles against these targets and
+# tests/test_calibration.py fails if they drift outside the ranges.
+#
+# Individual appliance ratings, ownership and timings are [ASSUMPTION]s chosen to be
+# typical for Indian homes and then tuned so the aggregates hit the targets above. There
+# is no published per-segment split; the low-income and affluent segments are scaled
+# relative to the eMARC "typical" home and labelled as assumptions.
+#
+# Shapes:
+#   profile: [[start_h, end_h, kW], ...]   kW drawn in that window (before jitter)
+#   session: one block per day starting near start_mean (h), lasting duration_min
+#   season:  per-season factor. For profiles it scales kW; for sessions it is the
+#            probability the session happens that day (capped at 1).
+# Seasons: winter (Dec-Feb), spring (Mar), summer (Apr-Jun), monsoon (Jul-Sep),
+#          post_monsoon (Oct-Nov).
+
+calibration_targets:
+  middle_night_w: [100, 150]          # mean 00:00-05:00, non-summer
+  middle_evening_peak_w: [200, 250]   # mean at the 21:00 hour, non-summer
+  ac_homes_peak_w: [500, 700]         # mean of AC-owning homes at their peak hour, summer
+  water_heater_homes_peak_w: [400, 600]  # geyser-owning homes at their peak hour, winter
+
+segments:
+  low_income:
+    label: "CALIBRATED TO REAL DATA (scaled below the eMARC typical home; ASSUMPTION)"
+    home_intensity_sigma: 0.25
+    ownership:
+      inverter: 0.02            # [ASSUMPTION] IIT Madras six-state study: 4-5% overall, concentrated among affluent homes
+      rooftop_pv: 0.0
+      actuator: 0.0             # no smart plugs assumed
+      critical_load: 0.01       # e.g. registered medical device
+    pv_kwp: 0.0
+    appliances:
+      lighting:  {own: 1.0, critical: true, backed_up: true, profile: [[0, 5, 0.008], [5, 7, 0.02], [18, 23, 0.05], [23, 24, 0.015]]}
+      fans:      {own: 1.0, critical: true, backed_up: true, profile: [[0, 24, 0.045]], season: {winter: 0.1, spring: 0.8, summer: 1.6, monsoon: 1.4, post_monsoon: 0.8}}
+      tv:        {own: 0.7, critical: true, backed_up: true, profile: [[12, 14, 0.04], [18.5, 22.5, 0.06]]}
+      phone:     {own: 1.0, critical: true, backed_up: true, profile: [[20, 24, 0.01]]}
+      fridge:    {own: 0.4, critical: true, backed_up: false, profile: [[0, 24, 0.055]], season: {winter: 0.8, spring: 1.0, summer: 1.3, monsoon: 1.15, post_monsoon: 1.0}}
+      cooler:    {own: 0.3, critical: false, backed_up: false, profile: [[12, 17, 0.14], [21, 24, 0.14], [0, 5, 0.14]], season: {winter: 0, spring: 0.2, summer: 1.0, monsoon: 0.5, post_monsoon: 0}}
+      misc:      {own: 1.0, critical: false, backed_up: false, profile: [[0, 24, 0.008], [7, 9, 0.03], [19, 21, 0.03]]}
+
+  middle:
+    label: "CALIBRATED TO REAL DATA (eMARC typical home)"
+    home_intensity_sigma: 0.25
+    ownership:
+      inverter: 0.20            # [ASSUMPTION] urban middle-income, range 15-25%
+      rooftop_pv: 0.03          # [ASSUMPTION]
+      actuator: 0.05            # [ASSUMPTION] smart plug on geyser/pump
+      critical_load: 0.02
+    pv_kwp: 1.0
+    appliances:
+      lighting:     {own: 1.0, critical: true, backed_up: true, profile: [[0, 5, 0.012], [5, 7, 0.03], [17.5, 18.5, 0.04], [18.5, 23, 0.055], [23, 24, 0.025]]}
+      fans:         {own: 1.0, critical: true, backed_up: true, profile: [[0, 24, 0.05]], season: {winter: 0.15, spring: 0.9, summer: 1.8, monsoon: 1.5, post_monsoon: 0.9}}
+      tv:           {own: 0.95, critical: true, backed_up: true, profile: [[12, 14, 0.05], [18.5, 23, 0.06]]}
+      phone:        {own: 1.0, critical: true, backed_up: true, profile: [[20, 24, 0.012]]}
+      router:       {own: 0.6, critical: false, backed_up: true, profile: [[0, 24, 0.012]]}
+      fridge:       {own: 0.9, critical: true, backed_up: false, profile: [[0, 24, 0.062]], season: {winter: 0.8, spring: 1.0, summer: 1.3, monsoon: 1.15, post_monsoon: 1.0}}
+      cooler:       {own: 0.4, critical: false, backed_up: false, profile: [[12, 17, 0.17], [21, 24, 0.17], [0, 5, 0.17]], season: {winter: 0, spring: 0.2, summer: 1.0, monsoon: 0.6, post_monsoon: 0}}
+      kitchen:      {own: 0.8, critical: false, backed_up: false, session: {start_mean: 19.5, start_sd: 0.5, duration_min: 15, kw: 0.45}}
+      water_heater: {own: 0.15, critical: false, flex: defer, session: {start_mean: 7.0, start_sd: 0.8, duration_min: 30, kw: 2.0}, season: {winter: 0.85, spring: 0.5, summer: 0.05, monsoon: 0.2, post_monsoon: 0.6}}
+      water_pump:   {own: 0.35, critical: false, flex: defer, session: {start_mean: 18.5, start_sd: 0.6, duration_min: 20, kw: 0.75}}
+      washing:      {own: 0.4, critical: false, flex: defer, session: {start_mean: 10.5, start_sd: 1.0, duration_min: 45, kw: 0.4, probability: 0.4}}
+
+  affluent:
+    label: "CALIBRATED TO REAL DATA (eMARC AC-home and water-heater-home peaks)"
+    home_intensity_sigma: 0.25
+    ownership:
+      inverter: 0.50            # [ASSUMPTION]
+      rooftop_pv: 0.15          # [ASSUMPTION]
+      actuator: 0.20            # [ASSUMPTION] smart AC or contactor on geyser/pump/EV
+      critical_load: 0.03
+    pv_kwp: 2.0
+    appliances:
+      lighting:     {own: 1.0, critical: true, backed_up: true, profile: [[0, 5, 0.02], [5, 7, 0.05], [17.5, 18.5, 0.06], [18.5, 23.5, 0.09], [23.5, 24, 0.04]]}
+      fans:         {own: 1.0, critical: true, backed_up: true, profile: [[0, 24, 0.06]], season: {winter: 0.15, spring: 0.9, summer: 1.4, monsoon: 1.3, post_monsoon: 0.9}}
+      tv:           {own: 1.0, critical: true, backed_up: true, profile: [[12, 14, 0.06], [18.5, 23.5, 0.08]]}
+      phone:        {own: 1.0, critical: true, backed_up: true, profile: [[20, 24, 0.02]]}
+      router:       {own: 1.0, critical: false, backed_up: true, profile: [[0, 24, 0.015]]}
+      fridge:       {own: 1.0, critical: true, backed_up: false, profile: [[0, 24, 0.08]], season: {winter: 0.8, spring: 1.0, summer: 1.3, monsoon: 1.15, post_monsoon: 1.0}}
+      ac_day:       {own: 0.7, critical: false, flex: setpoint, session: {start_mean: 14.0, start_sd: 0.8, duration_min: 150, kw: 0.42}, season: {winter: 0, spring: 0.05, summer: 0.35, monsoon: 0.25, post_monsoon: 0.02}}
+      ac:           {own: 0.7, critical: false, flex: setpoint, session: {start_mean: 22.0, start_sd: 0.6, duration_min: 360, kw: 0.42}, season: {winter: 0, spring: 0.1, summer: 0.65, monsoon: 0.5, post_monsoon: 0.05}}
+      kitchen:      {own: 0.9, critical: false, backed_up: false, session: {start_mean: 19.5, start_sd: 0.5, duration_min: 20, kw: 0.6}}
+      water_heater: {own: 0.6, critical: false, flex: defer, session: {start_mean: 7.0, start_sd: 0.8, duration_min: 30, kw: 2.0}, season: {winter: 0.85, spring: 0.5, summer: 0.05, monsoon: 0.2, post_monsoon: 0.6}}
+      water_pump:   {own: 0.5, critical: false, flex: defer, session: {start_mean: 18.5, start_sd: 0.6, duration_min: 20, kw: 0.75}}
+      washing:      {own: 0.8, critical: false, flex: defer, session: {start_mean: 10.5, start_sd: 1.0, duration_min: 45, kw: 0.5, probability: 0.5}}
+      ev_charger:   {own: 0.05, critical: false, flex: defer, session: {start_mean: 21.0, start_sd: 0.7, duration_min: 150, kw: 1.6, probability: 0.4}}
