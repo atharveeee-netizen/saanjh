@@ -1,0 +1,30 @@
+{
+  "peri_urban_low_income": {
+    "rate": 1.177475929260254,
+    "concentration": 2.0,
+    "daily_minutes": 51.42115068493151,
+    "evening_minutes": 26.568164383561648,
+    "daily_error": 6.421150684931511,
+    "target_daily_minutes": 45.0,
+    "target_evening_minutes": 26.5,
+    "d_ref_kw": 71.46102534184888,
+    "signature": 1941315631,
+    "esmi_category": "other_municipal",
+    "deficit_share": 0.5,
+    "label": "CALIBRATED TO REAL DATA (ESMI Uttar Pradesh published outage minutes)"
+  },
+  "mixed_urban": {
+    "rate": 0.19536113739013672,
+    "concentration": 4.0,
+    "daily_minutes": 9.842465753424657,
+    "evening_minutes": 6.133561643835616,
+    "daily_error": 0.6575342465753433,
+    "target_daily_minutes": 10.5,
+    "target_evening_minutes": 6.0,
+    "d_ref_kw": 69.84232312826008,
+    "signature": 251425462,
+    "esmi_category": "megacity",
+    "deficit_share": 0.5,
+    "label": "CALIBRATED TO REAL DATA (ESMI Uttar Pradesh published outage minutes)"
+  }
+}

@@ -42,6 +42,32 @@ appliance_flex:
   ac_rebound_share: 0.5           # [ASSUMPTION] share of avoided AC energy that returns later
   rebound_stagger_steps: 4        # deferred appliances restart spread over up to N steps
 
+grid:
+  lt_feeders: 4                   # [ASSUMPTION] LT feeders ("ways") per DT; the baseline sheds at this granularity
+
+essential_band:                   # smart-meter load limiting
+  band_w: 500                     # default floor of the band (prompt default; sensitivity 300 / 1000)
+  ladder_w: [1000, 750, 500]      # dispatcher uses the gentlest level that closes the gap
+  critical_band_w: 1000           # homes flagged critical (medical device, enterprise fridge)
+  grace_s: 30                     # [ASSUMPTION] meter trip delay; covers motor inrush
+
+community_battery:                # second-life EV pack at the DT [ASSUMPTION sizes; varied in sensitivity]
+  capacity_kwh: 100
+  power_kw: 40
+  round_trip_efficiency: 0.85
+  soc_min: 0.10
+  soc_max: 0.90
+  initial_soc: 0.90
+  fade_per_efc: 0.0002            # [ASSUMPTION] ~20% further fade over 1,000 equivalent full cycles
+  derate_start_c: 40              # [ASSUMPTION] power derate above this ambient temperature
+  derate_per_c: 0.03
+  charge_window_h: [9, 16]        # solar hours, cheapest under Time-of-Day tariffs
+
+dispatch:
+  assumed_event_blocks: 8         # without a forecast, assume a deficit lasts 2 h when planning battery energy
+  battery_mode: auto              # auto: full support if energy suffices for the event, else essential-only
+  heatwave_cooling_multiplier: 1.15   # [ASSUMPTION] extra cooling load on heatwave days
+
 forecast:
   model_path: artifacts/models/real_xgboost_model.pkl   # trained on UCI (non-Indian) data
 

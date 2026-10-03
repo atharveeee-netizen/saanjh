@@ -95,6 +95,8 @@ class Weather:
         days["month"] = [d.month for d in days.index]
         days["season"] = days["month"].map(SEASON_BY_MONTH)
         days["day_type"] = classify_days(days)
+        p90 = days.groupby("month")["ghi_kwh_m2"].transform(lambda x: x.quantile(0.9))
+        days["cloudiness"] = (1 - days["ghi_kwh_m2"] / p90).clip(0, 1)
         self.days = days
         self.dates = list(days.index)
         self._by_date = {d: g for d, g in q.groupby("date")}

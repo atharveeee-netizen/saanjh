@@ -16,24 +16,21 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from simulation.config import load_config, repo_path
 from simulation.feeder_sim import update_results
-from simulation.models.household import Household
+from simulation.fleet import HomeFleet
 
 SEASONS = ["winter", "spring", "summer", "monsoon", "post_monsoon"]
 
 
 def sample_profiles(cfg, segment, season, n_homes=600, n_days=3, seed=0):
-    """Return (homes, array[home, day, step] of kW)."""
+    """Return (fleet, array[home, day, step] of kW) using the engine's HomeFleet."""
     rng = np.random.default_rng(seed)
     step_h = cfg["simulation"]["step_min"] / 60
     steps = int(24 / step_h)
-    seg = cfg["segments"][segment]
-    homes = [Household(i, segment, seg, rng, False, False, False) for i in range(n_homes)]
+    fleet = HomeFleet(cfg, {"num_homes": n_homes, "segment_mix": {segment: 1.0}}, rng)
     out = np.zeros((n_homes, n_days, steps))
     for d in range(n_days):
-        for i, h in enumerate(homes):
-            h.generate_day(rng, steps, step_h, season=season)
-            out[i, d] = sum(h.loads.values()) if h.loads else 0.0
-    return homes, out
+        out[:, d] = fleet.generate_day(rng, steps, step_h, season=season).total
+    return fleet, out
 
 
 def hourly(profile, step_h):
@@ -68,13 +65,13 @@ def calibrate(cfg=None, n_homes=600, n_days=3):
     stats["middle_evening_peak_w"] = float(np.mean([window_mean(a, 21, 22) for a in non_summer]))
 
     homes, arr = cache[("affluent", "summer")]
-    ac_idx = [i for i, h in enumerate(homes) if h.owned.get("ac")]
+    ac_idx = np.where(homes.owned["ac"])[0]
     stats["ac_homes_peak_w"] = float(hourly(arr[ac_idx].mean(axis=(0, 1)), step_h).max() * 1000)
 
     wh = []
     for segment in ("middle", "affluent"):
         homes, arr = cache[(segment, "winter")]
-        idx = [i for i, h in enumerate(homes) if h.owned.get("water_heater")]
+        idx = np.where(homes.owned["water_heater"])[0]
         wh.append(arr[idx].mean(axis=1))
     wh = np.concatenate(wh)
     stats["water_heater_homes_peak_w"] = float(hourly(wh.mean(axis=0), step_h).max() * 1000)

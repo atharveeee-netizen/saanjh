@@ -70,20 +70,20 @@
   "load_calibration": {
     "label": "CALIBRATED TO REAL DATA (Prayas eMARC published load patterns)",
     "stats": {
-      "middle_night_w": 125.2504959728639,
-      "middle_evening_peak_w": 235.9377481034162,
-      "ac_homes_peak_w": 623.3442501907216,
-      "water_heater_homes_peak_w": 477.3216858894406,
-      "low_income_mean_w": 111.1757261789608,
-      "low_income_kwh_per_month": 80.04652284885178,
-      "middle_mean_w": 177.69535624755926,
-      "middle_kwh_per_month": 127.94065649824265,
-      "affluent_mean_w": 263.41355847384784,
-      "affluent_kwh_per_month": 189.65776210117045
+      "middle_night_w": 126.09419997944187,
+      "middle_evening_peak_w": 236.42702136370272,
+      "ac_homes_peak_w": 633.1830359165191,
+      "water_heater_homes_peak_w": 466.21115198909877,
+      "low_income_mean_w": 111.49913467420994,
+      "low_income_kwh_per_month": 80.27937696543117,
+      "middle_mean_w": 175.73214143490637,
+      "middle_kwh_per_month": 126.52714183313259,
+      "affluent_mean_w": 262.90804188591295,
+      "affluent_kwh_per_month": 189.29379015785733
     },
     "checks": {
       "middle_night_w": {
-        "value": 125.2504959728639,
+        "value": 126.09419997944187,
         "target": [
           100,
           150
@@ -91,7 +91,7 @@
         "ok": true
       },
       "middle_evening_peak_w": {
-        "value": 235.9377481034162,
+        "value": 236.42702136370272,
         "target": [
           200,
           250
@@ -99,7 +99,7 @@
         "ok": true
       },
       "ac_homes_peak_w": {
-        "value": 623.3442501907216,
+        "value": 633.1830359165191,
         "target": [
           500,
           700
@@ -107,7 +107,7 @@
         "ok": true
       },
       "water_heater_homes_peak_w": {
-        "value": 477.3216858894406,
+        "value": 466.21115198909877,
         "target": [
           400,
           600
