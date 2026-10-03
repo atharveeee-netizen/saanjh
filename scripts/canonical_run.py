@@ -25,7 +25,7 @@ def run_canonical_pipeline():
     subprocess.run([sys.executable, os.path.join(base_dir, "scripts", "generate_blender_data.py")], check=True)
     
     # Step 4: Documentation Compilation
-    print("\n[4/4] Compiling README.md & docs/SUBMISSION.md from Live KPIs...")
+    print("\n[4/4] Compiling README.md from Live KPIs...")
     subprocess.run([sys.executable, os.path.join(base_dir, "scripts", "generate_docs.py")], check=True)
     
     total_duration = round(time.time() - start_time, 2)

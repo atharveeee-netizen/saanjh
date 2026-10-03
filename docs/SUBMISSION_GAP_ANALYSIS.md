@@ -11,7 +11,7 @@ This file records any missing artifacts compared to the maximum theoretically re
 | Blender Digital Twin | PRESENT | BLOCKING | 100% Data-driven Blender scripts. |
 | Presentation Video (MP4) | PRESENT | BLOCKING | `saanjh_digital_twin_preview.mp4` & rendering scripts are available. |
 | Hardware Evidence | PRESENT | REQUIRED | Schematics/BOM exist. Physical prototype demo simulated via Edge Gateway logic. |
-| Submission PDF / Doc | PRESENT | BLOCKING | `sih_reference.pdf` and architecture/flow diagrams exist. |
+| Submission Presentation / Proposal | USER PREPARED | Manual slide deck prepared directly by user for portal upload. |
 | README & Tracability | PRESENT | BLOCKING | High-fidelity markdown docs. |
 | Voiceover & Subtitles | PRESENT | OPTIONAL | Included for final polish. |
 

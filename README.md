@@ -1,8 +1,8 @@
-# PROJECT SAANJH ⚡
+# SAANJH ⚡
 ## Neighbourhood Flexibility Network for Renewable-Deficit Reliability
 **Schneider Electric Yuva Yodha Tech Hackathon 2026 — Challenge 03**
 
-[![Challenge 3](https://img.shields.io/badge/Challenge-03-3DCD58.svg)](docs/SUBMISSION.md)
+[![Challenge 3](https://img.shields.io/badge/Challenge-03-3DCD58.svg)](#executive-summary-at-a-glance)
 [![Schneider Electric](https://img.shields.io/badge/Schneider-Electric-blue.svg)](https://www.se.com)
 [![PyPSA](https://img.shields.io/badge/PyPSA-Validated-00d4ff.svg)](simulation/validators/pypsa_validator.py)
 [![XGBoost](https://img.shields.io/badge/XGBoost-Real--Data-orange.svg)](artifacts/models/real_xgboost_model.pkl)

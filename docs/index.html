@@ -1177,6 +1177,15 @@
                     }
                 });
             });
+
+            // Handle URL query param for direct screen linking
+            const urlParams = new URLSearchParams(window.location.search);
+            const screenParam = urlParams.get('screen') || urlParams.get('tab');
+            if (screenParam) {
+                const targetTab = document.querySelector(`.fuxa-tab[data-tab="${screenParam}"]`) || 
+                                  document.querySelector(`.fuxa-tab[data-tab="screen-${screenParam}"]`);
+                if (targetTab) targetTab.click();
+            }
         }
 
         function setupReplayControls() {

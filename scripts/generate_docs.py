@@ -9,8 +9,7 @@ def generate_docs():
         kpis = json.load(f)
         
     templates = {
-        'docs/templates/README.template.md': 'README.md',
-        'docs/templates/SUBMISSION.template.md': 'docs/SUBMISSION.md'
+        'docs/templates/README.template.md': 'README.md'
     }
     
     for template_rel, output_rel in templates.items():

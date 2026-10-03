@@ -19,7 +19,7 @@
 | **External Grid Validator** | `simulation/validators/pypsa_validator.py` | **PASS** | PyPSA AC power flow validation |
 | **Interactive Dashboard** | `app.py` / `simulation/dashboard/` | **PASS** | Streamlit UI displaying real-time metrics, load curves, transformer status, and dispatch schedules |
 | **Cinematic Digital Twin** | `blender/scripts/` + `artifacts/video/saanjh_digital_twin_preview.mp4` | **PASS** | 100% procedural, data-driven Blender EEVEE visualization with dynamic HUD |
-| **Hardware BOM & Architecture** | `docs/SUBMISSION.md`, `README.md` | **PASS** | Fully itemized BOM (₹22,143 prototype stack), RAKwireless WisBlock LoRa + CM4 Edge Gateway |
+| **Hardware BOM & Architecture** | `README.md` | **PASS** | Fully itemized BOM (₹22,143 prototype stack), RAKwireless WisBlock LoRa + CM4 Edge Gateway |
 | **Unit Economics & Business Case** | `simulation/economics_engine.py` | **PASS** | Payback model for Indian DISCOMs and participating households |
 | **Forensic & Mutation Audits** | `docs/FORENSIC_VERIFICATION_MASTER.md` | **PASS** | 100% coupling verified via automated configuration mutation |
 
