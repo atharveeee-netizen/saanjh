@@ -22,10 +22,26 @@ SAANJH leverages numerous open-source tools. All integrations have been verified
 - **Usage:** Dashboard UI generation.
 - **Status:** Unmodified dependencies. Fully compliant.
 
-## 5. React SCADA HMI (CoffeESIME)
+## 5. FUXA (frangoteam)
+- **Source:** https://github.com/frangoteam/FUXA
+- **Purpose:** SCADA/HMI/process-visualization frontend foundation
 - **License:** MIT
-- **Usage:** Industrial SCADA/HMI design patterns, ISA-101 high-performance HMI color standards, linear gauge architecture, and operator screen layouts adapted for `docs/index.html`.
-- **Status:** Attribution documented. Fully compliant with MIT License.
+- **Upstream commit:** `64eb012e0333e65bae83b96a7f116f1fccd3434f`
+- **SAANJH-specific work:**
+  - Feeder visualization (FDR-023 topology, 11 kV busbar, CB-23, DT-100KVA-04, 415V lateral spine)
+  - SAANJH data integration (adapter mapping canonical CSV/JSON simulation results into FUXA tags)
+  - Household flexibility visualization (60-node matrix with battery SOC and reserve floors)
+  - Transformer loading visualization (thermal stress duration and limit indicators)
+  - Feeder tail voltage visualization (Node 60 RMS profile against statutory limits)
+  - Dispatch and renewable cliff event presentation (18:30 PV drop-off, 56.25 kW dispatch)
+  - DISCOM action interface (operator directive execution and economic sensitivity breakdown)
+  - SAANJH branding, operational telemetry replay, and technical documentation
+
+## 6. React SCADA HMI (CoffeESIME)
+- **Source:** https://github.com/CoffeESIME/react-scada-hmi
+- **License:** MIT
+- **Usage:** Evaluated for ISA-101 high-performance HMI color patterns and linear gauge standards.
 
 **STATUS: PASS**
+
 

@@ -5,3 +5,7 @@ __pycache__/
 artifacts/video/frames/
 exploration/
 data/raw/
+node_modules/
+**/node_modules/
+_appdata/
+

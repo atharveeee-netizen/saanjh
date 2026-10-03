@@ -3,47 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAANJH SCADA/HMI | EcoStruxure Grid Edge Console | Feeder FDR-023</title>
-    <meta name="description" content="SAANJH Distribution SCADA/HMI - Virtual Community Battery & Flexibility Aggregator for Indian LV Distribution Feeders.">
-    <!-- Google Fonts -->
+    <title>FUXA - SAANJH SCADA/HMI Operator Console | Feeder FDR-023</title>
+    <meta name="description" content="SAANJH Operator Console built on the open-source FUXA SCADA/HMI platform. Feeder FDR-023 renewable intermittency mitigation and flexibility dispatch simulation.">
+    <!-- Google Fonts: Roboto & Roboto Mono (FUXA standard) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Chart.js CDN -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chart.js for industrial trend widgets -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <style>
+        /* FUXA Industrial Design System Tokens */
         :root {
-            --bg-canvas: #090D14;
-            --bg-panel: #111622;
-            --bg-panel-header: #161D2B;
-            --bg-panel-subtle: #0D121B;
-            --bg-hover: #1C2436;
+            --fuxa-bg-main: #181B24;
+            --fuxa-bg-panel: #222634;
+            --fuxa-bg-header: #1C202C;
+            --fuxa-bg-hover: #2B3142;
+            --fuxa-bg-input: #151821;
             
-            --border-primary: #1F293D;
-            --border-secondary: #2B3852;
-            --border-active: #00D68F;
+            --fuxa-border: #31374A;
+            --fuxa-border-subtle: #272C3B;
+            --fuxa-border-highlight: #3F51B5;
             
-            --text-primary: #F1F5F9;
-            --text-secondary: #94A3B8;
-            --text-muted: #64748B;
-            --text-dim: #475569;
+            --fuxa-text-primary: #ECEFF1;
+            --fuxa-text-secondary: #B0BEC5;
+            --fuxa-text-muted: #78909C;
+            --fuxa-text-disabled: #546E7A;
             
-            /* ISA-101 SCADA Color Standard */
-            --scada-normal: #10B981;
-            --scada-normal-glow: rgba(16, 185, 129, 0.2);
-            --scada-urgent: #EF4444;
-            --scada-urgent-glow: rgba(239, 68, 68, 0.25);
-            --scada-high: #F59E0B;
-            --scada-medium: #EAB308;
-            --scada-telemetry: #38BDF8;
-            --scada-flex: #A855F7;
-            --scada-solar: #FBBF24;
+            /* Industrial Standard Indicators (Non-Cyberpunk) */
+            --ind-normal: #4CAF50;
+            --ind-warning: #FF9800;
+            --ind-alarm: #F44336;
+            --ind-telemetry: #2196F3;
+            --ind-flex: #9C27B0;
             
-            --schneider-green: #3DCD58;
-            --schneider-dark: #00873D;
-            
-            --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            --font-mono: 'JetBrains Mono', 'IBM Plex Mono', Consolas, monospace;
+            --font-ui: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'Roboto Mono', Consolas, monospace;
         }
 
         * {
@@ -54,1279 +48,797 @@
         }
 
         body {
-            background-color: var(--bg-canvas);
-            color: var(--text-primary);
+            background-color: var(--fuxa-bg-main);
+            color: var(--fuxa-text-primary);
             font-family: var(--font-ui);
+            font-size: 13px;
+            line-height: 1.4;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            overflow-x: hidden;
-            font-size: 13px;
             user-select: none;
         }
 
-        /* Industrial SCADA Top Bar */
-        .scada-masthead {
-            background: #0B0F18;
-            border-bottom: 2px solid var(--border-primary);
+        /* FUXA App Header Bar */
+        .fuxa-header {
+            background: var(--fuxa-bg-header);
+            border-bottom: 1px solid var(--fuxa-border);
+            height: 44px;
             padding: 0 1rem;
-            height: 48px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             z-index: 100;
         }
 
-        .brand-section {
+        .fuxa-brand-area {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 0.85rem;
         }
 
-        .schneider-badge {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(61, 205, 88, 0.12);
-            border: 1px solid rgba(61, 205, 88, 0.4);
-            padding: 0.25rem 0.6rem;
-            border-radius: 2px;
-            font-family: var(--font-mono);
-            font-weight: 700;
-            font-size: 0.75rem;
-            color: var(--schneider-green);
-            letter-spacing: 0.05em;
-        }
-
-        .app-title-cluster {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .app-title {
-            font-family: var(--font-mono);
-            font-size: 0.95rem;
-            font-weight: 700;
-            letter-spacing: 0.05em;
-            color: #FFFFFF;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .app-title .tag {
-            background: #1E293B;
-            color: var(--text-secondary);
-            font-size: 0.68rem;
-            font-weight: 600;
-            padding: 1px 6px;
-            border-radius: 2px;
-            border: 1px solid #334155;
-        }
-
-        .feeder-selector-box {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: var(--bg-panel-subtle);
-            border: 1px solid var(--border-primary);
-            padding: 0.25rem 0.75rem;
-            border-radius: 2px;
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-        }
-
-        .feeder-selector-box .asset-label {
-            color: var(--text-muted);
-            text-transform: uppercase;
-        }
-
-        .feeder-selector-box .asset-val {
-            color: #38BDF8;
-            font-weight: 600;
-        }
-
-        .masthead-right {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-        }
-
-        .comm-status {
+        .fuxa-logo {
             display: flex;
             align-items: center;
             gap: 0.4rem;
-            color: var(--scada-normal);
-        }
-
-        .comm-dot {
-            width: 7px;
-            height: 7px;
-            background: var(--scada-normal);
-            border-radius: 50%;
-            box-shadow: 0 0 6px var(--scada-normal);
-            animation: pulse-slow 2s infinite;
-        }
-
-        @keyframes pulse-slow {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(0.85); }
-        }
-
-        .sys-clock {
-            background: #06090F;
-            border: 1px solid var(--border-primary);
-            padding: 0.2rem 0.6rem;
-            border-radius: 2px;
-            color: #F1F5F9;
-            font-weight: 600;
-            letter-spacing: 0.05em;
-        }
-
-        /* Operational Telemetry / Annunciator Ribbon */
-        .scada-telemetry-ribbon {
-            background: #0E1420;
-            border-bottom: 1px solid var(--border-primary);
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 1px;
-            background-color: var(--border-primary);
-        }
-
-        .telemetry-cell {
-            background: #0E1420;
-            padding: 0.6rem 1rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.2rem;
-            transition: background 0.15s ease;
-        }
-
-        .telemetry-cell:hover {
-            background: #141C2C;
-        }
-
-        .cell-tag {
             font-family: var(--font-mono);
-            font-size: 0.68rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .cell-tag .indicator {
-            width: 6px;
-            height: 6px;
-            border-radius: 1px;
-            background: var(--text-dim);
-        }
-
-        .cell-tag .indicator.normal { background: var(--scada-normal); }
-        .cell-tag .indicator.alarm { background: var(--scada-urgent); }
-        .cell-tag .indicator.flex { background: var(--scada-flex); }
-        .cell-tag .indicator.volt { background: var(--scada-telemetry); }
-
-        .cell-value-row {
-            display: flex;
-            align-items: baseline;
-            gap: 0.4rem;
-        }
-
-        .cell-val {
-            font-family: var(--font-mono);
-            font-size: 1.35rem;
             font-weight: 700;
-            letter-spacing: -0.02em;
+            font-size: 0.9rem;
             color: #FFFFFF;
+            letter-spacing: 0.05em;
         }
 
-        .cell-unit {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--text-muted);
+        .fuxa-logo svg {
+            width: 20px;
+            height: 20px;
+            fill: #2196F3;
         }
 
-        .cell-delta {
+        .fuxa-badge-model {
+            background: #263238;
+            color: #90A4AE;
+            border: 1px solid #37474F;
+            padding: 2px 6px;
+            border-radius: 2px;
             font-family: var(--font-mono);
             font-size: 0.7rem;
-            display: flex;
-            align-items: center;
-            gap: 0.25rem;
+            font-weight: 500;
         }
 
-        .delta-good { color: var(--scada-normal); }
-        .delta-bad { color: var(--scada-urgent); }
-        .delta-warn { color: var(--scada-high); }
-        .delta-neutral { color: var(--text-secondary); }
-
-        /* Playback Scrubber & Time Travel Ribbon */
-        .scada-scrubber-ribbon {
-            background: #111724;
-            border-bottom: 1px solid var(--border-primary);
-            padding: 0.4rem 1rem;
+        .fuxa-asset-bar {
             display: flex;
             align-items: center;
+            gap: 0.6rem;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--fuxa-text-secondary);
+        }
+
+        .fuxa-asset-bar .highlight {
+            color: #2196F3;
+            font-weight: 500;
+        }
+
+        .fuxa-right-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: var(--fuxa-text-muted);
+        }
+
+        /* FUXA Screen Tab Navigation */
+        .fuxa-tabs-bar {
+            background: #151821;
+            border-bottom: 1px solid var(--fuxa-border);
+            padding: 0 1rem;
+            display: flex;
+            gap: 2px;
+        }
+
+        .fuxa-tab {
+            background: var(--fuxa-bg-header);
+            color: var(--fuxa-text-secondary);
+            border: 1px solid var(--fuxa-border);
+            border-bottom: none;
+            padding: 0.45rem 1.15rem;
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            position: relative;
+            top: 1px;
+            transition: background 0.15s ease, color 0.15s ease;
+        }
+
+        .fuxa-tab:hover {
+            background: var(--fuxa-bg-hover);
+            color: #FFFFFF;
+        }
+
+        .fuxa-tab.active {
+            background: var(--fuxa-bg-panel);
+            color: #FFFFFF;
+            border-top: 2px solid #2196F3;
+            border-bottom: 1px solid var(--fuxa-bg-panel);
+            font-weight: 700;
+        }
+
+        /* Telemetry & Replay Toolbar */
+        .fuxa-toolbar {
+            background: #1A1E29;
+            border-bottom: 1px solid var(--fuxa-border);
+            padding: 0.35rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             gap: 1rem;
             font-family: var(--font-mono);
             font-size: 0.75rem;
         }
 
-        .playback-controls {
-            display: flex;
-            align-items: center;
-            gap: 0.25rem;
-        }
-
-        .scada-btn {
-            background: #1A2336;
-            color: var(--text-primary);
-            border: 1px solid var(--border-primary);
-            padding: 0.3rem 0.6rem;
+        .fuxa-btn {
+            background: #252A3A;
+            color: var(--fuxa-text-primary);
+            border: 1px solid var(--fuxa-border);
+            padding: 0.25rem 0.6rem;
             border-radius: 2px;
             cursor: pointer;
             font-family: var(--font-mono);
-            font-size: 0.75rem;
-            font-weight: 600;
+            font-size: 0.72rem;
+            font-weight: 500;
             display: inline-flex;
             align-items: center;
-            gap: 0.35rem;
-            transition: all 0.15s ease;
+            gap: 0.3rem;
         }
 
-        .scada-btn:hover {
-            background: #25334E;
-            border-color: #3B82F6;
+        .fuxa-btn:hover {
+            background: #31384D;
+            border-color: #3F51B5;
         }
 
-        .scada-btn.active {
-            background: #00D68F;
-            color: #000000;
-            border-color: #00D68F;
-            font-weight: 700;
-        }
-
-        .scada-btn.alert {
-            background: rgba(239, 68, 68, 0.15);
-            color: #EF4444;
-            border-color: rgba(239, 68, 68, 0.4);
-        }
-
-        .scada-btn.alert:hover {
-            background: #EF4444;
+        .fuxa-btn.active {
+            background: #1976D2;
             color: #FFFFFF;
+            border-color: #1976D2;
         }
 
-        .time-slider-container {
+        .fuxa-slider-wrap {
             flex: 1;
             display: flex;
             align-items: center;
             gap: 0.75rem;
         }
 
-        .time-slider {
+        .fuxa-slider {
             flex: 1;
             -webkit-appearance: none;
-            height: 6px;
-            background: #1E293B;
-            border-radius: 3px;
+            height: 4px;
+            background: #31374A;
+            border-radius: 2px;
             outline: none;
             cursor: pointer;
         }
 
-        .time-slider::-webkit-slider-thumb {
+        .fuxa-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
-            appearance: none;
-            width: 16px;
-            height: 16px;
+            width: 14px;
+            height: 14px;
+            background: #2196F3;
             border-radius: 2px;
-            background: #00D68F;
             cursor: pointer;
-            border: 2px solid #06090F;
-            box-shadow: 0 0 6px rgba(0, 214, 143, 0.5);
+            border: 1px solid #FFFFFF;
         }
 
-        .time-readout {
-            background: #070A10;
-            border: 1px solid var(--border-primary);
-            padding: 0.25rem 0.75rem;
+        .fuxa-time-badge {
+            background: #12141C;
+            border: 1px solid var(--fuxa-border);
+            padding: 2px 8px;
             border-radius: 2px;
-            color: #00D68F;
+            color: #2196F3;
             font-weight: 700;
-            min-width: 140px;
+            min-width: 125px;
             text-align: center;
         }
 
-        .event-shortcuts {
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-
-        /* F-Key Navigation Tab Bar */
-        .scada-nav-tabs {
-            background: #0B0E17;
-            border-bottom: 2px solid var(--border-primary);
-            display: flex;
-            gap: 2px;
-            padding: 0 1rem;
-        }
-
-        .nav-tab {
-            background: #101622;
-            color: var(--text-secondary);
-            border: 1px solid var(--border-primary);
-            border-bottom: none;
-            padding: 0.5rem 1.25rem;
-            cursor: pointer;
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            position: relative;
-            top: 2px;
-            transition: all 0.15s ease;
-        }
-
-        .nav-tab:hover {
-            background: #182234;
-            color: #FFFFFF;
-        }
-
-        .nav-tab.active {
-            background: var(--bg-panel);
-            color: #00D68F;
-            border-top: 2px solid #00D68F;
-            border-left: 1px solid var(--border-primary);
-            border-right: 1px solid var(--border-primary);
-            border-bottom: 2px solid var(--bg-panel);
-            font-weight: 700;
-            z-index: 10;
-        }
-
-        .nav-tab .f-key {
-            background: #070A10;
-            color: var(--text-muted);
-            font-size: 0.7rem;
-            padding: 1px 4px;
-            border-radius: 2px;
-            border: 1px solid var(--border-primary);
-        }
-
-        .nav-tab.active .f-key {
-            color: #00D68F;
-            border-color: rgba(0, 214, 143, 0.4);
-        }
-
-        /* Main Workspace Container */
-        .scada-workspace {
+        /* Main Screen Container */
+        .fuxa-viewport-area {
             flex: 1;
             padding: 1rem;
-            background: var(--bg-canvas);
             display: flex;
             flex-direction: column;
             overflow-y: auto;
         }
 
-        .tab-viewport {
+        .fuxa-screen {
             display: none;
             flex: 1;
             flex-direction: column;
             gap: 1rem;
         }
 
-        .tab-viewport.active {
+        .fuxa-screen.active {
             display: flex;
         }
 
-        /* Industrial Panels */
-        .scada-panel {
-            background: var(--bg-panel);
-            border: 1px solid var(--border-primary);
+        /* FUXA Panels */
+        .fuxa-panel {
+            background: var(--fuxa-bg-panel);
+            border: 1px solid var(--fuxa-border);
             border-radius: 2px;
             display: flex;
             flex-direction: column;
             overflow: hidden;
         }
 
-        .panel-header {
-            background: var(--bg-panel-header);
-            border-bottom: 1px solid var(--border-primary);
-            padding: 0.5rem 0.85rem;
+        .fuxa-panel-title {
+            background: var(--fuxa-bg-header);
+            border-bottom: 1px solid var(--fuxa-border);
+            padding: 0.45rem 0.85rem;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--fuxa-text-primary);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--text-primary);
             letter-spacing: 0.03em;
         }
 
-        .panel-header .title-left {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .panel-header .status-tag {
-            font-size: 0.68rem;
-            padding: 1px 6px;
-            border-radius: 2px;
-            border: 1px solid;
-            font-weight: 700;
-        }
-
-        .status-tag.active {
-            background: rgba(16, 185, 129, 0.1);
-            color: var(--scada-normal);
-            border-color: rgba(16, 185, 129, 0.3);
-        }
-
-        .status-tag.warning {
-            background: rgba(245, 158, 11, 0.1);
-            color: var(--scada-high);
-            border-color: rgba(245, 158, 11, 0.3);
-        }
-
-        .status-tag.alert {
-            background: rgba(239, 68, 68, 0.1);
-            color: var(--scada-urgent);
-            border-color: rgba(239, 68, 68, 0.3);
-        }
-
-        .panel-body {
+        .fuxa-panel-body {
             padding: 0.85rem;
             flex: 1;
             display: flex;
             flex-direction: column;
         }
 
-        /* Screen 1: SLD & Mimic Layout */
-        .mimic-layout-grid {
+        /* SCREEN 1: Feeder Overview */
+        .overview-grid {
             display: grid;
             grid-template-columns: 2fr 1fr;
             gap: 1rem;
             flex: 1;
         }
 
-        /* SVG Mimic Canvas */
-        .sld-canvas-container {
-            background: #0A0E18;
-            border: 1px solid var(--border-primary);
-            border-radius: 2px;
-            position: relative;
-            min-height: 480px;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
+        .kpi-strip {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 1px;
+            background: var(--fuxa-border);
+            border: 1px solid var(--fuxa-border);
+            margin-bottom: 1rem;
         }
 
-        .sld-svg {
+        .kpi-box {
+            background: var(--fuxa-bg-panel);
+            padding: 0.6rem 0.85rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.15rem;
+        }
+
+        .kpi-tag {
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            color: var(--fuxa-text-muted);
+            text-transform: uppercase;
+        }
+
+        .kpi-val-row {
+            display: flex;
+            align-items: baseline;
+            gap: 0.35rem;
+        }
+
+        .kpi-val {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #FFFFFF;
+        }
+
+        .kpi-unit {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: var(--fuxa-text-muted);
+        }
+
+        .kpi-sub {
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            color: var(--fuxa-text-secondary);
+        }
+
+        /* Process Diagram (Clean Engineering SVG, no cyberpunk neon) */
+        .process-svg-wrap {
+            background: #141722;
+            border: 1px solid var(--fuxa-border);
+            min-height: 420px;
+            position: relative;
+        }
+
+        .process-svg {
             width: 100%;
             height: 100%;
-            flex: 1;
+            display: block;
         }
 
-        /* Mimic SVG Elements */
-        .busbar {
-            stroke: #475569;
-            stroke-width: 4;
-            stroke-linecap: square;
-        }
-
-        .busbar.energized {
-            stroke: #38BDF8;
-            filter: drop-shadow(0 0 3px rgba(56, 189, 248, 0.5));
-        }
-
-        .feeder-line {
-            stroke: #334155;
-            stroke-width: 2.5;
-            stroke-linecap: round;
-        }
-
-        .feeder-line.active {
-            stroke: #00D68F;
-        }
-
-        .pulse-path {
-            stroke-dasharray: 6, 12;
-            animation: dash-flow 1.5s linear infinite;
-        }
-
-        @keyframes dash-flow {
-            to { stroke-dashoffset: -18; }
-        }
-
-        /* Linear Gauge Component (ISA-101 high performance) */
-        .linear-gauge-container {
-            display: flex;
-            flex-direction: column;
-            gap: 0.35rem;
-            font-family: var(--font-mono);
-        }
-
-        .gauge-track {
-            height: 20px;
-            background: #141C2C;
-            border: 1px solid var(--border-primary);
+        /* Linear Gauge (FUXA/ISA-101 Style) */
+        .gauge-bar-wrap {
+            height: 16px;
+            background: #151821;
+            border: 1px solid var(--fuxa-border);
+            border-radius: 1px;
             position: relative;
-            border-radius: 2px;
             overflow: hidden;
+            margin: 0.5rem 0;
         }
 
         .gauge-fill {
             height: 100%;
-            background: var(--scada-normal);
-            transition: width 0.25s ease, background 0.25s ease;
+            background: #4CAF50;
+            transition: width 0.2s ease, background 0.2s ease;
         }
 
-        .gauge-threshold {
+        .gauge-limit-mark {
             position: absolute;
             top: 0;
             bottom: 0;
             width: 2px;
-            background: #EF4444;
-            z-index: 5;
+            background: #F44336;
         }
 
-        .gauge-setpoint {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: #F59E0B;
-            border-right: 1px dashed #000;
-            z-index: 4;
-        }
-
-        .gauge-labels {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.68rem;
-            color: var(--text-muted);
-        }
-
-        /* SCADA Alarm Table */
-        .alarm-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-        }
-
-        .alarm-table th {
-            background: var(--bg-panel-header);
-            color: var(--text-muted);
-            text-align: left;
-            padding: 0.4rem 0.6rem;
-            border-bottom: 1px solid var(--border-primary);
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.68rem;
-        }
-
-        .alarm-table td {
-            padding: 0.45rem 0.6rem;
-            border-bottom: 1px solid #141C2B;
-            color: var(--text-secondary);
-        }
-
-        .alarm-table tr:hover td {
-            background: #141C2C;
-        }
-
-        .alarm-row.urgent td {
-            color: #EF4444;
-            font-weight: 600;
-        }
-
-        .alarm-row.high td {
-            color: #F59E0B;
-            font-weight: 500;
-        }
-
-        .alarm-row.normal td {
-            color: #10B981;
-        }
-
-        .alarm-badge {
-            display: inline-block;
-            padding: 1px 5px;
-            border-radius: 2px;
-            font-size: 0.65rem;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-
-        .alarm-badge.urgent { background: #EF4444; color: #FFFFFF; }
-        .alarm-badge.high { background: #F59E0B; color: #000000; }
-        .alarm-badge.normal { background: #10B981; color: #000000; }
-        .alarm-badge.info { background: #38BDF8; color: #000000; }
-
-        /* Screen 2: Trends 2x2 Grid */
-        .trends-grid {
+        /* SCREEN 2: Trends Grid */
+        .trends-2x2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
             grid-template-rows: 1fr 1fr;
             gap: 1rem;
             flex: 1;
-            min-height: 640px;
+            min-height: 580px;
         }
 
-        .chart-box {
-            flex: 1;
+        .chart-container {
             position: relative;
-            min-height: 250px;
+            flex: 1;
+            min-height: 230px;
         }
 
-        /* Screen 3: Fleet Matrix */
-        .fleet-controls-bar {
-            background: var(--bg-panel-header);
-            border-bottom: 1px solid var(--border-primary);
-            padding: 0.5rem 0.85rem;
+        /* SCREEN 3: Household Fleet Matrix */
+        .fleet-controls {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            margin-bottom: 0.75rem;
             gap: 1rem;
         }
 
-        .filter-group {
-            display: flex;
-            align-items: center;
-            gap: 0.35rem;
-        }
-
-        .fleet-search {
-            background: #0A0E18;
-            border: 1px solid var(--border-primary);
-            color: #FFFFFF;
-            padding: 0.25rem 0.6rem;
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            border-radius: 2px;
-            width: 200px;
-            outline: none;
-        }
-
-        .fleet-search:focus {
-            border-color: #38BDF8;
-        }
-
-        .fleet-table-container {
+        .fleet-table-wrap {
             flex: 1;
             overflow-y: auto;
-            max-height: 620px;
+            max-height: 600px;
+            border: 1px solid var(--fuxa-border);
         }
 
         .fleet-table {
             width: 100%;
             border-collapse: collapse;
             font-family: var(--font-mono);
-            font-size: 0.75rem;
+            font-size: 0.74rem;
         }
 
         .fleet-table th {
-            background: #141B2A;
-            color: var(--text-muted);
+            background: #1C202C;
+            color: var(--fuxa-text-muted);
             text-align: left;
-            padding: 0.5rem 0.75rem;
-            border-bottom: 2px solid var(--border-primary);
+            padding: 0.45rem 0.6rem;
+            border-bottom: 2px solid var(--fuxa-border);
             font-weight: 600;
             position: sticky;
             top: 0;
-            z-index: 5;
-            text-transform: uppercase;
-            font-size: 0.68rem;
+            z-index: 2;
         }
 
         .fleet-table td {
-            padding: 0.45rem 0.75rem;
-            border-bottom: 1px solid #141C2B;
-            color: var(--text-secondary);
+            padding: 0.4rem 0.6rem;
+            border-bottom: 1px solid #272C3B;
+            color: var(--fuxa-text-secondary);
         }
 
         .fleet-table tr:hover td {
-            background: #151E30;
+            background: #282E3E;
             color: #FFFFFF;
         }
 
-        .soc-bar-container {
-            width: 120px;
-            height: 10px;
-            background: #1E293B;
-            border-radius: 2px;
-            overflow: hidden;
-            position: relative;
+        .soc-indicator {
+            width: 80px;
+            height: 8px;
+            background: #151821;
+            border: 1px solid #31374A;
+            border-radius: 1px;
             display: inline-block;
             vertical-align: middle;
-            margin-right: 0.5rem;
+            margin-right: 0.4rem;
+            position: relative;
         }
 
-        .soc-bar-fill {
+        .soc-fill {
             height: 100%;
-            background: var(--scada-normal);
-            border-radius: 1px;
+            background: #4CAF50;
         }
 
-        .soc-bar-reserve {
+        .soc-floor-line {
             position: absolute;
             top: 0;
             bottom: 0;
             left: 70%;
             width: 2px;
-            background: #EF4444;
-            z-index: 2;
+            background: #F44336;
         }
 
-        .tag-pill {
-            padding: 1px 6px;
-            border-radius: 2px;
-            font-size: 0.65rem;
-            font-weight: 700;
-            display: inline-block;
-        }
-
-        .tag-pill.participating { background: rgba(16, 185, 129, 0.15); color: #10B981; border: 1px solid rgba(16, 185, 129, 0.3); }
-        .tag-pill.optout { background: rgba(245, 158, 11, 0.15); color: #F59E0B; border: 1px solid rgba(245, 158, 11, 0.3); }
-        .tag-pill.passive { background: rgba(100, 116, 139, 0.15); color: #94A3B8; border: 1px solid rgba(100, 116, 139, 0.3); }
-
-        /* Screen 4: DISCOM Directive & Economics */
-        .directive-grid {
+        /* SCREEN 4: DISCOM / Decision View */
+        .decision-layout {
             display: grid;
             grid-template-columns: 1.2fr 1fr;
             gap: 1rem;
             flex: 1;
         }
 
-        .action-plan-banner {
-            background: #080D16;
-            border: 1px solid var(--border-secondary);
-            border-left: 4px solid var(--schneider-green);
-            padding: 1rem;
+        .decision-banner {
+            background: #18202E;
+            border: 1px solid #2A3B54;
+            border-left: 4px solid #2196F3;
+            padding: 0.85rem;
             border-radius: 2px;
             margin-bottom: 1rem;
         }
 
-        .directive-command {
+        .directive-text {
             font-family: var(--font-mono);
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             font-weight: 700;
             color: #FFFFFF;
-            margin: 0.5rem 0;
-            letter-spacing: 0.02em;
+            margin: 0.4rem 0;
         }
 
-        .matrix-table {
+        .spec-table {
             width: 100%;
             border-collapse: collapse;
             font-family: var(--font-mono);
-            font-size: 0.75rem;
+            font-size: 0.74rem;
             margin-top: 0.5rem;
         }
 
-        .matrix-table th {
-            background: var(--bg-panel-header);
-            color: var(--text-muted);
+        .spec-table th {
+            background: #1C202C;
+            color: var(--fuxa-text-muted);
             text-align: left;
-            padding: 0.5rem;
-            border-bottom: 1px solid var(--border-primary);
-            font-size: 0.68rem;
+            padding: 0.45rem;
+            border-bottom: 1px solid var(--fuxa-border);
         }
 
-        .matrix-table td {
-            padding: 0.5rem;
-            border-bottom: 1px solid #141C2B;
-            color: var(--text-secondary);
+        .spec-table td {
+            padding: 0.45rem;
+            border-bottom: 1px solid #272C3B;
+            color: var(--fuxa-text-secondary);
         }
 
-        .matrix-table tr.highlight td {
-            background: rgba(61, 205, 88, 0.08);
+        .spec-table tr.selected td {
+            background: rgba(33, 150, 243, 0.1);
             color: #FFFFFF;
             font-weight: 600;
         }
 
-        .key-value-list {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            margin-top: 0.5rem;
-        }
-
-        .kv-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.5rem;
-            background: #0C121D;
-            border: 1px solid var(--border-primary);
-            border-radius: 2px;
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-        }
-
-        .kv-item .label {
-            color: var(--text-muted);
-        }
-
-        .kv-item .value {
-            color: #FFFFFF;
-            font-weight: 600;
-        }
-
-        .kv-item .value.accent {
-            color: #00D68F;
-        }
-
-        /* Industrial Footer */
-        .scada-footer {
-            background: #080C14;
-            border-top: 1px solid var(--border-primary);
+        /* Status & Attribution Footer */
+        .fuxa-footer {
+            background: #151821;
+            border-top: 1px solid var(--fuxa-border);
             padding: 0.35rem 1rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
             font-family: var(--font-mono);
             font-size: 0.68rem;
-            color: var(--text-muted);
-            z-index: 100;
+            color: var(--fuxa-text-muted);
         }
 
-        .footer-left {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
+        .fuxa-footer a {
+            color: #90CAF9;
+            text-decoration: none;
         }
 
-        .footer-right {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
+        .fuxa-footer a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
 
-    <!-- SCADA Top Masthead -->
-    <header class="scada-masthead">
-        <div class="brand-section">
-            <div class="schneider-badge">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+    <!-- FUXA Operator Top Header -->
+    <header class="fuxa-header">
+        <div class="fuxa-brand-area">
+            <div class="fuxa-logo">
+                <svg viewBox="0 0 24 24">
+                    <path d="M4 4h16v3H4zm0 6h10v3H4zm0 6h14v3H4z"/>
                 </svg>
-                <span>SCHNEIDER ELECTRIC</span>
+                <span>FUXA SCADA/HMI</span>
             </div>
-            <div class="app-title-cluster">
-                <div class="app-title">
-                    SAANJH <span class="tag">SCADA / HMI v2.6</span>
-                </div>
-            </div>
+            <span style="color:var(--fuxa-border)">|</span>
+            <span style="font-weight:500; font-size:0.85rem; color:#FFFFFF;">SAANJH Grid Edge Substation Station</span>
+            <span class="fuxa-badge-model">MODEL REPLAY</span>
         </div>
 
-        <div class="feeder-selector-box">
-            <span class="asset-label">Substation:</span>
-            <span class="asset-val">33/11 kV SS-04</span>
-            <span style="color:var(--border-secondary)">|</span>
-            <span class="asset-label">Feeder:</span>
-            <span class="asset-val">FDR-023</span>
-            <span style="color:var(--border-secondary)">|</span>
-            <span class="asset-label">Transformer:</span>
-            <span class="asset-val">DT-100KVA-04 (100 kVA / 95 kW)</span>
+        <div class="fuxa-asset-bar">
+            <span>ASSET:</span>
+            <span class="highlight">Feeder FDR-023 / DT-100KVA-04 (100 kVA / 95 kW Dyn11)</span>
         </div>
 
-        <div class="masthead-right">
-            <div class="comm-status">
-                <div class="comm-dot"></div>
-                <span>IEC 60870-5-104: ONLINE (24ms)</span>
-            </div>
-            <div class="sys-clock" id="wall-clock">2026-10-03 16:00:00 IST</div>
+        <div class="fuxa-right-controls">
+            <span>STATUS: SIMULATED TELEMETRY</span>
+            <span style="color:var(--fuxa-border)">|</span>
+            <span id="fuxa-clock">2026-10-03 16:00:00 IST</span>
         </div>
     </header>
 
-    <!-- Operational Telemetry Annunciator Ribbon (ISA-101 High Performance) -->
-    <section class="scada-telemetry-ribbon">
-        <!-- 1. Feeder Demand -->
-        <div class="telemetry-cell">
-            <div class="cell-tag">
-                <span>Feeder Active Load</span>
-                <span class="indicator normal" id="ind-load"></span>
-            </div>
-            <div class="cell-value-row">
-                <span class="cell-val" id="kpi-load-val">109.2</span>
-                <span class="cell-unit">kW</span>
-            </div>
-            <div class="cell-delta">
-                <span class="delta-good" id="kpi-load-delta">↓ 44.95 kW (-29.2%)</span>
-                <span class="delta-neutral">vs 154.1 kW base</span>
-            </div>
-        </div>
-
-        <!-- 2. Transformer Loading -->
-        <div class="telemetry-cell">
-            <div class="cell-tag">
-                <span>TX Loading (100 kVA)</span>
-                <span class="indicator alarm" id="ind-tx"></span>
-            </div>
-            <div class="cell-value-row">
-                <span class="cell-val" id="kpi-tx-val">114.9</span>
-                <span class="cell-unit">%</span>
-            </div>
-            <div class="cell-delta">
-                <span class="delta-good" id="kpi-tx-delta">↓ 30 min stress cut</span>
-                <span class="delta-neutral">162.2% base peak</span>
-            </div>
-        </div>
-
-        <!-- 3. Flexibility Dispatched -->
-        <div class="telemetry-cell">
-            <div class="cell-tag">
-                <span>VCB Flexibility Dispatched</span>
-                <span class="indicator flex"></span>
-            </div>
-            <div class="cell-value-row">
-                <span class="cell-val" id="kpi-flex-val">56.25</span>
-                <span class="cell-unit">kW</span>
-            </div>
-            <div class="cell-delta">
-                <span class="delta-good" id="kpi-flex-delta">61.57 kWh (98.5% ratio)</span>
-            </div>
-        </div>
-
-        <!-- 4. Feeder Tail Voltage -->
-        <div class="telemetry-cell">
-            <div class="cell-tag">
-                <span>Feeder Tail Node 60</span>
-                <span class="indicator volt"></span>
-            </div>
-            <div class="cell-value-row">
-                <span class="cell-val" id="kpi-volt-val">226.5</span>
-                <span class="cell-unit">V RMS</span>
-            </div>
-            <div class="cell-delta">
-                <span class="delta-good">0 Violations (100% fixed)</span>
-                <span class="delta-bad">219.7V base sag</span>
-            </div>
-        </div>
-
-        <!-- 5. Participating Fleet -->
-        <div class="telemetry-cell">
-            <div class="cell-tag">
-                <span>Aggregated Fleet</span>
-                <span class="indicator normal"></span>
-            </div>
-            <div class="cell-value-row">
-                <span class="cell-val" id="kpi-fleet-val">39 / 42</span>
-                <span class="cell-unit">BESS</span>
-            </div>
-            <div class="cell-delta">
-                <span class="delta-neutral">3 Opted Out (H-18,55,56)</span>
-            </div>
-        </div>
-
-        <!-- 6. Economic Efficiency -->
-        <div class="telemetry-cell">
-            <div class="cell-tag">
-                <span>CapEx Efficiency</span>
-                <span class="indicator normal"></span>
-            </div>
-            <div class="cell-value-row">
-                <span class="cell-val">₹7,068</span>
-                <span class="cell-unit">/ kW</span>
-            </div>
-            <div class="cell-delta">
-                <span class="delta-good">84% CapEx savings</span>
-                <span class="delta-neutral">vs ₹45k utility BESS</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- Simulation Time Travel & Scrubber Bar -->
-    <section class="scada-scrubber-ribbon">
-        <div class="playback-controls">
-            <button class="scada-btn" id="btn-step-back" title="Previous 5-min step">◀◀</button>
-            <button class="scada-btn active" id="btn-play-pause">❚❚ PAUSE</button>
-            <button class="scada-btn" id="btn-step-fwd" title="Next 5-min step">▶▶</button>
-            <button class="scada-btn" id="btn-reset">⟲ RESET</button>
-        </div>
-
-        <div class="time-slider-container">
-            <span style="color:var(--text-muted)">TIMESTEP:</span>
-            <input type="range" class="time-slider" id="time-slider" min="0" max="71" value="37" step="1">
-            <div class="time-readout" id="active-time-readout">19:05 IST (PEAK)</div>
-        </div>
-
-        <div class="event-shortcuts">
-            <span style="color:var(--text-muted)">JUMP TO:</span>
-            <button class="scada-btn" id="jump-solar-cliff" style="color:var(--scada-solar)">18:30 SOLAR CLIFF</button>
-            <button class="scada-btn alert" id="jump-peak">19:05 MAX OVERLOAD</button>
-            <button class="scada-btn" id="jump-recovery">20:30 RECOVERY</button>
-        </div>
-    </section>
-
-    <!-- F-Key Navigation Tabs -->
-    <nav class="scada-nav-tabs">
-        <button class="nav-tab active" data-tab="tab-mimic">
-            <span class="f-key">F1</span>
-            <span>SLD & FEColorScheme MIMIC</span>
-        </button>
-        <button class="nav-tab" data-tab="tab-trends">
-            <span class="f-key">F2</span>
-            <span>SCADA TRENDS & TELEMETRY</span>
-        </button>
-        <button class="nav-tab" data-tab="tab-fleet">
-            <span class="f-key">F3</span>
-            <span>FLEET MATRIX (60 HOMES)</span>
-        </button>
-        <button class="nav-tab" data-tab="tab-directive">
-            <span class="f-key">F4</span>
-            <span>DISCOM DIRECTIVE & ECONOMICS</span>
-        </button>
+    <!-- FUXA Function Screen Tabs -->
+    <nav class="fuxa-tabs-bar">
+        <button class="fuxa-tab active" data-tab="screen-overview">FEEDER OVERVIEW</button>
+        <button class="fuxa-tab" data-tab="screen-trends">TRENDS</button>
+        <button class="fuxa-tab" data-tab="screen-fleet">FLEXIBILITY FLEET</button>
+        <button class="fuxa-tab" data-tab="screen-decision">DISCOM / DECISION VIEW</button>
     </nav>
 
-    <!-- Main SCADA Workspace -->
-    <main class="scada-workspace">
+    <!-- Telemetry Replay Toolbar -->
+    <section class="fuxa-toolbar">
+        <div style="display:flex; align-items:center; gap:0.3rem;">
+            <button class="fuxa-btn" id="btn-back">◀ Prev</button>
+            <button class="fuxa-btn active" id="btn-play">❚❚ Pause</button>
+            <button class="fuxa-btn" id="btn-fwd">Next ▶</button>
+            <button class="fuxa-btn" id="btn-rst">⟲ Reset</button>
+        </div>
 
-        <!-- VIEWPORT 1: [F1] SLD & MIMIC DIAGRAM -->
-        <div class="tab-viewport active" id="tab-mimic">
-            <div class="mimic-layout-grid">
+        <div class="fuxa-slider-wrap">
+            <span style="color:var(--fuxa-text-muted);">TIMESTEP:</span>
+            <input type="range" class="fuxa-slider" id="fuxa-slider" min="0" max="71" value="37" step="1">
+            <div class="fuxa-time-badge" id="fuxa-time-label">19:05 IST (PEAK)</div>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:0.4rem;">
+            <button class="fuxa-btn" id="jump-cliff">18:30 Solar Cliff</button>
+            <button class="fuxa-btn" id="jump-pk" style="color:#FF9800; font-weight:700;">19:05 Max Peak</button>
+        </div>
+    </section>
+
+    <!-- Operational KPI Telemetry Strip -->
+    <section class="kpi-strip" style="margin:0.5rem 1rem 0 1rem;">
+        <div class="kpi-box">
+            <span class="kpi-tag">Active Feeder Load</span>
+            <div class="kpi-val-row">
+                <span class="kpi-val" id="val-load">109.18</span>
+                <span class="kpi-unit">kW</span>
+            </div>
+            <span class="kpi-sub" id="val-load-delta" style="color:#4CAF50;">↓ 44.95 kW (-29.2%) vs Base</span>
+        </div>
+
+        <div class="kpi-box">
+            <span class="kpi-tag">Transformer Loading</span>
+            <div class="kpi-val-row">
+                <span class="kpi-val" id="val-tx">114.9</span>
+                <span class="kpi-unit">%</span>
+            </div>
+            <span class="kpi-sub" style="color:#4CAF50;">Overload cut by 30 min</span>
+        </div>
+
+        <div class="kpi-box">
+            <span class="kpi-tag">Feeder Tail Node 60</span>
+            <div class="kpi-val-row">
+                <span class="kpi-val" id="val-volt">226.54</span>
+                <span class="kpi-unit">V RMS</span>
+            </div>
+            <span class="kpi-sub" style="color:#4CAF50;">0 Statutory Violations (&gt;216V)</span>
+        </div>
+
+        <div class="kpi-box">
+            <span class="kpi-tag">Solar PV Generation</span>
+            <div class="kpi-val-row">
+                <span class="kpi-val" id="val-solar">0.00</span>
+                <span class="kpi-unit">kW</span>
+            </div>
+            <span class="kpi-sub">PV Cliff (-7.5 kW deficit)</span>
+        </div>
+
+        <div class="kpi-box">
+            <span class="kpi-tag">Available Flexibility</span>
+            <div class="kpi-val-row">
+                <span class="kpi-val" id="val-flex-avail">92.55</span>
+                <span class="kpi-unit">kW</span>
+            </div>
+            <span class="kpi-sub">Fleet Headroom Preserved</span>
+        </div>
+
+        <div class="kpi-box">
+            <span class="kpi-tag">Dispatched Flexibility</span>
+            <div class="kpi-val-row">
+                <span class="kpi-val" id="val-flex-disp">56.25</span>
+                <span class="kpi-unit">kW</span>
+            </div>
+            <span class="kpi-sub">39 BESS Inverters Active</span>
+        </div>
+    </section>
+
+    <!-- Main Viewport Area -->
+    <main class="fuxa-viewport-area">
+
+        <!-- SCREEN 1: FEEDER OVERVIEW -->
+        <div class="fuxa-screen active" id="screen-overview">
+            <div class="overview-grid">
                 
-                <!-- Left: Interactive Feeder Single Line Diagram (SLD) -->
-                <div class="scada-panel">
-                    <div class="panel-header">
-                        <div class="title-left">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="3" y="3" width="18" height="18" rx="2"/>
-                                <line x1="3" y1="9" x2="21" y2="9"/>
-                                <line x1="9" y1="21" x2="9" y2="9"/>
-                            </svg>
-                            <span>FEEDER FDR-023 SINGLE LINE MIMIC DIAGRAM</span>
-                        </div>
-                        <div class="status-tag active" id="sld-state-tag">DISPATCH MITIGATION ACTIVE</div>
+                <!-- Left: Feeder Process Mimic Diagram -->
+                <div class="fuxa-panel">
+                    <div class="fuxa-panel-title">
+                        <span>PROCESS VIEW: FEEDER FDR-023 SINGLE-LINE TOPOLOGY</span>
+                        <span style="font-size:0.68rem; color:var(--fuxa-text-muted);">IEC 61850 SLD MODEL</span>
                     </div>
-                    
-                    <div class="panel-body" style="padding:0; position:relative;">
-                        <div class="sld-canvas-container">
-                            <svg class="sld-svg" viewBox="0 0 840 480" preserveAspectRatio="xMidYMid meet">
-                                <defs>
-                                    <linearGradient id="grad-pulse" x1="0%" y1="0%" x2="100%" y2="0%">
-                                        <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.8"/>
-                                        <stop offset="100%" stop-color="#00D68F" stop-opacity="0.9"/>
-                                    </linearGradient>
-                                    <filter id="glow-green" x="-20%" y="-20%" width="140%" height="140%">
-                                        <feGaussianBlur stdDeviation="3" result="blur" />
-                                        <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                                    </filter>
-                                </defs>
-
-                                <!-- Grid Background Grid Lines -->
-                                <pattern id="scada-grid" width="20" height="20" patternUnits="userSpaceOnUse">
-                                    <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255, 255, 255, 0.03)" stroke-width="1"/>
+                    <div class="fuxa-panel-body" style="padding:0;">
+                        <div class="process-svg-wrap">
+                            <svg class="process-svg" viewBox="0 0 760 400" preserveAspectRatio="xMidYMid meet">
+                                <!-- Technical Grid -->
+                                <pattern id="grid-pattern" width="20" height="20" patternUnits="userSpaceOnUse">
+                                    <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
                                 </pattern>
-                                <rect width="100%" height="100%" fill="url(#scada-grid)"/>
+                                <rect width="100%" height="100%" fill="url(#grid-pattern)"/>
 
-                                <!-- 1. Substation Busbar 11 kV -->
-                                <line x1="60" y1="60" x2="220" y2="60" class="busbar energized" />
-                                <text x="60" y="45" fill="#38BDF8" font-family="var(--font-mono)" font-size="11" font-weight="700">SUBSTATION 11 kV BUSBAR</text>
-                                
-                                <!-- Feeder Breaker CB-23 -->
-                                <line x1="140" y1="60" x2="140" y2="100" class="feeder-line active" />
-                                <rect x="130" y="100" width="20" height="20" fill="#0E1626" stroke="#10B981" stroke-width="2" rx="2"/>
-                                <line x1="135" y1="110" x2="145" y2="110" stroke="#10B981" stroke-width="2" />
-                                <text x="160" y="114" fill="#94A3B8" font-family="var(--font-mono)" font-size="10">CB-23 [CLOSED]</text>
+                                <!-- 11 kV Incomer Bus -->
+                                <line x1="60" y1="50" x2="200" y2="50" stroke="#2196F3" stroke-width="4"/>
+                                <text x="60" y="38" fill="#2196F3" font-family="var(--font-mono)" font-size="10" font-weight="700">11 kV SUBSTATION BUSBAR</text>
 
-                                <!-- Down to Distribution Transformer DT-100KVA-04 -->
-                                <line x1="140" y1="120" x2="140" y2="160" class="feeder-line active" />
-                                
-                                <!-- Transformer Symbol (Dual Overlapping Circles Dyn11) -->
-                                <g transform="translate(140, 190)">
-                                    <circle cx="0" cy="-12" r="18" fill="none" stroke="#38BDF8" stroke-width="2.5" />
-                                    <circle cx="0" cy="12" r="18" fill="none" stroke="#00D68F" stroke-width="2.5" />
-                                    <text x="32" y="-5" fill="#FFFFFF" font-family="var(--font-mono)" font-size="11" font-weight="700">DT-100KVA-04</text>
-                                    <text x="32" y="10" fill="#94A3B8" font-family="var(--font-mono)" font-size="10">11 kV / 415 V Dyn11</text>
-                                    <text x="32" y="24" fill="#64748B" font-family="var(--font-mono)" font-size="9">Rated: 100 kVA / 95 kW</text>
+                                <!-- Circuit Breaker CB-23 -->
+                                <line x1="130" y1="50" x2="130" y2="90" stroke="#31374A" stroke-width="2"/>
+                                <rect x="122" y="90" width="16" height="16" fill="#1C202C" stroke="#4CAF50" stroke-width="2" rx="1"/>
+                                <line x1="126" y1="98" x2="134" y2="98" stroke="#4CAF50" stroke-width="2"/>
+                                <text x="146" y="102" fill="#B0BEC5" font-family="var(--font-mono)" font-size="9">CB-23 [CLOSED]</text>
+
+                                <!-- Down to Distribution Transformer -->
+                                <line x1="130" y1="106" x2="130" y2="140" stroke="#31374A" stroke-width="2"/>
+                                <circle cx="130" cy="150" r="14" fill="none" stroke="#2196F3" stroke-width="2"/>
+                                <circle cx="130" cy="170" r="14" fill="none" stroke="#4CAF50" stroke-width="2"/>
+                                <text x="154" y="155" fill="#FFFFFF" font-family="var(--font-mono)" font-size="10" font-weight="700">DT-100KVA-04</text>
+                                <text x="154" y="168" fill="#78909C" font-family="var(--font-mono)" font-size="9">11 / 0.415 kV Dyn11</text>
+                                <text x="154" y="180" fill="#78909C" font-family="var(--font-mono)" font-size="8">Rating: 100 kVA / 95 kW</text>
+
+                                <!-- 415 V 3-Phase Feeder Spine -->
+                                <line x1="130" y1="184" x2="130" y2="230" stroke="#31374A" stroke-width="2"/>
+                                <line x1="130" y1="230" x2="700" y2="230" stroke="#4CAF50" stroke-width="3"/>
+                                <text x="140" y="222" fill="#4CAF50" font-family="var(--font-mono)" font-size="9" font-weight="700">415 V FEEDER MAIN TRUNK (FDR-023)</text>
+
+                                <!-- Cluster 1: Homes 01–20 -->
+                                <g transform="translate(240, 230)">
+                                    <line x1="0" y1="0" x2="0" y2="50" stroke="#31374A" stroke-width="1.5"/>
+                                    <rect x="-40" y="50" width="80" height="45" fill="#1C202C" stroke="#31374A" stroke-width="1"/>
+                                    <text x="-32" y="66" fill="#FFFFFF" font-family="var(--font-mono)" font-size="9" font-weight="700">HOMES 01–20</text>
+                                    <text x="-32" y="78" fill="#78909C" font-family="var(--font-mono)" font-size="8">14 BESS / 5 Solar</text>
+                                    <text x="-32" y="89" fill="#4CAF50" font-family="var(--font-mono)" font-size="8">13 Active (H-18 Opt)</text>
                                 </g>
 
-                                <!-- 2. Low Voltage Feeder Spine (415V / 240V) -->
-                                <line x1="140" y1="220" x2="140" y2="280" class="feeder-line active" />
-                                
-                                <!-- Main Distribution Spine -->
-                                <line x1="140" y1="280" x2="760" y2="280" class="busbar energized" />
-                                <text x="150" y="270" fill="#00D68F" font-family="var(--font-mono)" font-size="10" font-weight="600">415V 3-PHASE 4-WIRE FEEDER SPINE (FDR-023)</text>
-
-                                <!-- Active Power Flow Animated Pulses -->
-                                <line x1="140" y1="280" x2="760" y2="280" stroke="#00D68F" stroke-width="2" class="pulse-path" id="flow-pulse-line"/>
-
-                                <!-- Feeder Nodes & Clusters -->
-                                <!-- Lateral Cluster 1: Nodes 01-15 -->
-                                <g transform="translate(260, 280)">
-                                    <line x1="0" y1="0" x2="0" y2="60" class="feeder-line active" />
-                                    <rect x="-45" y="60" width="90" height="50" fill="#111622" stroke="#1F293D" stroke-width="1.5" rx="2"/>
-                                    <text x="-38" y="76" fill="#FFFFFF" font-family="var(--font-mono)" font-size="10" font-weight="700">CLUSTER 1</text>
-                                    <text x="-38" y="90" fill="#94A3B8" font-family="var(--font-mono)" font-size="9">Nodes H-01..H-15</text>
-                                    <text x="-38" y="102" fill="#10B981" font-family="var(--font-mono)" font-size="8">11 BESS / 3 Solar</text>
+                                <!-- Cluster 2: Homes 21–40 -->
+                                <g transform="translate(420, 230)">
+                                    <line x1="0" y1="0" x2="0" y2="50" stroke="#31374A" stroke-width="1.5"/>
+                                    <rect x="-40" y="50" width="80" height="45" fill="#1C202C" stroke="#31374A" stroke-width="1"/>
+                                    <text x="-32" y="66" fill="#FFFFFF" font-family="var(--font-mono)" font-size="9" font-weight="700">HOMES 21–40</text>
+                                    <text x="-32" y="78" fill="#78909C" font-family="var(--font-mono)" font-size="8">14 BESS / 5 Solar</text>
+                                    <text x="-32" y="89" fill="#4CAF50" font-family="var(--font-mono)" font-size="8">14 Active BESS</text>
                                 </g>
 
-                                <!-- Lateral Cluster 2: Nodes 16-30 -->
-                                <g transform="translate(420, 280)">
-                                    <line x1="0" y1="0" x2="0" y2="60" class="feeder-line active" />
-                                    <rect x="-45" y="60" width="90" height="50" fill="#111622" stroke="#1F293D" stroke-width="1.5" rx="2"/>
-                                    <text x="-38" y="76" fill="#FFFFFF" font-family="var(--font-mono)" font-size="10" font-weight="700">CLUSTER 2</text>
-                                    <text x="-38" y="90" fill="#94A3B8" font-family="var(--font-mono)" font-size="9">Nodes H-16..H-30</text>
-                                    <text x="-38" y="102" fill="#F59E0B" font-family="var(--font-mono)" font-size="8">10 BESS (H-18 Opt)</text>
+                                <!-- Cluster 3: Homes 41–60 (Feeder Tail Node 60) -->
+                                <g transform="translate(620, 230)">
+                                    <line x1="0" y1="0" x2="0" y2="50" stroke="#31374A" stroke-width="1.5"/>
+                                    <rect x="-50" y="50" width="100" height="45" fill="#1C202C" stroke="#2196F3" stroke-width="1"/>
+                                    <text x="-42" y="66" fill="#2196F3" font-family="var(--font-mono)" font-size="9" font-weight="700">HOMES 41–60 (TAIL)</text>
+                                    <text x="-42" y="78" fill="#78909C" font-family="var(--font-mono)" font-size="8">14 BESS (H-55,56 Opt)</text>
+                                    <text x="-42" y="89" fill="#4CAF50" font-family="var(--font-mono)" font-size="8" id="svg-tail-text">226.54 V RMS (0 Sag)</text>
                                 </g>
 
-                                <!-- Lateral Cluster 3: Nodes 31-45 -->
-                                <g transform="translate(580, 280)">
-                                    <line x1="0" y1="0" x2="0" y2="60" class="feeder-line active" />
-                                    <rect x="-45" y="60" width="90" height="50" fill="#111622" stroke="#1F293D" stroke-width="1.5" rx="2"/>
-                                    <text x="-38" y="76" fill="#FFFFFF" font-family="var(--font-mono)" font-size="10" font-weight="700">CLUSTER 3</text>
-                                    <text x="-38" y="90" fill="#94A3B8" font-family="var(--font-mono)" font-size="9">Nodes H-31..H-45</text>
-                                    <text x="-38" y="102" fill="#10B981" font-family="var(--font-mono)" font-size="8">10 BESS / 4 Solar</text>
-                                </g>
-
-                                <!-- Lateral Cluster 4: Nodes 46-60 (FEEDER TAIL) -->
-                                <g transform="translate(740, 280)">
-                                    <line x1="0" y1="0" x2="0" y2="60" class="feeder-line active" />
-                                    <rect x="-55" y="60" width="105" height="50" fill="#111622" stroke="#38BDF8" stroke-width="1.5" rx="2"/>
-                                    <text x="-48" y="76" fill="#38BDF8" font-family="var(--font-mono)" font-size="10" font-weight="700">NODE 60 (TAIL)</text>
-                                    <text x="-48" y="90" fill="#94A3B8" font-family="var(--font-mono)" font-size="9">Nodes H-46..H-60</text>
-                                    <text x="-48" y="102" fill="#10B981" font-family="var(--font-mono)" font-size="8" id="tail-volt-mimic">226.5 V (0 Sag)</text>
-                                </g>
-
-                                <!-- VIRTUAL COMMUNITY BATTERY AGGREGATOR BADGE -->
-                                <g transform="translate(420, 390)">
-                                    <rect x="-180" y="-30" width="360" height="60" fill="#0C1420" stroke="#00D68F" stroke-width="2" rx="4" filter="url(#glow-green)"/>
-                                    <text x="-160" y="-10" fill="#00D68F" font-family="var(--font-mono)" font-size="11" font-weight="700">SAANJH VIRTUAL COMMUNITY BATTERY (VCB)</text>
-                                    <text x="-160" y="8" fill="#94A3B8" font-family="var(--font-mono)" font-size="9">42 Aggregated Inverters | Available: 92.55 kW | Dispatched: <tspan id="mimic-disp-kw" fill="#FFFFFF" font-weight="700">56.25 kW</tspan></text>
-                                    <text x="-160" y="21" fill="#64748B" font-family="var(--font-mono)" font-size="8">Reserve SOC Limit: ≥70% Protected | Opted Out: 3 Units Safe</text>
-                                </g>
-
-                                <!-- Upward Reverse Active Power Flow from VCB during Peak -->
-                                <g id="vcb-injection-lines">
-                                    <line x1="300" y1="360" x2="300" y2="330" stroke="#00D68F" stroke-width="2" stroke-dasharray="4,4" class="pulse-path"/>
-                                    <line x1="420" y1="360" x2="420" y2="330" stroke="#00D68F" stroke-width="2" stroke-dasharray="4,4" class="pulse-path"/>
-                                    <line x1="540" y1="360" x2="540" y2="330" stroke="#00D68F" stroke-width="2" stroke-dasharray="4,4" class="pulse-path"/>
+                                <!-- SAANJH Virtual Battery Aggregator Representation -->
+                                <g transform="translate(370, 330)">
+                                    <rect x="-160" y="-18" width="320" height="40" fill="#151821" stroke="#4CAF50" stroke-width="1.5" rx="2"/>
+                                    <text x="-140" y="-2" fill="#4CAF50" font-family="var(--font-mono)" font-size="10" font-weight="700">SAANJH VIRTUAL COMMUNITY BATTERY (VCB)</text>
+                                    <text x="-140" y="13" fill="#B0BEC5" font-family="var(--font-mono)" font-size="8.5">42 Inverters Enrolled | 39 Participating | 3 Opted Out | Hard Reserve Limit &gt;=70%</text>
                                 </g>
                             </svg>
                         </div>
                     </div>
                 </div>
 
-                <!-- Right: Asset Health & SCADA Alarm Annunciator Panel -->
+                <!-- Right: Asset Health & Thermal Stress -->
                 <div style="display:flex; flex-direction:column; gap:1rem;">
                     
-                    <!-- Transformer Linear Gauge Widget (React SCADA HMI style) -->
-                    <div class="scada-panel">
-                        <div class="panel-header">
-                            <div class="title-left">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-                                </svg>
-                                <span>DT-100KVA-04 THERMAL LOADING</span>
-                            </div>
-                            <span class="status-tag active" id="tx-thermal-tag">NORMAL MITIGATED</span>
+                    <div class="fuxa-panel">
+                        <div class="fuxa-panel-title">
+                            <span>TRANSFORMER THERMAL LOADING</span>
+                            <span id="badge-tx-stress" style="color:#4CAF50;">STABILIZED</span>
                         </div>
-                        <div class="panel-body">
-                            <div class="linear-gauge-container">
-                                <div style="display:flex; justify-content:space-between; margin-bottom:0.2rem;">
-                                    <span style="color:var(--text-muted); font-size:0.75rem;">CURRENT LOADING:</span>
-                                    <span style="color:#FFFFFF; font-weight:700; font-size:0.9rem;" id="gauge-load-num">109.18 kW / 114.9%</span>
-                                </div>
-                                <div class="gauge-track">
-                                    <div class="gauge-fill" id="tx-gauge-fill" style="width: 71%; background: #00D68F;"></div>
-                                    <!-- 85% Warning Setpoint -->
-                                    <div class="gauge-setpoint" style="left: 85%;" title="Warning Setpoint 85%"></div>
-                                    <!-- 100% Thermal Rating -->
-                                    <div class="gauge-threshold" style="left: 95%;" title="Rated Capacity 95 kW (100%)"></div>
-                                </div>
-                                <div class="gauge-labels">
-                                    <span>0 kW</span>
-                                    <span>80.75 kW (Safe Limit)</span>
-                                    <span>95 kW (Rated)</span>
-                                    <span>154 kW (Base Peak)</span>
-                                </div>
+                        <div class="fuxa-panel-body">
+                            <div style="display:flex; justify-content:space-between; font-family:var(--font-mono); font-size:0.75rem;">
+                                <span style="color:var(--fuxa-text-muted);">CURRENT LOAD:</span>
+                                <span style="color:#FFFFFF; font-weight:700;" id="txt-tx-load">109.18 kW / 114.9%</span>
                             </div>
 
-                            <div class="key-value-list" style="margin-top:0.85rem;">
-                                <div class="kv-item">
-                                    <span class="label">Baseline Unmanaged Overload:</span>
-                                    <span class="value" style="color:#EF4444;">154.14 kW (162.2% Overload)</span>
+                            <div class="gauge-bar-wrap">
+                                <div class="gauge-fill" id="bar-tx-fill" style="width:71%; background:#4CAF50;"></div>
+                                <div class="gauge-limit-mark" style="left:85%;" title="80.75 kW (85% Continuous Rating)"></div>
+                            </div>
+                            <div style="display:flex; justify-content:space-between; font-family:var(--font-mono); font-size:0.68rem; color:var(--fuxa-text-muted);">
+                                <span>0 kW</span>
+                                <span>80.75 kW (Safe Limit)</span>
+                                <span>95 kW (Rated)</span>
+                                <span>154 kW (Base Peak)</span>
+                            </div>
+
+                            <div style="margin-top:0.85rem; display:flex; flex-direction:column; gap:0.4rem; font-family:var(--font-mono); font-size:0.73rem;">
+                                <div style="display:flex; justify-content:space-between; padding:0.35rem 0; border-bottom:1px solid #272C3B;">
+                                    <span style="color:var(--fuxa-text-muted);">Baseline Peak Overload:</span>
+                                    <span style="color:#F44336; font-weight:700;">154.14 kW (162.2%)</span>
                                 </div>
-                                <div class="kv-item">
-                                    <span class="label">SAANJH Controlled Peak:</span>
-                                    <span class="value accent" id="kv-saanjh-peak">109.18 kW (-44.95 kW Shaved)</span>
+                                <div style="display:flex; justify-content:space-between; padding:0.35rem 0; border-bottom:1px solid #272C3B;">
+                                    <span style="color:var(--fuxa-text-muted);">SAANJH Controlled Peak:</span>
+                                    <span style="color:#4CAF50; font-weight:700;">109.18 kW (-44.95 kW)</span>
                                 </div>
-                                <div class="kv-item">
-                                    <span class="label">Overload Duration:</span>
-                                    <span class="value" id="kv-overload-dur">60 min (30 min stress avoided)</span>
+                                <div style="display:flex; justify-content:space-between; padding:0.35rem 0; border-bottom:1px solid #272C3B;">
+                                    <span style="color:var(--fuxa-text-muted);">Overload Duration:</span>
+                                    <span>60 min (30 min stress avoided)</span>
                                 </div>
-                                <div class="kv-item">
-                                    <span class="label">Insulation Life Extension:</span>
-                                    <span class="value accent">+3.8 Years (Arrhenius Model)</span>
+                                <div style="display:flex; justify-content:space-between; padding:0.35rem 0;">
+                                    <span style="color:var(--fuxa-text-muted);">Insulation Life Gain:</span>
+                                    <span style="color:#4CAF50; font-weight:700;">+3.8 Years (Arrhenius Model)</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- SCADA Real-Time Alarm & Event Log -->
-                    <div class="scada-panel" style="flex:1;">
-                        <div class="panel-header">
-                            <div class="title-left">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
-                                    <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
-                                </svg>
-                                <span>SCADA SEQUENCE OF EVENTS (SOE) LOG</span>
-                            </div>
-                            <span style="font-size:0.68rem; color:var(--text-muted);">AUTO-REFRESH</span>
+                    <!-- Sequence of Events -->
+                    <div class="fuxa-panel" style="flex:1;">
+                        <div class="fuxa-panel-title">
+                            <span>SEQUENCE OF EVENTS (SOE) LOG</span>
+                            <span style="color:var(--fuxa-text-muted); font-size:0.68rem;">SIMULATION REPLAY</span>
                         </div>
-                        <div class="panel-body" style="padding:0; overflow-y:auto; max-height:220px;">
-                            <table class="alarm-table">
+                        <div class="fuxa-panel-body" style="padding:0; overflow-y:auto; max-height:200px;">
+                            <table class="fleet-table">
                                 <thead>
                                     <tr>
                                         <th>Time</th>
-                                        <th>Sev</th>
-                                        <th>Asset</th>
-                                        <th>Event Description</th>
+                                        <th>Tag</th>
+                                        <th>Description</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="alarm-row normal">
+                                    <tr>
                                         <td>19:05:00</td>
-                                        <td><span class="alarm-badge normal">NORM</span></td>
-                                        <td>NODE-60</td>
-                                        <td>Tail voltage held at 226.5V RMS (sag averted)</td>
+                                        <td style="color:#4CAF50;">FEEDER</td>
+                                        <td>Coincident peak shaved to 109.18 kW (44.95 kW reduction)</td>
                                     </tr>
-                                    <tr class="alarm-row urgent">
+                                    <tr>
                                         <td>19:05:00</td>
-                                        <td><span class="alarm-badge urgent">URGT</span></td>
-                                        <td>DT-100</td>
-                                        <td>Baseline would exceed 154 kW (Mitigated by 56.2 kW)</td>
+                                        <td style="color:#2196F3;">TAIL-NODE</td>
+                                        <td>Voltage stabilized at 226.54 V (Zero &lt;216V violations)</td>
                                     </tr>
-                                    <tr class="alarm-row high">
+                                    <tr>
                                         <td>18:35:00</td>
-                                        <td><span class="alarm-badge high">HIGH</span></td>
-                                        <td>VCB-EDGE</td>
-                                        <td>Dispatch executed: 39 BESS commanded to 56.25 kW</td>
+                                        <td style="color:#9C27B0;">DISPATCH</td>
+                                        <td>Flexibility activated: 56.25 kW dispatched across 39 homes</td>
                                     </tr>
-                                    <tr class="alarm-row high">
+                                    <tr>
                                         <td>18:30:00</td>
-                                        <td><span class="alarm-badge high">HIGH</span></td>
-                                        <td>SOLAR-PV</td>
-                                        <td>PV Cliff detected: Solar generation drop to 0.0 kW</td>
+                                        <td style="color:#FF9800;">SOLAR</td>
+                                        <td>Solar PV cliff detected: Generation dropped to 0.0 kW</td>
                                     </tr>
-                                    <tr class="alarm-row normal">
+                                    <tr>
                                         <td>16:00:00</td>
-                                        <td><span class="alarm-badge info">INFO</span></td>
-                                        <td>SYS-COMM</td>
-                                        <td>Telecontrol link online. 42 BESS heartbeat OK</td>
+                                        <td style="color:#B0BEC5;">FLEET</td>
+                                        <td>Fleet initialized: 42 BESS ready, 3 opt-outs respected</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -1337,70 +849,58 @@
             </div>
         </div>
 
-        <!-- VIEWPORT 2: [F2] SCADA TRENDS & TELEMETRY -->
-        <div class="tab-viewport" id="tab-trends">
-            <div class="trends-grid">
+        <!-- SCREEN 2: TRENDS -->
+        <div class="fuxa-screen" id="screen-trends">
+            <div class="trends-2x2">
                 
-                <!-- Chart 1: Active Power & Peak Shaving -->
-                <div class="scada-panel">
-                    <div class="panel-header">
-                        <div class="title-left">
-                            <span style="color:#00D68F;">●</span>
-                            <span>TREND 1: FEEDER ACTIVE POWER & PEAK SHAVING PROFILE (kW)</span>
-                        </div>
-                        <span style="font-size:0.68rem; color:var(--text-muted)">16:00 - 22:00 IST</span>
+                <!-- Chart 1: Baseline vs SAANJH Feeder Demand -->
+                <div class="fuxa-panel">
+                    <div class="fuxa-panel-title">
+                        <span>CHART 1: BASELINE FEEDER DEMAND VS SAANJH-CONTROLLED DEMAND (kW)</span>
+                        <span style="color:var(--fuxa-text-muted);">16:00 - 22:00 IST</span>
                     </div>
-                    <div class="panel-body">
-                        <div class="chart-box">
-                            <canvas id="chart-demand"></canvas>
+                    <div class="fuxa-panel-body">
+                        <div class="chart-container">
+                            <canvas id="fuxa-chart-demand"></canvas>
                         </div>
                     </div>
                 </div>
 
-                <!-- Chart 2: Feeder Tail Voltage (Node 60) -->
-                <div class="scada-panel">
-                    <div class="panel-header">
-                        <div class="title-left">
-                            <span style="color:#38BDF8;">●</span>
-                            <span>TREND 2: FEEDER TAIL VOLTAGE PROFILE — NODE 60 (V RMS)</span>
-                        </div>
-                        <span class="status-tag active">0 STATUTORY VIOLATIONS</span>
+                <!-- Chart 2: Baseline vs SAANJH Feeder Tail Voltage -->
+                <div class="fuxa-panel">
+                    <div class="fuxa-panel-title">
+                        <span>CHART 2: FEEDER TAIL NODE 60 RMS VOLTAGE (V)</span>
+                        <span style="color:#4CAF50;">100% STATUTORY COMPLIANCE (&gt;216V)</span>
                     </div>
-                    <div class="panel-body">
-                        <div class="chart-box">
-                            <canvas id="chart-voltage"></canvas>
+                    <div class="fuxa-panel-body">
+                        <div class="chart-container">
+                            <canvas id="fuxa-chart-voltage"></canvas>
                         </div>
                     </div>
                 </div>
 
-                <!-- Chart 3: Flexibility Dispatch vs Availability -->
-                <div class="scada-panel">
-                    <div class="panel-header">
-                        <div class="title-left">
-                            <span style="color:#A855F7;">●</span>
-                            <span>TREND 3: VCB FLEXIBILITY DISPATCHED VS FLEET HEADROOM (kW)</span>
-                        </div>
-                        <span style="font-size:0.68rem; color:var(--text-muted)">39 Active Inverters</span>
+                <!-- Chart 3: Flexibility Available vs Dispatched -->
+                <div class="fuxa-panel">
+                    <div class="fuxa-panel-title">
+                        <span>CHART 3: AVAILABLE FLEET FLEXIBILITY VS DISPATCHED FLEXIBILITY (kW)</span>
+                        <span style="color:var(--fuxa-text-muted);">39 Inverters Active</span>
                     </div>
-                    <div class="panel-body">
-                        <div class="chart-box">
-                            <canvas id="chart-flex"></canvas>
+                    <div class="fuxa-panel-body">
+                        <div class="chart-container">
+                            <canvas id="fuxa-chart-flex"></canvas>
                         </div>
                     </div>
                 </div>
 
-                <!-- Chart 4: XGBoost Loss Convergence -->
-                <div class="scada-panel">
-                    <div class="panel-header">
-                        <div class="title-left">
-                            <span style="color:#F59E0B;">●</span>
-                            <span>TREND 4: EDGE XGBOOST LOSS FORECAST ERROR CONVERGENCE</span>
-                        </div>
-                        <span style="font-size:0.68rem; color:var(--text-muted)">Best Iter: 171 (RMSE 0.546 kW)</span>
+                <!-- Chart 4: Solar Generation + Feeder Demand -->
+                <div class="fuxa-panel">
+                    <div class="fuxa-panel-title">
+                        <span>CHART 4: SOLAR GENERATION AND FEEDER DEMAND DYNAMICS (kW)</span>
+                        <span style="color:#FF9800;">18:30 Solar Cliff Highlighted</span>
                     </div>
-                    <div class="panel-body">
-                        <div class="chart-box">
-                            <canvas id="chart-xgb"></canvas>
+                    <div class="fuxa-panel-body">
+                        <div class="chart-container">
+                            <canvas id="fuxa-chart-solar"></canvas>
                         </div>
                     </div>
                 </div>
@@ -1408,142 +908,145 @@
             </div>
         </div>
 
-        <!-- VIEWPORT 3: [F3] FLEET MATRIX (60 HOMES) -->
-        <div class="tab-viewport" id="tab-fleet">
-            <div class="scada-panel" style="flex:1;">
-                <div class="fleet-controls-bar">
-                    <div class="filter-group">
-                        <span style="color:var(--text-muted); font-size:0.75rem; margin-right:0.5rem;">FILTER FLEET:</span>
-                        <button class="scada-btn active" data-filter="all">ALL (60)</button>
-                        <button class="scada-btn" data-filter="battery">BESS FLEET (42)</button>
-                        <button class="scada-btn" data-filter="participating">ACTIVE (39)</button>
-                        <button class="scada-btn alert" data-filter="optout">OPTED OUT (3)</button>
-                        <button class="scada-btn" data-filter="solar">SOLAR PV (15)</button>
-                    </div>
-
-                    <div style="display:flex; align-items:center; gap:0.5rem;">
-                        <input type="text" class="fleet-search" id="fleet-search-input" placeholder="Search Node ID (e.g. H-18)...">
-                        <span style="color:var(--text-muted); font-size:0.75rem;" id="fleet-count-badge">Showing 60 nodes</span>
-                    </div>
+        <!-- SCREEN 3: FLEXIBILITY FLEET -->
+        <div class="fuxa-screen" id="screen-fleet">
+            <div class="fuxa-panel" style="flex:1;">
+                <div class="fuxa-panel-title">
+                    <span>RESIDENTIAL FLEXIBILITY ASSET MATRIX (ALL 60 HOMES)</span>
+                    <span style="font-size:0.68rem; color:var(--fuxa-text-muted);">CANONICAL SOURCE: simulation/data/results/household_dispatch.csv</span>
                 </div>
+                <div class="fuxa-panel-body">
+                    
+                    <div class="fleet-controls">
+                        <div style="display:flex; align-items:center; gap:0.4rem;">
+                            <span style="color:var(--fuxa-text-muted); font-size:0.75rem;">FILTER:</span>
+                            <button class="fuxa-btn active" data-fleet-filter="all">ALL (60)</button>
+                            <button class="fuxa-btn" data-fleet-filter="bess">BESS (42)</button>
+                            <button class="fuxa-btn" data-fleet-filter="participating">ACTIVE (39)</button>
+                            <button class="fuxa-btn" data-fleet-filter="optout">OPTED OUT (3)</button>
+                            <button class="fuxa-btn" data-fleet-filter="solar">SOLAR (15)</button>
+                        </div>
 
-                <div class="fleet-table-container">
-                    <table class="fleet-table" id="fleet-matrix-table">
-                        <thead>
-                            <tr>
-                                <th>Node ID</th>
-                                <th>BESS Hardware</th>
-                                <th>Solar PV</th>
-                                <th>Battery SOC (State of Charge)</th>
-                                <th>Emergency Reserve</th>
-                                <th>Avail Flex (kW)</th>
-                                <th>Delivered (kWh)</th>
-                                <th>Dispatch Status</th>
-                                <th>Incentive Tariff Credit</th>
-                            </tr>
-                        </thead>
-                        <tbody id="fleet-table-body">
-                            <!-- Populated dynamically via JS -->
-                        </tbody>
-                    </table>
+                        <div style="display:flex; align-items:center; gap:0.5rem;">
+                            <input type="text" id="fuxa-fleet-search" placeholder="Search Home ID (e.g. H-18)..." style="background:#151821; border:1px solid var(--fuxa-border); color:#FFFFFF; padding:2px 8px; font-family:var(--font-mono); font-size:0.75rem; border-radius:2px; width:190px;">
+                            <span style="color:var(--fuxa-text-muted); font-family:var(--font-mono); font-size:0.72rem;" id="fleet-count-text">Showing 60 homes</span>
+                        </div>
+                    </div>
+
+                    <div class="fleet-table-wrap">
+                        <table class="fleet-table">
+                            <thead>
+                                <tr>
+                                    <th>Home</th>
+                                    <th>Battery</th>
+                                    <th>Solar</th>
+                                    <th>State of Charge (SOC)</th>
+                                    <th>Reserve Limit</th>
+                                    <th>Available (kW)</th>
+                                    <th>Dispatched (kW)</th>
+                                    <th>Delivered (kWh)</th>
+                                    <th>Participation</th>
+                                    <th>Opted Out</th>
+                                    <th>Compensation</th>
+                                </tr>
+                            </thead>
+                            <tbody id="fuxa-fleet-tbody">
+                                <!-- Populated from canonical fleet array -->
+                            </tbody>
+                        </table>
+                    </div>
+
                 </div>
             </div>
         </div>
 
-        <!-- VIEWPORT 4: [F4] DISCOM DIRECTIVE & ECONOMICS -->
-        <div class="tab-viewport" id="tab-directive">
-            <div class="directive-grid">
+        <!-- SCREEN 4: DISCOM / DECISION VIEW -->
+        <div class="fuxa-screen" id="screen-decision">
+            <div class="decision-layout">
                 
-                <!-- Left: Official DISCOM Directive -->
-                <div class="scada-panel">
-                    <div class="panel-header">
-                        <div class="title-left">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                            </svg>
-                            <span>DISCOM FEEDER OPERATOR DISPATCH DIRECTIVE</span>
-                        </div>
-                        <span class="status-tag active">AUTHORIZED DIRECTIVE</span>
+                <!-- Left: Feeder Condition & Action Recommendation -->
+                <div class="fuxa-panel">
+                    <div class="fuxa-panel-title">
+                        <span>DISCOM FEEDER DECISION SUPPORT & DIRECTIVE</span>
+                        <span style="color:#2196F3;">AUTHORIZED OPERATOR PLAN</span>
                     </div>
-                    <div class="panel-body">
+                    <div class="fuxa-panel-body">
                         
-                        <div class="action-plan-banner">
-                            <div style="font-family:var(--font-mono); font-size:0.75rem; color:var(--schneider-green); font-weight:700;">
-                                >> DIRECTIVE ID: DIR-FDR023-20261003-PEAK
+                        <div class="decision-banner">
+                            <div style="font-family:var(--font-mono); font-size:0.72rem; color:#2196F3; font-weight:700;">
+                                >> AUTOMATED ACTION PLAN: FDR-023 / DT-100KVA-04
                             </div>
-                            <div class="directive-command">
+                            <div class="directive-text">
                                 "DISPATCH 56.2 kW FOR 45 MINUTES VIA SAANJH EDGE"
                             </div>
-                            <p style="color:var(--text-secondary); font-size:0.8rem; line-height:1.5;">
-                                Pre-emptive peak mitigation order automatically generated for feeder operator verification. Coordinates 39 participating residential inverters across Nodes 01–60 to shave 44.95 kW of coincident evening demand following the 18:30 Solar Cliff.
+                            <p style="color:var(--fuxa-text-secondary); font-size:0.78rem;">
+                                Pre-emptive flexibility call triggered by 18:30 Solar Cliff forecast. Coordinates 39 participating residential inverters across Nodes 01–60 to shave 44.95 kW of coincident evening demand.
                             </p>
                         </div>
 
-                        <div class="key-value-list">
-                            <div class="kv-item">
-                                <span class="label">Target Distribution Feeder:</span>
-                                <span class="value">FDR-023 | DT-100KVA-04</span>
+                        <div style="font-family:var(--font-mono); font-size:0.75rem; font-weight:700; color:#FFFFFF; margin-bottom:0.4rem;">
+                            1. CURRENT FEEDER CONDITION (AT TRIGGER TIME 18:30):
+                        </div>
+                        <div style="display:flex; flex-direction:column; gap:0.35rem; font-family:var(--font-mono); font-size:0.72rem; margin-bottom:1rem;">
+                            <div style="display:flex; justify-content:space-between; padding:0.35rem; background:#1C202C; border:1px solid #272C3B;">
+                                <span style="color:var(--fuxa-text-muted);">Baseline Projected Peak:</span>
+                                <span style="color:#F44336; font-weight:700;">154.14 kW (162.2% Overload)</span>
                             </div>
-                            <div class="kv-item">
-                                <span class="label">Trigger Condition:</span>
-                                <span class="value" style="color:#F59E0B;">Solar Drop-off at 18:30 (PV Cliff -7.5 kW)</span>
+                            <div style="display:flex; justify-content:space-between; padding:0.35rem; background:#1C202C; border:1px solid #272C3B;">
+                                <span style="color:var(--fuxa-text-muted);">Baseline Feeder Tail Voltage:</span>
+                                <span style="color:#F44336;">219.68 V (6 Voltage Violations below statutory 216V)</span>
                             </div>
-                            <div class="kv-item">
-                                <span class="label">Required Grid Relief:</span>
-                                <span class="value">56.25 kW for 45 min</span>
+                            <div style="display:flex; justify-content:space-between; padding:0.35rem; background:#1C202C; border:1px solid #272C3B;">
+                                <span style="color:var(--fuxa-text-muted);">Fleet Flexibility Available:</span>
+                                <span style="color:#4CAF50; font-weight:700;">92.55 kW Headroom (164% of request)</span>
                             </div>
-                            <div class="kv-item">
-                                <span class="label">Aggregated Fleet Availability:</span>
-                                <span class="value accent">92.55 kW (164% of request)</span>
-                            </div>
-                            <div class="kv-item">
-                                <span class="label">Dependable Delivery Ratio:</span>
-                                <span class="value accent">98.51% (Rigorous Reserve Guarantee)</span>
-                            </div>
-                            <div class="kv-item">
-                                <span class="label">Distribution Technical Loss Saving:</span>
-                                <span class="value accent">9.13 kWh Saved (-35.3%)</span>
+                            <div style="display:flex; justify-content:space-between; padding:0.35rem; background:#1C202C; border:1px solid #272C3B;">
+                                <span style="color:var(--fuxa-text-muted);">Flexibility Dispatched:</span>
+                                <span style="color:#2196F3; font-weight:700;">56.25 kW (45-Minute Coordinated Discharge)</span>
                             </div>
                         </div>
 
-                        <div style="margin-top:1rem; border-top:1px solid var(--border-primary); padding-top:0.75rem;">
-                            <div style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-muted); margin-bottom:0.4rem;">
-                                OPERATIONAL COMPLIANCE CHECKLIST:
+                        <div style="font-family:var(--font-mono); font-size:0.75rem; font-weight:700; color:#FFFFFF; margin-bottom:0.4rem;">
+                            2. EXPECTED ENGINEERING OUTCOME (VALIDATED VIA PYPSA):
+                        </div>
+                        <div style="display:flex; flex-direction:column; gap:0.35rem; font-family:var(--font-mono); font-size:0.72rem;">
+                            <div style="display:flex; justify-content:space-between; padding:0.35rem; background:#1C202C; border:1px solid #272C3B;">
+                                <span style="color:var(--fuxa-text-muted);">Net Peak Shaved:</span>
+                                <span style="color:#4CAF50; font-weight:700;">-44.95 kW (-29.2% Shaved down to 109.18 kW)</span>
                             </div>
-                            <div style="display:flex; flex-direction:column; gap:0.3rem; font-family:var(--font-mono); font-size:0.72rem; color:var(--text-secondary);">
-                                <div>☑ Frequency & Phase Synchronization Verified (IEEE 1547 compliant)</div>
-                                <div>☑ Consumer Emergency Reserve Floor Enforced (All units ≥70% SOC)</div>
-                                <div>☑ Homeowner Privacy & Opt-Out Guaranteed (H-18, H-55, H-56 Protected)</div>
-                                <div>☑ Arrhenius Thermal Stress Model Monitored (+3.8 yrs transformer life)</div>
+                            <div style="display:flex; justify-content:space-between; padding:0.35rem; background:#1C202C; border:1px solid #272C3B;">
+                                <span style="color:var(--fuxa-text-muted);">Thermal Overload Duration:</span>
+                                <span style="color:#4CAF50; font-weight:700;">90 min → 60 min (30 minutes stress cut)</span>
+                            </div>
+                            <div style="display:flex; justify-content:space-between; padding:0.35rem; background:#1C202C; border:1px solid #272C3B;">
+                                <span style="color:var(--fuxa-text-muted);">Voltage Violations:</span>
+                                <span style="color:#4CAF50; font-weight:700;">6 → 0 (100% Eliminated, Tail held at 226.5V)</span>
+                            </div>
+                            <div style="display:flex; justify-content:space-between; padding:0.35rem; background:#1C202C; border:1px solid #272C3B;">
+                                <span style="color:var(--fuxa-text-muted);">Distribution Losses:</span>
+                                <span style="color:#4CAF50; font-weight:700;">25.87 → 16.74 kWh (-35.3% Technical Loss Saving)</span>
+                            </div>
+                            <div style="display:flex; justify-content:space-between; padding:0.35rem; background:#1C202C; border:1px solid #272C3B;">
+                                <span style="color:var(--fuxa-text-muted);">Critical-Load Protection:</span>
+                                <span style="color:#4CAF50; font-weight:700;">ZERO Reserve Breaches (All homes ≥70% SOC)</span>
                             </div>
                         </div>
 
                     </div>
                 </div>
 
-                <!-- Right: Economics & CapEx Sensitivity Matrix -->
-                <div class="scada-panel">
-                    <div class="panel-header">
-                        <div class="title-left">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"/>
-                                <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/>
-                                <path d="M12 18V6"/>
-                            </svg>
-                            <span>DEPLOYMENT ECONOMICS & SENSITIVITY BENCHMARK</span>
-                        </div>
-                        <span style="font-size:0.68rem; color:var(--text-muted)">INR (₹)</span>
+                <!-- Right: Economic Sensitivity Matrix -->
+                <div class="fuxa-panel">
+                    <div class="fuxa-panel-title">
+                        <span>THREE-TIER DEPLOYMENT CAPEX SENSITIVITY</span>
+                        <span style="color:var(--fuxa-text-muted);">INR (₹)</span>
                     </div>
-                    <div class="panel-body">
+                    <div class="fuxa-panel-body">
                         
-                        <div style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-muted); margin-bottom:0.25rem;">
-                            THREE-TIER DEPLOYMENT SENSITIVITY SCENARIOS:
-                        </div>
-
-                        <table class="matrix-table">
+                        <table class="spec-table">
                             <thead>
                                 <tr>
-                                    <th>Deployment Tier</th>
+                                    <th>Deployment Scenario</th>
                                     <th>Total CapEx</th>
                                     <th>Cost / kW</th>
                                     <th>Cost / Home</th>
@@ -1551,15 +1054,15 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Low-Cost Mass Scale</td>
+                                    <td>Low-Cost Mass Production</td>
                                     <td>₹1,60,200</td>
-                                    <td style="color:#00D68F; font-weight:700;">₹3,563</td>
+                                    <td style="color:#4CAF50; font-weight:700;">₹3,563</td>
                                     <td>₹4,107</td>
                                 </tr>
-                                <tr class="highlight">
-                                    <td style="color:#00D68F;">Base Prototype Scale</td>
+                                <tr class="selected">
+                                    <td style="color:#2196F3;">Base Prototype Scale</td>
                                     <td>₹3,17,767</td>
-                                    <td style="color:#00D68F; font-weight:700;">₹7,068</td>
+                                    <td style="color:#2196F3; font-weight:700;">₹7,068</td>
                                     <td>₹8,147</td>
                                 </tr>
                                 <tr>
@@ -1571,28 +1074,36 @@
                             </tbody>
                         </table>
 
-                        <div style="margin-top:1rem; background:#080D16; border:1px solid var(--border-primary); padding:0.85rem; border-radius:2px;">
-                            <div style="font-family:var(--font-mono); font-size:0.75rem; font-weight:700; color:#FFFFFF; margin-bottom:0.5rem;">
+                        <div style="margin-top:1rem; background:#181B24; border:1px solid var(--fuxa-border); padding:0.75rem; border-radius:2px;">
+                            <div style="font-family:var(--font-mono); font-size:0.74rem; font-weight:700; color:#FFFFFF; margin-bottom:0.5rem;">
                                 ARCHITECTURAL COST COMPARISON:
                             </div>
-                            <div class="key-value-list">
-                                <div class="kv-item">
-                                    <span class="label">Central Utility Substation BESS (50 kWh):</span>
-                                    <span class="value" style="color:#EF4444;">₹45,000 / kW (₹22,50,000)</span>
+                            <div style="display:flex; flex-direction:column; gap:0.35rem; font-family:var(--font-mono); font-size:0.72rem;">
+                                <div style="display:flex; justify-content:space-between;">
+                                    <span style="color:var(--fuxa-text-muted);">Central Substation BESS (50 kWh):</span>
+                                    <span style="color:#F44336;">₹45,000 / kW (₹22,50,000)</span>
                                 </div>
-                                <div class="kv-item">
-                                    <span class="label">SAANJH Distributed Inverter Retrofit:</span>
-                                    <span class="value accent">₹7,068 / kW (₹3,17,767)</span>
+                                <div style="display:flex; justify-content:space-between;">
+                                    <span style="color:var(--fuxa-text-muted);">SAANJH Distributed Retrofit:</span>
+                                    <span style="color:#4CAF50; font-weight:700;">₹7,068 / kW (₹3,17,767)</span>
                                 </div>
-                                <div class="kv-item">
-                                    <span class="label">Net Capital Cost Savings:</span>
-                                    <span class="value accent">84.3% (₹19,32,233 Avoided)</span>
+                                <div style="display:flex; justify-content:space-between;">
+                                    <span style="color:var(--fuxa-text-muted);">Net Capital Savings:</span>
+                                    <span style="color:#4CAF50; font-weight:700;">84.3% (₹19,32,233 Avoided)</span>
                                 </div>
-                                <div class="kv-item">
-                                    <span class="label">Substation Real Estate / Land Required:</span>
-                                    <span class="value accent">0 sq. meters (Zero Land Acquisition)</span>
+                                <div style="display:flex; justify-content:space-between;">
+                                    <span style="color:var(--fuxa-text-muted);">Substation Land Required:</span>
+                                    <span style="color:#4CAF50; font-weight:700;">Zero sq. meters</span>
                                 </div>
                             </div>
+                        </div>
+
+                        <!-- System Boundary Mapping -->
+                        <div style="margin-top:0.85rem; border-top:1px solid var(--fuxa-border); padding-top:0.5rem; font-family:var(--font-mono); font-size:0.68rem; color:var(--fuxa-text-muted);">
+                            <div style="font-weight:700; color:#B0BEC5; margin-bottom:0.25rem;">SYSTEM VERIFICATION BOUNDARIES:</div>
+                            <div>• [PHYSICAL]: LoRa node temperature sensing &amp; CT clamp telemetry</div>
+                            <div>• [MODEL]: 72-step feeder simulation, XGBoost forecaster, PyPSA validation</div>
+                            <div>• [FUTURE DEPLOYMENT]: Certified DISCOM ADMS/DERMS utility switching</div>
                         </div>
 
                     </div>
@@ -1603,73 +1114,63 @@
 
     </main>
 
-    <!-- Industrial SCADA Bottom Telemetry Bar -->
-    <footer class="scada-footer">
-        <div class="footer-left">
-            <span>STATION: SAANJH-EDGE-DISPATCHER</span>
-            <span style="color:var(--border-secondary)">|</span>
-            <span>MODEL: XGBOOST RESIDUAL FORECASTER (VALIDATION RMSE: 0.546 kW)</span>
-            <span style="color:var(--border-secondary)">|</span>
-            <span>PYPSA VALIDATION: CONVERGED (0 UNRESOLVED FLOWS)</span>
+    <!-- FUXA Industrial Footer & Attribution -->
+    <footer class="fuxa-footer">
+        <div>
+            <span>PLATFORM: <a href="https://github.com/frangoteam/FUXA" target="_blank" rel="noopener">FUXA Web SCADA/HMI</a> (MIT License, Commit 64eb012)</span>
+            <span style="color:var(--fuxa-border)">|</span>
+            <span>APPLICATION: SAANJH Virtual Community Battery Feeder Orchestrator</span>
         </div>
-        <div class="footer-right">
-            <span>IEEE 1547 / CEA GRID CODE COMPLIANT</span>
-            <span style="color:var(--border-secondary)">|</span>
-            <span style="color:var(--schneider-green)">SCHNEIDER ELECTRIC YUVA YODHA HACKATHON 2026</span>
+        <div>
+            <span>SCHNEIDER ELECTRIC YUVA YODHA HACKATHON 2026 — CHALLENGE 03</span>
         </div>
     </footer>
 
-    <!-- CANONICAL DATA INJECTION & RUNTIME ENGINE -->
+    <!-- RUNTIME LOGIC & CHART BINDINGS -->
     <script>
-        // Canonical Datasets embedded from repository simulation results
-        const EMBEDDED_BUNDLE = {"labels": ["16:00", "16:05", "16:10", "16:15", "16:20", "16:25", "16:30", "16:35", "16:40", "16:45", "16:50", "16:55", "17:00", "17:05", "17:10", "17:15", "17:20", "17:25", "17:30", "17:35", "17:40", "17:45", "17:50", "17:55", "18:00", "18:05", "18:10", "18:15", "18:20", "18:25", "18:30", "18:35", "18:40", "18:45", "18:50", "18:55", "19:00", "19:05", "19:10", "19:15", "19:20", "19:25", "19:30", "19:35", "19:40", "19:45", "19:50", "19:55", "20:00", "20:05", "20:10", "20:15", "20:20", "20:25", "20:30", "20:35", "20:40", "20:45", "20:50", "20:55", "21:00", "21:05", "21:10", "21:15", "21:20", "21:25", "21:30", "21:35", "21:40", "21:45", "21:50", "21:55"], "baseline_load": [13.5, 13.79, 14.07, 14.37, 14.66, 14.96, 15.26, 15.56, 15.87, 16.18, 16.49, 16.8, 17.12, 20.43, 20.75, 21.07, 21.4, 21.72, 22.04, 29.87, 30.19, 30.52, 30.85, 31.17, 31.5, 73.1, 75.42, 72.52, 74.61, 75.57, 75.05, 117.96, 125.9, 134.12, 137.78, 144.53, 154.11, 154.14, 153.14, 151.99, 152.9, 153.66, 151.76, 135.36, 132.84, 125.59, 117.41, 111.75, 109.17, 78.85, 78.46, 79.12, 78.79, 78.45, 78.79, 78.93, 78.77, 78.68, 78.43, 78.7, 78.59, 78.85, 78.78, 78.54, 78.92, 78.87, 78.31, 78.28, 78.96, 78.7, 78.6, 78.52], "saanjh_load": [13.5, 13.79, 14.07, 14.37, 14.66, 14.96, 15.26, 15.56, 15.87, 16.18, 16.49, 16.8, 17.12, 20.43, 20.75, 21.07, 21.4, 21.72, 22.04, 29.87, 30.19, 30.52, 30.85, 31.17, 31.5, 73.1, 75.42, 72.52, 74.61, 75.57, 75.05, 83.33, 90.77, 95.44, 100.06, 94.38, 97.86, 105.32, 105.76, 104.42, 107.92, 109.14, 109.18, 103.12, 100.77, 96.97, 91.19, 88.93, 85.97, 78.85, 76.5, 68.52, 68.93, 68.59, 75.81, 76.39, 77.1, 76.01, 76.71, 77.23, 78.59, 78.85, 78.78, 78.54, 78.92, 78.87, 78.31, 78.28, 78.96, 78.7, 78.6, 78.52], "solar_gen": [7.5, 7.21, 6.93, 6.63, 6.34, 6.04, 5.74, 5.44, 5.13, 4.82, 4.51, 4.2, 3.88, 3.57, 3.25, 2.93, 2.6, 2.28, 1.96, 1.63, 1.31, 0.98, 0.65, 0.33, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "gross_demand": [21.0, 21.0, 21.0, 21.0, 21.0, 21.0, 21.0, 21.0, 21.0, 21.0, 21.0, 21.0, 21.0, 24.0, 24.0, 24.0, 24.0, 24.0, 24.0, 31.5, 31.5, 31.5, 31.5, 31.5, 31.5, 73.1, 75.42, 72.52, 74.61, 75.57, 75.05, 117.96, 125.9, 134.12, 137.78, 144.53, 154.11, 154.14, 153.14, 151.99, 152.9, 153.66, 151.76, 135.36, 132.84, 125.59, 117.41, 111.75, 109.17, 78.85, 78.46, 79.12, 78.79, 78.45, 78.79, 78.93, 78.77, 78.68, 78.43, 78.7, 78.59, 78.85, 78.78, 78.54, 78.92, 78.87, 78.31, 78.28, 78.96, 78.7, 78.6, 78.52], "saanjh_voltage": [238.36, 238.33, 238.29, 238.25, 238.22, 238.18, 238.14, 238.11, 238.07, 238.03, 237.99, 237.96, 237.92, 237.51, 237.47, 237.43, 237.39, 237.35, 237.31, 236.34, 236.3, 236.26, 236.22, 236.18, 236.14, 230.83, 230.53, 230.91, 230.63, 230.51, 230.58, 229.49, 228.5, 227.87, 227.25, 228.01, 227.55, 226.54, 226.48, 226.66, 226.18, 226.02, 226.01, 226.83, 227.15, 227.67, 228.44, 228.74, 229.14, 230.08, 230.39, 231.43, 231.37, 231.42, 230.48, 230.4, 230.31, 230.45, 230.36, 230.29, 230.11, 230.08, 230.09, 230.12, 230.07, 230.07, 230.15, 230.15, 230.06, 230.1, 230.11, 230.12], "baseline_voltage": [238.36, 238.33, 238.29, 238.25, 238.22, 238.18, 238.14, 238.11, 238.07, 238.03, 237.99, 237.96, 237.92, 237.51, 237.47, 237.43, 237.39, 237.35, 237.31, 236.34, 236.3, 236.26, 236.22, 236.18, 236.14, 230.83, 230.53, 230.91, 230.63, 230.51, 230.58, 224.8, 223.7, 222.55, 222.03, 221.07, 219.68, 219.68, 219.82, 219.99, 219.86, 219.75, 220.02, 222.37, 222.73, 223.75, 224.88, 225.66, 226.01, 230.08, 230.13, 230.04, 230.08, 230.13, 230.08, 230.07, 230.09, 230.1, 230.13, 230.1, 230.11, 230.08, 230.09, 230.12, 230.07, 230.07, 230.15, 230.15, 230.06, 230.1, 230.11, 230.12], "flex_delivered": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 34.63, 35.13, 38.68, 37.72, 50.15, 56.25, 48.82, 47.38, 47.57, 44.99, 44.53, 42.58, 32.24, 32.07, 28.61, 26.22, 22.81, 23.2, 0.0, 1.96, 10.6, 9.86, 9.86, 2.98, 2.54, 1.67, 2.67, 1.72, 1.47, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "flex_available": [92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 72.92, 65.01, 64.55, 62.6, 61.35, 62.15, 61.54, 61.41, 61.37, 61.36, 61.35, 69.15, 67.19, 62.11, 61.81, 61.7, 61.68, 61.66, 61.64, 61.62, 61.61, 61.6, 69.4, 77.2, 85.0, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55], "active_homes": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 35, 39, 39, 39, 39, 39, 0, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "line_loss_kw": [0.095, 0.099, 0.103, 0.108, 0.112, 0.117, 0.122, 0.127, 0.132, 0.137, 0.142, 0.148, 0.153, 0.219, 0.226, 0.234, 0.241, 0.248, 0.256, 0.473, 0.484, 0.495, 0.506, 0.516, 0.528, 2.973, 3.173, 2.924, 3.103, 3.187, 3.141, 3.909, 4.679, 5.201, 5.748, 5.08, 5.484, 6.407, 6.465, 6.292, 6.749, 6.912, 6.919, 6.127, 5.834, 5.379, 4.724, 4.481, 4.173, 3.482, 3.268, 2.599, 2.631, 2.604, 3.207, 3.259, 3.323, 3.225, 3.288, 3.334, 3.459, 3.482, 3.475, 3.454, 3.489, 3.484, 3.432, 3.43, 3.493, 3.468, 3.459, 3.452], "tx_loading_pct": [14.2, 14.5, 14.8, 15.1, 15.4, 15.7, 16.1, 16.4, 16.7, 17.0, 17.4, 17.7, 18.0, 21.5, 21.8, 22.2, 22.5, 22.9, 23.2, 31.4, 31.8, 32.1, 32.5, 32.8, 33.2, 76.9, 79.4, 76.3, 78.5, 79.5, 79.0, 87.7, 95.6, 100.5, 105.3, 99.4, 103.0, 110.9, 111.3, 109.9, 113.6, 114.9, 114.9, 108.6, 106.1, 102.1, 96.0, 93.6, 90.5, 83.0, 80.5, 72.1, 72.6, 72.2, 79.8, 80.4, 81.2, 80.0, 80.8, 81.3, 82.7, 83.0, 82.9, 82.7, 83.1, 83.0, 82.4, 82.4, 83.1, 82.8, 82.7, 82.7], "xgb_iterations": [0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76, 80, 84, 88, 92, 96, 100, 104, 108, 112, 116, 120, 124, 128, 132, 136, 140, 144, 148, 152, 156, 160, 164, 168, 172, 176, 180, 184, 188, 191], "xgb_train_metric": [1.0401, 0.9008, 0.7942, 0.7136, 0.6535, 0.6094, 0.5772, 0.554, 0.5369, 0.5244, 0.5151, 0.5079, 0.5024, 0.4979, 0.4941, 0.4909, 0.488, 0.4854, 0.4828, 0.4807, 0.4786, 0.4769, 0.4749, 0.4734, 0.4714, 0.4698, 0.4681, 0.4667, 0.4653, 0.4641, 0.4628, 0.4618, 0.4603, 0.459, 0.4581, 0.4565, 0.4551, 0.4542, 0.4532, 0.452, 0.4506, 0.4492, 0.4482, 0.4474, 0.4463, 0.4453, 0.444, 0.4428, 0.4421], "xgb_val_metric": [1.0293, 0.8988, 0.8007, 0.7285, 0.6762, 0.6389, 0.6132, 0.595, 0.5814, 0.5724, 0.5664, 0.5614, 0.5581, 0.5552, 0.5537, 0.5517, 0.5512, 0.5505, 0.5501, 0.5497, 0.5492, 0.5487, 0.5483, 0.5484, 0.5477, 0.5474, 0.5474, 0.5471, 0.5468, 0.5468, 0.5469, 0.5466, 0.5466, 0.5464, 0.5463, 0.5463, 0.5466, 0.5466, 0.5465, 0.5465, 0.5462, 0.5461, 0.546, 0.546, 0.5462, 0.5462, 0.5463, 0.5463, 0.5466], "xgb_best_iter": 171, "xgb_best_val": 0.546};
-        const EMBEDDED_FLEET = [{"id": "H-01", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 0.8, "disp_kw": 0.0, "delivered_kwh": 0.568, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.85}, {"id": "H-02", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.77, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-03", "has_battery": false, "has_solar": true, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 1.05, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-04", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 2.83, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-05", "has_battery": true, "has_solar": true, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.85, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-06", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 2.45, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-07", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.4, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-08", "has_battery": false, "has_solar": false, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 2.55, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-09", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 2.23, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-10", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 2.23, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-11", "has_battery": false, "has_solar": true, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 0.6, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-12", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.85, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-13", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 2.83, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-14", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 2.23, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-15", "has_battery": false, "has_solar": false, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 1.43, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-16", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.18, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.83}, {"id": "H-17", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.85, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-18", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 1.0, "avail_kw": 0.0, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": true, "comp_inr": 0.0}, {"id": "H-19", "has_battery": false, "has_solar": true, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 1.65, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-20", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.4, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-21", "has_battery": false, "has_solar": false, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 0.0, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-22", "has_battery": false, "has_solar": true, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 0.6, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-23", "has_battery": false, "has_solar": false, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 2.1, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-24", "has_battery": false, "has_solar": false, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 1.65, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-25", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.18, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.83}, {"id": "H-26", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.85, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-27", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.4, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-28", "has_battery": true, "has_solar": true, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.85, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-29", "has_battery": false, "has_solar": false, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 0.0, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-30", "has_battery": true, "has_solar": true, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.4, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-31", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 3.72, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-32", "has_battery": true, "has_solar": true, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 0.8, "disp_kw": 0.0, "delivered_kwh": 0.568, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.85}, {"id": "H-33", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 2.45, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-34", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.4, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-35", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.4, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-36", "has_battery": false, "has_solar": false, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 0.97, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-37", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.4, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-38", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 0.8, "disp_kw": 0.0, "delivered_kwh": 0.568, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.85}, {"id": "H-39", "has_battery": false, "has_solar": false, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 1.05, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-40", "has_battery": false, "has_solar": false, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 0.6, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-41", "has_battery": true, "has_solar": true, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 0.8, "disp_kw": 0.0, "delivered_kwh": 0.568, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.85}, {"id": "H-42", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.77, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-43", "has_battery": false, "has_solar": false, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 2.1, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-44", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 2.83, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-45", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.4, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-46", "has_battery": true, "has_solar": true, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.18, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.83}, {"id": "H-47", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 2.45, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-48", "has_battery": false, "has_solar": true, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 0.6, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-49", "has_battery": true, "has_solar": true, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.77, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-50", "has_battery": false, "has_solar": false, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 1.05, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-51", "has_battery": true, "has_solar": true, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 2.83, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-52", "has_battery": false, "has_solar": false, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 1.43, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-53", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.4, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-54", "has_battery": true, "has_solar": true, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 2.45, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-55", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 1.0, "avail_kw": 0.0, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": true, "comp_inr": 0.0}, {"id": "H-56", "has_battery": true, "has_solar": true, "init_soc": 0.92, "final_soc": 1.0, "avail_kw": 0.0, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": true, "comp_inr": 0.0}, {"id": "H-57", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 2.45, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-58", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 2.23, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-59", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 2.45, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-60", "has_battery": false, "has_solar": false, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 0.6, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}];
-        const EMBEDDED_COMPARISON = {"baseline_peak_kw": 154.1359519199378, "saanjh_peak_kw": 109.18234681921217, "peak_reduction_kw": 44.95360510072564, "peak_reduction_pct": 29.164905747671188, "baseline_overload_minutes": 90, "saanjh_overload_minutes": 60, "overload_reduction_pct": 33.33333333333333, "flexibility_delivered_kw": 56.24689102172852, "flexibility_delivered_kwh": 61.57406239142188, "dependable_delivery_ratio": 0.9851254691170566, "voltage_violations_baseline": 6, "voltage_violations_saanjh": 0, "baseline_loss_kwh": 25.87364976558972, "saanjh_loss_kwh": 16.740235608598958, "loss_reduction_pct": 35.30006102632498, "critical_load_violations": 0, "reserve_violations": 0, "opt_out_dispatches": 0, "homes_participating": 39, "cost_per_dependable_kw": 7068, "total_initial_investment": 317767};
-        const EMBEDDED_DISCOM = {"feeder_id": "FDR-023", "transformer_id": "DT-100KVA-04", "forecast_status": "HIGH STRESS PREDICTED (SOLAR DROP-OFF AT 18:30)", "required_flexibility_kw": 56.25, "available_flexibility_kw": 92.55, "recommended_action": "DISPATCH 56.2 kW FOR 45 MINUTES VIA SAANJH EDGE", "expected_outcomes": {"transformer_thermal_overload_reduction": "33.3% (30 minutes avoided)", "voltage_drop_mitigation": "Feeder tail voltage restored above 0.90 p.u.", "modeled_technical_loss_reduction": "35.3% (9.13 kWh saved)"}};
-        const EMBEDDED_ECON = {"LOW_COST_MASS_PRODUCTION": {"total_capex": 148500, "total_installation": 11700, "total_initial_investment": 160200, "cost_per_dependable_kw": 3563, "cost_per_home": 4107, "annual_operator_maintenance": 4455, "annual_household_benefit": 168, "discom_net_annual_benefit": 2097}, "BASE_PROTOTYPE_SCALE": {"total_capex": 298267, "total_installation": 19500, "total_initial_investment": 317767, "cost_per_dependable_kw": 7068, "cost_per_home": 8147, "annual_operator_maintenance": 14913, "annual_household_benefit": 126, "discom_net_annual_benefit": -11637}, "HIGH_CONTINGENCY": {"total_capex": 398500, "total_installation": 39000, "total_initial_investment": 437500, "cost_per_dependable_kw": 9732, "cost_per_home": 11217, "annual_operator_maintenance": 31880, "annual_household_benefit": 67, "discom_net_annual_benefit": -30132}};
+        // Canonical Datasets
+        const CANONICAL_TIMESERIES = {"labels": ["16:00", "16:05", "16:10", "16:15", "16:20", "16:25", "16:30", "16:35", "16:40", "16:45", "16:50", "16:55", "17:00", "17:05", "17:10", "17:15", "17:20", "17:25", "17:30", "17:35", "17:40", "17:45", "17:50", "17:55", "18:00", "18:05", "18:10", "18:15", "18:20", "18:25", "18:30", "18:35", "18:40", "18:45", "18:50", "18:55", "19:00", "19:05", "19:10", "19:15", "19:20", "19:25", "19:30", "19:35", "19:40", "19:45", "19:50", "19:55", "20:00", "20:05", "20:10", "20:15", "20:20", "20:25", "20:30", "20:35", "20:40", "20:45", "20:50", "20:55", "21:00", "21:05", "21:10", "21:15", "21:20", "21:25", "21:30", "21:35", "21:40", "21:45", "21:50", "21:55"], "baseline_load": [13.5, 13.79, 14.07, 14.37, 14.66, 14.96, 15.26, 15.56, 15.87, 16.18, 16.49, 16.8, 17.12, 20.43, 20.75, 21.07, 21.4, 21.72, 22.04, 29.87, 30.19, 30.52, 30.85, 31.17, 31.5, 73.1, 75.42, 72.52, 74.61, 75.57, 75.05, 117.96, 125.9, 134.12, 137.78, 144.53, 154.11, 154.14, 153.14, 151.99, 152.9, 153.66, 151.76, 135.36, 132.84, 125.59, 117.41, 111.75, 109.17, 78.85, 78.46, 79.12, 78.79, 78.45, 78.79, 78.93, 78.77, 78.68, 78.43, 78.7, 78.59, 78.85, 78.78, 78.54, 78.92, 78.87, 78.31, 78.28, 78.96, 78.7, 78.6, 78.52], "saanjh_load": [13.5, 13.79, 14.07, 14.37, 14.66, 14.96, 15.26, 15.56, 15.87, 16.18, 16.49, 16.8, 17.12, 20.43, 20.75, 21.07, 21.4, 21.72, 22.04, 29.87, 30.19, 30.52, 30.85, 31.17, 31.5, 73.1, 75.42, 72.52, 74.61, 75.57, 75.05, 83.33, 90.77, 95.44, 100.06, 94.38, 97.86, 105.32, 105.76, 104.42, 107.92, 109.14, 109.18, 103.12, 100.77, 96.97, 91.19, 88.93, 85.97, 78.85, 76.5, 68.52, 68.93, 68.59, 75.81, 76.39, 77.1, 76.01, 76.71, 77.23, 78.59, 78.85, 78.78, 78.54, 78.92, 78.87, 78.31, 78.28, 78.96, 78.7, 78.6, 78.52], "solar_gen": [7.5, 7.21, 6.93, 6.63, 6.34, 6.04, 5.74, 5.44, 5.13, 4.82, 4.51, 4.2, 3.88, 3.57, 3.25, 2.93, 2.6, 2.28, 1.96, 1.63, 1.31, 0.98, 0.65, 0.33, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "gross_demand": [21.0, 21.0, 21.0, 21.0, 21.0, 21.0, 21.0, 21.0, 21.0, 21.0, 21.0, 21.0, 21.0, 24.0, 24.0, 24.0, 24.0, 24.0, 24.0, 31.5, 31.5, 31.5, 31.5, 31.5, 31.5, 73.1, 75.42, 72.52, 74.61, 75.57, 75.05, 117.96, 125.9, 134.12, 137.78, 144.53, 154.11, 154.14, 153.14, 151.99, 152.9, 153.66, 151.76, 135.36, 132.84, 125.59, 117.41, 111.75, 109.17, 78.85, 78.46, 79.12, 78.79, 78.45, 78.79, 78.93, 78.77, 78.68, 78.43, 78.7, 78.59, 78.85, 78.78, 78.54, 78.92, 78.87, 78.31, 78.28, 78.96, 78.7, 78.6, 78.52], "saanjh_voltage": [238.36, 238.33, 238.29, 238.25, 238.22, 238.18, 238.14, 238.11, 238.07, 238.03, 237.99, 237.96, 237.92, 237.51, 237.47, 237.43, 237.39, 237.35, 237.31, 236.34, 236.3, 236.26, 236.22, 236.18, 236.14, 230.83, 230.53, 230.91, 230.63, 230.51, 230.58, 229.49, 228.5, 227.87, 227.25, 228.01, 227.55, 226.54, 226.48, 226.66, 226.18, 226.02, 226.01, 226.83, 227.15, 227.67, 228.44, 228.74, 229.14, 230.08, 230.39, 231.43, 231.37, 231.42, 230.48, 230.4, 230.31, 230.45, 230.36, 230.29, 230.11, 230.08, 230.09, 230.12, 230.07, 230.07, 230.15, 230.15, 230.06, 230.1, 230.11, 230.12], "baseline_voltage": [238.36, 238.33, 238.29, 238.25, 238.22, 238.18, 238.14, 238.11, 238.07, 238.03, 237.99, 237.96, 237.92, 237.51, 237.47, 237.43, 237.39, 237.35, 237.31, 236.34, 236.3, 236.26, 236.22, 236.18, 236.14, 230.83, 230.53, 230.91, 230.63, 230.51, 230.58, 224.8, 223.7, 222.55, 222.03, 221.07, 219.68, 219.68, 219.82, 219.99, 219.86, 219.75, 220.02, 222.37, 222.73, 223.75, 224.88, 225.66, 226.01, 230.08, 230.13, 230.04, 230.08, 230.13, 230.08, 230.07, 230.09, 230.1, 230.13, 230.1, 230.11, 230.08, 230.09, 230.12, 230.07, 230.07, 230.15, 230.15, 230.06, 230.1, 230.11, 230.12], "flex_delivered": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 34.63, 35.13, 38.68, 37.72, 50.15, 56.25, 48.82, 47.38, 47.57, 44.99, 44.53, 42.58, 32.24, 32.07, 28.61, 26.22, 22.81, 23.2, 0.0, 1.96, 10.6, 9.86, 9.86, 2.98, 2.54, 1.67, 2.67, 1.72, 1.47, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "flex_available": [92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 72.92, 65.01, 64.55, 62.6, 61.35, 62.15, 61.54, 61.41, 61.37, 61.36, 61.35, 69.15, 67.19, 62.11, 61.81, 61.7, 61.68, 61.66, 61.64, 61.62, 61.61, 61.6, 69.4, 77.2, 85.0, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55], "active_homes": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 35, 39, 39, 39, 39, 39, 0, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "line_loss_kw": [0.095, 0.099, 0.103, 0.108, 0.112, 0.117, 0.122, 0.127, 0.132, 0.137, 0.142, 0.148, 0.153, 0.219, 0.226, 0.234, 0.241, 0.248, 0.256, 0.473, 0.484, 0.495, 0.506, 0.516, 0.528, 2.973, 3.173, 2.924, 3.103, 3.187, 3.141, 3.909, 4.679, 5.201, 5.748, 5.08, 5.484, 6.407, 6.465, 6.292, 6.749, 6.912, 6.919, 6.127, 5.834, 5.379, 4.724, 4.481, 4.173, 3.482, 3.268, 2.599, 2.631, 2.604, 3.207, 3.259, 3.323, 3.225, 3.288, 3.334, 3.459, 3.482, 3.475, 3.454, 3.489, 3.484, 3.432, 3.43, 3.493, 3.468, 3.459, 3.452], "tx_loading_pct": [14.2, 14.5, 14.8, 15.1, 15.4, 15.7, 16.1, 16.4, 16.7, 17.0, 17.4, 17.7, 18.0, 21.5, 21.8, 22.2, 22.5, 22.9, 23.2, 31.4, 31.8, 32.1, 32.5, 32.8, 33.2, 76.9, 79.4, 76.3, 78.5, 79.5, 79.0, 87.7, 95.6, 100.5, 105.3, 99.4, 103.0, 110.9, 111.3, 109.9, 113.6, 114.9, 114.9, 108.6, 106.1, 102.1, 96.0, 93.6, 90.5, 83.0, 80.5, 72.1, 72.6, 72.2, 79.8, 80.4, 81.2, 80.0, 80.8, 81.3, 82.7, 83.0, 82.9, 82.7, 83.1, 83.0, 82.4, 82.4, 83.1, 82.8, 82.7, 82.7], "xgb_iterations": [0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76, 80, 84, 88, 92, 96, 100, 104, 108, 112, 116, 120, 124, 128, 132, 136, 140, 144, 148, 152, 156, 160, 164, 168, 172, 176, 180, 184, 188, 191], "xgb_train_metric": [1.0401, 0.9008, 0.7942, 0.7136, 0.6535, 0.6094, 0.5772, 0.554, 0.5369, 0.5244, 0.5151, 0.5079, 0.5024, 0.4979, 0.4941, 0.4909, 0.488, 0.4854, 0.4828, 0.4807, 0.4786, 0.4769, 0.4749, 0.4734, 0.4714, 0.4698, 0.4681, 0.4667, 0.4653, 0.4641, 0.4628, 0.4618, 0.4603, 0.459, 0.4581, 0.4565, 0.4551, 0.4542, 0.4532, 0.452, 0.4506, 0.4492, 0.4482, 0.4474, 0.4463, 0.4453, 0.444, 0.4428, 0.4421], "xgb_val_metric": [1.0293, 0.8988, 0.8007, 0.7285, 0.6762, 0.6389, 0.6132, 0.595, 0.5814, 0.5724, 0.5664, 0.5614, 0.5581, 0.5552, 0.5537, 0.5517, 0.5512, 0.5505, 0.5501, 0.5497, 0.5492, 0.5487, 0.5483, 0.5484, 0.5477, 0.5474, 0.5474, 0.5471, 0.5468, 0.5468, 0.5469, 0.5466, 0.5466, 0.5464, 0.5463, 0.5463, 0.5466, 0.5466, 0.5465, 0.5465, 0.5462, 0.5461, 0.546, 0.546, 0.5462, 0.5462, 0.5463, 0.5463, 0.5466], "xgb_best_iter": 171, "xgb_best_val": 0.546};
+        const CANONICAL_FLEET = [{"id": "H-01", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 0.8, "disp_kw": 0.0, "delivered_kwh": 0.568, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.85}, {"id": "H-02", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.77, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-03", "has_battery": false, "has_solar": true, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 1.05, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-04", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 2.83, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-05", "has_battery": true, "has_solar": true, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.85, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-06", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 2.45, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-07", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.4, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-08", "has_battery": false, "has_solar": false, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 2.55, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-09", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 2.23, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-10", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 2.23, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-11", "has_battery": false, "has_solar": true, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 0.6, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-12", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.85, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-13", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 2.83, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-14", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 2.23, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-15", "has_battery": false, "has_solar": false, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 1.43, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-16", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.18, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.83}, {"id": "H-17", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.85, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-18", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 1.0, "avail_kw": 0.0, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": true, "comp_inr": 0.0}, {"id": "H-19", "has_battery": false, "has_solar": true, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 1.65, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-20", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.4, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-21", "has_battery": false, "has_solar": false, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 0.0, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-22", "has_battery": false, "has_solar": true, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 0.6, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-23", "has_battery": false, "has_solar": false, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 2.1, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-24", "has_battery": false, "has_solar": false, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 1.65, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-25", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.18, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.83}, {"id": "H-26", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.85, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-27", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.4, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-28", "has_battery": true, "has_solar": true, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.85, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-29", "has_battery": false, "has_solar": false, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 0.0, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-30", "has_battery": true, "has_solar": true, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.4, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-31", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 3.72, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-32", "has_battery": true, "has_solar": true, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 0.8, "disp_kw": 0.0, "delivered_kwh": 0.568, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.85}, {"id": "H-33", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 2.45, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-34", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.4, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-35", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.4, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-36", "has_battery": false, "has_solar": false, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 0.97, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-37", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.4, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-38", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 0.8, "disp_kw": 0.0, "delivered_kwh": 0.568, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.85}, {"id": "H-39", "has_battery": false, "has_solar": false, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 1.05, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-40", "has_battery": false, "has_solar": false, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 0.6, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-41", "has_battery": true, "has_solar": true, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 0.8, "disp_kw": 0.0, "delivered_kwh": 0.568, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.85}, {"id": "H-42", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.77, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-43", "has_battery": false, "has_solar": false, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 2.1, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-44", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 2.83, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-45", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.4, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-46", "has_battery": true, "has_solar": true, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.18, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.83}, {"id": "H-47", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 2.45, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-48", "has_battery": false, "has_solar": true, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 0.6, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-49", "has_battery": true, "has_solar": true, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.77, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-50", "has_battery": false, "has_solar": false, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 1.05, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-51", "has_battery": true, "has_solar": true, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 2.83, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-52", "has_battery": false, "has_solar": false, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 1.43, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-53", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.4, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-54", "has_battery": true, "has_solar": true, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 2.45, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-55", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 1.0, "avail_kw": 0.0, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": true, "comp_inr": 0.0}, {"id": "H-56", "has_battery": true, "has_solar": true, "init_soc": 0.92, "final_soc": 1.0, "avail_kw": 0.0, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": true, "comp_inr": 0.0}, {"id": "H-57", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 2.45, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-58", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 2.23, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-59", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 2.45, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-60", "has_battery": false, "has_solar": false, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 0.6, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}];
+        const CANONICAL_COMP = {"baseline_peak_kw": 154.1359519199378, "saanjh_peak_kw": 109.18234681921217, "peak_reduction_kw": 44.95360510072564, "peak_reduction_pct": 29.164905747671188, "baseline_overload_minutes": 90, "saanjh_overload_minutes": 60, "overload_reduction_pct": 33.33333333333333, "flexibility_delivered_kw": 56.24689102172852, "flexibility_delivered_kwh": 61.57406239142188, "dependable_delivery_ratio": 0.9851254691170566, "voltage_violations_baseline": 6, "voltage_violations_saanjh": 0, "baseline_loss_kwh": 25.87364976558972, "saanjh_loss_kwh": 16.740235608598958, "loss_reduction_pct": 35.30006102632498, "critical_load_violations": 0, "reserve_violations": 0, "opt_out_dispatches": 0, "homes_participating": 39, "cost_per_dependable_kw": 7068, "total_initial_investment": 317767};
+        const CANONICAL_DISCOM = {"feeder_id": "FDR-023", "transformer_id": "DT-100KVA-04", "forecast_status": "HIGH STRESS PREDICTED (SOLAR DROP-OFF AT 18:30)", "required_flexibility_kw": 56.25, "available_flexibility_kw": 92.55, "recommended_action": "DISPATCH 56.2 kW FOR 45 MINUTES VIA SAANJH EDGE", "expected_outcomes": {"transformer_thermal_overload_reduction": "33.3% (30 minutes avoided)", "voltage_drop_mitigation": "Feeder tail voltage restored above 0.90 p.u.", "modeled_technical_loss_reduction": "35.3% (9.13 kWh saved)"}};
+        const CANONICAL_ECON = {"LOW_COST_MASS_PRODUCTION": {"total_capex": 148500, "total_installation": 11700, "total_initial_investment": 160200, "cost_per_dependable_kw": 3563, "cost_per_home": 4107, "annual_operator_maintenance": 4455, "annual_household_benefit": 168, "discom_net_annual_benefit": 2097}, "BASE_PROTOTYPE_SCALE": {"total_capex": 298267, "total_installation": 19500, "total_initial_investment": 317767, "cost_per_dependable_kw": 7068, "cost_per_home": 8147, "annual_operator_maintenance": 14913, "annual_household_benefit": 126, "discom_net_annual_benefit": -11637}, "HIGH_CONTINGENCY": {"total_capex": 398500, "total_installation": 39000, "total_initial_investment": 437500, "cost_per_dependable_kw": 9732, "cost_per_home": 11217, "annual_operator_maintenance": 31880, "annual_household_benefit": 67, "discom_net_annual_benefit": -30132}};
 
-        let currentBundle = EMBEDDED_BUNDLE;
-        let currentFleet = EMBEDDED_FLEET;
-        let currentStep = 37; // 19:05 Peak by default
+        let currentStep = 37; // 19:05 Peak
         let isPlaying = false;
-        let playInterval = null;
+        let playTimer = null;
         let charts = {};
 
-        // Initialize application on DOM load
         document.addEventListener('DOMContentLoaded', () => {
-            setupNavigation();
-            setupPlayback();
-            setupFleetTable(currentFleet);
-            initCharts(currentBundle);
-            updateTimestep(currentStep);
+            setupTabs();
+            setupReplayControls();
+            populateFleetTable(CANONICAL_FLEET);
+            initCharts(CANONICAL_TIMESERIES);
+            applyTimestep(currentStep);
             startClock();
         });
 
         function startClock() {
-            const clockEl = document.getElementById('wall-clock');
+            const clockEl = document.getElementById('fuxa-clock');
             setInterval(() => {
                 const d = new Date();
-                const pad = (n) => n.toString().padStart(2, '0');
-                const timeStr = `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())} IST`;
-                if (clockEl) clockEl.innerText = timeStr;
+                const pad = n => n.toString().padStart(2, '0');
+                clockEl.innerText = `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())} IST`;
             }, 1000);
         }
 
-        // Navigation Tabs Handling
-        function setupNavigation() {
-            const tabs = document.querySelectorAll('.nav-tab');
+        function setupTabs() {
+            const tabs = document.querySelectorAll('.fuxa-tab');
             tabs.forEach(tab => {
                 tab.addEventListener('click', () => {
                     tabs.forEach(t => t.classList.remove('active'));
-                    document.querySelectorAll('.tab-viewport').forEach(v => v.classList.remove('active'));
+                    document.querySelectorAll('.fuxa-screen').forEach(s => s.classList.remove('active'));
                     
                     tab.classList.add('active');
                     const targetId = tab.getAttribute('data-tab');
-                    const targetView = document.getElementById(targetId);
-                    if (targetView) targetView.classList.add('active');
+                    const targetScreen = document.getElementById(targetId);
+                    if (targetScreen) targetScreen.classList.add('active');
 
-                    // Resize charts if switching to trends
-                    if (targetId === 'tab-trends') {
+                    if (targetId === 'screen-trends') {
                         setTimeout(() => {
                             Object.values(charts).forEach(c => c.resize());
                         }, 50);
@@ -1678,279 +1179,249 @@
             });
         }
 
-        // Playback and Scrubber Controls
-        function setupPlayback() {
-            const slider = document.getElementById('time-slider');
-            const playBtn = document.getElementById('btn-play-pause');
-            const stepBack = document.getElementById('btn-step-back');
-            const stepFwd = document.getElementById('btn-step-fwd');
-            const resetBtn = document.getElementById('btn-reset');
-            
-            const jumpSolar = document.getElementById('jump-solar-cliff');
-            const jumpPeak = document.getElementById('jump-peak');
-            const jumpRecovery = document.getElementById('jump-recovery');
+        function setupReplayControls() {
+            const slider = document.getElementById('fuxa-slider');
+            const btnPlay = document.getElementById('btn-play');
+            const btnBack = document.getElementById('btn-back');
+            const btnFwd = document.getElementById('btn-fwd');
+            const btnRst = document.getElementById('btn-rst');
+            const jumpCliff = document.getElementById('jump-cliff');
+            const jumpPk = document.getElementById('jump-pk');
 
-            slider.addEventListener('input', (e) => {
+            slider.addEventListener('input', e => {
                 currentStep = parseInt(e.target.value);
-                updateTimestep(currentStep);
+                applyTimestep(currentStep);
             });
 
-            playBtn.addEventListener('click', togglePlay);
-            
-            stepBack.addEventListener('click', () => {
+            btnPlay.addEventListener('click', () => {
+                isPlaying = !isPlaying;
+                if (isPlaying) {
+                    btnPlay.innerText = '❚❚ Pause';
+                    btnPlay.classList.add('active');
+                    playTimer = setInterval(() => {
+                        if (currentStep < CANONICAL_TIMESERIES.labels.length - 1) {
+                            currentStep++;
+                        } else {
+                            currentStep = 0;
+                        }
+                        slider.value = currentStep;
+                        applyTimestep(currentStep);
+                    }, 600);
+                } else {
+                    btnPlay.innerText = '▶ Play';
+                    btnPlay.classList.remove('active');
+                    clearInterval(playTimer);
+                }
+            });
+
+            btnBack.addEventListener('click', () => {
                 if (currentStep > 0) {
                     currentStep--;
                     slider.value = currentStep;
-                    updateTimestep(currentStep);
+                    applyTimestep(currentStep);
                 }
             });
 
-            stepFwd.addEventListener('click', () => {
-                if (currentStep < currentBundle.labels.length - 1) {
+            btnFwd.addEventListener('click', () => {
+                if (currentStep < CANONICAL_TIMESERIES.labels.length - 1) {
                     currentStep++;
                     slider.value = currentStep;
-                    updateTimestep(currentStep);
+                    applyTimestep(currentStep);
                 }
             });
 
-            resetBtn.addEventListener('click', () => {
+            btnRst.addEventListener('click', () => {
                 currentStep = 0;
                 slider.value = currentStep;
-                updateTimestep(currentStep);
+                applyTimestep(currentStep);
             });
 
-            if (jumpSolar) jumpSolar.addEventListener('click', () => jumpTo(30)); // 18:30
-            if (jumpPeak) jumpPeak.addEventListener('click', () => jumpTo(37)); // 19:05
-            if (jumpRecovery) jumpRecovery.addEventListener('click', () => jumpTo(54)); // 20:30
+            if (jumpCliff) jumpCliff.addEventListener('click', () => jumpToStep(30));
+            if (jumpPk) jumpPk.addEventListener('click', () => jumpToStep(37));
         }
 
-        function jumpTo(step) {
-            currentStep = step;
-            document.getElementById('time-slider').value = step;
-            updateTimestep(step);
+        function jumpToStep(s) {
+            currentStep = s;
+            document.getElementById('fuxa-slider').value = s;
+            applyTimestep(s);
         }
 
-        function togglePlay() {
-            const playBtn = document.getElementById('btn-play-pause');
-            isPlaying = !isPlaying;
-            if (isPlaying) {
-                playBtn.innerText = '❚❚ PAUSE';
-                playBtn.classList.add('active');
-                playInterval = setInterval(() => {
-                    if (currentStep < currentBundle.labels.length - 1) {
-                        currentStep++;
-                    } else {
-                        currentStep = 0;
-                    }
-                    document.getElementById('time-slider').value = currentStep;
-                    updateTimestep(currentStep);
-                }, 600);
-            } else {
-                playBtn.innerText = '▶ PLAY';
-                playBtn.classList.remove('active');
-                clearInterval(playInterval);
-            }
-        }
+        function applyTimestep(idx) {
+            const ts = CANONICAL_TIMESERIES;
+            if (!ts || !ts.labels[idx]) return;
 
-        // Update UI dynamically for a given timestep
-        function updateTimestep(idx) {
-            const b = currentBundle;
-            if (!b || !b.labels[idx]) return;
-
-            const timeLabel = b.labels[idx];
-            const loadVal = b.saanjh_load[idx];
-            const baseLoad = b.baseline_load[idx];
-            const flexVal = b.flex_delivered[idx];
-            const voltVal = b.saanjh_voltage[idx];
-            const baseVolt = b.baseline_voltage[idx];
-            const txPct = b.tx_loading_pct[idx];
-            const activeHomes = b.active_homes[idx];
+            const timeLabel = ts.labels[idx];
+            const loadVal = ts.saanjh_load[idx];
+            const baseLoad = ts.baseline_load[idx];
+            const voltVal = ts.saanjh_voltage[idx];
+            const solarVal = ts.solar_gen[idx];
+            const txPct = ts.tx_loading_pct[idx];
+            const flexDisp = ts.flex_delivered[idx];
+            const flexAvail = ts.flex_available[idx];
             const deltaKw = (baseLoad - loadVal).toFixed(2);
 
-            // Time readout
-            document.getElementById('active-time-readout').innerText = `${timeLabel} IST (${idx === 37 ? 'MAX PEAK' : (idx === 30 ? 'SOLAR CLIFF' : 'DISPATCH')})`;
+            document.getElementById('fuxa-time-label').innerText = `${timeLabel} IST (${idx === 37 ? 'MAX PEAK' : (idx === 30 ? 'SOLAR CLIFF' : 'DISPATCH')})`;
+            document.getElementById('val-load').innerText = loadVal.toFixed(2);
+            document.getElementById('val-load-delta').innerText = deltaKw > 0 ? `↓ ${deltaKw} kW (-${((deltaKw/baseLoad)*100).toFixed(1)}%)` : `0.0 kW delta`;
+            document.getElementById('val-tx').innerText = txPct.toFixed(1);
+            document.getElementById('val-volt').innerText = voltVal.toFixed(2);
+            document.getElementById('val-solar').innerText = solarVal.toFixed(2);
+            document.getElementById('val-flex-avail').innerText = flexAvail.toFixed(2);
+            document.getElementById('val-flex-disp').innerText = flexDisp.toFixed(2);
 
-            // Top Telemetry Cells
-            document.getElementById('kpi-load-val').innerText = loadVal.toFixed(1);
-            document.getElementById('kpi-load-delta').innerText = deltaKw > 0 ? `↓ ${deltaKw} kW shaved` : `0.0 kW delta`;
-            
-            document.getElementById('kpi-tx-val').innerText = txPct.toFixed(1);
-            document.getElementById('kpi-flex-val').innerText = flexVal.toFixed(2);
-            document.getElementById('kpi-volt-val').innerText = voltVal.toFixed(1);
-
-            // Transformer Linear Gauge update
-            const gaugeFill = document.getElementById('tx-gauge-fill');
-            const gaugeLoadNum = document.getElementById('gauge-load-num');
-            if (gaugeFill) {
+            // Transformer linear gauge
+            const barFill = document.getElementById('bar-tx-fill');
+            const txtLoad = document.getElementById('txt-tx-load');
+            const badgeStress = document.getElementById('badge-tx-stress');
+            if (barFill) {
                 const fillPct = Math.min(100, (loadVal / 154.14) * 100);
-                gaugeFill.style.width = fillPct + '%';
+                barFill.style.width = fillPct + '%';
                 if (txPct > 100) {
-                    gaugeFill.style.background = '#EF4444';
+                    barFill.style.background = '#F44336';
+                    if (badgeStress) { badgeStress.innerText = 'OVERLOAD REDUCED'; badgeStress.style.color = '#FF9800'; }
                 } else if (txPct > 85) {
-                    gaugeFill.style.background = '#F59E0B';
+                    barFill.style.background = '#FF9800';
+                    if (badgeStress) { badgeStress.innerText = 'CONTINUOUS RATING'; badgeStress.style.color = '#FF9800'; }
                 } else {
-                    gaugeFill.style.background = '#00D68F';
+                    barFill.style.background = '#4CAF50';
+                    if (badgeStress) { badgeStress.innerText = 'SAFE MARGIN'; badgeStress.style.color = '#4CAF50'; }
                 }
             }
-            if (gaugeLoadNum) {
-                gaugeLoadNum.innerText = `${loadVal.toFixed(1)} kW / ${txPct.toFixed(1)}%`;
+            if (txtLoad) {
+                txtLoad.innerText = `${loadVal.toFixed(2)} kW / ${txPct.toFixed(1)}%`;
             }
 
-            // Mimic SVG dynamic updates
-            const mimicDispKw = document.getElementById('mimic-disp-kw');
-            if (mimicDispKw) mimicDispKw.innerText = `${flexVal.toFixed(2)} kW`;
-
-            const tailVoltMimic = document.getElementById('tail-volt-mimic');
-            if (tailVoltMimic) tailVoltMimic.innerText = `${voltVal.toFixed(1)} V (${voltVal < 216 ? 'SAG ALARM' : 'OK'})`;
-
-            const vcbLines = document.getElementById('vcb-injection-lines');
-            if (vcbLines) {
-                vcbLines.style.opacity = flexVal > 0 ? '1' : '0.15';
+            const tailSvgText = document.getElementById('svg-tail-text');
+            if (tailSvgText) {
+                tailSvgText.innerText = `${voltVal.toFixed(2)} V RMS (${voltVal >= 216 ? '0 Sag' : 'Sag Event'})`;
             }
         }
 
-        // Render SCADA Trend Charts
-        function initCharts(b) {
+        function initCharts(ts) {
             const commonScales = {
                 x: {
-                    grid: { color: 'rgba(255, 255, 255, 0.04)' },
-                    ticks: { color: '#64748B', font: { family: "'JetBrains Mono', monospace", size: 10 } }
+                    grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                    ticks: { color: '#78909C', font: { family: "'Roboto Mono', monospace", size: 10 } }
                 },
                 y: {
                     grid: { color: 'rgba(255, 255, 255, 0.05)' },
-                    ticks: { color: '#64748B', font: { family: "'JetBrains Mono', monospace", size: 10 } }
+                    ticks: { color: '#78909C', font: { family: "'Roboto Mono', monospace", size: 10 } }
                 }
             };
 
-            const commonOptions = (title) => ({
+            const commonOptions = (title, yMin, yMax) => ({
                 responsive: true,
                 maintainAspectRatio: false,
                 animation: false,
                 interaction: { mode: 'index', intersect: false },
                 plugins: {
-                    legend: { labels: { color: '#94A3B8', font: { family: "'Inter', sans-serif", size: 11 } } },
+                    legend: { labels: { color: '#B0BEC5', font: { family: "'Roboto', sans-serif", size: 11 } } },
                     tooltip: {
-                        backgroundColor: '#0F172A',
+                        backgroundColor: '#1C202C',
                         titleColor: '#FFFFFF',
-                        bodyColor: '#94A3B8',
-                        borderColor: '#1E293B',
+                        bodyColor: '#B0BEC5',
+                        borderColor: '#31374A',
                         borderWidth: 1,
                         padding: 8
                     }
                 },
-                scales: commonScales
+                scales: {
+                    ...commonScales,
+                    y: { ...commonScales.y, min: yMin, max: yMax }
+                }
             });
 
-            // 1. Demand Chart
-            const ctx1 = document.getElementById('chart-demand').getContext('2d');
-            charts.demand = new Chart(ctx1, {
+            // Chart 1: Demand
+            charts.demand = new Chart(document.getElementById('fuxa-chart-demand').getContext('2d'), {
                 type: 'line',
                 data: {
-                    labels: b.labels,
+                    labels: ts.labels,
                     datasets: [
                         {
-                            label: 'Baseline Unmanaged Load (kW)',
-                            data: b.baseline_load,
-                            borderColor: '#EF4444',
+                            label: 'Baseline Feeder Demand (kW)',
+                            data: ts.baseline_load,
+                            borderColor: '#F44336',
                             borderWidth: 2,
                             borderDash: [5, 5],
-                            pointRadius: 0,
-                            fill: false
+                            pointRadius: 0
                         },
                         {
-                            label: 'SAANJH Controlled Load (kW)',
-                            data: b.saanjh_load,
-                            borderColor: '#00D68F',
-                            backgroundColor: 'rgba(0, 214, 143, 0.15)',
-                            borderWidth: 2.5,
+                            label: 'SAANJH-Controlled Demand (kW)',
+                            data: ts.saanjh_load,
+                            borderColor: '#4CAF50',
+                            backgroundColor: 'rgba(76, 175, 80, 0.15)',
+                            borderWidth: 2,
                             pointRadius: 0,
                             fill: true
                         },
                         {
-                            label: 'Solar PV Cliff Generation (kW)',
-                            data: b.solar_gen,
-                            borderColor: '#F59E0B',
-                            borderWidth: 2,
-                            pointRadius: 0,
-                            fill: false
-                        },
-                        {
-                            label: 'Transformer Safe Thermal Limit (80.75 kW)',
-                            data: b.labels.map(() => 80.75),
-                            borderColor: '#64748B',
-                            borderWidth: 1.5,
-                            borderDash: [8, 4],
-                            pointRadius: 0,
-                            fill: false
+                            label: 'Transformer 85% Limit (80.75 kW)',
+                            data: ts.labels.map(() => 80.75),
+                            borderColor: '#78909C',
+                            borderWidth: 1,
+                            borderDash: [4, 4],
+                            pointRadius: 0
                         }
                     ]
                 },
                 options: commonOptions('Active Power (kW)')
             });
 
-            // 2. Voltage Chart
-            const ctx2 = document.getElementById('chart-voltage').getContext('2d');
-            charts.voltage = new Chart(ctx2, {
+            // Chart 2: Voltage
+            charts.voltage = new Chart(document.getElementById('fuxa-chart-voltage').getContext('2d'), {
                 type: 'line',
                 data: {
-                    labels: b.labels,
+                    labels: ts.labels,
                     datasets: [
                         {
                             label: 'Baseline Sag (Node 60)',
-                            data: b.baseline_voltage,
-                            borderColor: '#EF4444',
+                            data: ts.baseline_voltage,
+                            borderColor: '#F44336',
                             borderWidth: 2,
                             borderDash: [4, 4],
                             pointRadius: 0
                         },
                         {
                             label: 'SAANJH Stabilized Voltage (Node 60)',
-                            data: b.saanjh_voltage,
-                            borderColor: '#38BDF8',
-                            backgroundColor: 'rgba(56, 189, 248, 0.12)',
-                            borderWidth: 2.5,
+                            data: ts.saanjh_voltage,
+                            borderColor: '#2196F3',
+                            backgroundColor: 'rgba(33, 150, 243, 0.12)',
+                            borderWidth: 2,
                             pointRadius: 0,
                             fill: true
                         },
                         {
-                            label: 'Statutory Lower Limit (216V)',
-                            data: b.labels.map(() => 216),
-                            borderColor: '#F59E0B',
+                            label: 'Statutory Minimum Limit (216V)',
+                            data: ts.labels.map(() => 216),
+                            borderColor: '#FF9800',
                             borderWidth: 1.5,
                             borderDash: [6, 4],
                             pointRadius: 0
                         }
                     ]
                 },
-                options: {
-                    ...commonOptions('RMS Volts'),
-                    scales: {
-                        ...commonScales,
-                        y: { ...commonScales.y, min: 212, max: 242 }
-                    }
-                }
+                options: commonOptions('RMS Voltage (V)', 214, 242)
             });
 
-            // 3. Flex Chart
-            const ctx3 = document.getElementById('chart-flex').getContext('2d');
-            charts.flex = new Chart(ctx3, {
+            // Chart 3: Flex
+            charts.flex = new Chart(document.getElementById('fuxa-chart-flex').getContext('2d'), {
                 type: 'line',
                 data: {
-                    labels: b.labels,
+                    labels: ts.labels,
                     datasets: [
                         {
-                            label: 'Flexibility Dispatched (kW)',
-                            data: b.flex_delivered,
-                            borderColor: '#00D68F',
-                            backgroundColor: 'rgba(0, 214, 143, 0.25)',
+                            label: 'Dispatched Flexibility (kW)',
+                            data: ts.flex_delivered,
+                            borderColor: '#4CAF50',
+                            backgroundColor: 'rgba(76, 175, 80, 0.25)',
                             borderWidth: 2,
                             pointRadius: 0,
                             fill: true
                         },
                         {
-                            label: 'Total Available Fleet Flex (kW)',
-                            data: b.flex_available,
-                            borderColor: '#A855F7',
+                            label: 'Available Fleet Flexibility (kW)',
+                            data: ts.flex_available,
+                            borderColor: '#9C27B0',
                             borderWidth: 1.5,
                             borderDash: [4, 4],
                             pointRadius: 0
@@ -1960,91 +1431,81 @@
                 options: commonOptions('Power (kW)')
             });
 
-            // 4. XGBoost Loss Chart
-            const ctx4 = document.getElementById('chart-xgb').getContext('2d');
-            charts.xgb = new Chart(ctx4, {
+            // Chart 4: Solar
+            charts.solar = new Chart(document.getElementById('fuxa-chart-solar').getContext('2d'), {
                 type: 'line',
                 data: {
-                    labels: b.xgb_iterations.map(i => 'Iter ' + i),
+                    labels: ts.labels,
                     datasets: [
                         {
-                            label: 'Validation RMSE (kW)',
-                            data: b.xgb_val_metric,
-                            borderColor: '#00D68F',
-                            borderWidth: 2.5,
-                            pointRadius: 0
+                            label: 'Solar PV Cliff Generation (kW)',
+                            data: ts.solar_gen,
+                            borderColor: '#FF9800',
+                            backgroundColor: 'rgba(255, 152, 0, 0.15)',
+                            borderWidth: 2,
+                            pointRadius: 0,
+                            fill: true
                         },
                         {
-                            label: 'Training RMSE (kW)',
-                            data: b.xgb_train_metric,
-                            borderColor: '#64748B',
+                            label: 'Gross Feeder Demand (kW)',
+                            data: ts.gross_demand,
+                            borderColor: '#B0BEC5',
                             borderWidth: 1.5,
-                            borderDash: [4, 4],
+                            borderDash: [3, 3],
                             pointRadius: 0
                         }
                     ]
                 },
-                options: commonOptions('Loss (RMSE kW)')
+                options: commonOptions('Power (kW)')
             });
         }
 
-        // Setup 60-Household Fleet Matrix Table
-        function setupFleetTable(fleet) {
-            const tbody = document.getElementById('fleet-table-body');
-            const searchInput = document.getElementById('fleet-search-input');
-            const countBadge = document.getElementById('fleet-count-badge');
-            const filterBtns = document.querySelectorAll('.filter-group .scada-btn');
+        function populateFleetTable(fleet) {
+            const tbody = document.getElementById('fuxa-fleet-tbody');
+            const searchInput = document.getElementById('fuxa-fleet-search');
+            const countText = document.getElementById('fleet-count-text');
+            const filterBtns = document.querySelectorAll('[data-fleet-filter]');
 
             let activeFilter = 'all';
 
-            function renderTable() {
-                const searchTxt = searchInput.value.trim().toUpperCase();
+            function renderRows() {
+                const search = searchInput.value.trim().toUpperCase();
                 tbody.innerHTML = '';
                 
                 const filtered = fleet.filter(h => {
-                    // Filter tag
-                    if (activeFilter === 'battery' && !h.has_battery) return false;
+                    if (activeFilter === 'bess' && !h.has_battery) return false;
                     if (activeFilter === 'participating' && !h.participated) return false;
                     if (activeFilter === 'optout' && !h.opted_out) return false;
                     if (activeFilter === 'solar' && !h.has_solar) return false;
-
-                    // Search text
-                    if (searchTxt && !h.id.includes(searchTxt)) return false;
-
+                    if (search && !h.id.includes(search)) return false;
                     return true;
                 });
 
-                countBadge.innerText = `Showing ${filtered.length} of 60 nodes`;
+                countText.innerText = `Showing ${filtered.length} of 60 homes`;
 
                 filtered.forEach(h => {
                     const tr = document.createElement('tr');
-                    
                     const socPct = (h.final_soc * 100).toFixed(0);
-                    const socColor = h.final_soc >= 0.8 ? '#10B981' : (h.final_soc >= 0.7 ? '#F59E0B' : '#EF4444');
-                    
-                    let statusBadge = '<span class="tag-pill passive">PASSIVE LOAD</span>';
-                    if (h.opted_out) {
-                        statusBadge = '<span class="tag-pill optout">OPTED OUT</span>';
-                    } else if (h.participated) {
-                        statusBadge = '<span class="tag-pill participating">PARTICIPATING</span>';
-                    }
+                    const socColor = h.final_soc >= 0.8 ? '#4CAF50' : (h.final_soc >= 0.7 ? '#FF9800' : '#F44336');
 
                     tr.innerHTML = `
                         <td style="font-weight:700; color:#FFFFFF;">${h.id}</td>
-                        <td>${h.has_battery ? '<span style="color:#00D68F;">Installed (4.0 kWh)</span>' : '<span style="color:#64748B;">None</span>'}</td>
-                        <td>${h.has_solar ? '<span style="color:#F59E0B;">Installed (1.5 kWp)</span>' : '<span style="color:#64748B;">None</span>'}</td>
+                        <td>${h.has_battery ? '<span style="color:#4CAF50;">Installed (4.0 kWh)</span>' : '<span style="color:#78909C;">None</span>'}</td>
+                        <td>${h.has_solar ? '<span style="color:#FF9800;">Installed (1.5 kWp)</span>' : '<span style="color:#78909C;">None</span>'}</td>
                         <td>
-                            <div class="soc-bar-container">
-                                <div class="soc-bar-fill" style="width: ${socPct}%; background: ${socColor};"></div>
-                                <div class="soc-bar-reserve" title="Reserve Floor 70%"></div>
+                            <div class="soc-indicator">
+                                <div class="soc-fill" style="width: ${socPct}%; background: ${socColor};"></div>
+                                <div class="soc-floor-line" title="70% Reserve Floor"></div>
                             </div>
                             <span>${(h.init_soc * 100).toFixed(0)}% → ${socPct}%</span>
                         </td>
-                        <td style="color:#EF4444; font-weight:600;">70.0% Reserve Floor</td>
+                        <td style="color:#F44336; font-weight:500;">≥70.0% Floor</td>
                         <td>${h.avail_kw.toFixed(2)} kW</td>
-                        <td style="font-weight:600; color:#FFFFFF;">${h.delivered_kwh.toFixed(3)} kWh</td>
-                        <td>${statusBadge}</td>
-                        <td style="color:#00D68F; font-weight:700;">₹${h.comp_inr.toFixed(2)}</td>
+                        <td style="font-weight:600; color:#FFFFFF;">${h.disp_kw.toFixed(2)} kW</td>
+                        <td>${h.delivered_kwh.toFixed(3)} kWh</td>
+                        <td>${h.participated ? '<span style="color:#4CAF50; font-weight:700;">YES</span>' : '<span style="color:#78909C;">NO</span>'}</td>
+                        <td>${h.opted_out ? '<span style="color:#FF9800; font-weight:700;">OPTED OUT</span>' : '<span style="color:#78909C;">NO</span>'}</td>
+                        <td style="color:#4CAF50; font-weight:700;">₹${h.comp_inr.toFixed(2)}</td>
                     `;
                     tbody.appendChild(tr);
                 });
@@ -2054,13 +1515,13 @@
                 btn.addEventListener('click', () => {
                     filterBtns.forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
-                    activeFilter = btn.getAttribute('data-filter');
-                    renderTable();
+                    activeFilter = btn.getAttribute('data-fleet-filter');
+                    renderRows();
                 });
             });
 
-            searchInput.addEventListener('input', renderTable);
-            renderTable();
+            searchInput.addEventListener('input', renderRows);
+            renderRows();
         }
     </script>
 </body>
