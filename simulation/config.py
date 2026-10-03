@@ -12,12 +12,12 @@ HOMES_WITH_SOLAR = 15             # 25% penetration
 # Household load profiles (watts, by category)
 # These represent TYPICAL Indian urban evening loads
 LOAD_PROFILES = {
-    "lighting": {"base": 60, "peak_add": 40, "deferrable": False},
-    "fans": {"base": 75, "peak_add": 0, "deferrable": False},
-    "tv": {"base": 80, "peak_add": 0, "deferrable": False},
-    "refrigerator": {"base": 150, "peak_add": 0, "deferrable": False},
-    "cooking": {"base": 0, "peak_add": 500, "deferrable": False},  # induction/mixer
-    "water_heater": {"base": 0, "peak_add": 1500, "deferrable": True, "duration_min": 20},
+    "lighting": {"base": 100, "peak_add": 80, "deferrable": False},
+    "fans": {"base": 150, "peak_add": 0, "deferrable": False},
+    "tv": {"base": 120, "peak_add": 0, "deferrable": False},
+    "refrigerator": {"base": 200, "peak_add": 0, "deferrable": False},
+    "cooking": {"base": 0, "peak_add": 800, "deferrable": False},  # induction/mixer
+    "water_heater": {"base": 0, "peak_add": 2000, "deferrable": True, "duration_min": 20},
     "ac": {"base": 0, "peak_add": 1500, "deferrable": True, "duration_min": 60},
     "washing_machine": {"base": 0, "peak_add": 500, "deferrable": True, "duration_min": 45},
     "ev_charger": {"base": 0, "peak_add": 1500, "deferrable": True, "duration_min": 120},
@@ -25,8 +25,10 @@ LOAD_PROFILES = {
 }
 
 # Probabilities of having specific high-load appliances
-PROB_AC = 0.4
-PROB_EV = 0.05
+PROB_AC = 0.55          # 55% homes have AC (urban India summer)
+PROB_EV = 0.08          # 8% homes have EV
+PROB_WATER_HEATER = 0.6 # 60% homes use geyser in evening
+PROB_WATER_PUMP = 0.3   # 30% homes run pump in evening
 
 # Inverter battery
 BATTERY_CAPACITY_WH = 1800  # typical 150Ah/12V
