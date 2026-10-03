@@ -1,0 +1,23 @@
+{
+    "baseline_peak_kw": 154.1359519199378,
+    "saanjh_peak_kw": 109.18234681921217,
+    "peak_reduction_kw": 44.95360510072564,
+    "peak_reduction_pct": 29.164905747671188,
+    "baseline_overload_minutes": 90,
+    "saanjh_overload_minutes": 60,
+    "overload_reduction_pct": 33.33333333333333,
+    "flexibility_delivered_kw": 56.24689102172852,
+    "flexibility_delivered_kwh": 61.57406239142188,
+    "dependable_delivery_ratio": 0.9851254691170566,
+    "voltage_violations_baseline": 6,
+    "voltage_violations_saanjh": 0,
+    "baseline_loss_kwh": 25.87364976558972,
+    "saanjh_loss_kwh": 16.740235608598958,
+    "loss_reduction_pct": 35.30006102632498,
+    "critical_load_violations": 0,
+    "reserve_violations": 0,
+    "opt_out_dispatches": 0,
+    "homes_participating": 39,
+    "cost_per_dependable_kw": 7068,
+    "total_initial_investment": 317767
+}

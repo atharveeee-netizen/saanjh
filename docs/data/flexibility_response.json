@@ -1,0 +1,9 @@
+{
+    "committed_kw": 56.25,
+    "delivered_kw": 56.25,
+    "shortfall_kw": 0.0,
+    "households_dispatched": 39,
+    "energy_delivered_kwh": 61.57,
+    "constraint_status": "RELIEVED (45 MIN OVERLOAD AVOIDED)",
+    "voltage_status": "NOMINAL (MIN 218.5V MAINTAINED)"
+}

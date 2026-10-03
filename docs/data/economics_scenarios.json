@@ -1,0 +1,32 @@
+{
+    "LOW_COST_MASS_PRODUCTION": {
+        "total_capex": 148500,
+        "total_installation": 11700,
+        "total_initial_investment": 160200,
+        "cost_per_dependable_kw": 3563,
+        "cost_per_home": 4107,
+        "annual_operator_maintenance": 4455,
+        "annual_household_benefit": 168,
+        "discom_net_annual_benefit": 2097
+    },
+    "BASE_PROTOTYPE_SCALE": {
+        "total_capex": 298267,
+        "total_installation": 19500,
+        "total_initial_investment": 317767,
+        "cost_per_dependable_kw": 7068,
+        "cost_per_home": 8147,
+        "annual_operator_maintenance": 14913,
+        "annual_household_benefit": 126,
+        "discom_net_annual_benefit": -11637
+    },
+    "HIGH_CONTINGENCY": {
+        "total_capex": 398500,
+        "total_installation": 39000,
+        "total_initial_investment": 437500,
+        "cost_per_dependable_kw": 9732,
+        "cost_per_home": 11217,
+        "annual_operator_maintenance": 31880,
+        "annual_household_benefit": 67,
+        "discom_net_annual_benefit": -30132
+    }
+}

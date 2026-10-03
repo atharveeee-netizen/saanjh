@@ -1,0 +1,75 @@
+{
+    "metadata": {
+        "title": "SAANJH Challenge 03 Reliability Scorecard",
+        "feeder_id": "FDR-023",
+        "transformer_rating_kva": 100,
+        "nominal_voltage_v": 240,
+        "evaluation_timesteps": 72,
+        "evaluation_window": "16:00 - 22:00"
+    },
+    "metrics": {
+        "peak_demand_kw": {
+            "baseline": 154.1359519199378,
+            "saanjh": 109.18234681921217,
+            "delta": -44.95360510072564,
+            "percent_change": -29.164905747671188,
+            "unit": "kW"
+        },
+        "transformer_overload_duration": {
+            "baseline": 90,
+            "saanjh": 60,
+            "delta": -30,
+            "percent_change": -33.33333333333333,
+            "unit": "minutes"
+        },
+        "renewable_deficit_peak": {
+            "baseline": 59.13595191993781,
+            "saanjh": 14.18234681921217,
+            "delta": -44.95360510072564,
+            "percent_change": -76.01738644807277,
+            "unit": "kW"
+        },
+        "renewable_deficit_energy": {
+            "baseline": 62.84308240463753,
+            "saanjh": 7.997863425937393,
+            "delta": -54.84521897870013,
+            "percent_change": -87.27327954023593,
+            "unit": "kWh"
+        },
+        "critical_load_availability": {
+            "baseline": 100.0,
+            "saanjh": 100.0,
+            "delta": 0.0,
+            "percent_change": 0.0,
+            "unit": "%"
+        },
+        "voltage_violation_duration": {
+            "baseline": 30,
+            "saanjh": 0,
+            "delta": -30,
+            "percent_change": -100.0,
+            "unit": "minutes"
+        },
+        "modeled_resistive_feeder_losses": {
+            "baseline": 25.87364976558972,
+            "saanjh": 16.740235608598958,
+            "delta": -9.133414156990764,
+            "percent_change": -35.30006102632498,
+            "unit": "kWh"
+        },
+        "dependable_flexibility_delivered": {
+            "baseline": 0.0,
+            "saanjh": 56.24689102172852,
+            "delta": 56.24689102172852,
+            "percent_change": 100.0,
+            "unit": "kW"
+        },
+        "delivery_ratio": {
+            "baseline": 0.0,
+            "saanjh": 0.9851254691170566,
+            "delta": 0.9851254691170566,
+            "percent_change": 100.0,
+            "unit": "ratio"
+        }
+    }
+}
