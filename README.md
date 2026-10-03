@@ -1,4 +1,4 @@
-# SAANJH ⚡
+# PROJECT SAANJH ⚡
 ## Neighbourhood Flexibility Network for Renewable-Deficit Reliability
 **Schneider Electric Yuva Yodha Tech Hackathon 2026 — Challenge 03**
 
