@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAANJH | Grid Control Centre</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --panel-bg: rgba(22, 27, 34, 0.7);
+            --accent-green: #3DCD58;
+            --accent-red: #ff4d4d;
+            --text-main: #e6edf3;
+            --text-muted: #8b949e;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(61, 205, 88, 0.05), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(61, 205, 88, 0.05), transparent 25%);
+        }
+
+        /* Glassmorphism Header */
+        header {
+            background: rgba(11, 15, 25, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        header h1 span {
+            color: var(--accent-green);
+        }
+
+        .status-badge {
+            background: rgba(61, 205, 88, 0.1);
+            border: 1px solid var(--accent-green);
+            color: var(--accent-green);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-badge::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-green);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--accent-green);
+        }
+
+        /* Main Dashboard Layout */
+        .dashboard {
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        /* KPI Cards */
+        .kpi-container {
+            grid-column: span 3;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .kpi-card {
+            background: var(--panel-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            transition: transform 0.2s, border-color 0.2s;
+            border-top: 3px solid var(--accent-green);
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(61, 205, 88, 0.3);
+        }
+
+        .kpi-card.alert {
+            border-top: 3px solid var(--accent-red);
+        }
+
+        .kpi-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .kpi-value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .kpi-subtext {
+            font-size: 0.85rem;
+            color: var(--accent-green);
+            margin-top: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Chart Section */
+        .chart-section {
+            grid-column: span 2;
+            background: var(--panel-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .chart-title {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        /* Controls Section */
+        .controls-section {
+            background: var(--panel-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .control-group h3 {
+            margin: 0 0 1rem 0;
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+
+        .toggle-switch {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(0,0,0,0.2);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+
+        .toggle-label {
+            font-weight: 600;
+        }
+
+        .dispatch-btn {
+            background: linear-gradient(135deg, #3DCD58 0%, #2b9e41 100%);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .dispatch-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .dashboard { grid-template-columns: 1fr; }
+            .kpi-container { grid-column: span 1; grid-template-columns: 1fr 1fr; }
+            .chart-section { grid-column: span 1; }
+        }
+        @media (max-width: 600px) {
+            .kpi-container { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>⚡ SAANJH <span>Grid Control Centre</span></h1>
+        <div class="status-badge">SYSTEM ACTIVE (FE-021)</div>
+    </header>
+
+    <div class="dashboard">
+        
+        <!-- KPIs -->
+        <div class="kpi-container">
+            <div class="kpi-card">
+                <div class="kpi-label">Current Feeder Load</div>
+                <p class="kpi-value" id="currentLoad">126.9 <span style="font-size:1rem;color:var(--text-muted)">kW</span></p>
+                <div class="kpi-subtext">↓ 22.3% below baseline</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Active Flexibility</div>
+                <p class="kpi-value" style="color:var(--accent-green)">36.4 <span style="font-size:1rem;color:var(--text-muted)">kW</span></p>
+                <div class="kpi-subtext">From 43 participating homes</div>
+            </div>
+            <div class="kpi-card alert" id="dtAlertCard">
+                <div class="kpi-label">DT Overload Duration</div>
+                <p class="kpi-value">15 <span style="font-size:1rem;color:var(--text-muted)">min</span></p>
+                <div class="kpi-subtext" style="color:var(--accent-red)">Down from 90 mins</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Grid Health</div>
+                <p class="kpi-value">Stable</p>
+                <div class="kpi-subtext">0 Voltage Violations</div>
+            </div>
+        </div>
+
+        <!-- Chart -->
+        <div class="chart-section">
+            <div class="chart-header">
+                <h2 class="chart-title">Transformer Load Profile (16:00 - 22:00)</h2>
+            </div>
+            <canvas id="loadChart" height="250"></canvas>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls-section">
+            <div class="control-group">
+                <h3>Edge Dispatch Control</h3>
+                
+                <div class="toggle-switch">
+                    <div>
+                        <div class="toggle-label">Auto-Dispatch (AI)</div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted)">Let ML meta-learner trigger events</div>
+                    </div>
+                    <div style="color: var(--accent-green); font-weight: bold;">ON</div>
+                </div>
+
+                <div class="toggle-switch">
+                    <div>
+                        <div class="toggle-label">Fairness Constraint</div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted)">Rotate battery discharge across homes</div>
+                    </div>
+                    <div style="color: var(--accent-green); font-weight: bold;">ON</div>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <h3>Network Status</h3>
+                <div style="display:flex; justify-content:space-between; margin-bottom: 0.5rem;">
+                    <span>Connected Nodes (LoRa):</span>
+                    <strong style="color:var(--accent-green)">42 / 60</strong>
+                </div>
+                <div style="display:flex; justify-content:space-between;">
+                    <span>Avg Uplink Latency:</span>
+                    <strong>1.2s</strong>
+                </div>
+            </div>
+
+            <button class="dispatch-btn">FORCE MANUAL DISPATCH</button>
+        </div>
+
+    </div>
+
+    <script>
+        // Mock data representing our simulation results from 16:00 to 22:00
+        const labels = ['16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00'];
+        
+        // Baseline peaks around 19:30 at ~163kW
+        const baselineData = [55, 60, 65, 75, 95, 130, 155, 163, 150, 120, 95, 80, 70];
+        
+        // SAANJH shaves the peak down to ~127kW
+        const saanjhData = [55, 60, 65, 75, 95, 120, 126.9, 126.5, 125, 120, 95, 80, 70];
+
+        // Transformer safe limit (100kVA * 0.85 pf * 0.95 safety) ~ 80.75kW
+        const limitData = Array(13).fill(80.75);
+
+        const ctx = document.getElementById('loadChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Unmanaged Load (Baseline)',
+                        data: baselineData,
+                        borderColor: '#ff4d4d',
+                        backgroundColor: 'rgba(255, 77, 77, 0.1)',
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.4,
+                        borderDash: [5, 5]
+                    },
+                    {
+                        label: 'SAANJH Managed Load',
+                        data: saanjhData,
+                        borderColor: '#3DCD58',
+                        backgroundColor: 'rgba(61, 205, 88, 0.2)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Transformer Safe Limit (80.75 kW)',
+                        data: limitData,
+                        borderColor: '#A0AEC0',
+                        borderWidth: 1,
+                        pointRadius: 0,
+                        borderDash: [10, 5],
+                        fill: false
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                plugins: {
+                    legend: {
+                        labels: { color: '#e6edf3' }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(22, 27, 34, 0.9)',
+                        titleColor: '#3DCD58',
+                        bodyColor: '#e6edf3',
+                        borderColor: 'rgba(255,255,255,0.1)',
+                        borderWidth: 1
+                    }
+                },
+                scales: {
+                    y: {
+                        grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                        ticks: { color: '#8b949e' },
+                        title: {
+                            display: true,
+                            text: 'Load (kW)',
+                            color: '#8b949e'
+                        }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#8b949e' }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
