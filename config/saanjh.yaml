@@ -1,0 +1,79 @@
+# SAANJH Main Configuration File
+
+transformer:
+  rating_kva: 100
+  rated_temp_c: 65
+  ambient_c: 35
+  voltage_nominal: 230
+
+neighbourhood:
+  num_homes: 60
+  homes_with_inverter_battery: 42
+  homes_with_solar: 15
+
+probabilities:
+  ac: 0.55
+  ev: 0.08
+  water_heater: 0.6
+  water_pump: 0.3
+
+battery:
+  capacity_wh: 1800
+  inverter_rating_w: 800
+  reserve_soc: 0.70
+  available_soc: 0.22
+
+solar:
+  panel_rating_w: 1000
+
+dispatch:
+  max_event_duration_min: 120
+  stagger_groups: 4
+  rebound_recovery_min: 30
+
+load_profiles:
+  lighting:
+    base: 100
+    peak_add: 80
+    deferrable: false
+  fans:
+    base: 150
+    peak_add: 0
+    deferrable: false
+  tv:
+    base: 120
+    peak_add: 0
+    deferrable: false
+  refrigerator:
+    base: 200
+    peak_add: 0
+    deferrable: false
+  cooking:
+    base: 0
+    peak_add: 800
+    deferrable: false
+  water_heater:
+    base: 0
+    peak_add: 2000
+    deferrable: true
+    duration_min: 20
+  ac:
+    base: 0
+    peak_add: 1500
+    deferrable: true
+    duration_min: 60
+  washing_machine:
+    base: 0
+    peak_add: 500
+    deferrable: true
+    duration_min: 45
+  ev_charger:
+    base: 0
+    peak_add: 1500
+    deferrable: true
+    duration_min: 120
+  water_pump:
+    base: 0
+    peak_add: 750
+    deferrable: true
+    duration_min: 30

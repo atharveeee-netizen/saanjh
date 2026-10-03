@@ -79,7 +79,7 @@ SAANJH bridges the last-mile gap as a localized edge layer beneath the DISCOM's 
 | **Home Node Compute** | RAKwireless WisBlock RAK4631 (nRF52840 + SX1262 LoRa) | ₹2,999 |
 | **Home Node Sensors** | DFRobot SCD41 (CO2), BME688, TMP117, INMP441 | ₹7,869 |
 | **Edge Gateway Compute** | Raspberry Pi CM4 (2GB, 32GB eMMC) | ₹11,275 |
-| **Total Physical BOM** | Purchased Hardware Stack for Prototype | **₹42,695** |
+| **Total Physical BOM** | Purchased Hardware Stack for Prototype | **₹22,143** |
 
 ## Project Structure
 ```

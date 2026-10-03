@@ -1,45 +1,42 @@
+import os
+import yaml
+
+# Path to the new configuration file
+config_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'config', 'saanjh.yaml')
+
+with open(config_path, 'r') as f:
+    _cfg = yaml.safe_load(f)
+
 # Transformer
-TRANSFORMER_RATING_KVA = 100
-TRANSFORMER_RATED_TEMP_C = 65
-TRANSFORMER_AMBIENT_C = 35
-VOLTAGE_NOMINAL = 230
+TRANSFORMER_RATING_KVA = _cfg['transformer']['rating_kva']
+TRANSFORMER_RATED_TEMP_C = _cfg['transformer']['rated_temp_c']
+TRANSFORMER_AMBIENT_C = _cfg['transformer']['ambient_c']
+VOLTAGE_NOMINAL = _cfg['transformer']['voltage_nominal']
 
 # Neighbourhood
-NUM_HOMES = 60
-HOMES_WITH_INVERTER_BATTERY = 42  # 70% penetration (realistic for urban India)
-HOMES_WITH_SOLAR = 15             # 25% penetration
+NUM_HOMES = _cfg['neighbourhood']['num_homes']
+HOMES_WITH_INVERTER_BATTERY = _cfg['neighbourhood']['homes_with_inverter_battery']
+HOMES_WITH_SOLAR = _cfg['neighbourhood']['homes_with_solar']
 
-# Household load profiles (watts, by category)
-# These represent TYPICAL Indian urban evening loads
-LOAD_PROFILES = {
-    "lighting": {"base": 100, "peak_add": 80, "deferrable": False},
-    "fans": {"base": 150, "peak_add": 0, "deferrable": False},
-    "tv": {"base": 120, "peak_add": 0, "deferrable": False},
-    "refrigerator": {"base": 200, "peak_add": 0, "deferrable": False},
-    "cooking": {"base": 0, "peak_add": 800, "deferrable": False},  # induction/mixer
-    "water_heater": {"base": 0, "peak_add": 2000, "deferrable": True, "duration_min": 20},
-    "ac": {"base": 0, "peak_add": 1500, "deferrable": True, "duration_min": 60},
-    "washing_machine": {"base": 0, "peak_add": 500, "deferrable": True, "duration_min": 45},
-    "ev_charger": {"base": 0, "peak_add": 1500, "deferrable": True, "duration_min": 120},
-    "water_pump": {"base": 0, "peak_add": 750, "deferrable": True, "duration_min": 30},
-}
+# Probabilities
+PROB_AC = _cfg['probabilities']['ac']
+PROB_EV = _cfg['probabilities']['ev']
+PROB_WATER_HEATER = _cfg['probabilities']['water_heater']
+PROB_WATER_PUMP = _cfg['probabilities']['water_pump']
 
-# Probabilities of having specific high-load appliances
-PROB_AC = 0.55          # 55% homes have AC (urban India summer)
-PROB_EV = 0.08          # 8% homes have EV
-PROB_WATER_HEATER = 0.6 # 60% homes use geyser in evening
-PROB_WATER_PUMP = 0.3   # 30% homes run pump in evening
-
-# Inverter battery
-BATTERY_CAPACITY_WH = 1800  # typical 150Ah/12V
-BATTERY_INVERTER_RATING_W = 800
-BATTERY_RESERVE_SOC = 0.70
-BATTERY_AVAILABLE_SOC = 0.22  # 92% - 70% reserve = ~400 Wh available
+# Battery
+BATTERY_CAPACITY_WH = _cfg['battery']['capacity_wh']
+BATTERY_INVERTER_RATING_W = _cfg['battery']['inverter_rating_w']
+BATTERY_RESERVE_SOC = _cfg['battery']['reserve_soc']
+BATTERY_AVAILABLE_SOC = _cfg['battery']['available_soc']
 
 # Solar
-SOLAR_PANEL_RATING_W = 1000  # 1 kW rooftop
+SOLAR_PANEL_RATING_W = _cfg['solar']['panel_rating_w']
 
 # SAANJH dispatch
-MAX_EVENT_DURATION_MIN = 120
-DISPATCH_STAGGER_GROUPS = 4
-REBOUND_RECOVERY_MIN = 30
+MAX_EVENT_DURATION_MIN = _cfg['dispatch']['max_event_duration_min']
+DISPATCH_STAGGER_GROUPS = _cfg['dispatch']['stagger_groups']
+REBOUND_RECOVERY_MIN = _cfg['dispatch']['rebound_recovery_min']
+
+# Load profiles
+LOAD_PROFILES = _cfg['load_profiles']

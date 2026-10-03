@@ -15,12 +15,12 @@ def run_mutation_test():
     state_a = read_metrics()
     
     # Mutate config
-    config_path = "simulation/config.py"
+    config_path = "config/saanjh.yaml"
     with open(config_path, "r") as f:
         config_text = f.read()
         
-    # Change HOMES_WITH_INVERTER_BATTERY
-    mutated_config = config_text.replace("HOMES_WITH_INVERTER_BATTERY = 42", "HOMES_WITH_INVERTER_BATTERY = 10")
+    # Change homes_with_inverter_battery
+    mutated_config = config_text.replace("homes_with_inverter_battery: 42", "homes_with_inverter_battery: 10")
     with open(config_path, "w") as f:
         f.write(mutated_config)
         

@@ -1,0 +1,30 @@
+{
+  "pipeline": "SAANJH Baseline to Digital Twin",
+  "steps": [
+    {
+      "step": 1,
+      "name": "Configuration",
+      "source": "config/saanjh.yaml",
+      "target": "simulation/config.py"
+    },
+    {
+      "step": 2,
+      "name": "Simulation",
+      "source": "simulation/feeder_sim.py",
+      "target": "simulation/data/results/comparison.json"
+    },
+    {
+      "step": 3,
+      "name": "Blender Data Export",
+      "source": "scripts/generate_blender_data.py",
+      "target": "artifacts/blender/saanjh_visualization_data.json"
+    },
+    {
+      "step": 4,
+      "name": "Presentation Video Compilation",
+      "source": "scripts/compile_final_presentation.py",
+      "target": "artifacts/video/saanjh_final_presentation.mp4"
+    }
+  ],
+  "verified": true
+}

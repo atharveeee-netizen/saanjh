@@ -1,0 +1,12 @@
+{
+  "python_version": "3.10.11",
+  "dependencies": "requirements.txt",
+  "test_commands": [
+    "python simulation/feeder_sim.py",
+    "python simulation/run_monte_carlo.py",
+    "python simulation/run_adversarial_tests.py",
+    "python scripts/mutation_test.py",
+    "pytest"
+  ],
+  "expected_outcome": "ALL_PASS"
+}

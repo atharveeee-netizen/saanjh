@@ -63,7 +63,7 @@ Every evening across Indian cities:
 ![Architecture](docs/diagrams/architecture_1791008183566.jpg)
 
 **Three-Layer Edge Architecture:**
-*   **Layer 1 – Home Nodes:** RAKwireless WisBlock (nRF52840 + SX1262 LoRa) + Custom "Qashu" PCB with environmental/load sensors.
+*   **Layer 1 – Home Nodes:** RAKwireless WisBlock (nRF52840 + SX1262 LoRa) with environmental/load sensors.
 *   **Layer 2 – LoRa Gateway:** Raspberry Pi CM4 (2GB/32GB) + Waveshare SX1262 LoRa HAT running AI models.
 *   **Layer 3 – DISCOM Interface:** MQTT/REST API pushing aggregated data to utility ADMS.
 
