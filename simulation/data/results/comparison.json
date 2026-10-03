@@ -1,0 +1,14 @@
+{
+    "baseline_peak_kw": 71.67187296957427,
+    "saanjh_peak_kw": 71.79532444253378,
+    "peak_reduction_kw": -0.1234514729595162,
+    "peak_reduction_pct": -0.17224535629468357,
+    "baseline_overload_minutes": 0,
+    "saanjh_overload_minutes": 0,
+    "flexibility_delivered_kw": 0.0,
+    "dependable_flexibility_ratio": 0.889,
+    "voltage_violations_baseline": 0,
+    "voltage_violations_saanjh": 0,
+    "homes_participating": 0,
+    "cost_per_dependable_kw": 2083
+}
