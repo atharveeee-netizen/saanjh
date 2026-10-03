@@ -1,0 +1,13 @@
+{
+    "feeder_id": "FDR-023",
+    "transformer_id": "DT-100KVA-04",
+    "forecast_status": "HIGH STRESS PREDICTED (SOLAR DROP-OFF AT 18:30)",
+    "required_flexibility_kw": 56.25,
+    "available_flexibility_kw": 92.55,
+    "recommended_action": "DISPATCH 56.2 kW FOR 45 MINUTES VIA SAANJH EDGE",
+    "expected_outcomes": {
+        "transformer_thermal_overload_reduction": "33.3% (30 minutes avoided)",
+        "voltage_drop_mitigation": "Feeder tail voltage restored above 0.90 p.u.",
+        "modeled_technical_loss_reduction": "35.3% (9.13 kWh saved)"
+    }
+}

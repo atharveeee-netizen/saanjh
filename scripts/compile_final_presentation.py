@@ -6,7 +6,7 @@ def compile_presentation():
     vid_dir = os.path.join(base_dir, 'artifacts', 'video')
     
     # 1. Hardware Video
-    hardware_vid = r"C:\Users\noobg\Downloads\WhatsApp Video 2026-09-20 at 11.00.02 PM.mp4"
+    hardware_vid = os.path.join(vid_dir, 'hardware_demonstration.mp4')
     if not os.path.exists(hardware_vid):
         print(f"Error: Could not find hardware video at {hardware_vid}")
         return

@@ -10,7 +10,7 @@ sys.path.append(base_dir)
 from simulation.feeder_sim import run_simulation
 from simulation.config import NUM_HOMES
 
-def run_monte_carlo(iterations=10):
+def run_monte_carlo(iterations=50):
     print(f"--- Running Monte Carlo Robustness Tests ({iterations} Iterations) ---")
     
     results_dir = os.path.join(base_dir, 'simulation', 'data', 'results')
@@ -18,43 +18,46 @@ def run_monte_carlo(iterations=10):
     
     peak_reductions_kw = []
     overload_mins = []
+    failure_count = 0
     
     for i in range(iterations):
-        # We simulate randomness by implicitly letting np.random handle the distribution of solar/battery
-        # inside the Household initialization (if we re-initialize it).
-        # We need to change the global seed per iteration.
-        np.random.seed(i)
+        seed = 100 + i
+        baseline_df, _ = run_simulation(use_saanjh=False, seed=seed)
+        baseline_peak = float(baseline_df['Load_kW'].max())
         
-        # Run baseline
-        baseline_df, _ = run_simulation(use_saanjh=False, seed=i)
-        baseline_peak = baseline_df['Load_kW'].max()
+        saanjh_df, _ = run_simulation(use_saanjh=True, seed=seed)
+        saanjh_peak = float(saanjh_df['Load_kW'].max())
         
-        # Run SAANJH
-        saanjh_df, _ = run_simulation(use_saanjh=True, seed=i)
-        saanjh_peak = saanjh_df['Load_kW'].max()
+        reduction = baseline_peak - saanjh_peak
+        peak_reductions_kw.append(reduction)
         
-        peak_reductions_kw.append(baseline_peak - saanjh_peak)
-        
-        overload = (saanjh_df['Transformer_Loading_%'] > 100).sum() * 5
+        overload = int((saanjh_df['Transformer_Loading_%'] > 100).sum() * 5)
         overload_mins.append(overload)
         
-        print(f"Iteration {i}: Peak Reduction = {baseline_peak - saanjh_peak:.2f} kW, Overload = {overload} mins")
-        
-    # Aggregate Metrics
+        if reduction < 0: # If SAANJH somehow caused higher peak
+            failure_count += 1
+            
+        if (i + 1) % 10 == 0:
+            print(f"Completed {i + 1}/{iterations} iterations...")
+            
     summary = {
-        "mean_peak_reduction_kw": np.mean(peak_reductions_kw),
-        "median_peak_reduction_kw": np.median(peak_reductions_kw),
-        "min_peak_reduction_kw": np.min(peak_reductions_kw),
-        "max_peak_reduction_kw": np.max(peak_reductions_kw),
-        "P10_peak_reduction": np.percentile(peak_reductions_kw, 10),
-        "P90_peak_reduction": np.percentile(peak_reductions_kw, 90),
-        "mean_overload_mins": np.mean(overload_mins)
+        "evaluation_type": "50-run stochastic robustness validation",
+        "iterations": iterations,
+        "mean_peak_reduction_kw": round(float(np.mean(peak_reductions_kw)), 2),
+        "median_peak_reduction_kw": round(float(np.median(peak_reductions_kw)), 2),
+        "min_peak_reduction_kw": round(float(np.min(peak_reductions_kw)), 2),
+        "max_peak_reduction_kw": round(float(np.max(peak_reductions_kw)), 2),
+        "P10_peak_reduction_kw": round(float(np.percentile(peak_reductions_kw, 10)), 2),
+        "P90_peak_reduction_kw": round(float(np.percentile(peak_reductions_kw, 90)), 2),
+        "mean_overload_mins": round(float(np.mean(overload_mins)), 1),
+        "failure_rate_pct": round(float((failure_count / iterations) * 100.0), 2)
     }
     
     with open(os.path.join(results_dir, 'monte_carlo_summary.json'), 'w') as f:
         json.dump(summary, f, indent=4)
         
-    print("\n[SUCCESS] Monte Carlo testing complete. Summary saved.")
-    
+    print(f"\n[SUCCESS] Monte Carlo validation complete. Mean Peak Reduction: {summary['mean_peak_reduction_kw']} kW, Failure Rate: {summary['failure_rate_pct']}%.")
+    return summary
+
 if __name__ == "__main__":
-    run_monte_carlo(iterations=5)
+    run_monte_carlo(iterations=50)

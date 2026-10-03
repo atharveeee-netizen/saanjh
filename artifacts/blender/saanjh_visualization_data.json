@@ -8,8 +8,8 @@
         {
             "time_idx": 0,
             "hour": 16.0,
-            "feeder_load_kw": 15.75,
-            "transformer_loading_pct": 16.578947368421055,
+            "feeder_load_kw": 13.5,
+            "transformer_loading_pct": 14.210526315789473,
             "transformer_stress": 0.0,
             "active_homes": 0,
             "flexibility_delivered_kw": 0.0
@@ -17,8 +17,8 @@
         {
             "time_idx": 1,
             "hour": 16.083333333333332,
-            "feeder_load_kw": 15.75,
-            "transformer_loading_pct": 16.578947368421055,
+            "feeder_load_kw": 13.785168466209178,
+            "transformer_loading_pct": 14.51070364864124,
             "transformer_stress": 0.0,
             "active_homes": 0,
             "flexibility_delivered_kw": 0.0
@@ -26,8 +26,8 @@
         {
             "time_idx": 2,
             "hour": 16.166666666666664,
-            "feeder_load_kw": 15.75,
-            "transformer_loading_pct": 16.578947368421055,
+            "feeder_load_kw": 14.073770801474485,
+            "transformer_loading_pct": 14.814495580499456,
             "transformer_stress": 0.0,
             "active_homes": 0,
             "flexibility_delivered_kw": 0.0
@@ -35,8 +35,8 @@
         {
             "time_idx": 3,
             "hour": 16.249999999999996,
-            "feeder_load_kw": 15.75,
-            "transformer_loading_pct": 16.578947368421055,
+            "feeder_load_kw": 14.365669646714966,
+            "transformer_loading_pct": 15.12175752285786,
             "transformer_stress": 0.0,
             "active_homes": 0,
             "flexibility_delivered_kw": 0.0
@@ -44,8 +44,8 @@
         {
             "time_idx": 4,
             "hour": 16.33333333333333,
-            "feeder_load_kw": 15.75,
-            "transformer_loading_pct": 16.578947368421055,
+            "feeder_load_kw": 14.660726073889492,
+            "transformer_loading_pct": 15.432343235673148,
             "transformer_stress": 0.0,
             "active_homes": 0,
             "flexibility_delivered_kw": 0.0
@@ -53,8 +53,8 @@
         {
             "time_idx": 5,
             "hour": 16.41666666666666,
-            "feeder_load_kw": 15.75,
-            "transformer_loading_pct": 16.578947368421055,
+            "feeder_load_kw": 14.95879965211892,
+            "transformer_loading_pct": 15.746104896967289,
             "transformer_stress": 0.0,
             "active_homes": 0,
             "flexibility_delivered_kw": 0.0
@@ -62,8 +62,8 @@
         {
             "time_idx": 6,
             "hour": 16.499999999999993,
-            "feeder_load_kw": 15.75,
-            "transformer_loading_pct": 16.578947368421055,
+            "feeder_load_kw": 15.259748514523622,
+            "transformer_loading_pct": 16.06289317318276,
             "transformer_stress": 0.0,
             "active_homes": 0,
             "flexibility_delivered_kw": 0.0
@@ -71,8 +71,8 @@
         {
             "time_idx": 7,
             "hour": 16.583333333333325,
-            "feeder_load_kw": 15.75,
-            "transformer_loading_pct": 16.578947368421055,
+            "feeder_load_kw": 15.563429425744443,
+            "transformer_loading_pct": 16.38255729025731,
             "transformer_stress": 0.0,
             "active_homes": 0,
             "flexibility_delivered_kw": 0.0
@@ -80,8 +80,8 @@
         {
             "time_idx": 8,
             "hour": 16.666666666666657,
-            "feeder_load_kw": 15.869697850114932,
-            "transformer_loading_pct": 16.70494510538414,
+            "feeder_load_kw": 15.869697850114935,
+            "transformer_loading_pct": 16.704945105384144,
             "transformer_stress": 0.0,
             "active_homes": 0,
             "flexibility_delivered_kw": 0.0
@@ -89,8 +89,8 @@
         {
             "time_idx": 9,
             "hour": 16.74999999999999,
-            "feeder_load_kw": 16.17840802045253,
-            "transformer_loading_pct": 17.029903179423716,
+            "feeder_load_kw": 16.178408020452537,
+            "transformer_loading_pct": 17.029903179423723,
             "transformer_stress": 0.0,
             "active_homes": 0,
             "flexibility_delivered_kw": 0.0
@@ -98,8 +98,8 @@
         {
             "time_idx": 10,
             "hour": 16.83333333333332,
-            "feeder_load_kw": 16.48941300743586,
-            "transformer_loading_pct": 17.357276849932486,
+            "feeder_load_kw": 16.489413007435857,
+            "transformer_loading_pct": 17.357276849932482,
             "transformer_stress": 0.0,
             "active_homes": 0,
             "flexibility_delivered_kw": 0.0
@@ -107,8 +107,8 @@
         {
             "time_idx": 11,
             "hour": 16.916666666666654,
-            "feeder_load_kw": 16.802564789535076,
-            "transformer_loading_pct": 17.686910304773765,
+            "feeder_load_kw": 16.80256478953507,
+            "transformer_loading_pct": 17.686910304773757,
             "transformer_stress": 0.0,
             "active_homes": 0,
             "flexibility_delivered_kw": 0.0
@@ -116,8 +116,8 @@
         {
             "time_idx": 12,
             "hour": 16.999999999999986,
-            "feeder_load_kw": 17.11771432346214,
-            "transformer_loading_pct": 18.018646656275937,
+            "feeder_load_kw": 17.117714323462135,
+            "transformer_loading_pct": 18.018646656275934,
             "transformer_stress": 0.0,
             "active_homes": 0,
             "flexibility_delivered_kw": 0.0
@@ -125,8 +125,8 @@
         {
             "time_idx": 13,
             "hour": 17.083333333333318,
-            "feeder_load_kw": 20.434711615107357,
-            "transformer_loading_pct": 21.510222752744586,
+            "feeder_load_kw": 20.434711615107343,
+            "transformer_loading_pct": 21.51022275274457,
             "transformer_stress": 0.0,
             "active_homes": 0,
             "flexibility_delivered_kw": 0.0
@@ -143,8 +143,8 @@
         {
             "time_idx": 15,
             "hour": 17.249999999999982,
-            "feeder_load_kw": 21.073645169758,
-            "transformer_loading_pct": 22.18278438921895,
+            "feeder_load_kw": 21.07364516975801,
+            "transformer_loading_pct": 22.18278438921896,
             "transformer_stress": 0.0,
             "active_homes": 0,
             "flexibility_delivered_kw": 0.0
@@ -161,8 +161,8 @@
         {
             "time_idx": 17,
             "hour": 17.416666666666647,
-            "feeder_load_kw": 21.71814920715116,
-            "transformer_loading_pct": 22.861209691738065,
+            "feeder_load_kw": 21.71814920715117,
+            "transformer_loading_pct": 22.861209691738075,
             "transformer_stress": 0.0,
             "active_homes": 0,
             "flexibility_delivered_kw": 0.0
@@ -170,8 +170,8 @@
         {
             "time_idx": 18,
             "hour": 17.49999999999998,
-            "feeder_load_kw": 22.04210711669913,
-            "transformer_loading_pct": 23.202218017578037,
+            "feeder_load_kw": 22.042107116699142,
+            "transformer_loading_pct": 23.202218017578044,
             "transformer_stress": 0.0,
             "active_homes": 0,
             "flexibility_delivered_kw": 0.0
@@ -179,8 +179,8 @@
         {
             "time_idx": 19,
             "hour": 17.58333333333331,
-            "feeder_load_kw": 27.991996877220444,
-            "transformer_loading_pct": 29.465259870758366,
+            "feeder_load_kw": 29.866996877220444,
+            "transformer_loading_pct": 31.438944081284674,
             "transformer_stress": 0.0,
             "active_homes": 0,
             "flexibility_delivered_kw": 0.0
@@ -188,8 +188,8 @@
         {
             "time_idx": 20,
             "hour": 17.666666666666643,
-            "feeder_load_kw": 28.31766385878503,
-            "transformer_loading_pct": 29.808067219773715,
+            "feeder_load_kw": 30.19266385878504,
+            "transformer_loading_pct": 31.78175143030004,
             "transformer_stress": 0.0,
             "active_homes": 0,
             "flexibility_delivered_kw": 0.0
@@ -197,8 +197,8 @@
         {
             "time_idx": 21,
             "hour": 17.749999999999975,
-            "feeder_load_kw": 28.64395306154774,
-            "transformer_loading_pct": 30.151529538471312,
+            "feeder_load_kw": 30.518953061547755,
+            "transformer_loading_pct": 32.12521374899764,
             "transformer_stress": 0.0,
             "active_homes": 0,
             "flexibility_delivered_kw": 0.0
@@ -206,8 +206,8 @@
         {
             "time_idx": 22,
             "hour": 17.833333333333307,
-            "feeder_load_kw": 28.97070918951986,
-            "transformer_loading_pct": 30.495483357389325,
+            "feeder_load_kw": 30.84570918951985,
+            "transformer_loading_pct": 32.46916756791564,
             "transformer_stress": 0.0,
             "active_homes": 0,
             "flexibility_delivered_kw": 0.0
@@ -215,8 +215,8 @@
         {
             "time_idx": 23,
             "hour": 17.91666666666664,
-            "feeder_load_kw": 29.297776724481484,
-            "transformer_loading_pct": 30.839764973138408,
+            "feeder_load_kw": 31.17277672448148,
+            "transformer_loading_pct": 32.81344918366472,
             "transformer_stress": 0.0,
             "active_homes": 0,
             "flexibility_delivered_kw": 0.0
@@ -224,8 +224,8 @@
         {
             "time_idx": 24,
             "hour": 17.99999999999997,
-            "feeder_load_kw": 29.62499999999989,
-            "transformer_loading_pct": 31.184210526315677,
+            "feeder_load_kw": 31.499999999999886,
+            "transformer_loading_pct": 33.15789473684199,
             "transformer_stress": 0.0,
             "active_homes": 0,
             "flexibility_delivered_kw": 0.0
@@ -233,404 +233,404 @@
         {
             "time_idx": 25,
             "hour": 18.083333333333304,
-            "feeder_load_kw": 72.90829278043314,
-            "transformer_loading_pct": 76.74557134782437,
+            "feeder_load_kw": 73.10036560188601,
+            "transformer_loading_pct": 76.94775326514318,
             "transformer_stress": 0.0,
-            "active_homes": 4,
+            "active_homes": 0,
             "flexibility_delivered_kw": 0.0
         },
         {
             "time_idx": 26,
             "hour": 18.16666666666664,
-            "feeder_load_kw": 70.49776971548653,
-            "transformer_loading_pct": 74.20817864788056,
+            "feeder_load_kw": 75.42231852009601,
+            "transformer_loading_pct": 79.39191423168002,
             "transformer_stress": 0.0,
-            "active_homes": 9,
+            "active_homes": 0,
             "flexibility_delivered_kw": 0.0
         },
         {
             "time_idx": 27,
             "hour": 18.249999999999968,
-            "feeder_load_kw": 65.87141328029445,
-            "transformer_loading_pct": 69.338329768731,
+            "feeder_load_kw": 72.51678382753103,
+            "transformer_loading_pct": 76.33345666055898,
             "transformer_stress": 0.0,
-            "active_homes": 9,
+            "active_homes": 0,
             "flexibility_delivered_kw": 0.0
         },
         {
             "time_idx": 28,
             "hour": 18.3333333333333,
-            "feeder_load_kw": 63.10313194696943,
-            "transformer_loading_pct": 66.42434941786256,
+            "feeder_load_kw": 74.61367243974973,
+            "transformer_loading_pct": 78.54070783131552,
             "transformer_stress": 0.0,
-            "active_homes": 9,
+            "active_homes": 0,
             "flexibility_delivered_kw": 0.0
         },
         {
             "time_idx": 29,
             "hour": 18.416666666666632,
-            "feeder_load_kw": 64.13314823779038,
-            "transformer_loading_pct": 67.50857709241093,
+            "feeder_load_kw": 75.57142774335037,
+            "transformer_loading_pct": 79.54887130878987,
             "transformer_stress": 0.0,
-            "active_homes": 9,
+            "active_homes": 0,
             "flexibility_delivered_kw": 0.0
         },
         {
             "time_idx": 30,
             "hour": 18.499999999999964,
-            "feeder_load_kw": 65.90798219206023,
-            "transformer_loading_pct": 69.3768233600634,
+            "feeder_load_kw": 75.04612147452475,
+            "transformer_loading_pct": 78.99591734160501,
             "transformer_stress": 0.0,
-            "active_homes": 9,
+            "active_homes": 0,
             "flexibility_delivered_kw": 0.0
         },
         {
             "time_idx": 31,
             "hour": 18.583333333333297,
-            "feeder_load_kw": 108.8584754260458,
-            "transformer_loading_pct": 114.58786886952188,
-            "transformer_stress": 0.9862622956507294,
-            "active_homes": 26,
-            "flexibility_delivered_kw": 0.0
+            "feeder_load_kw": 83.32942519151278,
+            "transformer_loading_pct": 87.71518441211872,
+            "transformer_stress": 0.09050614707062389,
+            "active_homes": 39,
+            "flexibility_delivered_kw": 34.63203430175781
         },
         {
             "time_idx": 32,
             "hour": 18.66666666666663,
-            "feeder_load_kw": 68.46684008823902,
-            "transformer_loading_pct": 72.07035798762003,
-            "transformer_stress": 0.0,
-            "active_homes": 26,
-            "flexibility_delivered_kw": 0.0
+            "feeder_load_kw": 90.77378072758584,
+            "transformer_loading_pct": 95.55134813430088,
+            "transformer_stress": 0.351711604476696,
+            "active_homes": 39,
+            "flexibility_delivered_kw": 35.13028144836428
         },
         {
             "time_idx": 33,
             "hour": 18.74999999999996,
-            "feeder_load_kw": 72.42753980691992,
-            "transformer_loading_pct": 76.2395155862315,
-            "transformer_stress": 0.0,
-            "active_homes": 26,
-            "flexibility_delivered_kw": 0.0
+            "feeder_load_kw": 95.44084354567242,
+            "transformer_loading_pct": 100.4640458375499,
+            "transformer_stress": 0.5154681945849968,
+            "active_homes": 39,
+            "flexibility_delivered_kw": 38.68311405181886
         },
         {
             "time_idx": 34,
             "hour": 18.833333333333293,
-            "feeder_load_kw": 86.66880409816358,
-            "transformer_loading_pct": 91.23032010333009,
-            "transformer_stress": 0.20767733677766956,
-            "active_homes": 37,
-            "flexibility_delivered_kw": 0.0
+            "feeder_load_kw": 100.06406621314784,
+            "transformer_loading_pct": 105.33059601383982,
+            "transformer_stress": 0.6776865337946608,
+            "active_homes": 39,
+            "flexibility_delivered_kw": 37.72013664245607
         },
         {
             "time_idx": 35,
             "hour": 18.916666666666625,
-            "feeder_load_kw": 64.48472826591745,
-            "transformer_loading_pct": 67.8786613325447,
-            "transformer_stress": 0.0,
-            "active_homes": 37,
-            "flexibility_delivered_kw": 0.0
+            "feeder_load_kw": 94.38289839652126,
+            "transformer_loading_pct": 99.35041936475922,
+            "transformer_stress": 0.4783473121586406,
+            "active_homes": 39,
+            "flexibility_delivered_kw": 50.150880813598654
         },
         {
             "time_idx": 36,
             "hour": 18.99999999999996,
-            "feeder_load_kw": 78.90909317042846,
-            "transformer_loading_pct": 83.06220333729313,
-            "transformer_stress": 0.0,
-            "active_homes": 42,
-            "flexibility_delivered_kw": 0.0
+            "feeder_load_kw": 97.86447070049644,
+            "transformer_loading_pct": 103.01523231631204,
+            "transformer_stress": 0.600507743877068,
+            "active_homes": 39,
+            "flexibility_delivered_kw": 56.24689102172852
         },
         {
             "time_idx": 37,
             "hour": 19.08333333333329,
-            "feeder_load_kw": 68.1766722906104,
-            "transformer_loading_pct": 71.76491820064253,
-            "transformer_stress": 0.0,
-            "active_homes": 38,
-            "flexibility_delivered_kw": 0.0
+            "feeder_load_kw": 105.31664840736455,
+            "transformer_loading_pct": 110.859629902489,
+            "transformer_stress": 0.8619876634163002,
+            "active_homes": 39,
+            "flexibility_delivered_kw": 48.819303512573256
         },
         {
             "time_idx": 38,
             "hour": 19.16666666666662,
-            "feeder_load_kw": 74.26006855904987,
-            "transformer_loading_pct": 78.1684932200525,
-            "transformer_stress": 0.0,
-            "active_homes": 34,
-            "flexibility_delivered_kw": 0.0
+            "feeder_load_kw": 105.7618515041924,
+            "transformer_loading_pct": 111.32826474125515,
+            "transformer_stress": 0.8776088247085051,
+            "active_homes": 39,
+            "flexibility_delivered_kw": 47.37946510314942
         },
         {
             "time_idx": 39,
             "hour": 19.249999999999957,
-            "feeder_load_kw": 80.46253550188663,
-            "transformer_loading_pct": 84.69740579145962,
-            "transformer_stress": 0.0,
-            "active_homes": 37,
-            "flexibility_delivered_kw": 0.0
+            "feeder_load_kw": 104.42121528412612,
+            "transformer_loading_pct": 109.9170687201328,
+            "transformer_stress": 0.8305689573377601,
+            "active_homes": 39,
+            "flexibility_delivered_kw": 47.57184028625488
         },
         {
             "time_idx": 40,
             "hour": 19.33333333333329,
-            "feeder_load_kw": 73.84259871921353,
-            "transformer_loading_pct": 77.72905128338266,
-            "transformer_stress": 0.0,
-            "active_homes": 38,
-            "flexibility_delivered_kw": 0.0
+            "feeder_load_kw": 107.91885539867486,
+            "transformer_loading_pct": 113.59879515649986,
+            "transformer_stress": 0.9532931718833287,
+            "active_homes": 39,
+            "flexibility_delivered_kw": 44.98514090193835
         },
         {
             "time_idx": 41,
             "hour": 19.416666666666615,
-            "feeder_load_kw": 86.6130895113218,
-            "transformer_loading_pct": 91.17167316981242,
-            "transformer_stress": 0.2057224389937474,
-            "active_homes": 50,
-            "flexibility_delivered_kw": 0.0
+            "feeder_load_kw": 109.13535109013505,
+            "transformer_loading_pct": 114.87931693698424,
+            "transformer_stress": 0.995977231232808,
+            "active_homes": 39,
+            "flexibility_delivered_kw": 44.525000000000006
         },
         {
             "time_idx": 42,
             "hour": 19.49999999999995,
-            "feeder_load_kw": 69.92917717153294,
-            "transformer_loading_pct": 73.609660180561,
-            "transformer_stress": 0.0,
-            "active_homes": 50,
-            "flexibility_delivered_kw": 0.0
+            "feeder_load_kw": 109.18234681921216,
+            "transformer_loading_pct": 114.9287861254865,
+            "transformer_stress": 0.9976262041828832,
+            "active_homes": 39,
+            "flexibility_delivered_kw": 42.57849745500584
         },
         {
             "time_idx": 43,
             "hour": 19.58333333333328,
-            "feeder_load_kw": 64.22404002728571,
-            "transformer_loading_pct": 67.60425266030074,
-            "transformer_stress": 0.0,
-            "active_homes": 33,
-            "flexibility_delivered_kw": 0.0
+            "feeder_load_kw": 103.12483698186016,
+            "transformer_loading_pct": 108.55245998090544,
+            "transformer_stress": 0.7850819993635146,
+            "active_homes": 35,
+            "flexibility_delivered_kw": 32.23654270172119
         },
         {
             "time_idx": 44,
             "hour": 19.66666666666661,
-            "feeder_load_kw": 95.51615699707908,
-            "transformer_loading_pct": 100.54332315482006,
-            "transformer_stress": 0.5181107718273352,
-            "active_homes": 49,
-            "flexibility_delivered_kw": 0.0
+            "feeder_load_kw": 100.77051679683456,
+            "transformer_loading_pct": 106.0742282071943,
+            "transformer_stress": 0.7024742735731432,
+            "active_homes": 39,
+            "flexibility_delivered_kw": 32.06652641296385
         },
         {
             "time_idx": 45,
             "hour": 19.749999999999947,
-            "feeder_load_kw": 58.13472877338136,
-            "transformer_loading_pct": 61.19445134040144,
-            "transformer_stress": 0.0,
-            "active_homes": 49,
-            "flexibility_delivered_kw": 0.0
+            "feeder_load_kw": 96.97335836953212,
+            "transformer_loading_pct": 102.0772193363496,
+            "transformer_stress": 0.5692406445449867,
+            "active_homes": 39,
+            "flexibility_delivered_kw": 28.61377239227293
         },
         {
             "time_idx": 46,
             "hour": 19.83333333333328,
-            "feeder_load_kw": 53.528328579374346,
-            "transformer_loading_pct": 56.345609030920365,
-            "transformer_stress": 0.0,
-            "active_homes": 38,
-            "flexibility_delivered_kw": 0.0
+            "feeder_load_kw": 91.19055097363936,
+            "transformer_loading_pct": 95.99005365646248,
+            "transformer_stress": 0.3663351218820826,
+            "active_homes": 39,
+            "flexibility_delivered_kw": 26.215891838073723
         },
         {
             "time_idx": 47,
             "hour": 19.91666666666661,
-            "feeder_load_kw": 64.0756446298568,
-            "transformer_loading_pct": 67.44804697879663,
-            "transformer_stress": 0.0,
-            "active_homes": 38,
-            "flexibility_delivered_kw": 0.0
+            "feeder_load_kw": 88.93406287625926,
+            "transformer_loading_pct": 93.61480302764132,
+            "transformer_stress": 0.28716010092137717,
+            "active_homes": 39,
+            "flexibility_delivered_kw": 22.81145334243773
         },
         {
             "time_idx": 48,
             "hour": 19.999999999999943,
-            "feeder_load_kw": 56.207338719902594,
-            "transformer_loading_pct": 59.16561970516063,
-            "transformer_stress": 0.0,
-            "active_homes": 33,
-            "flexibility_delivered_kw": 0.0
+            "feeder_load_kw": 85.97012812120033,
+            "transformer_loading_pct": 90.49487170652668,
+            "transformer_stress": 0.183162390217556,
+            "active_homes": 39,
+            "flexibility_delivered_kw": 23.19500923156736
         },
         {
             "time_idx": 49,
             "hour": 20.083333333333275,
-            "feeder_load_kw": 49.35342210649721,
-            "transformer_loading_pct": 51.95097063841811,
+            "feeder_load_kw": 78.8543153590128,
+            "transformer_loading_pct": 83.00454248317138,
             "transformer_stress": 0.0,
-            "active_homes": 33,
+            "active_homes": 0,
             "flexibility_delivered_kw": 0.0
         },
         {
             "time_idx": 50,
             "hour": 20.166666666666607,
-            "feeder_load_kw": 49.77154863935081,
-            "transformer_loading_pct": 52.39110383089559,
+            "feeder_load_kw": 76.49576782538936,
+            "transformer_loading_pct": 80.52186086883091,
             "transformer_stress": 0.0,
-            "active_homes": 32,
-            "flexibility_delivered_kw": 0.0
+            "active_homes": 39,
+            "flexibility_delivered_kw": 1.961913108825684
         },
         {
             "time_idx": 51,
             "hour": 20.24999999999994,
-            "feeder_load_kw": 52.82433221348469,
-            "transformer_loading_pct": 55.604560224720736,
+            "feeder_load_kw": 68.51925329348954,
+            "transformer_loading_pct": 72.12552978262057,
             "transformer_stress": 0.0,
-            "active_homes": 29,
-            "flexibility_delivered_kw": 0.0
+            "active_homes": 39,
+            "flexibility_delivered_kw": 10.599970817565918
         },
         {
             "time_idx": 52,
             "hour": 20.33333333333327,
-            "feeder_load_kw": 60.95966216776336,
-            "transformer_loading_pct": 64.1680654397509,
+            "feeder_load_kw": 68.93044768212323,
+            "transformer_loading_pct": 72.55836598118235,
             "transformer_stress": 0.0,
-            "active_homes": 28,
-            "flexibility_delivered_kw": 0.0
+            "active_homes": 39,
+            "flexibility_delivered_kw": 9.860296249389648
         },
         {
             "time_idx": 53,
             "hour": 20.416666666666604,
-            "feeder_load_kw": 63.3335399396458,
-            "transformer_loading_pct": 66.66688414699557,
+            "feeder_load_kw": 68.58777321823737,
+            "transformer_loading_pct": 72.19765601919724,
             "transformer_stress": 0.0,
-            "active_homes": 16,
-            "flexibility_delivered_kw": 0.0
+            "active_homes": 39,
+            "flexibility_delivered_kw": 9.860296249389648
         },
         {
             "time_idx": 54,
             "hour": 20.499999999999936,
-            "feeder_load_kw": 74.5492648689241,
-            "transformer_loading_pct": 78.47291038834116,
+            "feeder_load_kw": 75.80856564922195,
+            "transformer_loading_pct": 79.79849015707573,
             "transformer_stress": 0.0,
-            "active_homes": 17,
-            "flexibility_delivered_kw": 0.0
+            "active_homes": 39,
+            "flexibility_delivered_kw": 2.9789423942565905
         },
         {
             "time_idx": 55,
             "hour": 20.583333333333268,
-            "feeder_load_kw": 71.20213971425466,
-            "transformer_loading_pct": 74.94962075184701,
+            "feeder_load_kw": 76.39170199466008,
+            "transformer_loading_pct": 80.41231788911588,
             "transformer_stress": 0.0,
-            "active_homes": 17,
-            "flexibility_delivered_kw": 0.0
+            "active_homes": 39,
+            "flexibility_delivered_kw": 2.540576457977294
         },
         {
             "time_idx": 56,
             "hour": 20.6666666666666,
-            "feeder_load_kw": 72.15930901785006,
-            "transformer_loading_pct": 75.9571673872106,
+            "feeder_load_kw": 77.10492304736495,
+            "transformer_loading_pct": 81.1630768919631,
             "transformer_stress": 0.0,
-            "active_homes": 1,
-            "flexibility_delivered_kw": 0.0
+            "active_homes": 39,
+            "flexibility_delivered_kw": 1.6687512397766109
         },
         {
             "time_idx": 57,
             "hour": 20.74999999999993,
-            "feeder_load_kw": 89.77112879419693,
-            "transformer_loading_pct": 94.49592504652308,
-            "transformer_stress": 0.3165308348841028,
-            "active_homes": 10,
-            "flexibility_delivered_kw": 0.0
+            "feeder_load_kw": 76.00562490406912,
+            "transformer_loading_pct": 80.00592095165172,
+            "transformer_stress": 0.0,
+            "active_homes": 39,
+            "flexibility_delivered_kw": 2.6699233055114733
         },
         {
             "time_idx": 58,
             "hour": 20.833333333333265,
-            "feeder_load_kw": 67.20286094096323,
-            "transformer_loading_pct": 70.73985362206656,
+            "feeder_load_kw": 76.71348929426792,
+            "transformer_loading_pct": 80.75104136238728,
             "transformer_stress": 0.0,
-            "active_homes": 10,
-            "flexibility_delivered_kw": 0.0
+            "active_homes": 39,
+            "flexibility_delivered_kw": 1.7203426361083978
         },
         {
             "time_idx": 59,
             "hour": 20.9166666666666,
-            "feeder_load_kw": 69.29639021448098,
-            "transformer_loading_pct": 72.94356864682209,
+            "feeder_load_kw": 77.23145964396299,
+            "transformer_loading_pct": 81.29627330943474,
             "transformer_stress": 0.0,
-            "active_homes": 10,
-            "flexibility_delivered_kw": 0.0
+            "active_homes": 39,
+            "flexibility_delivered_kw": 1.4659547805786135
         },
         {
             "time_idx": 60,
             "hour": 20.99999999999993,
-            "feeder_load_kw": 71.42313681654555,
-            "transformer_loading_pct": 75.18224928057427,
+            "feeder_load_kw": 78.5948391348647,
+            "transformer_loading_pct": 82.73140961564705,
             "transformer_stress": 0.0,
-            "active_homes": 10,
+            "active_homes": 0,
             "flexibility_delivered_kw": 0.0
         },
         {
             "time_idx": 61,
             "hour": 21.08333333333326,
-            "feeder_load_kw": 71.63437797896846,
-            "transformer_loading_pct": 75.40460839891418,
+            "feeder_load_kw": 78.84689161986822,
+            "transformer_loading_pct": 82.99672802091392,
             "transformer_stress": 0.0,
-            "active_homes": 10,
+            "active_homes": 0,
             "flexibility_delivered_kw": 0.0
         },
         {
             "time_idx": 62,
             "hour": 21.166666666666597,
-            "feeder_load_kw": 71.54159650150949,
-            "transformer_loading_pct": 75.30694368579947,
+            "feeder_load_kw": 78.77515613298961,
+            "transformer_loading_pct": 82.92121698209432,
             "transformer_stress": 0.0,
-            "active_homes": 10,
+            "active_homes": 0,
             "flexibility_delivered_kw": 0.0
         },
         {
             "time_idx": 63,
             "hour": 21.249999999999925,
-            "feeder_load_kw": 71.87274859653041,
-            "transformer_loading_pct": 75.65552483845308,
+            "feeder_load_kw": 78.54343435922348,
+            "transformer_loading_pct": 82.67729932549841,
             "transformer_stress": 0.0,
-            "active_homes": 10,
+            "active_homes": 0,
             "flexibility_delivered_kw": 0.0
         },
         {
             "time_idx": 64,
             "hour": 21.333333333333258,
-            "feeder_load_kw": 71.62247323005003,
-            "transformer_loading_pct": 75.39207708426319,
+            "feeder_load_kw": 78.92377894261409,
+            "transformer_loading_pct": 83.07766204485694,
             "transformer_stress": 0.0,
-            "active_homes": 10,
+            "active_homes": 0,
             "flexibility_delivered_kw": 0.0
         },
         {
             "time_idx": 65,
             "hour": 21.41666666666659,
-            "feeder_load_kw": 71.7039338255019,
-            "transformer_loading_pct": 75.47782507947569,
+            "feeder_load_kw": 78.87314524725933,
+            "transformer_loading_pct": 83.02436341816772,
             "transformer_stress": 0.0,
-            "active_homes": 10,
+            "active_homes": 0,
             "flexibility_delivered_kw": 0.0
         },
         {
             "time_idx": 66,
             "hour": 21.49999999999992,
-            "feeder_load_kw": 71.68795232262583,
-            "transformer_loading_pct": 75.46100244486931,
+            "feeder_load_kw": 78.30863416006994,
+            "transformer_loading_pct": 82.43014122112626,
             "transformer_stress": 0.0,
-            "active_homes": 9,
+            "active_homes": 0,
             "flexibility_delivered_kw": 0.0
         },
         {
             "time_idx": 67,
             "hour": 21.58333333333325,
-            "feeder_load_kw": 74.54010756701608,
-            "transformer_loading_pct": 78.46327112317482,
+            "feeder_load_kw": 78.28443140622258,
+            "transformer_loading_pct": 82.40466463812903,
             "transformer_stress": 0.0,
-            "active_homes": 9,
+            "active_homes": 0,
             "flexibility_delivered_kw": 0.0
         },
         {
             "time_idx": 68,
             "hour": 21.666666666666583,
-            "feeder_load_kw": 74.33310541887421,
-            "transformer_loading_pct": 78.24537412513075,
+            "feeder_load_kw": 78.96443406951344,
+            "transformer_loading_pct": 83.12045691527732,
             "transformer_stress": 0.0,
-            "active_homes": 9,
+            "active_homes": 0,
             "flexibility_delivered_kw": 0.0
         },
         {
             "time_idx": 69,
             "hour": 21.74999999999992,
-            "feeder_load_kw": 74.21822977569741,
-            "transformer_loading_pct": 78.12445239547097,
+            "feeder_load_kw": 78.69690408945372,
+            "transformer_loading_pct": 82.83884640995129,
             "transformer_stress": 0.0,
             "active_homes": 0,
             "flexibility_delivered_kw": 0.0
@@ -638,19 +638,19 @@
         {
             "time_idx": 70,
             "hour": 21.83333333333325,
-            "feeder_load_kw": 92.21983119994252,
-            "transformer_loading_pct": 97.07350652625529,
-            "transformer_stress": 0.4024502175418429,
-            "active_homes": 7,
+            "feeder_load_kw": 78.59736415050862,
+            "transformer_loading_pct": 82.73406752685119,
+            "transformer_stress": 0.0,
+            "active_homes": 0,
             "flexibility_delivered_kw": 0.0
         },
         {
             "time_idx": 71,
             "hour": 21.916666666666583,
-            "feeder_load_kw": 75.03861784512786,
-            "transformer_loading_pct": 78.98801878434512,
+            "feeder_load_kw": 78.52287209936006,
+            "transformer_loading_pct": 82.65565484143164,
             "transformer_stress": 0.0,
-            "active_homes": 7,
+            "active_homes": 0,
             "flexibility_delivered_kw": 0.0
         }
     ]

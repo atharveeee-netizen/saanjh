@@ -1,0 +1,9 @@
+{
+    "mean_peak_reduction_kw": 0.13043572512775087,
+    "median_peak_reduction_kw": 0.047671903127564974,
+    "min_peak_reduction_kw": -0.7419354723776905,
+    "max_peak_reduction_kw": 1.0947929797272309,
+    "P10_peak_reduction": -0.5346134457949347,
+    "P90_peak_reduction": 0.8469876362693185,
+    "mean_overload_mins": 44.0
+}

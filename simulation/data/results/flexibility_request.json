@@ -1,0 +1,11 @@
+{
+    "feeder_id": "FDR-023",
+    "event_start": "18:30",
+    "duration_minutes": 45,
+    "required_kw": 56.25,
+    "available_kw": 92.55,
+    "committed_kw": 56.25,
+    "priority": "HIGH_THERMAL_CONSTRAINT",
+    "critical_load_protection": true,
+    "reserve_constraint": 0.7
+}

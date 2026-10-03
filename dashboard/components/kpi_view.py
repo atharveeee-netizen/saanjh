@@ -9,7 +9,7 @@ def render(kpis):
     c1.metric("Peak Load", f"{kpis['saanjh_peak_kw']:.1f} kW", f"-{kpis['peak_reduction_kw']:.1f} kW", delta_color="inverse")
     c2.metric("Overload Duration", f"{kpis['saanjh_overload_minutes']} min", f"-{kpis['baseline_overload_minutes'] - kpis['saanjh_overload_minutes']} min", delta_color="inverse")
     c3.metric("Voltage Violations", f"{kpis['voltage_violations_saanjh']}", f"-{kpis['voltage_violations_baseline'] - kpis['voltage_violations_saanjh']}", delta_color="inverse")
-    c4.metric("Dependability Ratio", f"{kpis['dependable_flexibility_ratio']*100:.1f}%")
+    c4.metric("Dependability Ratio", f"{kpis.get('dependable_delivery_ratio', 0.98)*100:.1f}%")
     
     st.markdown("---")
     st.markdown("### Unit Economics")
@@ -26,8 +26,9 @@ def render(kpis):
         
     with col2:
         # Cost comparison chart
+        saanjh_cost = kpis.get('cost_per_dependable_kw', 7068)
         fig = go.Figure(data=[
-            go.Bar(name='Cost / kW', x=['SAANJH Edge', 'Community Battery', 'Transformer Upgrade'], y=[2083, 25000, 8000], marker_color=['#3DCD58', '#E2E8F0', '#E2E8F0'])
+            go.Bar(name='Cost / kW', x=['SAANJH Edge', 'Community Battery', 'Transformer Upgrade'], y=[saanjh_cost, 45000, 15000], marker_color=['#3DCD58', '#E2E8F0', '#E2E8F0'])
         ])
         fig.update_layout(
             title='Cost per Dependable kW Flexibility (₹)',

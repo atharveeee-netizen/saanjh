@@ -1,64 +1,66 @@
 import pypsa
 import pandas as pd
 import numpy as np
+import os
 
 def validate_profile_with_pypsa(profile_path, output_path):
     """
     Independently validates the electrical integrity of SAANJH's output 
-    using the industry-standard PyPSA load flow solver.
+    using the industry-standard PyPSA AC power flow solver.
+    Models the 415V/240V 3-phase 4-wire radial distribution feeder downstream of the 100 kVA DT.
+    Calculates genuine bus voltages and modeled resistive-loss proxy.
     """
-    # Load the SAANJH simulated timeseries
     df = pd.read_csv(profile_path)
     
-    # Initialize PyPSA Network
     network = pypsa.Network()
     network.set_snapshots(df.index)
     
-    # Grid Slack Bus (11kV MV Side)
-    network.add("Bus", "Grid_Bus", v_nom=11.0, control="Slack")
-    network.add("Generator", "External_Grid", bus="Grid_Bus", p_set=0, control="Slack")
+    # 415V (0.415 kV line-to-line, 240V phase-to-neutral) standard Indian distribution voltage
+    v_nom_kv = 0.415
+    v_phase_nominal = 240.0
     
-    # Feeder Bus (240V LV Side)
-    network.add("Bus", "Feeder_Bus", v_nom=0.24)
+    # Secondary side of 100 kVA distribution transformer (Slack Bus)
+    network.add("Bus", "Trafo_LV_Bus", v_nom=v_nom_kv, control="Slack")
+    network.add("Generator", "Trafo_Secondary", bus="Trafo_LV_Bus", control="Slack")
     
-    # Distribution Transformer (100 kVA, 11kV -> 240V)
-    network.add("Transformer", "Dist_Trafo", 
-                bus0="Grid_Bus", bus1="Feeder_Bus",
-                s_nom=100.0, # 100 kVA rating matches our SAANJH assumption
-                r_pu=0.01, x_pu=0.04) # Typical LV transformer impedance
+    # 3-phase LT radial feeder line (e.g. 50 mm² AB cable / ACSR conductor, 250m)
+    # Balanced 3-phase equivalent: R = 0.08 ohm, X = 0.02 ohm, 250 kVA capacity
+    network.add("Bus", "Load_Center_Bus", v_nom=v_nom_kv)
+    network.add("Line", "Feeder_Cable",
+                bus0="Trafo_LV_Bus", bus1="Load_Center_Bus",
+                r=0.08, x=0.02, s_nom=0.25)
                 
-    # Feeder Line (Approximating voltage drop down the street)
-    network.add("Bus", "Load_Center_Bus", v_nom=0.24)
-    network.add("Line", "Street_Cable",
-                bus0="Feeder_Bus", bus1="Load_Center_Bus",
-                r=0.05, x=0.01, length=0.5, # 500 meters of cable
-                s_nom=200.0)
-                
-    # Add the dynamic timeseries load from SAANJH
-    # We assign the total kW to the load center
-    network.add("Load", "Aggregated_Neighbourhood",
+    # 3-phase aggregate neighborhood demand (MW) with 0.95 power factor
+    p_load_mw = df["Load_kW"].values / 1000.0
+    q_load_mvar = p_load_mw * np.tan(np.arccos(0.95))
+    
+    network.add("Load", "Neighbourhood_Demand",
                 bus="Load_Center_Bus",
-                p_set=df["Load_kW"].values / 1000.0, # PyPSA expects MW
-                q_set=df["Load_kW"].values / 1000.0 * 0.3) # Assume 0.95 PF roughly
+                p_set=p_load_mw,
+                q_set=q_load_mvar)
                 
-    # Run Non-Linear AC Power Flow
+    # Run full Non-Linear AC Power Flow (Newton-Raphson)
     try:
-        network.lpf() # Linear PF as a fast fallback
-        network.pf()  # Full Newton-Raphson AC Power Flow
+        network.pf()
     except Exception as e:
-        print(f"PyPSA AC Power Flow failed, falling back to LPF: {e}")
+        print(f"Warning: Falling back to linear power flow: {e}")
+        network.lpf()
         
-    # Extract independent physical results
-    trafo_loading = network.transformers_t.p0["Dist_Trafo"] * 1000.0 # Convert back to kW
-    voltage_pu = network.buses_t.v_mag_pu["Load_Center_Bus"]
-    voltage_v = voltage_pu * 240.0
+    # Extract genuine physical results
+    v_pu = network.buses_t.v_mag_pu["Load_Center_Bus"].values
+    v_actual_phase = v_pu * v_phase_nominal
+    trafo_p_kw = network.generators_t.p["Trafo_Secondary"].values * 1000.0
     
-    # Package Results
+    # Modeled resistive-loss proxy = sum of power at both ends of line
+    line_loss_kw = np.maximum(0.0, (network.lines_t.p0["Feeder_Cable"].values + network.lines_t.p1["Feeder_Cable"].values) * 1000.0)
+    
     results = pd.DataFrame({
         "Time": df["Time"],
         "Original_SAANJH_Load_kW": df["Load_kW"],
-        "PyPSA_Trafo_Load_kW": trafo_loading.values,
-        "PyPSA_Voltage_V": voltage_v.values
+        "PyPSA_Trafo_Load_kW": trafo_p_kw,
+        "PyPSA_Voltage_V": v_actual_phase,
+        "PyPSA_Voltage_pu": v_pu,
+        "PyPSA_Line_Loss_kW": line_loss_kw
     })
     
     results.to_csv(output_path, index=False)
@@ -66,7 +68,6 @@ def validate_profile_with_pypsa(profile_path, output_path):
     return results
 
 if __name__ == "__main__":
-    import os
     base_dir = os.path.dirname(os.path.dirname(__file__))
     baseline_path = os.path.join(base_dir, 'data', 'results', 'baseline_profile.csv')
     saanjh_path = os.path.join(base_dir, 'data', 'results', 'saanjh_profile.csv')

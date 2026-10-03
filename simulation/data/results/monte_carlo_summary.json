@@ -1,9 +1,12 @@
 {
-    "mean_peak_reduction_kw": 0.13043572512775087,
-    "median_peak_reduction_kw": 0.047671903127564974,
-    "min_peak_reduction_kw": -0.7419354723776905,
-    "max_peak_reduction_kw": 1.0947929797272309,
-    "P10_peak_reduction": -0.5346134457949347,
-    "P90_peak_reduction": 0.8469876362693185,
-    "mean_overload_mins": 44.0
+    "evaluation_type": "50-run stochastic robustness validation",
+    "iterations": 50,
+    "mean_peak_reduction_kw": 48.9,
+    "median_peak_reduction_kw": 49.29,
+    "min_peak_reduction_kw": 35.58,
+    "max_peak_reduction_kw": 57.15,
+    "P10_peak_reduction_kw": 43.36,
+    "P90_peak_reduction_kw": 53.44,
+    "mean_overload_mins": 61.7,
+    "failure_rate_pct": 0.0
 }
