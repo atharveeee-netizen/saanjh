@@ -22,4 +22,10 @@ SAANJH leverages numerous open-source tools. All integrations have been verified
 - **Usage:** Dashboard UI generation.
 - **Status:** Unmodified dependencies. Fully compliant.
 
+## 5. React SCADA HMI (CoffeESIME)
+- **License:** MIT
+- **Usage:** Industrial SCADA/HMI design patterns, ISA-101 high-performance HMI color standards, linear gauge architecture, and operator screen layouts adapted for `docs/index.html`.
+- **Status:** Attribution documented. Fully compliant with MIT License.
+
 **STATUS: PASS**
+

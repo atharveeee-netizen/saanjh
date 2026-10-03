@@ -1,4 +1,28 @@
-<!DOCTYPE html>
+"""
+Builder script to generate docs/index.html with authentic industrial SCADA/HMI architecture,
+inspired by React SCADA HMI (ISA-101 high performance HMI principles),
+incorporating all canonical SAANJH simulation results.
+"""
+
+import json
+import os
+
+with open('docs/data/timeseries_bundle.json', 'r') as f:
+    timeseries_data = json.load(f)
+
+with open('docs/data/fleet_bundle.json', 'r') as f:
+    fleet_data = json.load(f)
+
+with open('docs/data/comparison.json', 'r') as f:
+    comparison_data = json.load(f)
+
+with open('docs/data/economics_scenarios.json', 'r') as f:
+    economics_data = json.load(f)
+
+with open('docs/data/discom_action_plan.json', 'r') as f:
+    discom_data = json.load(f)
+
+html_content = f'''<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,7 +36,7 @@
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <style>
-        :root {
+        :root {{
             --bg-canvas: #090D14;
             --bg-panel: #111622;
             --bg-panel-header: #161D2B;
@@ -44,16 +68,16 @@
             
             --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             --font-mono: 'JetBrains Mono', 'IBM Plex Mono', Consolas, monospace;
-        }
+        }}
 
-        * {
+        * {{
             box-sizing: border-box;
             margin: 0;
             padding: 0;
             font-feature-settings: "tnum" 1;
-        }
+        }}
 
-        body {
+        body {{
             background-color: var(--bg-canvas);
             color: var(--text-primary);
             font-family: var(--font-ui);
@@ -63,10 +87,10 @@
             overflow-x: hidden;
             font-size: 13px;
             user-select: none;
-        }
+        }}
 
         /* Industrial SCADA Top Bar */
-        .scada-masthead {
+        .scada-masthead {{
             background: #0B0F18;
             border-bottom: 2px solid var(--border-primary);
             padding: 0 1rem;
@@ -75,15 +99,15 @@
             align-items: center;
             justify-content: space-between;
             z-index: 100;
-        }
+        }}
 
-        .brand-section {
+        .brand-section {{
             display: flex;
             align-items: center;
             gap: 0.75rem;
-        }
+        }}
 
-        .schneider-badge {
+        .schneider-badge {{
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -96,14 +120,14 @@
             font-size: 0.75rem;
             color: var(--schneider-green);
             letter-spacing: 0.05em;
-        }
+        }}
 
-        .app-title-cluster {
+        .app-title-cluster {{
             display: flex;
             flex-direction: column;
-        }
+        }}
 
-        .app-title {
+        .app-title {{
             font-family: var(--font-mono);
             font-size: 0.95rem;
             font-weight: 700;
@@ -112,9 +136,9 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-        }
+        }}
 
-        .app-title .tag {
+        .app-title .tag {{
             background: #1E293B;
             color: var(--text-secondary);
             font-size: 0.68rem;
@@ -122,9 +146,9 @@
             padding: 1px 6px;
             border-radius: 2px;
             border: 1px solid #334155;
-        }
+        }}
 
-        .feeder-selector-box {
+        .feeder-selector-box {{
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -134,48 +158,48 @@
             border-radius: 2px;
             font-family: var(--font-mono);
             font-size: 0.75rem;
-        }
+        }}
 
-        .feeder-selector-box .asset-label {
+        .feeder-selector-box .asset-label {{
             color: var(--text-muted);
             text-transform: uppercase;
-        }
+        }}
 
-        .feeder-selector-box .asset-val {
+        .feeder-selector-box .asset-val {{
             color: #38BDF8;
             font-weight: 600;
-        }
+        }}
 
-        .masthead-right {
+        .masthead-right {{
             display: flex;
             align-items: center;
             gap: 1rem;
             font-family: var(--font-mono);
             font-size: 0.75rem;
-        }
+        }}
 
-        .comm-status {
+        .comm-status {{
             display: flex;
             align-items: center;
             gap: 0.4rem;
             color: var(--scada-normal);
-        }
+        }}
 
-        .comm-dot {
+        .comm-dot {{
             width: 7px;
             height: 7px;
             background: var(--scada-normal);
             border-radius: 50%;
             box-shadow: 0 0 6px var(--scada-normal);
             animation: pulse-slow 2s infinite;
-        }
+        }}
 
-        @keyframes pulse-slow {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(0.85); }
-        }
+        @keyframes pulse-slow {{
+            0%, 100% {{ opacity: 1; transform: scale(1); }}
+            50% {{ opacity: 0.4; transform: scale(0.85); }}
+        }}
 
-        .sys-clock {
+        .sys-clock {{
             background: #06090F;
             border: 1px solid var(--border-primary);
             padding: 0.2rem 0.6rem;
@@ -183,32 +207,32 @@
             color: #F1F5F9;
             font-weight: 600;
             letter-spacing: 0.05em;
-        }
+        }}
 
         /* Operational Telemetry / Annunciator Ribbon */
-        .scada-telemetry-ribbon {
+        .scada-telemetry-ribbon {{
             background: #0E1420;
             border-bottom: 1px solid var(--border-primary);
             display: grid;
             grid-template-columns: repeat(6, 1fr);
             gap: 1px;
             background-color: var(--border-primary);
-        }
+        }}
 
-        .telemetry-cell {
+        .telemetry-cell {{
             background: #0E1420;
             padding: 0.6rem 1rem;
             display: flex;
             flex-direction: column;
             gap: 0.2rem;
             transition: background 0.15s ease;
-        }
+        }}
 
-        .telemetry-cell:hover {
+        .telemetry-cell:hover {{
             background: #141C2C;
-        }
+        }}
 
-        .cell-tag {
+        .cell-tag {{
             font-family: var(--font-mono);
             font-size: 0.68rem;
             color: var(--text-muted);
@@ -217,55 +241,55 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
+        }}
 
-        .cell-tag .indicator {
+        .cell-tag .indicator {{
             width: 6px;
             height: 6px;
             border-radius: 1px;
             background: var(--text-dim);
-        }
+        }}
 
-        .cell-tag .indicator.normal { background: var(--scada-normal); }
-        .cell-tag .indicator.alarm { background: var(--scada-urgent); }
-        .cell-tag .indicator.flex { background: var(--scada-flex); }
-        .cell-tag .indicator.volt { background: var(--scada-telemetry); }
+        .cell-tag .indicator.normal {{ background: var(--scada-normal); }}
+        .cell-tag .indicator.alarm {{ background: var(--scada-urgent); }}
+        .cell-tag .indicator.flex {{ background: var(--scada-flex); }}
+        .cell-tag .indicator.volt {{ background: var(--scada-telemetry); }}
 
-        .cell-value-row {
+        .cell-value-row {{
             display: flex;
             align-items: baseline;
             gap: 0.4rem;
-        }
+        }}
 
-        .cell-val {
+        .cell-val {{
             font-family: var(--font-mono);
             font-size: 1.35rem;
             font-weight: 700;
             letter-spacing: -0.02em;
             color: #FFFFFF;
-        }
+        }}
 
-        .cell-unit {
+        .cell-unit {{
             font-family: var(--font-mono);
             font-size: 0.75rem;
             color: var(--text-muted);
-        }
+        }}
 
-        .cell-delta {
+        .cell-delta {{
             font-family: var(--font-mono);
             font-size: 0.7rem;
             display: flex;
             align-items: center;
             gap: 0.25rem;
-        }
+        }}
 
-        .delta-good { color: var(--scada-normal); }
-        .delta-bad { color: var(--scada-urgent); }
-        .delta-warn { color: var(--scada-high); }
-        .delta-neutral { color: var(--text-secondary); }
+        .delta-good {{ color: var(--scada-normal); }}
+        .delta-bad {{ color: var(--scada-urgent); }}
+        .delta-warn {{ color: var(--scada-high); }}
+        .delta-neutral {{ color: var(--text-secondary); }}
 
         /* Playback Scrubber & Time Travel Ribbon */
-        .scada-scrubber-ribbon {
+        .scada-scrubber-ribbon {{
             background: #111724;
             border-bottom: 1px solid var(--border-primary);
             padding: 0.4rem 1rem;
@@ -274,15 +298,15 @@
             gap: 1rem;
             font-family: var(--font-mono);
             font-size: 0.75rem;
-        }
+        }}
 
-        .playback-controls {
+        .playback-controls {{
             display: flex;
             align-items: center;
             gap: 0.25rem;
-        }
+        }}
 
-        .scada-btn {
+        .scada-btn {{
             background: #1A2336;
             color: var(--text-primary);
             border: 1px solid var(--border-primary);
@@ -296,39 +320,39 @@
             align-items: center;
             gap: 0.35rem;
             transition: all 0.15s ease;
-        }
+        }}
 
-        .scada-btn:hover {
+        .scada-btn:hover {{
             background: #25334E;
             border-color: #3B82F6;
-        }
+        }}
 
-        .scada-btn.active {
+        .scada-btn.active {{
             background: #00D68F;
             color: #000000;
             border-color: #00D68F;
             font-weight: 700;
-        }
+        }}
 
-        .scada-btn.alert {
+        .scada-btn.alert {{
             background: rgba(239, 68, 68, 0.15);
             color: #EF4444;
             border-color: rgba(239, 68, 68, 0.4);
-        }
+        }}
 
-        .scada-btn.alert:hover {
+        .scada-btn.alert:hover {{
             background: #EF4444;
             color: #FFFFFF;
-        }
+        }}
 
-        .time-slider-container {
+        .time-slider-container {{
             flex: 1;
             display: flex;
             align-items: center;
             gap: 0.75rem;
-        }
+        }}
 
-        .time-slider {
+        .time-slider {{
             flex: 1;
             -webkit-appearance: none;
             height: 6px;
@@ -336,9 +360,9 @@
             border-radius: 3px;
             outline: none;
             cursor: pointer;
-        }
+        }}
 
-        .time-slider::-webkit-slider-thumb {
+        .time-slider::-webkit-slider-thumb {{
             -webkit-appearance: none;
             appearance: none;
             width: 16px;
@@ -348,9 +372,9 @@
             cursor: pointer;
             border: 2px solid #06090F;
             box-shadow: 0 0 6px rgba(0, 214, 143, 0.5);
-        }
+        }}
 
-        .time-readout {
+        .time-readout {{
             background: #070A10;
             border: 1px solid var(--border-primary);
             padding: 0.25rem 0.75rem;
@@ -359,24 +383,24 @@
             font-weight: 700;
             min-width: 140px;
             text-align: center;
-        }
+        }}
 
-        .event-shortcuts {
+        .event-shortcuts {{
             display: flex;
             align-items: center;
             gap: 0.4rem;
-        }
+        }}
 
         /* F-Key Navigation Tab Bar */
-        .scada-nav-tabs {
+        .scada-nav-tabs {{
             background: #0B0E17;
             border-bottom: 2px solid var(--border-primary);
             display: flex;
             gap: 2px;
             padding: 0 1rem;
-        }
+        }}
 
-        .nav-tab {
+        .nav-tab {{
             background: #101622;
             color: var(--text-secondary);
             border: 1px solid var(--border-primary);
@@ -392,14 +416,14 @@
             position: relative;
             top: 2px;
             transition: all 0.15s ease;
-        }
+        }}
 
-        .nav-tab:hover {
+        .nav-tab:hover {{
             background: #182234;
             color: #FFFFFF;
-        }
+        }}
 
-        .nav-tab.active {
+        .nav-tab.active {{
             background: var(--bg-panel);
             color: #00D68F;
             border-top: 2px solid #00D68F;
@@ -408,54 +432,54 @@
             border-bottom: 2px solid var(--bg-panel);
             font-weight: 700;
             z-index: 10;
-        }
+        }}
 
-        .nav-tab .f-key {
+        .nav-tab .f-key {{
             background: #070A10;
             color: var(--text-muted);
             font-size: 0.7rem;
             padding: 1px 4px;
             border-radius: 2px;
             border: 1px solid var(--border-primary);
-        }
+        }}
 
-        .nav-tab.active .f-key {
+        .nav-tab.active .f-key {{
             color: #00D68F;
             border-color: rgba(0, 214, 143, 0.4);
-        }
+        }}
 
         /* Main Workspace Container */
-        .scada-workspace {
+        .scada-workspace {{
             flex: 1;
             padding: 1rem;
             background: var(--bg-canvas);
             display: flex;
             flex-direction: column;
             overflow-y: auto;
-        }
+        }}
 
-        .tab-viewport {
+        .tab-viewport {{
             display: none;
             flex: 1;
             flex-direction: column;
             gap: 1rem;
-        }
+        }}
 
-        .tab-viewport.active {
+        .tab-viewport.active {{
             display: flex;
-        }
+        }}
 
         /* Industrial Panels */
-        .scada-panel {
+        .scada-panel {{
             background: var(--bg-panel);
             border: 1px solid var(--border-primary);
             border-radius: 2px;
             display: flex;
             flex-direction: column;
             overflow: hidden;
-        }
+        }}
 
-        .panel-header {
+        .panel-header {{
             background: var(--bg-panel-header);
             border-bottom: 1px solid var(--border-primary);
             padding: 0.5rem 0.85rem;
@@ -467,57 +491,57 @@
             font-weight: 600;
             color: var(--text-primary);
             letter-spacing: 0.03em;
-        }
+        }}
 
-        .panel-header .title-left {
+        .panel-header .title-left {{
             display: flex;
             align-items: center;
             gap: 0.5rem;
-        }
+        }}
 
-        .panel-header .status-tag {
+        .panel-header .status-tag {{
             font-size: 0.68rem;
             padding: 1px 6px;
             border-radius: 2px;
             border: 1px solid;
             font-weight: 700;
-        }
+        }}
 
-        .status-tag.active {
+        .status-tag.active {{
             background: rgba(16, 185, 129, 0.1);
             color: var(--scada-normal);
             border-color: rgba(16, 185, 129, 0.3);
-        }
+        }}
 
-        .status-tag.warning {
+        .status-tag.warning {{
             background: rgba(245, 158, 11, 0.1);
             color: var(--scada-high);
             border-color: rgba(245, 158, 11, 0.3);
-        }
+        }}
 
-        .status-tag.alert {
+        .status-tag.alert {{
             background: rgba(239, 68, 68, 0.1);
             color: var(--scada-urgent);
             border-color: rgba(239, 68, 68, 0.3);
-        }
+        }}
 
-        .panel-body {
+        .panel-body {{
             padding: 0.85rem;
             flex: 1;
             display: flex;
             flex-direction: column;
-        }
+        }}
 
         /* Screen 1: SLD & Mimic Layout */
-        .mimic-layout-grid {
+        .mimic-layout-grid {{
             display: grid;
             grid-template-columns: 2fr 1fr;
             gap: 1rem;
             flex: 1;
-        }
+        }}
 
         /* SVG Mimic Canvas */
-        .sld-canvas-container {
+        .sld-canvas-container {{
             background: #0A0E18;
             border: 1px solid var(--border-primary);
             border-radius: 2px;
@@ -526,78 +550,78 @@
             display: flex;
             flex-direction: column;
             overflow: hidden;
-        }
+        }}
 
-        .sld-svg {
+        .sld-svg {{
             width: 100%;
             height: 100%;
             flex: 1;
-        }
+        }}
 
         /* Mimic SVG Elements */
-        .busbar {
+        .busbar {{
             stroke: #475569;
             stroke-width: 4;
             stroke-linecap: square;
-        }
+        }}
 
-        .busbar.energized {
+        .busbar.energized {{
             stroke: #38BDF8;
             filter: drop-shadow(0 0 3px rgba(56, 189, 248, 0.5));
-        }
+        }}
 
-        .feeder-line {
+        .feeder-line {{
             stroke: #334155;
             stroke-width: 2.5;
             stroke-linecap: round;
-        }
+        }}
 
-        .feeder-line.active {
+        .feeder-line.active {{
             stroke: #00D68F;
-        }
+        }}
 
-        .pulse-path {
+        .pulse-path {{
             stroke-dasharray: 6, 12;
             animation: dash-flow 1.5s linear infinite;
-        }
+        }}
 
-        @keyframes dash-flow {
-            to { stroke-dashoffset: -18; }
-        }
+        @keyframes dash-flow {{
+            to {{ stroke-dashoffset: -18; }}
+        }}
 
         /* Linear Gauge Component (ISA-101 high performance) */
-        .linear-gauge-container {
+        .linear-gauge-container {{
             display: flex;
             flex-direction: column;
             gap: 0.35rem;
             font-family: var(--font-mono);
-        }
+        }}
 
-        .gauge-track {
+        .gauge-track {{
             height: 20px;
             background: #141C2C;
             border: 1px solid var(--border-primary);
             position: relative;
             border-radius: 2px;
             overflow: hidden;
-        }
+        }}
 
-        .gauge-fill {
+        .gauge-fill {{
             height: 100%;
             background: var(--scada-normal);
             transition: width 0.25s ease, background 0.25s ease;
-        }
+        }}
 
-        .gauge-threshold {
+        .gauge-threshold {{
             position: absolute;
             top: 0;
             bottom: 0;
             width: 2px;
             background: #EF4444;
             z-index: 5;
-        }
+        }}
 
-        .gauge-setpoint {
+        .gauge-setpoint {{
             position: absolute;
             top: 0;
             bottom: 0;
@@ -605,24 +629,24 @@
             background: #F59E0B;
             border-right: 1px dashed #000;
             z-index: 4;
-        }
+        }}
 
-        .gauge-labels {
+        .gauge-labels {{
             display: flex;
             justify-content: space-between;
             font-size: 0.68rem;
             color: var(--text-muted);
-        }
+        }}
 
         /* SCADA Alarm Table */
-        .alarm-table {
+        .alarm-table {{
             width: 100%;
             border-collapse: collapse;
             font-family: var(--font-mono);
             font-size: 0.75rem;
-        }
+        }}
 
-        .alarm-table th {
+        .alarm-table th {{
             background: var(--bg-panel-header);
             color: var(--text-muted);
             text-align: left;
@@ -631,64 +655,64 @@
             font-weight: 600;
             text-transform: uppercase;
             font-size: 0.68rem;
-        }
+        }}
 
-        .alarm-table td {
+        .alarm-table td {{
             padding: 0.45rem 0.6rem;
             border-bottom: 1px solid #141C2B;
             color: var(--text-secondary);
-        }
+        }}
 
-        .alarm-table tr:hover td {
+        .alarm-table tr:hover td {{
             background: #141C2C;
-        }
+        }}
 
-        .alarm-row.urgent td {
+        .alarm-row.urgent td {{
             color: #EF4444;
             font-weight: 600;
-        }
+        }}
 
-        .alarm-row.high td {
+        .alarm-row.high td {{
             color: #F59E0B;
             font-weight: 500;
-        }
+        }}
 
-        .alarm-row.normal td {
+        .alarm-row.normal td {{
             color: #10B981;
-        }
+        }}
 
-        .alarm-badge {
+        .alarm-badge {{
             display: inline-block;
             padding: 1px 5px;
             border-radius: 2px;
             font-size: 0.65rem;
             font-weight: 700;
             text-transform: uppercase;
-        }
+        }}
 
-        .alarm-badge.urgent { background: #EF4444; color: #FFFFFF; }
-        .alarm-badge.high { background: #F59E0B; color: #000000; }
-        .alarm-badge.normal { background: #10B981; color: #000000; }
-        .alarm-badge.info { background: #38BDF8; color: #000000; }
+        .alarm-badge.urgent {{ background: #EF4444; color: #FFFFFF; }}
+        .alarm-badge.high {{ background: #F59E0B; color: #000000; }}
+        .alarm-badge.normal {{ background: #10B981; color: #000000; }}
+        .alarm-badge.info {{ background: #38BDF8; color: #000000; }}
 
         /* Screen 2: Trends 2x2 Grid */
-        .trends-grid {
+        .trends-grid {{
             display: grid;
             grid-template-columns: 1fr 1fr;
             grid-template-rows: 1fr 1fr;
             gap: 1rem;
             flex: 1;
             min-height: 640px;
-        }
+        }}
 
-        .chart-box {
+        .chart-box {{
             flex: 1;
             position: relative;
             min-height: 250px;
-        }
+        }}
 
         /* Screen 3: Fleet Matrix */
-        .fleet-controls-bar {
+        .fleet-controls-bar {{
             background: var(--bg-panel-header);
             border-bottom: 1px solid var(--border-primary);
             padding: 0.5rem 0.85rem;
@@ -696,15 +720,15 @@
             align-items: center;
             justify-content: space-between;
             gap: 1rem;
-        }
+        }}
 
-        .filter-group {
+        .filter-group {{
             display: flex;
             align-items: center;
             gap: 0.35rem;
-        }
+        }}
 
-        .fleet-search {
+        .fleet-search {{
             background: #0A0E18;
             border: 1px solid var(--border-primary);
             color: #FFFFFF;
@@ -714,26 +738,26 @@
             border-radius: 2px;
             width: 200px;
             outline: none;
-        }
+        }}
 
-        .fleet-search:focus {
+        .fleet-search:focus {{
             border-color: #38BDF8;
-        }
+        }}
 
-        .fleet-table-container {
+        .fleet-table-container {{
             flex: 1;
             overflow-y: auto;
             max-height: 620px;
-        }
+        }}
 
-        .fleet-table {
+        .fleet-table {{
             width: 100%;
             border-collapse: collapse;
             font-family: var(--font-mono);
             font-size: 0.75rem;
-        }
+        }}
 
-        .fleet-table th {
+        .fleet-table th {{
             background: #141B2A;
             color: var(--text-muted);
             text-align: left;
@@ -745,20 +769,20 @@
             z-index: 5;
             text-transform: uppercase;
             font-size: 0.68rem;
-        }
+        }}
 
-        .fleet-table td {
+        .fleet-table td {{
             padding: 0.45rem 0.75rem;
             border-bottom: 1px solid #141C2B;
             color: var(--text-secondary);
-        }
+        }}
 
-        .fleet-table tr:hover td {
+        .fleet-table tr:hover td {{
             background: #151E30;
             color: #FFFFFF;
-        }
+        }}
 
-        .soc-bar-container {
+        .soc-bar-container {{
             width: 120px;
             height: 10px;
             background: #1E293B;
@@ -768,15 +792,15 @@
             display: inline-block;
             vertical-align: middle;
             margin-right: 0.5rem;
-        }
+        }}
 
-        .soc-bar-fill {
+        .soc-bar-fill {{
             height: 100%;
             background: var(--scada-normal);
             border-radius: 1px;
-        }
+        }}
 
-        .soc-bar-reserve {
+        .soc-bar-reserve {{
             position: absolute;
             top: 0;
             bottom: 0;
@@ -784,83 +808,83 @@
             width: 2px;
             background: #EF4444;
             z-index: 2;
-        }
+        }}
 
-        .tag-pill {
+        .tag-pill {{
             padding: 1px 6px;
             border-radius: 2px;
             font-size: 0.65rem;
             font-weight: 700;
             display: inline-block;
-        }
+        }}
 
-        .tag-pill.participating { background: rgba(16, 185, 129, 0.15); color: #10B981; border: 1px solid rgba(16, 185, 129, 0.3); }
-        .tag-pill.optout { background: rgba(245, 158, 11, 0.15); color: #F59E0B; border: 1px solid rgba(245, 158, 11, 0.3); }
-        .tag-pill.passive { background: rgba(100, 116, 139, 0.15); color: #94A3B8; border: 1px solid rgba(100, 116, 139, 0.3); }
+        .tag-pill.participating {{ background: rgba(16, 185, 129, 0.15); color: #10B981; border: 1px solid rgba(16, 185, 129, 0.3); }}
+        .tag-pill.optout {{ background: rgba(245, 158, 11, 0.15); color: #F59E0B; border: 1px solid rgba(245, 158, 11, 0.3); }}
+        .tag-pill.passive {{ background: rgba(100, 116, 139, 0.15); color: #94A3B8; border: 1px solid rgba(100, 116, 139, 0.3); }}
 
         /* Screen 4: DISCOM Directive & Economics */
-        .directive-grid {
+        .directive-grid {{
             display: grid;
             grid-template-columns: 1.2fr 1fr;
             gap: 1rem;
             flex: 1;
-        }
+        }}
 
-        .action-plan-banner {
+        .action-plan-banner {{
             background: #080D16;
             border: 1px solid var(--border-secondary);
             border-left: 4px solid var(--schneider-green);
             padding: 1rem;
             border-radius: 2px;
             margin-bottom: 1rem;
-        }
+        }}
 
-        .directive-command {
+        .directive-command {{
             font-family: var(--font-mono);
             font-size: 1.15rem;
             font-weight: 700;
             color: #FFFFFF;
             margin: 0.5rem 0;
             letter-spacing: 0.02em;
-        }
+        }}
 
-        .matrix-table {
+        .matrix-table {{
             width: 100%;
             border-collapse: collapse;
             font-family: var(--font-mono);
             font-size: 0.75rem;
             margin-top: 0.5rem;
-        }
+        }}
 
-        .matrix-table th {
+        .matrix-table th {{
             background: var(--bg-panel-header);
             color: var(--text-muted);
             text-align: left;
             padding: 0.5rem;
             border-bottom: 1px solid var(--border-primary);
             font-size: 0.68rem;
-        }
+        }}
 
-        .matrix-table td {
+        .matrix-table td {{
             padding: 0.5rem;
             border-bottom: 1px solid #141C2B;
             color: var(--text-secondary);
-        }
+        }}
 
-        .matrix-table tr.highlight td {
+        .matrix-table tr.highlight td {{
             background: rgba(61, 205, 88, 0.08);
             color: #FFFFFF;
             font-weight: 600;
-        }
+        }}
 
-        .key-value-list {
+        .key-value-list {{
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
             margin-top: 0.5rem;
-        }
+        }}
 
-        .kv-item {
+        .kv-item {{
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -870,23 +894,23 @@
             border-radius: 2px;
             font-family: var(--font-mono);
             font-size: 0.75rem;
-        }
+        }}
 
-        .kv-item .label {
+        .kv-item .label {{
             color: var(--text-muted);
-        }
+        }}
 
-        .kv-item .value {
+        .kv-item .value {{
             color: #FFFFFF;
             font-weight: 600;
-        }
+        }}
 
-        .kv-item .value.accent {
+        .kv-item .value.accent {{
             color: #00D68F;
-        }
+        }}
 
         /* Industrial Footer */
-        .scada-footer {
+        .scada-footer {{
             background: #080C14;
             border-top: 1px solid var(--border-primary);
             padding: 0.35rem 1rem;
@@ -897,19 +921,19 @@
             font-size: 0.68rem;
             color: var(--text-muted);
             z-index: 100;
-        }
+        }}
 
-        .footer-left {
+        .footer-left {{
             display: flex;
             align-items: center;
             gap: 1rem;
-        }
+        }}
 
-        .footer-right {
+        .footer-right {{
             display: flex;
             align-items: center;
             gap: 1rem;
-        }
+        }}
     </style>
 </head>
 <body>
@@ -1622,44 +1646,44 @@
     <!-- CANONICAL DATA INJECTION & RUNTIME ENGINE -->
     <script>
         // Canonical Datasets embedded from repository simulation results
-        const EMBEDDED_BUNDLE = {"labels": ["16:00", "16:05", "16:10", "16:15", "16:20", "16:25", "16:30", "16:35", "16:40", "16:45", "16:50", "16:55", "17:00", "17:05", "17:10", "17:15", "17:20", "17:25", "17:30", "17:35", "17:40", "17:45", "17:50", "17:55", "18:00", "18:05", "18:10", "18:15", "18:20", "18:25", "18:30", "18:35", "18:40", "18:45", "18:50", "18:55", "19:00", "19:05", "19:10", "19:15", "19:20", "19:25", "19:30", "19:35", "19:40", "19:45", "19:50", "19:55", "20:00", "20:05", "20:10", "20:15", "20:20", "20:25", "20:30", "20:35", "20:40", "20:45", "20:50", "20:55", "21:00", "21:05", "21:10", "21:15", "21:20", "21:25", "21:30", "21:35", "21:40", "21:45", "21:50", "21:55"], "baseline_load": [13.5, 13.79, 14.07, 14.37, 14.66, 14.96, 15.26, 15.56, 15.87, 16.18, 16.49, 16.8, 17.12, 20.43, 20.75, 21.07, 21.4, 21.72, 22.04, 29.87, 30.19, 30.52, 30.85, 31.17, 31.5, 73.1, 75.42, 72.52, 74.61, 75.57, 75.05, 117.96, 125.9, 134.12, 137.78, 144.53, 154.11, 154.14, 153.14, 151.99, 152.9, 153.66, 151.76, 135.36, 132.84, 125.59, 117.41, 111.75, 109.17, 78.85, 78.46, 79.12, 78.79, 78.45, 78.79, 78.93, 78.77, 78.68, 78.43, 78.7, 78.59, 78.85, 78.78, 78.54, 78.92, 78.87, 78.31, 78.28, 78.96, 78.7, 78.6, 78.52], "saanjh_load": [13.5, 13.79, 14.07, 14.37, 14.66, 14.96, 15.26, 15.56, 15.87, 16.18, 16.49, 16.8, 17.12, 20.43, 20.75, 21.07, 21.4, 21.72, 22.04, 29.87, 30.19, 30.52, 30.85, 31.17, 31.5, 73.1, 75.42, 72.52, 74.61, 75.57, 75.05, 83.33, 90.77, 95.44, 100.06, 94.38, 97.86, 105.32, 105.76, 104.42, 107.92, 109.14, 109.18, 103.12, 100.77, 96.97, 91.19, 88.93, 85.97, 78.85, 76.5, 68.52, 68.93, 68.59, 75.81, 76.39, 77.1, 76.01, 76.71, 77.23, 78.59, 78.85, 78.78, 78.54, 78.92, 78.87, 78.31, 78.28, 78.96, 78.7, 78.6, 78.52], "solar_gen": [7.5, 7.21, 6.93, 6.63, 6.34, 6.04, 5.74, 5.44, 5.13, 4.82, 4.51, 4.2, 3.88, 3.57, 3.25, 2.93, 2.6, 2.28, 1.96, 1.63, 1.31, 0.98, 0.65, 0.33, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "gross_demand": [21.0, 21.0, 21.0, 21.0, 21.0, 21.0, 21.0, 21.0, 21.0, 21.0, 21.0, 21.0, 21.0, 24.0, 24.0, 24.0, 24.0, 24.0, 24.0, 31.5, 31.5, 31.5, 31.5, 31.5, 31.5, 73.1, 75.42, 72.52, 74.61, 75.57, 75.05, 117.96, 125.9, 134.12, 137.78, 144.53, 154.11, 154.14, 153.14, 151.99, 152.9, 153.66, 151.76, 135.36, 132.84, 125.59, 117.41, 111.75, 109.17, 78.85, 78.46, 79.12, 78.79, 78.45, 78.79, 78.93, 78.77, 78.68, 78.43, 78.7, 78.59, 78.85, 78.78, 78.54, 78.92, 78.87, 78.31, 78.28, 78.96, 78.7, 78.6, 78.52], "saanjh_voltage": [238.36, 238.33, 238.29, 238.25, 238.22, 238.18, 238.14, 238.11, 238.07, 238.03, 237.99, 237.96, 237.92, 237.51, 237.47, 237.43, 237.39, 237.35, 237.31, 236.34, 236.3, 236.26, 236.22, 236.18, 236.14, 230.83, 230.53, 230.91, 230.63, 230.51, 230.58, 229.49, 228.5, 227.87, 227.25, 228.01, 227.55, 226.54, 226.48, 226.66, 226.18, 226.02, 226.01, 226.83, 227.15, 227.67, 228.44, 228.74, 229.14, 230.08, 230.39, 231.43, 231.37, 231.42, 230.48, 230.4, 230.31, 230.45, 230.36, 230.29, 230.11, 230.08, 230.09, 230.12, 230.07, 230.07, 230.15, 230.15, 230.06, 230.1, 230.11, 230.12], "baseline_voltage": [238.36, 238.33, 238.29, 238.25, 238.22, 238.18, 238.14, 238.11, 238.07, 238.03, 237.99, 237.96, 237.92, 237.51, 237.47, 237.43, 237.39, 237.35, 237.31, 236.34, 236.3, 236.26, 236.22, 236.18, 236.14, 230.83, 230.53, 230.91, 230.63, 230.51, 230.58, 224.8, 223.7, 222.55, 222.03, 221.07, 219.68, 219.68, 219.82, 219.99, 219.86, 219.75, 220.02, 222.37, 222.73, 223.75, 224.88, 225.66, 226.01, 230.08, 230.13, 230.04, 230.08, 230.13, 230.08, 230.07, 230.09, 230.1, 230.13, 230.1, 230.11, 230.08, 230.09, 230.12, 230.07, 230.07, 230.15, 230.15, 230.06, 230.1, 230.11, 230.12], "flex_delivered": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 34.63, 35.13, 38.68, 37.72, 50.15, 56.25, 48.82, 47.38, 47.57, 44.99, 44.53, 42.58, 32.24, 32.07, 28.61, 26.22, 22.81, 23.2, 0.0, 1.96, 10.6, 9.86, 9.86, 2.98, 2.54, 1.67, 2.67, 1.72, 1.47, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "flex_available": [92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 72.92, 65.01, 64.55, 62.6, 61.35, 62.15, 61.54, 61.41, 61.37, 61.36, 61.35, 69.15, 67.19, 62.11, 61.81, 61.7, 61.68, 61.66, 61.64, 61.62, 61.61, 61.6, 69.4, 77.2, 85.0, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55, 92.55], "active_homes": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 35, 39, 39, 39, 39, 39, 0, 39, 39, 39, 39, 39, 39, 39, 39, 39, 39, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "line_loss_kw": [0.095, 0.099, 0.103, 0.108, 0.112, 0.117, 0.122, 0.127, 0.132, 0.137, 0.142, 0.148, 0.153, 0.219, 0.226, 0.234, 0.241, 0.248, 0.256, 0.473, 0.484, 0.495, 0.506, 0.516, 0.528, 2.973, 3.173, 2.924, 3.103, 3.187, 3.141, 3.909, 4.679, 5.201, 5.748, 5.08, 5.484, 6.407, 6.465, 6.292, 6.749, 6.912, 6.919, 6.127, 5.834, 5.379, 4.724, 4.481, 4.173, 3.482, 3.268, 2.599, 2.631, 2.604, 3.207, 3.259, 3.323, 3.225, 3.288, 3.334, 3.459, 3.482, 3.475, 3.454, 3.489, 3.484, 3.432, 3.43, 3.493, 3.468, 3.459, 3.452], "tx_loading_pct": [14.2, 14.5, 14.8, 15.1, 15.4, 15.7, 16.1, 16.4, 16.7, 17.0, 17.4, 17.7, 18.0, 21.5, 21.8, 22.2, 22.5, 22.9, 23.2, 31.4, 31.8, 32.1, 32.5, 32.8, 33.2, 76.9, 79.4, 76.3, 78.5, 79.5, 79.0, 87.7, 95.6, 100.5, 105.3, 99.4, 103.0, 110.9, 111.3, 109.9, 113.6, 114.9, 114.9, 108.6, 106.1, 102.1, 96.0, 93.6, 90.5, 83.0, 80.5, 72.1, 72.6, 72.2, 79.8, 80.4, 81.2, 80.0, 80.8, 81.3, 82.7, 83.0, 82.9, 82.7, 83.1, 83.0, 82.4, 82.4, 83.1, 82.8, 82.7, 82.7], "xgb_iterations": [0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76, 80, 84, 88, 92, 96, 100, 104, 108, 112, 116, 120, 124, 128, 132, 136, 140, 144, 148, 152, 156, 160, 164, 168, 172, 176, 180, 184, 188, 191], "xgb_train_metric": [1.0401, 0.9008, 0.7942, 0.7136, 0.6535, 0.6094, 0.5772, 0.554, 0.5369, 0.5244, 0.5151, 0.5079, 0.5024, 0.4979, 0.4941, 0.4909, 0.488, 0.4854, 0.4828, 0.4807, 0.4786, 0.4769, 0.4749, 0.4734, 0.4714, 0.4698, 0.4681, 0.4667, 0.4653, 0.4641, 0.4628, 0.4618, 0.4603, 0.459, 0.4581, 0.4565, 0.4551, 0.4542, 0.4532, 0.452, 0.4506, 0.4492, 0.4482, 0.4474, 0.4463, 0.4453, 0.444, 0.4428, 0.4421], "xgb_val_metric": [1.0293, 0.8988, 0.8007, 0.7285, 0.6762, 0.6389, 0.6132, 0.595, 0.5814, 0.5724, 0.5664, 0.5614, 0.5581, 0.5552, 0.5537, 0.5517, 0.5512, 0.5505, 0.5501, 0.5497, 0.5492, 0.5487, 0.5483, 0.5484, 0.5477, 0.5474, 0.5474, 0.5471, 0.5468, 0.5468, 0.5469, 0.5466, 0.5466, 0.5464, 0.5463, 0.5463, 0.5466, 0.5466, 0.5465, 0.5465, 0.5462, 0.5461, 0.546, 0.546, 0.5462, 0.5462, 0.5463, 0.5463, 0.5466], "xgb_best_iter": 171, "xgb_best_val": 0.546};
-        const EMBEDDED_FLEET = [{"id": "H-01", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 0.8, "disp_kw": 0.0, "delivered_kwh": 0.568, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.85}, {"id": "H-02", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.77, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-03", "has_battery": false, "has_solar": true, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 1.05, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-04", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 2.83, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-05", "has_battery": true, "has_solar": true, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.85, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-06", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 2.45, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-07", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.4, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-08", "has_battery": false, "has_solar": false, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 2.55, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-09", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 2.23, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-10", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 2.23, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-11", "has_battery": false, "has_solar": true, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 0.6, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-12", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.85, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-13", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 2.83, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-14", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 2.23, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-15", "has_battery": false, "has_solar": false, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 1.43, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-16", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.18, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.83}, {"id": "H-17", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.85, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-18", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 1.0, "avail_kw": 0.0, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": true, "comp_inr": 0.0}, {"id": "H-19", "has_battery": false, "has_solar": true, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 1.65, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-20", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.4, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-21", "has_battery": false, "has_solar": false, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 0.0, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-22", "has_battery": false, "has_solar": true, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 0.6, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-23", "has_battery": false, "has_solar": false, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 2.1, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-24", "has_battery": false, "has_solar": false, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 1.65, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-25", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.18, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.83}, {"id": "H-26", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.85, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-27", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.4, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-28", "has_battery": true, "has_solar": true, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.85, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-29", "has_battery": false, "has_solar": false, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 0.0, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-30", "has_battery": true, "has_solar": true, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.4, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-31", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 3.72, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-32", "has_battery": true, "has_solar": true, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 0.8, "disp_kw": 0.0, "delivered_kwh": 0.568, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.85}, {"id": "H-33", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 2.45, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-34", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.4, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-35", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.4, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-36", "has_battery": false, "has_solar": false, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 0.97, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-37", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.4, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-38", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 0.8, "disp_kw": 0.0, "delivered_kwh": 0.568, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.85}, {"id": "H-39", "has_battery": false, "has_solar": false, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 1.05, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-40", "has_battery": false, "has_solar": false, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 0.6, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-41", "has_battery": true, "has_solar": true, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 0.8, "disp_kw": 0.0, "delivered_kwh": 0.568, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.85}, {"id": "H-42", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.77, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-43", "has_battery": false, "has_solar": false, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 2.1, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-44", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 2.83, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-45", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.4, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-46", "has_battery": true, "has_solar": true, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.18, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.83}, {"id": "H-47", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 2.45, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-48", "has_battery": false, "has_solar": true, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 0.6, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-49", "has_battery": true, "has_solar": true, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.77, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-50", "has_battery": false, "has_solar": false, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 1.05, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-51", "has_battery": true, "has_solar": true, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 2.83, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-52", "has_battery": false, "has_solar": false, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 1.43, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}, {"id": "H-53", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 1.4, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-54", "has_battery": true, "has_solar": true, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 2.45, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-55", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 1.0, "avail_kw": 0.0, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": true, "comp_inr": 0.0}, {"id": "H-56", "has_battery": true, "has_solar": true, "init_soc": 0.92, "final_soc": 1.0, "avail_kw": 0.0, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": true, "comp_inr": 0.0}, {"id": "H-57", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 2.45, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-58", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 2.23, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-59", "has_battery": true, "has_solar": false, "init_soc": 0.92, "final_soc": 0.81, "avail_kw": 2.45, "disp_kw": 0.0, "delivered_kwh": 0.557, "reserve_limit": 0.7, "participated": true, "opted_out": false, "comp_inr": 0.84}, {"id": "H-60", "has_battery": false, "has_solar": false, "init_soc": 1.0, "final_soc": 1.0, "avail_kw": 0.6, "disp_kw": 0.0, "delivered_kwh": 0.0, "reserve_limit": 0.7, "participated": false, "opted_out": false, "comp_inr": 0.0}];
-        const EMBEDDED_COMPARISON = {"baseline_peak_kw": 154.1359519199378, "saanjh_peak_kw": 109.18234681921217, "peak_reduction_kw": 44.95360510072564, "peak_reduction_pct": 29.164905747671188, "baseline_overload_minutes": 90, "saanjh_overload_minutes": 60, "overload_reduction_pct": 33.33333333333333, "flexibility_delivered_kw": 56.24689102172852, "flexibility_delivered_kwh": 61.57406239142188, "dependable_delivery_ratio": 0.9851254691170566, "voltage_violations_baseline": 6, "voltage_violations_saanjh": 0, "baseline_loss_kwh": 25.87364976558972, "saanjh_loss_kwh": 16.740235608598958, "loss_reduction_pct": 35.30006102632498, "critical_load_violations": 0, "reserve_violations": 0, "opt_out_dispatches": 0, "homes_participating": 39, "cost_per_dependable_kw": 7068, "total_initial_investment": 317767};
-        const EMBEDDED_DISCOM = {"feeder_id": "FDR-023", "transformer_id": "DT-100KVA-04", "forecast_status": "HIGH STRESS PREDICTED (SOLAR DROP-OFF AT 18:30)", "required_flexibility_kw": 56.25, "available_flexibility_kw": 92.55, "recommended_action": "DISPATCH 56.2 kW FOR 45 MINUTES VIA SAANJH EDGE", "expected_outcomes": {"transformer_thermal_overload_reduction": "33.3% (30 minutes avoided)", "voltage_drop_mitigation": "Feeder tail voltage restored above 0.90 p.u.", "modeled_technical_loss_reduction": "35.3% (9.13 kWh saved)"}};
-        const EMBEDDED_ECON = {"LOW_COST_MASS_PRODUCTION": {"total_capex": 148500, "total_installation": 11700, "total_initial_investment": 160200, "cost_per_dependable_kw": 3563, "cost_per_home": 4107, "annual_operator_maintenance": 4455, "annual_household_benefit": 168, "discom_net_annual_benefit": 2097}, "BASE_PROTOTYPE_SCALE": {"total_capex": 298267, "total_installation": 19500, "total_initial_investment": 317767, "cost_per_dependable_kw": 7068, "cost_per_home": 8147, "annual_operator_maintenance": 14913, "annual_household_benefit": 126, "discom_net_annual_benefit": -11637}, "HIGH_CONTINGENCY": {"total_capex": 398500, "total_installation": 39000, "total_initial_investment": 437500, "cost_per_dependable_kw": 9732, "cost_per_home": 11217, "annual_operator_maintenance": 31880, "annual_household_benefit": 67, "discom_net_annual_benefit": -30132}};
+        const EMBEDDED_BUNDLE = {json.dumps(timeseries_data)};
+        const EMBEDDED_FLEET = {json.dumps(fleet_data)};
+        const EMBEDDED_COMPARISON = {json.dumps(comparison_data)};
+        const EMBEDDED_DISCOM = {json.dumps(discom_data)};
+        const EMBEDDED_ECON = {json.dumps(economics_data)};
 
         let currentBundle = EMBEDDED_BUNDLE;
         let currentFleet = EMBEDDED_FLEET;
         let currentStep = 37; // 19:05 Peak by default
         let isPlaying = false;
         let playInterval = null;
-        let charts = {};
+        let charts = {{}};
 
         // Initialize application on DOM load
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', () => {{
             setupNavigation();
             setupPlayback();
             setupFleetTable(currentFleet);
             initCharts(currentBundle);
             updateTimestep(currentStep);
             startClock();
-        });
+        }});
 
-        function startClock() {
+        function startClock() {{
             const clockEl = document.getElementById('wall-clock');
-            setInterval(() => {
+            setInterval(() => {{
                 const d = new Date();
                 const pad = (n) => n.toString().padStart(2, '0');
-                const timeStr = `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())} IST`;
+                const timeStr = `${{d.getFullYear()}}-${{pad(d.getMonth()+1)}}-${{pad(d.getDate())}} ${{pad(d.getHours())}}:${{pad(d.getMinutes())}}:${{pad(d.getSeconds())}} IST`;
                 if (clockEl) clockEl.innerText = timeStr;
-            }, 1000);
-        }
+            }}, 1000);
+        }}
 
         // Navigation Tabs Handling
-        function setupNavigation() {
+        function setupNavigation() {{
             const tabs = document.querySelectorAll('.nav-tab');
-            tabs.forEach(tab => {
-                tab.addEventListener('click', () => {
+            tabs.forEach(tab => {{
+                tab.addEventListener('click', () => {{
                     tabs.forEach(t => t.classList.remove('active'));
                     document.querySelectorAll('.tab-viewport').forEach(v => v.classList.remove('active'));
                     
@@ -1669,17 +1693,17 @@
                     if (targetView) targetView.classList.add('active');
 
                     // Resize charts if switching to trends
-                    if (targetId === 'tab-trends') {
-                        setTimeout(() => {
+                    if (targetId === 'tab-trends') {{
+                        setTimeout(() => {{
                             Object.values(charts).forEach(c => c.resize());
-                        }, 50);
-                    }
-                });
-            });
-        }
+                        }}, 50);
+                    }}
+                }});
+            }});
+        }}
 
         // Playback and Scrubber Controls
-        function setupPlayback() {
+        function setupPlayback() {{
             const slider = document.getElementById('time-slider');
             const playBtn = document.getElementById('btn-play-pause');
             const stepBack = document.getElementById('btn-step-back');
@@ -1690,70 +1714,70 @@
             const jumpPeak = document.getElementById('jump-peak');
             const jumpRecovery = document.getElementById('jump-recovery');
 
-            slider.addEventListener('input', (e) => {
+            slider.addEventListener('input', (e) => {{
                 currentStep = parseInt(e.target.value);
                 updateTimestep(currentStep);
-            });
+            }});
 
             playBtn.addEventListener('click', togglePlay);
             
-            stepBack.addEventListener('click', () => {
-                if (currentStep > 0) {
+            stepBack.addEventListener('click', () => {{
+                if (currentStep > 0) {{
                     currentStep--;
                     slider.value = currentStep;
                     updateTimestep(currentStep);
-                }
-            });
+                }}
+            }});
 
-            stepFwd.addEventListener('click', () => {
-                if (currentStep < currentBundle.labels.length - 1) {
+            stepFwd.addEventListener('click', () => {{
+                if (currentStep < currentBundle.labels.length - 1) {{
                     currentStep++;
                     slider.value = currentStep;
                     updateTimestep(currentStep);
-                }
-            });
+                }}
+            }});
 
-            resetBtn.addEventListener('click', () => {
+            resetBtn.addEventListener('click', () => {{
                 currentStep = 0;
                 slider.value = currentStep;
                 updateTimestep(currentStep);
-            });
+            }});
 
             if (jumpSolar) jumpSolar.addEventListener('click', () => jumpTo(30)); // 18:30
             if (jumpPeak) jumpPeak.addEventListener('click', () => jumpTo(37)); // 19:05
             if (jumpRecovery) jumpRecovery.addEventListener('click', () => jumpTo(54)); // 20:30
-        }
+        }}
 
-        function jumpTo(step) {
+        function jumpTo(step) {{
             currentStep = step;
             document.getElementById('time-slider').value = step;
             updateTimestep(step);
-        }
+        }}
 
-        function togglePlay() {
+        function togglePlay() {{
             const playBtn = document.getElementById('btn-play-pause');
             isPlaying = !isPlaying;
-            if (isPlaying) {
+            if (isPlaying) {{
                 playBtn.innerText = '❚❚ PAUSE';
                 playBtn.classList.add('active');
-                playInterval = setInterval(() => {
-                    if (currentStep < currentBundle.labels.length - 1) {
+                playInterval = setInterval(() => {{
+                    if (currentStep < currentBundle.labels.length - 1) {{
                         currentStep++;
-                    } else {
+                    }} else {{
                         currentStep = 0;
-                    }
+                    }}
                     document.getElementById('time-slider').value = currentStep;
                     updateTimestep(currentStep);
-                }, 600);
-            } else {
+                }}, 600);
+            }} else {{
                 playBtn.innerText = '▶ PLAY';
                 playBtn.classList.remove('active');
                 clearInterval(playInterval);
-            }
-        }
+            }}
+        }}
 
         // Update UI dynamically for a given timestep
-        function updateTimestep(idx) {
+        function updateTimestep(idx) {{
             const b = currentBundle;
             if (!b || !b.labels[idx]) return;
 
@@ -1768,11 +1792,11 @@
             const deltaKw = (baseLoad - loadVal).toFixed(2);
 
             // Time readout
-            document.getElementById('active-time-readout').innerText = `${timeLabel} IST (${idx === 37 ? 'MAX PEAK' : (idx === 30 ? 'SOLAR CLIFF' : 'DISPATCH')})`;
+            document.getElementById('active-time-readout').innerText = `${{timeLabel}} IST (${{idx === 37 ? 'MAX PEAK' : (idx === 30 ? 'SOLAR CLIFF' : 'DISPATCH')}})`;
 
             // Top Telemetry Cells
             document.getElementById('kpi-load-val').innerText = loadVal.toFixed(1);
-            document.getElementById('kpi-load-delta').innerText = deltaKw > 0 ? `↓ ${deltaKw} kW shaved` : `0.0 kW delta`;
+            document.getElementById('kpi-load-delta').innerText = deltaKw > 0 ? `↓ ${{deltaKw}} kW shaved` : `0.0 kW delta`;
             
             document.getElementById('kpi-tx-val').innerText = txPct.toFixed(1);
             document.getElementById('kpi-flex-val').innerText = flexVal.toFixed(2);
@@ -1781,74 +1805,74 @@
             // Transformer Linear Gauge update
             const gaugeFill = document.getElementById('tx-gauge-fill');
             const gaugeLoadNum = document.getElementById('gauge-load-num');
-            if (gaugeFill) {
+            if (gaugeFill) {{
                 const fillPct = Math.min(100, (loadVal / 154.14) * 100);
                 gaugeFill.style.width = fillPct + '%';
-                if (txPct > 100) {
+                if (txPct > 100) {{
                     gaugeFill.style.background = '#EF4444';
-                } else if (txPct > 85) {
+                }} else if (txPct > 85) {{
                     gaugeFill.style.background = '#F59E0B';
-                } else {
+                }} else {{
                     gaugeFill.style.background = '#00D68F';
-                }
-            }
-            if (gaugeLoadNum) {
-                gaugeLoadNum.innerText = `${loadVal.toFixed(1)} kW / ${txPct.toFixed(1)}%`;
-            }
+                }}
+            }}
+            if (gaugeLoadNum) {{
+                gaugeLoadNum.innerText = `${{loadVal.toFixed(1)}} kW / ${{txPct.toFixed(1)}}%`;
+            }}
 
             // Mimic SVG dynamic updates
             const mimicDispKw = document.getElementById('mimic-disp-kw');
-            if (mimicDispKw) mimicDispKw.innerText = `${flexVal.toFixed(2)} kW`;
+            if (mimicDispKw) mimicDispKw.innerText = `${{flexVal.toFixed(2)}} kW`;
 
             const tailVoltMimic = document.getElementById('tail-volt-mimic');
-            if (tailVoltMimic) tailVoltMimic.innerText = `${voltVal.toFixed(1)} V (${voltVal < 216 ? 'SAG ALARM' : 'OK'})`;
+            if (tailVoltMimic) tailVoltMimic.innerText = `${{voltVal.toFixed(1)}} V (${{voltVal < 216 ? 'SAG ALARM' : 'OK'}})`;
 
             const vcbLines = document.getElementById('vcb-injection-lines');
-            if (vcbLines) {
+            if (vcbLines) {{
                 vcbLines.style.opacity = flexVal > 0 ? '1' : '0.15';
-            }
-        }
+            }}
+        }}
 
         // Render SCADA Trend Charts
-        function initCharts(b) {
-            const commonScales = {
-                x: {
-                    grid: { color: 'rgba(255, 255, 255, 0.04)' },
-                    ticks: { color: '#64748B', font: { family: "'JetBrains Mono', monospace", size: 10 } }
-                },
-                y: {
-                    grid: { color: 'rgba(255, 255, 255, 0.05)' },
-                    ticks: { color: '#64748B', font: { family: "'JetBrains Mono', monospace", size: 10 } }
-                }
-            };
+        function initCharts(b) {{
+            const commonScales = {{
+                x: {{
+                    grid: {{ color: 'rgba(255, 255, 255, 0.04)' }},
+                    ticks: {{ color: '#64748B', font: {{ family: "'JetBrains Mono', monospace", size: 10 }} }}
+                }},
+                y: {{
+                    grid: {{ color: 'rgba(255, 255, 255, 0.05)' }},
+                    ticks: {{ color: '#64748B', font: {{ family: "'JetBrains Mono', monospace", size: 10 }} }}
+                }}
+            }};
 
-            const commonOptions = (title) => ({
+            const commonOptions = (title) => ({{
                 responsive: true,
                 maintainAspectRatio: false,
                 animation: false,
-                interaction: { mode: 'index', intersect: false },
-                plugins: {
-                    legend: { labels: { color: '#94A3B8', font: { family: "'Inter', sans-serif", size: 11 } } },
-                    tooltip: {
+                interaction: {{ mode: 'index', intersect: false }},
+                plugins: {{
+                    legend: {{ labels: {{ color: '#94A3B8', font: {{ family: "'Inter', sans-serif", size: 11 }} }} }},
+                    tooltip: {{
                         backgroundColor: '#0F172A',
                         titleColor: '#FFFFFF',
                         bodyColor: '#94A3B8',
                         borderColor: '#1E293B',
                         borderWidth: 1,
                         padding: 8
-                    }
-                },
+                    }}
+                }},
                 scales: commonScales
-            });
+            }});
 
             // 1. Demand Chart
             const ctx1 = document.getElementById('chart-demand').getContext('2d');
-            charts.demand = new Chart(ctx1, {
+            charts.demand = new Chart(ctx1, {{
                 type: 'line',
-                data: {
+                data: {{
                     labels: b.labels,
                     datasets: [
-                        {
+                        {{
                             label: 'Baseline Unmanaged Load (kW)',
                             data: b.baseline_load,
                             borderColor: '#EF4444',
@@ -1856,8 +1880,8 @@
                             borderDash: [5, 5],
                             pointRadius: 0,
                             fill: false
-                        },
-                        {
+                        }},
+                        {{
                             label: 'SAANJH Controlled Load (kW)',
                             data: b.saanjh_load,
                             borderColor: '#00D68F',
@@ -1865,16 +1889,16 @@
                             borderWidth: 2.5,
                             pointRadius: 0,
                             fill: true
-                        },
-                        {
+                        }},
+                        {{
                             label: 'Solar PV Cliff Generation (kW)',
                             data: b.solar_gen,
                             borderColor: '#F59E0B',
                             borderWidth: 2,
                             pointRadius: 0,
                             fill: false
-                        },
-                        {
+                        }},
+                        {{
                             label: 'Transformer Safe Thermal Limit (80.75 kW)',
                             data: b.labels.map(() => 80.75),
                             borderColor: '#64748B',
@@ -1882,28 +1906,28 @@
                             borderDash: [8, 4],
                             pointRadius: 0,
                             fill: false
-                        }
+                        }}
                     ]
-                },
+                }},
                 options: commonOptions('Active Power (kW)')
-            });
+            }});
 
             // 2. Voltage Chart
             const ctx2 = document.getElementById('chart-voltage').getContext('2d');
-            charts.voltage = new Chart(ctx2, {
+            charts.voltage = new Chart(ctx2, {{
                 type: 'line',
-                data: {
+                data: {{
                     labels: b.labels,
                     datasets: [
-                        {
+                        {{
                             label: 'Baseline Sag (Node 60)',
                             data: b.baseline_voltage,
                             borderColor: '#EF4444',
                             borderWidth: 2,
                             borderDash: [4, 4],
                             pointRadius: 0
-                        },
-                        {
+                        }},
+                        {{
                             label: 'SAANJH Stabilized Voltage (Node 60)',
                             data: b.saanjh_voltage,
                             borderColor: '#38BDF8',
@@ -1911,34 +1935,34 @@
                             borderWidth: 2.5,
                             pointRadius: 0,
                             fill: true
-                        },
-                        {
+                        }},
+                        {{
                             label: 'Statutory Lower Limit (216V)',
                             data: b.labels.map(() => 216),
                             borderColor: '#F59E0B',
                             borderWidth: 1.5,
                             borderDash: [6, 4],
                             pointRadius: 0
-                        }
+                        }}
                     ]
-                },
-                options: {
+                }},
+                options: {{
                     ...commonOptions('RMS Volts'),
-                    scales: {
+                    scales: {{
                         ...commonScales,
-                        y: { ...commonScales.y, min: 212, max: 242 }
-                    }
-                }
-            });
+                        y: {{ ...commonScales.y, min: 212, max: 242 }}
+                    }}
+                }}
+            }});
 
             // 3. Flex Chart
             const ctx3 = document.getElementById('chart-flex').getContext('2d');
-            charts.flex = new Chart(ctx3, {
+            charts.flex = new Chart(ctx3, {{
                 type: 'line',
-                data: {
+                data: {{
                     labels: b.labels,
                     datasets: [
-                        {
+                        {{
                             label: 'Flexibility Dispatched (kW)',
                             data: b.flex_delivered,
                             borderColor: '#00D68F',
@@ -1946,50 +1970,50 @@
                             borderWidth: 2,
                             pointRadius: 0,
                             fill: true
-                        },
-                        {
+                        }},
+                        {{
                             label: 'Total Available Fleet Flex (kW)',
                             data: b.flex_available,
                             borderColor: '#A855F7',
                             borderWidth: 1.5,
                             borderDash: [4, 4],
                             pointRadius: 0
-                        }
+                        }}
                     ]
-                },
+                }},
                 options: commonOptions('Power (kW)')
-            });
+            }});
 
             // 4. XGBoost Loss Chart
             const ctx4 = document.getElementById('chart-xgb').getContext('2d');
-            charts.xgb = new Chart(ctx4, {
+            charts.xgb = new Chart(ctx4, {{
                 type: 'line',
-                data: {
+                data: {{
                     labels: b.xgb_iterations.map(i => 'Iter ' + i),
                     datasets: [
-                        {
+                        {{
                             label: 'Validation RMSE (kW)',
                             data: b.xgb_val_metric,
                             borderColor: '#00D68F',
                             borderWidth: 2.5,
                             pointRadius: 0
-                        },
-                        {
+                        }},
+                        {{
                             label: 'Training RMSE (kW)',
                             data: b.xgb_train_metric,
                             borderColor: '#64748B',
                             borderWidth: 1.5,
                             borderDash: [4, 4],
                             pointRadius: 0
-                        }
+                        }}
                     ]
-                },
+                }},
                 options: commonOptions('Loss (RMSE kW)')
-            });
-        }
+            }});
+        }}
 
         // Setup 60-Household Fleet Matrix Table
-        function setupFleetTable(fleet) {
+        function setupFleetTable(fleet) {{
             const tbody = document.getElementById('fleet-table-body');
             const searchInput = document.getElementById('fleet-search-input');
             const countBadge = document.getElementById('fleet-count-badge');
@@ -1997,11 +2021,11 @@
 
             let activeFilter = 'all';
 
-            function renderTable() {
+            function renderTable() {{
                 const searchTxt = searchInput.value.trim().toUpperCase();
                 tbody.innerHTML = '';
                 
-                const filtered = fleet.filter(h => {
+                const filtered = fleet.filter(h => {{
                     // Filter tag
                     if (activeFilter === 'battery' && !h.has_battery) return false;
                     if (activeFilter === 'participating' && !h.participated) return false;
@@ -2012,56 +2036,62 @@
                     if (searchTxt && !h.id.includes(searchTxt)) return false;
 
                     return true;
-                });
+                }});
 
-                countBadge.innerText = `Showing ${filtered.length} of 60 nodes`;
+                countBadge.innerText = `Showing ${{filtered.length}} of 60 nodes`;
 
-                filtered.forEach(h => {
+                filtered.forEach(h => {{
                     const tr = document.createElement('tr');
                     
                     const socPct = (h.final_soc * 100).toFixed(0);
                     const socColor = h.final_soc >= 0.8 ? '#10B981' : (h.final_soc >= 0.7 ? '#F59E0B' : '#EF4444');
                     
                     let statusBadge = '<span class="tag-pill passive">PASSIVE LOAD</span>';
-                    if (h.opted_out) {
+                    if (h.opted_out) {{
                         statusBadge = '<span class="tag-pill optout">OPTED OUT</span>';
-                    } else if (h.participated) {
+                    }} else if (h.participated) {{
                         statusBadge = '<span class="tag-pill participating">PARTICIPATING</span>';
-                    }
+                    }}
 
                     tr.innerHTML = `
-                        <td style="font-weight:700; color:#FFFFFF;">${h.id}</td>
-                        <td>${h.has_battery ? '<span style="color:#00D68F;">Installed (4.0 kWh)</span>' : '<span style="color:#64748B;">None</span>'}</td>
-                        <td>${h.has_solar ? '<span style="color:#F59E0B;">Installed (1.5 kWp)</span>' : '<span style="color:#64748B;">None</span>'}</td>
+                        <td style="font-weight:700; color:#FFFFFF;">${{h.id}}</td>
+                        <td>${{h.has_battery ? '<span style="color:#00D68F;">Installed (4.0 kWh)</span>' : '<span style="color:#64748B;">None</span>'}}</td>
+                        <td>${{h.has_solar ? '<span style="color:#F59E0B;">Installed (1.5 kWp)</span>' : '<span style="color:#64748B;">None</span>'}}</td>
                         <td>
                             <div class="soc-bar-container">
-                                <div class="soc-bar-fill" style="width: ${socPct}%; background: ${socColor};"></div>
+                                <div class="soc-bar-fill" style="width: ${{socPct}}%; background: ${{socColor}};"></div>
                                 <div class="soc-bar-reserve" title="Reserve Floor 70%"></div>
                             </div>
-                            <span>${(h.init_soc * 100).toFixed(0)}% → ${socPct}%</span>
+                            <span>${{(h.init_soc * 100).toFixed(0)}}% → ${{socPct}}%</span>
                         </td>
                         <td style="color:#EF4444; font-weight:600;">70.0% Reserve Floor</td>
-                        <td>${h.avail_kw.toFixed(2)} kW</td>
-                        <td style="font-weight:600; color:#FFFFFF;">${h.delivered_kwh.toFixed(3)} kWh</td>
-                        <td>${statusBadge}</td>
-                        <td style="color:#00D68F; font-weight:700;">₹${h.comp_inr.toFixed(2)}</td>
+                        <td>${{h.avail_kw.toFixed(2)}} kW</td>
+                        <td style="font-weight:600; color:#FFFFFF;">${{h.delivered_kwh.toFixed(3)}} kWh</td>
+                        <td>${{statusBadge}}</td>
+                        <td style="color:#00D68F; font-weight:700;">₹${{h.comp_inr.toFixed(2)}}</td>
                     `;
                     tbody.appendChild(tr);
-                });
-            }
+                }});
+            }}
 
-            filterBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
+            filterBtns.forEach(btn => {{
+                btn.addEventListener('click', () => {{
                     filterBtns.forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
                     activeFilter = btn.getAttribute('data-filter');
                     renderTable();
-                });
-            });
+                }});
+            }});
 
             searchInput.addEventListener('input', renderTable);
             renderTable();
-        }
+        }}
     </script>
 </body>
 </html>
+'''
+
+with open('docs/index.html', 'w', encoding='utf-8') as f:
+    f.write(html_content)
+
+print(f"Successfully generated docs/index.html ({len(html_content)} bytes)")
