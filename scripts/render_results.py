@@ -75,6 +75,103 @@ RENDERERS = {
 }
 
 
+SCEN = {"peri_urban_low_income": "Peri-urban low-income DT", "mixed_urban": "Mixed urban DT"}
+SEG = {"low_income": "Low-income", "middle": "Middle", "affluent": "Affluent"}
+
+
+def _m(block, key):
+    v = block.get(key)
+    return None if v is None else v["mean"]
+
+
+def _rng(block, key, scale=1.0, fmt="{:.1f}", unit=""):
+    v = block.get(key)
+    if v is None:
+        return "–"
+    f = lambda x: fmt.format(x * scale) + unit
+    return f"{f(v['mean'])} ({f(v['p10'])}–{f(v['p90'])})"
+
+
+def render_annual(res):
+    a = res["annual"]
+    lines = [f"*{a['label']}. Mean over {a['seeds']} Monte Carlo seeds, 365 days at 15-minute resolution, "
+             f"weather for {a['site']['name'].title()} {a['site']['year']}; P10–P90 across seeds in brackets.*", ""]
+    for name, s in a["scenarios"].items():
+        b, v = s["baseline"], s["saanjh"]
+        cal = s["calibration"]
+        lines += [
+            f"**{SCEN.get(name, name)}**: {s['homes']} homes on a {s['transformer_kva']} kVA DT "
+            f"(segment mix {', '.join(f'{SEG[k]} {int(round(x * 100))}%' for k, x in s['segment_mix'].items())}). "
+            f"Baseline calibrated to ESMI '{s['esmi_category'].replace('_', ' ')}' locations: "
+            f"{cal['evening_minutes']:.0f} shortfall outage minutes per evening (target {cal['target_evening_minutes']:.1f}), "
+            f"{cal['daily_minutes']:.0f} per day (target {cal['target_daily_minutes']:.1f}).",
+            "",
+            "| Metric | Baseline | SAANJH |",
+            "|---|---:|---:|",
+            f"| Essential-supply availability in deficit windows | {_rng(b, 'essential_supply_availability', 100, '{:.0f}', '%')} | {_rng(v, 'essential_supply_availability', 100, '{:.0f}', '%')} |",
+            f"| Outage hours per home per year (full disconnection) | {_rng(b, 'outage_hours_per_home')} | {_rng(v, 'outage_hours_per_home')} |",
+            f"| Hours on essential band per home per year | {_rng(b, 'banded_hours_per_home')} | {_rng(v, 'banded_hours_per_home')} |",
+            f"| Energy not served (kWh/year) | {_rng(b, 'energy_not_served_kwh', fmt='{:,.0f}')} | {_rng(v, 'energy_not_served_kwh', fmt='{:,.0f}')} |",
+            f"| Energy curtailed above the band (kWh/year) | {_rng(b, 'energy_curtailed_above_band_kwh', fmt='{:,.0f}')} | {_rng(v, 'energy_curtailed_above_band_kwh', fmt='{:,.0f}')} |",
+            f"| DT peak loading | {_m(b, 'dt_peak_loading_pct'):.0f}% | {_m(v, 'dt_peak_loading_pct'):.0f}% |",
+            f"| Fairness of outage hours across homes (Gini, 0 = equal) | {_m(b, 'fairness_outage_gini'):.2f} | {_m(v, 'fairness_outage_gini'):.2f} |",
+            "",
+            "| Essential-supply availability by segment | Baseline | SAANJH |",
+            "|---|---:|---:|",
+        ]
+        for seg in [k for k in SEG if k in b["by_segment"]]:
+            sb, sv = b["by_segment"][seg], v["by_segment"][seg]
+            lines.append(f"| {SEG.get(seg, seg)} | {sb['essential_supply_availability']['mean'] * 100:.0f}% | "
+                         f"{sv['essential_supply_availability']['mean'] * 100:.0f}% |")
+        f = v["flexibility"]
+        cb = v.get("community_battery", {})
+        lines += [
+            "",
+            f"Household-hours of essential supply preserved per year: "
+            f"{s['essential_household_hours_preserved']['mean']:,.0f}. "
+            f"Flexibility delivered per year: {f['demand_flexibility_mwh']['mean']:.1f} MWh of demand flexibility "
+            f"(inverter relays {f['inverter_relay_kwh']['mean'] / 1000:.1f} MWh, essential band "
+            f"{f['essential_band_kwh']['mean'] / 1000:.2f} MWh, appliances "
+            f"{(f['appliance_deferred_kwh']['mean'] + f['ac_setpoint_kwh']['mean']) / 1000:.2f} MWh) plus "
+            f"{f['community_battery_kwh']['mean'] / 1000:.1f} MWh from the community battery"
+            + (f" ({cb['equivalent_full_cycles']['mean']:.0f} equivalent full cycles)" if cb else "")
+            + f". Extra cycles on household inverter batteries (average over homes with an inverter): "
+            f"{v['household_battery_cycles_added_per_year']['mean']:.1f} per year.",
+            "",
+        ]
+    return "\n".join(lines).rstrip()
+
+
+def render_sensitivity(res):
+    sens = res.get("sensitivity")
+    if not sens:
+        return "*Sensitivity runs not yet available.*"
+    label = {"essential_band_w": "Essential band floor (W)", "community_battery_kwh": "Community battery (kWh)",
+             "inverter_relay_participation": "Inverter owners enrolled", "segment_mix": "Segment mix",
+             "deficit_share": "Share of outages caused by shortfall", "shortfall_depth": "Shortfall depth",
+             "forecast": "Battery reserve policy"}
+    lines = [f"*SIMULATED. Each row changes one input; mean of {sens['seeds']} seeds. "
+             "Availability = essential-supply availability in deficit windows.*", "",
+             "| Input | Value | " + " | ".join(f"{SCEN[n]}: baseline / SAANJH availability, SAANJH outage h" for n in sens["scenarios"]) + " |",
+             "|---|---|" + "---:|" * len(sens["scenarios"])]
+    names = list(sens["scenarios"])
+    params = list(sens["scenarios"][names[0]])
+    for p in params:
+        for i, row in enumerate(sens["scenarios"][names[0]][p]):
+            cells = []
+            for n in names:
+                r = sens["scenarios"][n][p][i]
+                cells.append(f"{r['baseline']['essential_supply_availability']['mean'] * 100:.0f}% / "
+                             f"{r['saanjh']['essential_supply_availability']['mean'] * 100:.0f}%, "
+                             f"{r['saanjh']['outage_hours_per_home']['mean']:.1f} h")
+            lines.append(f"| {label.get(p, p)} | {row['value']} | " + " | ".join(cells) + " |")
+    return "\n".join(lines)
+
+
+RENDERERS["annual"] = render_annual
+RENDERERS["sensitivity"] = render_sensitivity
+
+
 def load_results():
     with open(RESULTS, "r", encoding="utf-8") as f:
         return json.load(f)

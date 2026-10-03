@@ -45,6 +45,7 @@ class Decision:
     battery_mode: str = None
     covered: dict = field(default_factory=dict)
     reason: str = ""
+    peak_before_kw: float = None
 
 
 def _take_until(order, values, need):
@@ -75,7 +76,7 @@ class DeficitDispatcher:
         self.charge_window = cfg["community_battery"]["charge_window_h"]
 
     def plan(self, loads, t, hour, limit_kw, pv_kw, temp_c, event_energy_kwh=None,
-             charge_target_soc=None):
+             charge_target_soc=None, day_plan=None):
         n = self.fleet.n
         eligible = ~self.fleet.opted_out
         d = loads.total[:, t]
@@ -92,6 +93,17 @@ class DeficitDispatcher:
 
         if gap <= 0:
             self.event_age = 0
+            # Evening peak shaving with energy above the day's deficit reserve.
+            win = day_plan.get("arbitrage_window_h") if day_plan else None
+            if self.cb is not None and win and win[0] <= hour < win[1]:
+                spare = self.cb.usable_kwh() * self.cb.eta - day_plan["reserve_kwh"]
+                hours_left = max(self.step_h, win[1] - hour)
+                kw = min(self.cb.power_limit_kw(temp_c), max(0.0, spare) / hours_left, max(0.0, draw0.sum()))
+                if kw > 0.05:
+                    dec.cb_kw = kw
+                    dec.peak_before_kw = float(draw0.sum())
+                    dec.reason = f"Peak shaving {kw:.1f} kW; {day_plan['reserve_kwh']:.0f} kWh kept for deficits."
+                return dec
             # Spare supply: recharge the community battery in solar hours.
             if self.cb is not None:
                 in_window = self.charge_window[0] <= hour < self.charge_window[1]
@@ -115,10 +127,11 @@ class DeficitDispatcher:
         # Step 1b: inverter relays (already-open relays keep delivering).
         avail = self.inv.available_kw(bu, self.step_h)
         relay_value = avail + np.where(self.inv.relay_open, 0.0, rech)   # opening also stops recharge
-        already = self.inv.relay_open & eligible & (avail > 0)
+        enrolled = eligible & self.fleet.relay_enrolled
+        already = self.inv.relay_open & enrolled & (avail > 0)
         remaining -= relay_value[already].sum()
         draw -= np.where(already, relay_value, 0.0)
-        cand = np.where(eligible & self.inv.mask & ~self.inv.relay_open & (avail > 0))[0]
+        cand = np.where(enrolled & ~self.inv.relay_open & (avail > 0))[0]
         if remaining > 0 and len(cand):
             order = cand[np.lexsort((-avail[cand], self.inv.dispatch_steps[cand]))]
             picked, got = _take_until(order, relay_value, remaining)

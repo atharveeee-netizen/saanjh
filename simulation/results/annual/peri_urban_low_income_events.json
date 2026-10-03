@@ -1,0 +1,5044 @@
+[
+ {
+  "kind": "event",
+  "id": "EV-PER-0102-91",
+  "date": "2023-01-02",
+  "start": "22:45",
+  "entries": [
+   {
+    "time": "22:45",
+    "text": "Gap 6.0 kW. Inverter relays carried 1.9 kW. Community battery 4.1 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 6.0084229927743,
+  "blocks": 5,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 3.859503466070209,
+  "relay_kwh": 1.506389959564276,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0103-81",
+  "date": "2023-01-03",
+  "start": "20:15",
+  "entries": [
+   {
+    "time": "20:15",
+    "text": "Gap 8.5 kW. Inverter relays carried 2.1 kW. Community battery 6.4 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 8.508611369297647,
+  "blocks": 15,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 18.036092387891035,
+  "relay_kwh": 6.182548487547002,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0105-85",
+  "date": "2023-01-05",
+  "start": "21:15",
+  "entries": [
+   {
+    "time": "21:15",
+    "text": "Gap 8.8 kW. Inverter relays carried 2.1 kW. Community battery 6.8 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 8.883163362421655,
+  "blocks": 6,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 10.049067078646999,
+  "relay_kwh": 3.0539762967019644,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "22:45"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0108-83",
+  "date": "2023-01-08",
+  "start": "20:45",
+  "entries": [
+   {
+    "time": "20:45",
+    "text": "Gap 12.5 kW. Inverter relays carried 2.1 kW. Community battery 10.4 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 12.499329806334508,
+  "blocks": 11,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 22.95705897479492,
+  "relay_kwh": 5.017808718897636,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "23:30"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0110-81",
+  "date": "2023-01-10",
+  "start": "20:15",
+  "entries": [
+   {
+    "time": "20:15",
+    "text": "Gap 12.7 kW. Inverter relays carried 2.1 kW. Community battery 10.7 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 12.733290422504936,
+  "blocks": 15,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 31.41227032141543,
+  "relay_kwh": 6.19529403900021,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0123-80",
+  "date": "2023-01-23",
+  "start": "20:00",
+  "entries": [
+   {
+    "time": "20:00",
+    "text": "Gap 11.6 kW. Inverter relays carried 2.0 kW. Community battery 9.6 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 11.58055364761995,
+  "blocks": 7,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 15.0041332284098,
+  "relay_kwh": 3.569684800954501,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "21:45"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0123-90",
+  "date": "2023-01-23",
+  "start": "22:30",
+  "entries": [
+   {
+    "time": "22:30",
+    "text": "Gap 17.6 kW. Inverter relays carried 5.0 kW. Community battery 12.6 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 17.561960141344656,
+  "blocks": 2,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 5.908427123790091,
+  "relay_kwh": 0.932493888358134,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "23:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0124-74",
+  "date": "2023-01-24",
+  "start": "18:30",
+  "entries": [
+   {
+    "time": "18:30",
+    "text": "Gap 11.9 kW. Inverter relays carried 1.5 kW. Deferred 0.8 kW of appliances. Community battery 9.6 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 19.271260711841673,
+  "blocks": 14,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 47.31255599769266,
+  "relay_kwh": 6.268495996539973,
+  "appliance_kwh": 0.38796609504637586,
+  "lowest_band_w": null,
+  "end": "22:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0129-83",
+  "date": "2023-01-29",
+  "start": "20:45",
+  "entries": [
+   {
+    "time": "20:45",
+    "text": "Gap 7.3 kW. Inverter relays carried 2.0 kW. Community battery 5.3 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 7.330582750499424,
+  "blocks": 4,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 4.680431778110664,
+  "relay_kwh": 2.0504353453596202,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "21:45"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0130-80",
+  "date": "2023-01-30",
+  "start": "20:00",
+  "entries": [
+   {
+    "time": "20:00",
+    "text": "Gap 20.4 kW. Inverter relays carried 2.0 kW. Community battery 18.5 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 20.40598939005196,
+  "blocks": 3,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 12.972263374111652,
+  "relay_kwh": 1.5183515549492184,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "20:45"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0203-79",
+  "date": "2023-02-03",
+  "start": "19:45",
+  "entries": [
+   {
+    "time": "19:45",
+    "text": "Gap 17.3 kW. Inverter relays carried 1.8 kW. Community battery 15.4 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 17.271298913995256,
+  "blocks": 2,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 7.477959684093702,
+  "relay_kwh": 0.9666484625989265,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "20:15"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0207-75",
+  "date": "2023-02-07",
+  "start": "18:45",
+  "entries": [
+   {
+    "time": "18:45",
+    "text": "Gap 8.8 kW. Inverter relays carried 1.9 kW. Community battery 6.9 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 10.536175691865488,
+  "blocks": 11,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 20.262896036019253,
+  "relay_kwh": 5.292991045364803,
+  "appliance_kwh": 0.18855306911310193,
+  "lowest_band_w": null,
+  "end": "21:30"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0216-75",
+  "date": "2023-02-16",
+  "start": "18:45",
+  "entries": [
+   {
+    "time": "18:45",
+    "text": "Gap 11.9 kW. Inverter relays carried 1.9 kW. Community battery 10.0 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 12.87874144150577,
+  "blocks": 2,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 5.068239410879209,
+  "relay_kwh": 0.9360063626220891,
+  "appliance_kwh": 0.18855306911310193,
+  "lowest_band_w": null,
+  "end": "19:15"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0220-78",
+  "date": "2023-02-20",
+  "start": "19:30",
+  "entries": [
+   {
+    "time": "19:30",
+    "text": "Gap 13.1 kW. Inverter relays carried 1.9 kW. Community battery 11.2 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 13.313161868226452,
+  "blocks": 11,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 27.768514532476665,
+  "relay_kwh": 5.39008261334901,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "22:15"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0222-26",
+  "date": "2023-02-22",
+  "start": "06:30",
+  "entries": [
+   {
+    "time": "06:30",
+    "text": "Gap 8.8 kW. Inverter relays carried 0.7 kW. Community battery 8.1 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 8.79965405321304,
+  "blocks": 4,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 5.910379093477066,
+  "relay_kwh": 0.4670568776779223,
+  "appliance_kwh": 1.12749099509195,
+  "lowest_band_w": null,
+  "end": "07:30"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0223-77",
+  "date": "2023-02-23",
+  "start": "19:15",
+  "entries": [
+   {
+    "time": "19:15",
+    "text": "Gap 16.7 kW. Inverter relays carried 1.9 kW. Community battery 14.9 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 17.51890900396078,
+  "blocks": 17,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 53.328185016044344,
+  "relay_kwh": 7.133817204940575,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "23:30"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0226-78",
+  "date": "2023-02-26",
+  "start": "19:30",
+  "entries": [
+   {
+    "time": "19:30",
+    "text": "Gap 15.8 kW. Inverter relays carried 1.8 kW. Community battery 13.9 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 15.751282477799975,
+  "blocks": 18,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 48.414261892984776,
+  "relay_kwh": 7.093432969628367,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0301-76",
+  "date": "2023-03-01",
+  "start": "19:00",
+  "entries": [
+   {
+    "time": "19:00",
+    "text": "Gap 19.8 kW. Inverter relays carried 2.4 kW. Community battery 17.4 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 21.25574859269895,
+  "blocks": 3,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 13.615005807029092,
+  "relay_kwh": 1.7842052537551196,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "19:45"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0303-83",
+  "date": "2023-03-03",
+  "start": "20:45",
+  "entries": [
+   {
+    "time": "20:45",
+    "text": "Gap 14.1 kW. Inverter relays carried 2.6 kW. Community battery 11.5 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 14.117213898607652,
+  "blocks": 13,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 31.949953792479768,
+  "relay_kwh": 6.649944547724212,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0305-76",
+  "date": "2023-03-05",
+  "start": "19:00",
+  "entries": [
+   {
+    "time": "19:00",
+    "text": "Gap 17.8 kW. Inverter relays carried 2.4 kW. Community battery 15.4 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 20.491282425121035,
+  "blocks": 7,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 29.602707889892372,
+  "relay_kwh": 4.31622690768659,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "20:45"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0307-86",
+  "date": "2023-03-07",
+  "start": "21:30",
+  "entries": [
+   {
+    "time": "21:30",
+    "text": "Gap 16.9 kW. Inverter relays carried 2.6 kW. Community battery 14.3 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 17.53311875177483,
+  "blocks": 10,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 33.345900448512076,
+  "relay_kwh": 5.156065465670629,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0308-16",
+  "date": "2023-03-08",
+  "start": "04:00",
+  "entries": [
+   {
+    "time": "04:00",
+    "text": "Gap 7.8 kW. Inverter relays carried 0.9 kW. Community battery 6.9 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 8.285190312058138,
+  "blocks": 8,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 13.989310531214022,
+  "relay_kwh": 2.078742100705397,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "06:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0310-74",
+  "date": "2023-03-10",
+  "start": "18:30",
+  "entries": [
+   {
+    "time": "18:30",
+    "text": "Gap 8.9 kW. Inverter relays carried 2.1 kW. Deferred 0.8 kW of appliances. Community battery 6.1 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 12.576527269295163,
+  "blocks": 13,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 28.669972722630778,
+  "relay_kwh": 6.9177517458948685,
+  "appliance_kwh": 0.19941302593327392,
+  "lowest_band_w": null,
+  "end": "21:45"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0311-79",
+  "date": "2023-03-11",
+  "start": "19:45",
+  "entries": [
+   {
+    "time": "19:45",
+    "text": "Gap 15.8 kW. Inverter relays carried 2.4 kW. Community battery 13.4 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 16.31136490246245,
+  "blocks": 3,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 10.117250336475664,
+  "relay_kwh": 1.8662092048473602,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "20:30"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0312-86",
+  "date": "2023-03-12",
+  "start": "21:30",
+  "entries": [
+   {
+    "time": "21:30",
+    "text": "Gap 11.7 kW. Inverter relays carried 2.6 kW. Community battery 9.1 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 11.75672184531252,
+  "blocks": 10,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 19.006049940106788,
+  "relay_kwh": 5.184983812423059,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0313-75",
+  "date": "2023-03-13",
+  "start": "18:45",
+  "entries": [
+   {
+    "time": "18:45",
+    "text": "Gap 11.7 kW. Inverter relays carried 2.4 kW. Community battery 9.4 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 14.935853464666707,
+  "blocks": 16,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 45.33098418714254,
+  "relay_kwh": 7.979059672067719,
+  "appliance_kwh": 0.2168164720591446,
+  "lowest_band_w": null,
+  "end": "22:45"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0314-85",
+  "date": "2023-03-14",
+  "start": "21:15",
+  "entries": [
+   {
+    "time": "21:15",
+    "text": "Gap 14.0 kW. Inverter relays carried 2.6 kW. Community battery 11.5 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 14.633522128124,
+  "blocks": 7,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 20.109805896147396,
+  "relay_kwh": 4.431041732703962,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "23:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0317-83",
+  "date": "2023-03-17",
+  "start": "20:45",
+  "entries": [
+   {
+    "time": "20:45",
+    "text": "Gap 12.1 kW. Inverter relays carried 2.6 kW. Community battery 9.5 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 12.052802994719023,
+  "blocks": 13,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 25.810037051831767,
+  "relay_kwh": 6.679490203799068,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0318-75",
+  "date": "2023-03-18",
+  "start": "18:45",
+  "entries": [
+   {
+    "time": "18:45",
+    "text": "Gap 15.8 kW. Inverter relays carried 2.4 kW. Deferred 0.8 kW of appliances. Community battery 12.6 kW (full support)."
+   },
+   {
+    "time": "23:30",
+    "text": "Gap 13.0 kW. Held 0.1 kW of appliance rebound. Inverter relays carried 1.4 kW. Band 500 W applied to 2 homes because earlier steps left 1.9 kW uncovered. Disconnected 37 homes (9.7 kW) after all other steps were exhausted."
+   },
+   {
+    "time": "23:45",
+    "text": "Gap 13.2 kW. Held 0.1 kW of appliance rebound. Inverter relays carried 0.3 kW. Band 500 W applied to 3 homes because earlier steps left 1.9 kW uncovered. Disconnected 74 homes (11.0 kW) after all other steps were exhausted."
+   }
+  ],
+  "peak_gap_kw": 22.029286842996417,
+  "blocks": 21,
+  "homes_banded_max": 3,
+  "homes_shed_max": 74,
+  "battery_kwh": 73.65844058346302,
+  "relay_kwh": 8.853770036793092,
+  "appliance_kwh": 0.308540375738265,
+  "lowest_band_w": 500,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0319-81",
+  "date": "2023-03-19",
+  "start": "20:15",
+  "entries": [
+   {
+    "time": "20:15",
+    "text": "Gap 10.8 kW. Inverter relays carried 2.6 kW. Community battery 8.2 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 10.766436472680347,
+  "blocks": 2,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 4.076722236037163,
+  "relay_kwh": 1.2926445788260883,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "20:45"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0319-86",
+  "date": "2023-03-19",
+  "start": "21:30",
+  "entries": [
+   {
+    "time": "21:30",
+    "text": "Gap 17.4 kW. Inverter relays carried 5.5 kW. Community battery 11.9 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 17.3823333132583,
+  "blocks": 3,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 8.96492966378279,
+  "relay_kwh": 1.9332432706836027,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "22:15"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0319-90",
+  "date": "2023-03-19",
+  "start": "22:30",
+  "entries": [
+   {
+    "time": "22:30",
+    "text": "Gap 16.9 kW. Inverter relays carried 4.8 kW. Community battery 12.2 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 16.943217393098287,
+  "blocks": 4,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 10.550097962617418,
+  "relay_kwh": 1.8437811804173396,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "23:30"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0323-80",
+  "date": "2023-03-23",
+  "start": "20:00",
+  "entries": [
+   {
+    "time": "20:00",
+    "text": "Gap 13.7 kW. Inverter relays carried 2.5 kW. Community battery 11.2 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 14.613230296294226,
+  "blocks": 16,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 42.13428618094942,
+  "relay_kwh": 7.76070189825859,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0324-75",
+  "date": "2023-03-24",
+  "start": "18:45",
+  "entries": [
+   {
+    "time": "18:45",
+    "text": "Gap 15.4 kW. Inverter relays carried 2.4 kW. Deferred 0.8 kW of appliances. Community battery 12.2 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 18.496867228699223,
+  "blocks": 21,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 66.63550538029342,
+  "relay_kwh": 8.976168673846836,
+  "appliance_kwh": 0.37546545550343124,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0326-25",
+  "date": "2023-03-26",
+  "start": "06:15",
+  "entries": [
+   {
+    "time": "06:15",
+    "text": "Gap 8.1 kW. Inverter relays carried 1.2 kW. Community battery 7.0 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 9.53241279566597,
+  "blocks": 12,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 19.50803938932077,
+  "relay_kwh": 2.5707911887997503,
+  "appliance_kwh": 1.1532594581208926,
+  "lowest_band_w": null,
+  "end": "09:15"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0326-85",
+  "date": "2023-03-26",
+  "start": "21:15",
+  "entries": [
+   {
+    "time": "21:15",
+    "text": "Gap 17.2 kW. Inverter relays carried 2.6 kW. Community battery 14.6 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 17.213324022742732,
+  "blocks": 11,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 34.585475688779134,
+  "relay_kwh": 5.74224853253713,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0329-77",
+  "date": "2023-03-29",
+  "start": "19:15",
+  "entries": [
+   {
+    "time": "19:15",
+    "text": "Gap 10.0 kW. Inverter relays carried 2.4 kW. Community battery 7.6 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 15.34580273905231,
+  "blocks": 18,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 53.20840328312863,
+  "relay_kwh": 8.336449341557962,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "23:45"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0330-80",
+  "date": "2023-03-30",
+  "start": "20:00",
+  "entries": [
+   {
+    "time": "20:00",
+    "text": "Gap 11.9 kW. Inverter relays carried 2.5 kW. Community battery 9.4 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 20.824410922400734,
+  "blocks": 14,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 38.57184385900488,
+  "relay_kwh": 7.227832060078094,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "23:30"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0402-79",
+  "date": "2023-04-02",
+  "start": "19:45",
+  "entries": [
+   {
+    "time": "19:45",
+    "text": "Gap 14.4 kW. Inverter relays carried 3.0 kW. Community battery 11.4 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 16.26905683007019,
+  "blocks": 12,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 35.69607899394845,
+  "relay_kwh": 7.605519681590461,
+  "appliance_kwh": 0.08660218038504627,
+  "lowest_band_w": null,
+  "end": "22:45"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0403-78",
+  "date": "2023-04-03",
+  "start": "19:30",
+  "entries": [
+   {
+    "time": "19:30",
+    "text": "Gap 18.1 kW. Inverter relays carried 2.9 kW. Community battery 15.2 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 18.155807309671403,
+  "blocks": 5,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 18.39976432661421,
+  "relay_kwh": 3.8543806271328656,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "20:45"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0403-86",
+  "date": "2023-04-03",
+  "start": "21:30",
+  "entries": [
+   {
+    "time": "21:30",
+    "text": "Gap 30.8 kW. Inverter relays carried 6.1 kW. Community battery 24.7 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 30.795961660668063,
+  "blocks": 9,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 53.581175208589734,
+  "relay_kwh": 4.131687016932125,
+  "appliance_kwh": 0.05456367490249553,
+  "lowest_band_w": null,
+  "end": "23:45"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0404-76",
+  "date": "2023-04-04",
+  "start": "19:00",
+  "entries": [
+   {
+    "time": "19:00",
+    "text": "Gap 28.9 kW. Inverter relays carried 3.0 kW. Community battery 25.9 kW (full support)."
+   },
+   {
+    "time": "21:30",
+    "text": "Gap 33.4 kW. Inverter relays carried 2.7 kW. Community battery 26.9 kW (essential only). Band 500 W applied to 20 homes because earlier steps left 3.8 kW uncovered."
+   },
+   {
+    "time": "21:45",
+    "text": "Gap 34.7 kW. Inverter relays carried 0.9 kW. Community battery 0.6 kW (essential only). Band 500 W applied to 24 homes because earlier steps left 5.9 kW uncovered. Disconnected 137 homes (27.6 kW) after all other steps were exhausted."
+   }
+  ],
+  "peak_gap_kw": 34.73952604822057,
+  "blocks": 12,
+  "homes_banded_max": 24,
+  "homes_shed_max": 137,
+  "battery_kwh": 73.58490926142198,
+  "relay_kwh": 7.2791994239319395,
+  "appliance_kwh": 0.019446259146334535,
+  "lowest_band_w": 500,
+  "end": "22:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0409-85",
+  "date": "2023-04-09",
+  "start": "21:15",
+  "entries": [
+   {
+    "time": "21:15",
+    "text": "Gap 12.3 kW. Inverter relays carried 3.2 kW. Community battery 9.2 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 12.523094554855206,
+  "blocks": 11,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 23.848393694859556,
+  "relay_kwh": 6.834004196911612,
+  "appliance_kwh": 0.08730187984399285,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0410-80",
+  "date": "2023-04-10",
+  "start": "20:00",
+  "entries": [
+   {
+    "time": "20:00",
+    "text": "Gap 20.1 kW. Inverter relays carried 3.1 kW. Community battery 17.0 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 23.326590740834348,
+  "blocks": 16,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 71.86118376581832,
+  "relay_kwh": 8.551897888216235,
+  "appliance_kwh": 0.12519270341989563,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0412-84",
+  "date": "2023-04-12",
+  "start": "21:00",
+  "entries": [
+   {
+    "time": "21:00",
+    "text": "Gap 20.8 kW. Inverter relays carried 3.2 kW. Community battery 17.6 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 23.98217081634597,
+  "blocks": 5,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 24.84772603638352,
+  "relay_kwh": 3.9218692513199676,
+  "appliance_kwh": 0.019144263888514822,
+  "lowest_band_w": null,
+  "end": "22:15"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0413-74",
+  "date": "2023-04-13",
+  "start": "18:30",
+  "entries": [
+   {
+    "time": "18:30",
+    "text": "Gap 22.6 kW. Inverter relays carried 2.8 kW. Deferred 0.1 kW of appliances. Community battery 19.7 kW (full support)."
+   },
+   {
+    "time": "21:30",
+    "text": "Gap 32.8 kW. Held 0.1 kW of appliance rebound. Inverter relays carried 1.7 kW. Community battery 2.5 kW (essential only). Band 500 W applied to 26 homes because earlier steps left 5.1 kW uncovered. Disconnected 50 homes (23.8 kW) after all other steps were exhausted."
+   },
+   {
+    "time": "21:45",
+    "text": "Gap 34.0 kW. Held 0.1 kW of appliance rebound. Inverter relays carried 0.3 kW. Band 500 W applied to 32 homes because earlier steps left 6.2 kW uncovered. Disconnected 82 homes (27.6 kW) after all other steps were exhausted."
+   }
+  ],
+  "peak_gap_kw": 34.094126928347805,
+  "blocks": 17,
+  "homes_banded_max": 36,
+  "homes_shed_max": 127,
+  "battery_kwh": 73.55384650738065,
+  "relay_kwh": 8.073355297299813,
+  "appliance_kwh": 0.4165392991240137,
+  "lowest_band_w": 500,
+  "end": "22:45"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0414-75",
+  "date": "2023-04-14",
+  "start": "18:45",
+  "entries": [
+   {
+    "time": "18:45",
+    "text": "Gap 13.4 kW. Inverter relays carried 3.0 kW. Community battery 10.4 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 18.58583292515594,
+  "blocks": 20,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 67.85957112895005,
+  "relay_kwh": 9.589510880257526,
+  "appliance_kwh": 0.04365093992199642,
+  "lowest_band_w": null,
+  "end": "23:45"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0415-85",
+  "date": "2023-04-15",
+  "start": "21:15",
+  "entries": [
+   {
+    "time": "21:15",
+    "text": "Gap 23.5 kW. Inverter relays carried 3.1 kW. Community battery 20.4 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 24.588923145956976,
+  "blocks": 11,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 53.25045506597192,
+  "relay_kwh": 6.855811897335532,
+  "appliance_kwh": 0.05652680589208532,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0416-93",
+  "date": "2023-04-16",
+  "start": "23:15",
+  "entries": [
+   {
+    "time": "23:15",
+    "text": "Gap 17.6 kW. Inverter relays carried 2.4 kW. Deferred 0.1 kW of appliances. Community battery 15.0 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 17.55929539652103,
+  "blocks": 3,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 11.270126895926486,
+  "relay_kwh": 1.630297658371782,
+  "appliance_kwh": 0.10369664609809803,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0420-88",
+  "date": "2023-04-20",
+  "start": "22:00",
+  "entries": [
+   {
+    "time": "22:00",
+    "text": "Gap 33.9 kW. Inverter relays carried 3.3 kW. Deferred 0.1 kW of appliances. Community battery 30.6 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 34.337594728113665,
+  "blocks": 3,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 22.826050359427512,
+  "relay_kwh": 2.4666715058769606,
+  "appliance_kwh": 0.03764893568272191,
+  "lowest_band_w": null,
+  "end": "22:45"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0424-90",
+  "date": "2023-04-24",
+  "start": "22:30",
+  "entries": [
+   {
+    "time": "22:30",
+    "text": "Gap 23.8 kW. Inverter relays carried 3.1 kW. Deferred 0.1 kW of appliances. Community battery 20.6 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 23.77926077667245,
+  "blocks": 2,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 9.944837935881997,
+  "relay_kwh": 1.5360166963613333,
+  "appliance_kwh": 0.060113997738027856,
+  "lowest_band_w": null,
+  "end": "23:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0426-95",
+  "date": "2023-04-26",
+  "start": "23:45",
+  "entries": [
+   {
+    "time": "23:45",
+    "text": "Gap 9.7 kW. Inverter relays carried 1.8 kW. Community battery 7.8 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 9.674950200357927,
+  "blocks": 1,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 1.9518011342076995,
+  "relay_kwh": 0.4572132863086149,
+  "appliance_kwh": 0.009723129573167268,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0428-83",
+  "date": "2023-04-28",
+  "start": "20:45",
+  "entries": [
+   {
+    "time": "20:45",
+    "text": "Gap 19.1 kW. Inverter relays carried 3.2 kW. Community battery 15.9 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 22.13390010559661,
+  "blocks": 11,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 48.66407611251776,
+  "relay_kwh": 7.083292861349266,
+  "appliance_kwh": 0.1662765218366628,
+  "lowest_band_w": null,
+  "end": "23:30"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0429-87",
+  "date": "2023-04-29",
+  "start": "21:45",
+  "entries": [
+   {
+    "time": "21:45",
+    "text": "Gap 13.8 kW. Inverter relays carried 3.1 kW. Deferred 0.1 kW of appliances. Community battery 10.6 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 14.094227592256445,
+  "blocks": 9,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 21.61504917343971,
+  "relay_kwh": 5.781716223510451,
+  "appliance_kwh": 0.18300482366261994,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0501-80",
+  "date": "2023-05-01",
+  "start": "20:00",
+  "entries": [
+   {
+    "time": "20:00",
+    "text": "Gap 17.4 kW. Inverter relays carried 3.1 kW. Community battery 14.3 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 18.97858742762903,
+  "blocks": 7,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 25.815844820181518,
+  "relay_kwh": 5.40802776562938,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "21:45"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0501-91",
+  "date": "2023-05-01",
+  "start": "22:45",
+  "entries": [
+   {
+    "time": "22:45",
+    "text": "Gap 23.8 kW. Inverter relays carried 6.0 kW. Deferred 0.1 kW of appliances. Community battery 17.6 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 23.76622635922829,
+  "blocks": 5,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 20.48264822362119,
+  "relay_kwh": 2.292385502930705,
+  "appliance_kwh": 0.15028499434506964,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0502-07",
+  "date": "2023-05-02",
+  "start": "01:45",
+  "entries": [
+   {
+    "time": "01:45",
+    "text": "Gap 23.3 kW. Inverter relays carried 4.4 kW. Deferred 0.1 kW of appliances. Community battery 18.1 kW (essential only). Band 500 W applied to 7 homes because earlier steps left 0.7 kW uncovered."
+   },
+   {
+    "time": "02:15",
+    "text": "Gap 8.4 kW. Held 0.1 kW of appliance rebound. Inverter relays carried 1.5 kW. Deferred 0.1 kW of appliances. Community battery 6.7 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 23.306323362249184,
+  "blocks": 5,
+  "homes_banded_max": 7,
+  "homes_shed_max": 0,
+  "battery_kwh": 14.089817781962285,
+  "relay_kwh": 1.8589284133716357,
+  "appliance_kwh": 0.15028499434506964,
+  "lowest_band_w": 500,
+  "end": "03:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0502-87",
+  "date": "2023-05-02",
+  "start": "21:45",
+  "entries": [
+   {
+    "time": "21:45",
+    "text": "Gap 29.2 kW. Inverter relays carried 3.2 kW. Deferred 0.1 kW of appliances. Community battery 26.0 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 29.734449108499568,
+  "blocks": 9,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 52.451774592513694,
+  "relay_kwh": 5.765988225643125,
+  "appliance_kwh": 0.24224958687508266,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0503-79",
+  "date": "2023-05-03",
+  "start": "19:45",
+  "entries": [
+   {
+    "time": "19:45",
+    "text": "Gap 20.9 kW. Inverter relays carried 2.9 kW. Community battery 18.0 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 20.910218080509487,
+  "blocks": 1,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 4.495697655659614,
+  "relay_kwh": 0.7318568644677577,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "20:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0503-88",
+  "date": "2023-05-03",
+  "start": "22:00",
+  "entries": [
+   {
+    "time": "22:00",
+    "text": "Gap 32.5 kW. Inverter relays carried 3.2 kW. Community battery 29.3 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 32.5461996060871,
+  "blocks": 5,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 34.67153015389204,
+  "relay_kwh": 3.701809884407504,
+  "appliance_kwh": 0.04710567157673777,
+  "lowest_band_w": null,
+  "end": "23:15"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0505-79",
+  "date": "2023-05-05",
+  "start": "19:45",
+  "entries": [
+   {
+    "time": "19:45",
+    "text": "Gap 21.5 kW. Inverter relays carried 2.9 kW. Community battery 18.6 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 25.1127046737547,
+  "blocks": 13,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 65.0550832344236,
+  "relay_kwh": 7.846121737933771,
+  "appliance_kwh": 0.07042274220288754,
+  "lowest_band_w": null,
+  "end": "23:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0505-94",
+  "date": "2023-05-05",
+  "start": "23:30",
+  "entries": [
+   {
+    "time": "23:30",
+    "text": "Gap 23.4 kW. Inverter relays carried 5.0 kW. Deferred 0.1 kW of appliances. Community battery 17.3 kW (essential only). Band 500 W applied to 7 homes because earlier steps left 1.1 kW uncovered."
+   },
+   {
+    "time": "23:45",
+    "text": "Gap 20.2 kW. Inverter relays carried 1.7 kW. Deferred 0.1 kW of appliances. Community battery 16.4 kW (essential only). Band 500 W applied to 7 homes because earlier steps left 0.8 kW uncovered. Disconnected 9 homes (1.3 kW) after all other steps were exhausted."
+   }
+  ],
+  "peak_gap_kw": 23.448747762357485,
+  "blocks": 2,
+  "homes_banded_max": 7,
+  "homes_shed_max": 9,
+  "battery_kwh": 8.4246923725504,
+  "relay_kwh": 0.9194912412763518,
+  "appliance_kwh": 0.04066773859169332,
+  "lowest_band_w": 500,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0506-82",
+  "date": "2023-05-06",
+  "start": "20:30",
+  "entries": [
+   {
+    "time": "20:30",
+    "text": "Gap 27.7 kW. Inverter relays carried 3.1 kW. Community battery 24.5 kW (full support)."
+   },
+   {
+    "time": "23:15",
+    "text": "Gap 25.0 kW. Held 0.1 kW of appliance rebound. Inverter relays carried 2.4 kW. Community battery 2.2 kW (essential only). Band 500 W applied to 8 homes because earlier steps left 1.4 kW uncovered. Disconnected 95 homes (19.2 kW) after all other steps were exhausted."
+   },
+   {
+    "time": "23:30",
+    "text": "Gap 24.2 kW. Held 0.1 kW of appliance rebound. Inverter relays carried 0.4 kW. Band 500 W applied to 12 homes because earlier steps left 1.6 kW uncovered. Disconnected 87 homes (22.2 kW) after all other steps were exhausted."
+   }
+  ],
+  "peak_gap_kw": 30.690164305097134,
+  "blocks": 14,
+  "homes_banded_max": 12,
+  "homes_shed_max": 146,
+  "battery_kwh": 73.46801884287687,
+  "relay_kwh": 7.535736876761021,
+  "appliance_kwh": 0.07638914486349374,
+  "lowest_band_w": 500,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0507-03",
+  "date": "2023-05-07",
+  "start": "00:45",
+  "entries": [
+   {
+    "time": "00:45",
+    "text": "Gap 17.3 kW. Inverter relays carried 4.5 kW. Deferred 0.1 kW of appliances. Community battery 11.7 kW (essential only). Band 500 W applied to 8 homes because earlier steps left 1.0 kW uncovered."
+   },
+   {
+    "time": "01:15",
+    "text": "Gap 14.7 kW. Held 0.1 kW of appliance rebound. Inverter relays carried 1.0 kW. Deferred 0.1 kW of appliances. Community battery 4.0 kW (essential only). Band 500 W applied to 8 homes because earlier steps left 1.7 kW uncovered. Disconnected 21 homes (8.2 kW) after all other steps were exhausted."
+   },
+   {
+    "time": "01:30",
+    "text": "Gap 15.3 kW. Held 0.1 kW of appliance rebound. Inverter relays carried 0.7 kW. Deferred 0.1 kW of appliances. Band 500 W applied to 9 homes because earlier steps left 1.9 kW uncovered. Disconnected 47 homes (12.8 kW) after all other steps were exhausted."
+   }
+  ],
+  "peak_gap_kw": 18.23230428732026,
+  "blocks": 14,
+  "homes_banded_max": 12,
+  "homes_shed_max": 114,
+  "battery_kwh": 6.839233696320866,
+  "relay_kwh": 1.7099878741984202,
+  "appliance_kwh": 0.11294680704816573,
+  "lowest_band_w": 500,
+  "end": "04:15"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0508-10",
+  "date": "2023-05-08",
+  "start": "02:30",
+  "entries": [
+   {
+    "time": "02:30",
+    "text": "Gap 12.3 kW. Inverter relays carried 1.5 kW. Deferred 0.1 kW of appliances. Community battery 10.8 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 12.348113662054807,
+  "blocks": 15,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 36.695605245777244,
+  "relay_kwh": 5.741828719349815,
+  "appliance_kwh": 0.11171284693416728,
+  "lowest_band_w": null,
+  "end": "06:15"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0509-84",
+  "date": "2023-05-09",
+  "start": "21:00",
+  "entries": [
+   {
+    "time": "21:00",
+    "text": "Gap 25.9 kW. Inverter relays carried 3.4 kW. Community battery 22.5 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 28.10990145301121,
+  "blocks": 12,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 69.17569833434543,
+  "relay_kwh": 7.544460025654818,
+  "appliance_kwh": 0.2338394969022366,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0510-76",
+  "date": "2023-05-10",
+  "start": "19:00",
+  "entries": [
+   {
+    "time": "19:00",
+    "text": "Gap 25.7 kW. Inverter relays carried 3.0 kW. Community battery 22.7 kW (full support)."
+   },
+   {
+    "time": "21:45",
+    "text": "Gap 30.5 kW. Inverter relays carried 1.3 kW. Community battery 21.6 kW (essential only). Band 500 W applied to 20 homes because earlier steps left 1.7 kW uncovered. Disconnected 14 homes (6.0 kW) after all other steps were exhausted."
+   },
+   {
+    "time": "22:00",
+    "text": "Gap 31.1 kW. Inverter relays carried 2.6 kW. Band 500 W applied to 17 homes because earlier steps left 2.1 kW uncovered. Disconnected 96 homes (26.4 kW) after all other steps were exhausted."
+   }
+  ],
+  "peak_gap_kw": 32.011608588480954,
+  "blocks": 17,
+  "homes_banded_max": 24,
+  "homes_shed_max": 144,
+  "battery_kwh": 73.4382302738978,
+  "relay_kwh": 7.966602211926043,
+  "appliance_kwh": 0.23800354896812326,
+  "lowest_band_w": 500,
+  "end": "23:15"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0512-92",
+  "date": "2023-05-12",
+  "start": "23:00",
+  "entries": [
+   {
+    "time": "23:00",
+    "text": "Gap 17.0 kW. Inverter relays carried 2.7 kW. Deferred 0.1 kW of appliances. Community battery 14.3 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 17.01742694694604,
+  "blocks": 4,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 13.376847923945373,
+  "relay_kwh": 2.302375044325091,
+  "appliance_kwh": 0.0949249769468653,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0514-75",
+  "date": "2023-05-14",
+  "start": "18:45",
+  "entries": [
+   {
+    "time": "18:45",
+    "text": "Gap 13.4 kW. Inverter relays carried 3.1 kW. Deferred 1.6 kW of appliances. Community battery 8.7 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 16.155905840471362,
+  "blocks": 5,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 13.317257028385855,
+  "relay_kwh": 3.9514003210435185,
+  "appliance_kwh": 0.38796609504637586,
+  "lowest_band_w": null,
+  "end": "20:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0514-83",
+  "date": "2023-05-14",
+  "start": "20:45",
+  "entries": [
+   {
+    "time": "20:45",
+    "text": "Gap 23.9 kW. Held 0.8 kW of appliance rebound. Inverter relays carried 6.3 kW. Community battery 16.8 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 24.8554433111146,
+  "blocks": 10,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 50.942193077600784,
+  "relay_kwh": 4.6002642909559155,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "23:15"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0515-86",
+  "date": "2023-05-15",
+  "start": "21:30",
+  "entries": [
+   {
+    "time": "21:30",
+    "text": "Gap 32.4 kW. Inverter relays carried 3.4 kW. Community battery 29.0 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 32.617070061769915,
+  "blocks": 10,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 65.37948469631463,
+  "relay_kwh": 6.714691592053594,
+  "appliance_kwh": 0.13348459901672294,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0516-28",
+  "date": "2023-05-16",
+  "start": "07:00",
+  "entries": [
+   {
+    "time": "07:00",
+    "text": "Gap 14.2 kW. Inverter relays carried 1.6 kW. Community battery 12.6 kW (essential only). Band 500 W applied to 0 homes because earlier steps left 0.0 kW uncovered."
+   }
+  ],
+  "peak_gap_kw": 14.197290792394988,
+  "blocks": 1,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 3.1509480631451128,
+  "relay_kwh": 0.3983746349536341,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": 500,
+  "end": "07:15"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0516-78",
+  "date": "2023-05-16",
+  "start": "19:30",
+  "entries": [
+   {
+    "time": "19:30",
+    "text": "Gap 20.5 kW. Inverter relays carried 3.2 kW. Community battery 17.3 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 20.469849297532534,
+  "blocks": 1,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 4.323305081206933,
+  "relay_kwh": 0.7941572431762001,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "19:45"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0517-83",
+  "date": "2023-05-17",
+  "start": "20:45",
+  "entries": [
+   {
+    "time": "20:45",
+    "text": "Gap 11.1 kW. Inverter relays carried 3.3 kW. Community battery 7.8 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 13.123106108042464,
+  "blocks": 8,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 18.288362972998375,
+  "relay_kwh": 6.254082030254949,
+  "appliance_kwh": 0.1477284530416821,
+  "lowest_band_w": null,
+  "end": "22:45"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0518-87",
+  "date": "2023-05-18",
+  "start": "21:45",
+  "entries": [
+   {
+    "time": "21:45",
+    "text": "Gap 27.9 kW. Inverter relays carried 3.3 kW. Community battery 24.6 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 28.066881116644005,
+  "blocks": 9,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 49.89007621533245,
+  "relay_kwh": 6.027266015850239,
+  "appliance_kwh": 0.16338261722015104,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0519-88",
+  "date": "2023-05-19",
+  "start": "22:00",
+  "entries": [
+   {
+    "time": "22:00",
+    "text": "Gap 25.8 kW. Inverter relays carried 3.4 kW. Deferred 0.1 kW of appliances. Community battery 22.3 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 25.97163178733316,
+  "blocks": 2,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 11.201619626403087,
+  "relay_kwh": 1.6840883444095083,
+  "appliance_kwh": 0.04746248847343265,
+  "lowest_band_w": null,
+  "end": "22:30"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0520-81",
+  "date": "2023-05-20",
+  "start": "20:15",
+  "entries": [
+   {
+    "time": "20:15",
+    "text": "Gap 12.7 kW. Inverter relays carried 3.4 kW. Community battery 9.3 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 15.311596596193155,
+  "blocks": 15,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 40.81341552796269,
+  "relay_kwh": 8.425440059987324,
+  "appliance_kwh": 0.14373437967119052,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0521-82",
+  "date": "2023-05-21",
+  "start": "20:30",
+  "entries": [
+   {
+    "time": "20:30",
+    "text": "Gap 28.3 kW. Inverter relays carried 3.4 kW. Community battery 25.0 kW (full support)."
+   },
+   {
+    "time": "23:00",
+    "text": "Gap 28.4 kW. Inverter relays carried 1.6 kW. Community battery 18.1 kW (essential only). Band 500 W applied to 17 homes because earlier steps left 2.4 kW uncovered. Disconnected 21 homes (6.4 kW) after all other steps were exhausted."
+   },
+   {
+    "time": "23:15",
+    "text": "Gap 26.2 kW. Inverter relays carried 2.3 kW. Band 500 W applied to 11 homes because earlier steps left 2.6 kW uncovered. Disconnected 135 homes (21.3 kW) after all other steps were exhausted."
+   }
+  ],
+  "peak_gap_kw": 32.34209905744221,
+  "blocks": 14,
+  "homes_banded_max": 17,
+  "homes_shed_max": 135,
+  "battery_kwh": 73.38317079541983,
+  "relay_kwh": 7.660859954238874,
+  "appliance_kwh": 0.021668608925299374,
+  "lowest_band_w": 500,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0523-78",
+  "date": "2023-05-23",
+  "start": "19:30",
+  "entries": [
+   {
+    "time": "19:30",
+    "text": "Gap 19.0 kW. Inverter relays carried 3.1 kW. Community battery 15.9 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 23.05574265002938,
+  "blocks": 14,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 60.28667837335818,
+  "relay_kwh": 8.3991382751679,
+  "appliance_kwh": 0.12603871214884368,
+  "lowest_band_w": null,
+  "end": "23:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0525-89",
+  "date": "2023-05-25",
+  "start": "22:15",
+  "entries": [
+   {
+    "time": "22:15",
+    "text": "Gap 18.5 kW. Inverter relays carried 3.2 kW. Deferred 0.1 kW of appliances. Community battery 15.2 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 18.47935631009885,
+  "blocks": 4,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 14.093559563338278,
+  "relay_kwh": 2.9273782508926396,
+  "appliance_kwh": 0.0825434582146655,
+  "lowest_band_w": null,
+  "end": "23:15"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0526-82",
+  "date": "2023-05-26",
+  "start": "20:30",
+  "entries": [
+   {
+    "time": "20:30",
+    "text": "Gap 14.4 kW. Inverter relays carried 3.2 kW. Community battery 11.2 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 14.382656695761902,
+  "blocks": 1,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 2.802045709893912,
+  "relay_kwh": 0.7936184640465636,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "20:45"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0528-81",
+  "date": "2023-05-28",
+  "start": "20:15",
+  "entries": [
+   {
+    "time": "20:15",
+    "text": "Gap 29.3 kW. Inverter relays carried 3.2 kW. Community battery 26.2 kW (full support)."
+   },
+   {
+    "time": "22:45",
+    "text": "Gap 30.1 kW. Inverter relays carried 1.9 kW. Deferred 0.1 kW of appliances. Community battery 15.9 kW (essential only). Band 500 W applied to 16 homes because earlier steps left 2.2 kW uncovered. Disconnected 66 homes (10.0 kW) after all other steps were exhausted."
+   },
+   {
+    "time": "23:00",
+    "text": "Gap 28.4 kW. Held 0.1 kW of appliance rebound. Inverter relays carried 1.3 kW. Deferred 0.1 kW of appliances. Band 500 W applied to 15 homes because earlier steps left 1.9 kW uncovered. Disconnected 80 homes (25.2 kW) after all other steps were exhausted."
+   }
+  ],
+  "peak_gap_kw": 32.407600923552685,
+  "blocks": 15,
+  "homes_banded_max": 16,
+  "homes_shed_max": 122,
+  "battery_kwh": 73.35908032270912,
+  "relay_kwh": 7.469445322878825,
+  "appliance_kwh": 0.07657705555405929,
+  "lowest_band_w": 500,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0529-79",
+  "date": "2023-05-29",
+  "start": "19:45",
+  "entries": [
+   {
+    "time": "19:45",
+    "text": "Gap 24.8 kW. Inverter relays carried 3.0 kW. Community battery 21.9 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 29.496652202318977,
+  "blocks": 11,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 66.17275283126322,
+  "relay_kwh": 7.211423186838276,
+  "appliance_kwh": 0.10017774581408175,
+  "lowest_band_w": null,
+  "end": "22:30"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0531-60",
+  "date": "2023-05-31",
+  "start": "15:00",
+  "entries": [
+   {
+    "time": "15:00",
+    "text": "Gap 14.6 kW. Inverter relays carried 1.5 kW. Community battery 13.1 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 24.499697692795763,
+  "blocks": 17,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 55.78687834555976,
+  "relay_kwh": 6.951751430187214,
+  "appliance_kwh": 0.45036648084185815,
+  "lowest_band_w": null,
+  "end": "19:15"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0531-78",
+  "date": "2023-05-31",
+  "start": "19:30",
+  "entries": [
+   {
+    "time": "19:30",
+    "text": "Gap 17.0 kW. Held 1.6 kW of appliance rebound. Inverter relays carried 4.2 kW. Community battery 8.0 kW (essential only). Band 500 W applied to 15 homes because earlier steps left 3.2 kW uncovered."
+   }
+  ],
+  "peak_gap_kw": 17.03093273440846,
+  "blocks": 1,
+  "homes_banded_max": 15,
+  "homes_shed_max": 0,
+  "battery_kwh": 2.006726672104357,
+  "relay_kwh": 0.5466528621947628,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": 500,
+  "end": "19:45"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0601-21",
+  "date": "2023-06-01",
+  "start": "05:15",
+  "entries": [
+   {
+    "time": "05:15",
+    "text": "Gap 14.6 kW. Inverter relays carried 1.7 kW. Community battery 12.9 kW (essential only). Band 500 W applied to 0 homes because earlier steps left 0.0 kW uncovered."
+   }
+  ],
+  "peak_gap_kw": 14.637272899275207,
+  "blocks": 2,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 6.434741883281935,
+  "relay_kwh": 0.8744605833618728,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": 500,
+  "end": "05:45"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0601-81",
+  "date": "2023-06-01",
+  "start": "20:15",
+  "entries": [
+   {
+    "time": "20:15",
+    "text": "Gap 23.2 kW. Inverter relays carried 3.1 kW. Community battery 20.1 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 26.649906058320873,
+  "blocks": 11,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 60.38108797881953,
+  "relay_kwh": 7.208960918550088,
+  "appliance_kwh": 0.08660218038504627,
+  "lowest_band_w": null,
+  "end": "23:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0603-18",
+  "date": "2023-06-03",
+  "start": "04:30",
+  "entries": [
+   {
+    "time": "04:30",
+    "text": "Gap 18.9 kW. Inverter relays carried 1.5 kW. Community battery 17.4 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 18.915826246173808,
+  "blocks": 9,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 33.86047831124179,
+  "relay_kwh": 3.810148985774408,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "06:45"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0603-77",
+  "date": "2023-06-03",
+  "start": "19:15",
+  "entries": [
+   {
+    "time": "19:15",
+    "text": "Gap 17.1 kW. Inverter relays carried 3.0 kW. Community battery 14.2 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 18.6104365725281,
+  "blocks": 12,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 42.593412910451654,
+  "relay_kwh": 7.462779115341765,
+  "appliance_kwh": 0.20799932825943646,
+  "lowest_band_w": null,
+  "end": "22:15"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0604-13",
+  "date": "2023-06-04",
+  "start": "03:15",
+  "entries": [
+   {
+    "time": "03:15",
+    "text": "Gap 19.2 kW. Inverter relays carried 1.7 kW. Community battery 17.0 kW (essential only). Band 500 W applied to 4 homes because earlier steps left 0.5 kW uncovered."
+   },
+   {
+    "time": "05:00",
+    "text": "Gap 17.1 kW. Inverter relays carried 1.8 kW. Community battery 4.5 kW (essential only). Band 500 W applied to 1 homes because earlier steps left 0.0 kW uncovered. Disconnected 97 homes (11.0 kW) after all other steps were exhausted."
+   },
+   {
+    "time": "05:15",
+    "text": "Gap 15.4 kW. Inverter relays carried 1.9 kW. Band 500 W applied to 0 homes because earlier steps left 0.0 kW uncovered. Disconnected 54 homes (13.5 kW) after all other steps were exhausted."
+   }
+  ],
+  "peak_gap_kw": 19.210136670556206,
+  "blocks": 9,
+  "homes_banded_max": 4,
+  "homes_shed_max": 97,
+  "battery_kwh": 30.71827873015081,
+  "relay_kwh": 3.8537344555708635,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": 500,
+  "end": "05:30"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0604-86",
+  "date": "2023-06-04",
+  "start": "21:30",
+  "entries": [
+   {
+    "time": "21:30",
+    "text": "Gap 23.6 kW. Inverter relays carried 3.4 kW. Community battery 20.2 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 24.136817872122364,
+  "blocks": 10,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 46.5237314579299,
+  "relay_kwh": 6.659384065559349,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0605-76",
+  "date": "2023-06-05",
+  "start": "19:00",
+  "entries": [
+   {
+    "time": "19:00",
+    "text": "Gap 10.8 kW. Inverter relays carried 3.1 kW. Community battery 7.6 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 12.250791335087122,
+  "blocks": 9,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 18.325871530808715,
+  "relay_kwh": 6.5188618696083,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "21:15"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0605-89",
+  "date": "2023-06-05",
+  "start": "22:15",
+  "entries": [
+   {
+    "time": "22:15",
+    "text": "Gap 30.8 kW. Inverter relays carried 6.3 kW. Community battery 24.4 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 30.805430173748483,
+  "blocks": 7,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 39.19980328875283,
+  "relay_kwh": 3.1305138338824383,
+  "appliance_kwh": 0.13244271537724492,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0607-85",
+  "date": "2023-06-07",
+  "start": "21:15",
+  "entries": [
+   {
+    "time": "21:15",
+    "text": "Gap 23.1 kW. Inverter relays carried 3.3 kW. Community battery 19.7 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 23.07696345697925,
+  "blocks": 2,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 9.8401602035886,
+  "relay_kwh": 1.6843699942894785,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "21:45"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0611-11",
+  "date": "2023-06-11",
+  "start": "02:45",
+  "entries": [
+   {
+    "time": "02:45",
+    "text": "Gap 21.5 kW. Inverter relays carried 1.7 kW. Community battery 19.8 kW (full support)."
+   },
+   {
+    "time": "06:45",
+    "text": "Gap 18.0 kW. Held 0.1 kW of appliance rebound. Inverter relays carried 1.6 kW. Community battery 7.7 kW (essential only). Band 500 W applied to 1 homes because earlier steps left 0.0 kW uncovered. Disconnected 43 homes (8.6 kW) after all other steps were exhausted."
+   },
+   {
+    "time": "07:00",
+    "text": "Gap 18.0 kW. Held 0.1 kW of appliance rebound. Inverter relays carried 0.4 kW. Band 500 W applied to 0 homes because earlier steps left 0.0 kW uncovered. Disconnected 145 homes (17.4 kW) after all other steps were exhausted."
+   }
+  ],
+  "peak_gap_kw": 21.514542008348624,
+  "blocks": 18,
+  "homes_banded_max": 1,
+  "homes_shed_max": 145,
+  "battery_kwh": 73.28144784199446,
+  "relay_kwh": 6.918756209528806,
+  "appliance_kwh": 0.04333721785059875,
+  "lowest_band_w": 500,
+  "end": "07:15"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0613-88",
+  "date": "2023-06-13",
+  "start": "22:00",
+  "entries": [
+   {
+    "time": "22:00",
+    "text": "Gap 20.0 kW. Inverter relays carried 3.3 kW. Deferred 0.1 kW of appliances. Community battery 16.6 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 20.278421205564676,
+  "blocks": 2,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 8.360297472910595,
+  "relay_kwh": 1.6511638521797067,
+  "appliance_kwh": 0.04711519392693998,
+  "lowest_band_w": null,
+  "end": "22:30"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0614-08",
+  "date": "2023-06-14",
+  "start": "02:00",
+  "entries": [
+   {
+    "time": "02:00",
+    "text": "Gap 7.5 kW. Inverter relays carried 1.7 kW. Deferred 0.1 kW of appliances. Community battery 5.8 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 7.698523839042366,
+  "blocks": 14,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 19.675314867076963,
+  "relay_kwh": 5.765170423443732,
+  "appliance_kwh": 0.21217088797693717,
+  "lowest_band_w": null,
+  "end": "05:30"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0614-88",
+  "date": "2023-06-14",
+  "start": "22:00",
+  "entries": [
+   {
+    "time": "22:00",
+    "text": "Gap 18.7 kW. Inverter relays carried 3.4 kW. Community battery 15.3 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 18.699812779495858,
+  "blocks": 3,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 11.318101171032996,
+  "relay_kwh": 2.485087585643186,
+  "appliance_kwh": 0.04505255861552303,
+  "lowest_band_w": null,
+  "end": "22:45"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0616-82",
+  "date": "2023-06-16",
+  "start": "20:30",
+  "entries": [
+   {
+    "time": "20:30",
+    "text": "Gap 18.1 kW. Inverter relays carried 3.3 kW. Community battery 14.8 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 19.053422215296827,
+  "blocks": 3,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 11.307747167439002,
+  "relay_kwh": 2.525198158679732,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "21:15"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0619-53",
+  "date": "2023-06-19",
+  "start": "13:15",
+  "entries": [
+   {
+    "time": "13:15",
+    "text": "Gap 20.0 kW. Inverter relays carried 2.1 kW. Community battery 17.9 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 20.00724378602981,
+  "blocks": 16,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 64.03976882747939,
+  "relay_kwh": 6.168001295209784,
+  "appliance_kwh": 0.24090488061829513,
+  "lowest_band_w": null,
+  "end": "17:15"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0619-77",
+  "date": "2023-06-19",
+  "start": "19:15",
+  "entries": [
+   {
+    "time": "19:15",
+    "text": "Gap 17.4 kW. Inverter relays carried 5.8 kW. Community battery 8.7 kW (essential only). Band 500 W applied to 14 homes because earlier steps left 2.8 kW uncovered."
+   },
+   {
+    "time": "20:15",
+    "text": "Gap 14.9 kW. Inverter relays carried 2.7 kW. Community battery 1.5 kW (essential only). Band 500 W applied to 8 homes because earlier steps left 1.2 kW uncovered. Disconnected 23 homes (9.8 kW) after all other steps were exhausted."
+   },
+   {
+    "time": "20:30",
+    "text": "Gap 15.5 kW. Inverter relays carried 2.0 kW. Band 500 W applied to 10 homes because earlier steps left 1.6 kW uncovered. Disconnected 32 homes (12.1 kW) after all other steps were exhausted."
+   }
+  ],
+  "peak_gap_kw": 19.837548726192175,
+  "blocks": 9,
+  "homes_banded_max": 34,
+  "homes_shed_max": 64,
+  "battery_kwh": 9.221848149151795,
+  "relay_kwh": 4.703246695436933,
+  "appliance_kwh": 0.01254964522757397,
+  "lowest_band_w": 500,
+  "end": "21:30"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0621-79",
+  "date": "2023-06-21",
+  "start": "19:45",
+  "entries": [
+   {
+    "time": "19:45",
+    "text": "Gap 15.2 kW. Inverter relays carried 3.0 kW. Community battery 12.2 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 18.324694938397982,
+  "blocks": 17,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 57.0032735260196,
+  "relay_kwh": 8.837694121172035,
+  "appliance_kwh": 0.21009699682527777,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0622-02",
+  "date": "2023-06-22",
+  "start": "00:30",
+  "entries": [
+   {
+    "time": "00:30",
+    "text": "Gap 21.2 kW. Inverter relays carried 4.5 kW. Community battery 16.3 kW (essential only). Band 500 W applied to 4 homes because earlier steps left 0.4 kW uncovered."
+   },
+   {
+    "time": "01:15",
+    "text": "Gap 20.7 kW. Held 0.1 kW of appliance rebound. Inverter relays carried 2.3 kW. Community battery 13.9 kW (essential only). Band 500 W applied to 6 homes because earlier steps left 1.0 kW uncovered. Disconnected 33 homes (3.4 kW) after all other steps were exhausted."
+   },
+   {
+    "time": "01:30",
+    "text": "Gap 19.7 kW. Held 0.1 kW of appliance rebound. Inverter relays carried 0.8 kW. Band 500 W applied to 7 homes because earlier steps left 1.3 kW uncovered. Disconnected 51 homes (17.4 kW) after all other steps were exhausted."
+   }
+  ],
+  "peak_gap_kw": 22.46890251416721,
+  "blocks": 10,
+  "homes_banded_max": 10,
+  "homes_shed_max": 154,
+  "battery_kwh": 16.24459868526758,
+  "relay_kwh": 1.366486469676812,
+  "appliance_kwh": 0.07638914486349374,
+  "lowest_band_w": 500,
+  "end": "03:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0622-65",
+  "date": "2023-06-22",
+  "start": "16:15",
+  "entries": [
+   {
+    "time": "16:15",
+    "text": "Gap 7.4 kW. Inverter relays carried 1.3 kW. Community battery 6.0 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 15.759092859976917,
+  "blocks": 18,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 34.76892514805382,
+  "relay_kwh": 7.790504559949089,
+  "appliance_kwh": 0.4625048882923876,
+  "lowest_band_w": null,
+  "end": "20:45"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0622-88",
+  "date": "2023-06-22",
+  "start": "22:00",
+  "entries": [
+   {
+    "time": "22:00",
+    "text": "Gap 33.9 kW. Inverter relays carried 6.2 kW. Community battery 24.6 kW (essential only). Band 500 W applied to 16 homes because earlier steps left 3.2 kW uncovered."
+   },
+   {
+    "time": "23:30",
+    "text": "Gap 24.1 kW. Held 0.1 kW of appliance rebound. Inverter relays carried 1.3 kW. Community battery 14.2 kW (essential only). Band 500 W applied to 7 homes because earlier steps left 1.6 kW uncovered. Disconnected 28 homes (7.0 kW) after all other steps were exhausted."
+   },
+   {
+    "time": "23:45",
+    "text": "Gap 24.5 kW. Held 0.1 kW of appliance rebound. Inverter relays carried 1.8 kW. Band 500 W applied to 7 homes because earlier steps left 1.2 kW uncovered. Disconnected 144 homes (21.3 kW) after all other steps were exhausted."
+   }
+  ],
+  "peak_gap_kw": 33.93622681942482,
+  "blocks": 8,
+  "homes_banded_max": 16,
+  "homes_shed_max": 144,
+  "battery_kwh": 38.47184944609694,
+  "relay_kwh": 3.664355862568761,
+  "appliance_kwh": 0.08730187984399285,
+  "lowest_band_w": 500,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0623-89",
+  "date": "2023-06-23",
+  "start": "22:15",
+  "entries": [
+   {
+    "time": "22:15",
+    "text": "Gap 29.1 kW. Inverter relays carried 3.3 kW. Community battery 25.8 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 29.128129859648837,
+  "blocks": 7,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 38.72964258100247,
+  "relay_kwh": 4.671400391948487,
+  "appliance_kwh": 0.07827119306399649,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0624-87",
+  "date": "2023-06-24",
+  "start": "21:45",
+  "entries": [
+   {
+    "time": "21:45",
+    "text": "Gap 20.4 kW. Inverter relays carried 3.2 kW. Community battery 17.2 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 21.258564323906796,
+  "blocks": 9,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 35.67641344292561,
+  "relay_kwh": 5.765146499570068,
+  "appliance_kwh": 0.24164559635944324,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0627-89",
+  "date": "2023-06-27",
+  "start": "22:15",
+  "entries": [
+   {
+    "time": "22:15",
+    "text": "Gap 30.3 kW. Inverter relays carried 3.1 kW. Deferred 0.1 kW of appliances. Community battery 27.1 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 30.322140567305112,
+  "blocks": 4,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 24.884982666297276,
+  "relay_kwh": 2.9230747614901964,
+  "appliance_kwh": 0.12022799547605571,
+  "lowest_band_w": null,
+  "end": "23:15"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0628-73",
+  "date": "2023-06-28",
+  "start": "18:15",
+  "entries": [
+   {
+    "time": "18:15",
+    "text": "Gap 18.5 kW. Inverter relays carried 1.9 kW. Deferred 0.8 kW of appliances. Community battery 15.8 kW (full support)."
+   },
+   {
+    "time": "21:15",
+    "text": "Gap 29.5 kW. Inverter relays carried 3.4 kW. Community battery 8.1 kW (essential only). Band 500 W applied to 15 homes because earlier steps left 2.9 kW uncovered. Disconnected 41 homes (15.5 kW) after all other steps were exhausted."
+   },
+   {
+    "time": "21:30",
+    "text": "Gap 29.6 kW. Inverter relays carried 0.6 kW. Band 500 W applied to 21 homes because earlier steps left 3.6 kW uncovered. Disconnected 69 homes (25.6 kW) after all other steps were exhausted."
+   }
+  ],
+  "peak_gap_kw": 31.439126734299826,
+  "blocks": 21,
+  "homes_banded_max": 26,
+  "homes_shed_max": 134,
+  "battery_kwh": 73.21057036823562,
+  "relay_kwh": 7.962307329331953,
+  "appliance_kwh": 0.4575012270997513,
+  "lowest_band_w": 500,
+  "end": "23:30"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0629-76",
+  "date": "2023-06-29",
+  "start": "19:00",
+  "entries": [
+   {
+    "time": "19:00",
+    "text": "Gap 27.7 kW. Inverter relays carried 3.0 kW. Community battery 24.7 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 31.210945004857145,
+  "blocks": 10,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 64.75636240517592,
+  "relay_kwh": 6.772076548524723,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "21:30"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0629-90",
+  "date": "2023-06-29",
+  "start": "22:30",
+  "entries": [
+   {
+    "time": "22:30",
+    "text": "Gap 15.3 kW. Inverter relays carried 6.1 kW. Community battery 5.2 kW (essential only). Band 500 W applied to 12 homes because earlier steps left 3.9 kW uncovered."
+   }
+  ],
+  "peak_gap_kw": 15.28659438561261,
+  "blocks": 6,
+  "homes_banded_max": 13,
+  "homes_shed_max": 0,
+  "battery_kwh": 7.770578900697906,
+  "relay_kwh": 2.5801957202882244,
+  "appliance_kwh": 0.06547640988299464,
+  "lowest_band_w": 500,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0630-17",
+  "date": "2023-06-30",
+  "start": "04:15",
+  "entries": [
+   {
+    "time": "04:15",
+    "text": "Gap 10.2 kW. Inverter relays carried 1.5 kW. Community battery 8.4 kW (essential only). Band 500 W applied to 2 homes because earlier steps left 0.3 kW uncovered."
+   },
+   {
+    "time": "05:15",
+    "text": "Gap 8.4 kW. Inverter relays carried 1.7 kW. Community battery 0.2 kW (essential only). Band 500 W applied to 0 homes because earlier steps left 0.0 kW uncovered. Disconnected 27 homes (6.5 kW) after all other steps were exhausted."
+   },
+   {
+    "time": "05:30",
+    "text": "Gap 8.4 kW. Inverter relays carried 1.8 kW. Band 500 W applied to 0 homes because earlier steps left 0.0 kW uncovered. Disconnected 37 homes (6.7 kW) after all other steps were exhausted."
+   }
+  ],
+  "peak_gap_kw": 10.25491729168509,
+  "blocks": 8,
+  "homes_banded_max": 2,
+  "homes_shed_max": 68,
+  "battery_kwh": 8.243620090676174,
+  "relay_kwh": 3.2743243244329765,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": 500,
+  "end": "06:15"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0630-87",
+  "date": "2023-06-30",
+  "start": "21:45",
+  "entries": [
+   {
+    "time": "21:45",
+    "text": "Gap 26.3 kW. Inverter relays carried 3.2 kW. Deferred 0.1 kW of appliances. Community battery 23.0 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 27.1702738948822,
+  "blocks": 8,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 42.89035975030305,
+  "relay_kwh": 5.4250610566056015,
+  "appliance_kwh": 0.16508691642933096,
+  "lowest_band_w": null,
+  "end": "23:45"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0701-11",
+  "date": "2023-07-01",
+  "start": "02:45",
+  "entries": [
+   {
+    "time": "02:45",
+    "text": "Gap 10.6 kW. Inverter relays carried 3.8 kW. Deferred 0.1 kW of appliances. Community battery 6.8 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 10.621727198649488,
+  "blocks": 8,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 13.953926071970967,
+  "relay_kwh": 2.506569890631723,
+  "appliance_kwh": 0.12349481644023151,
+  "lowest_band_w": null,
+  "end": "04:45"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0701-84",
+  "date": "2023-07-01",
+  "start": "21:00",
+  "entries": [
+   {
+    "time": "21:00",
+    "text": "Gap 25.1 kW. Inverter relays carried 3.0 kW. Community battery 22.2 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 25.381928999724465,
+  "blocks": 3,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 16.73793469145995,
+  "relay_kwh": 2.23934659096095,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "21:45"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0702-84",
+  "date": "2023-07-02",
+  "start": "21:00",
+  "entries": [
+   {
+    "time": "21:00",
+    "text": "Gap 12.3 kW. Inverter relays carried 3.0 kW. Community battery 9.3 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 12.854332690180179,
+  "blocks": 12,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 27.667535265960556,
+  "relay_kwh": 6.964714740364144,
+  "appliance_kwh": 0.13234871148783364,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0703-80",
+  "date": "2023-07-03",
+  "start": "20:00",
+  "entries": [
+   {
+    "time": "20:00",
+    "text": "Gap 25.0 kW. Inverter relays carried 2.9 kW. Community battery 22.1 kW (full support)."
+   },
+   {
+    "time": "23:15",
+    "text": "Gap 20.5 kW. Held 0.2 kW of appliance rebound. Inverter relays carried 2.2 kW. Deferred 0.1 kW of appliances. Community battery 2.8 kW (essential only). Band 500 W applied to 6 homes because earlier steps left 1.2 kW uncovered. Disconnected 64 homes (14.3 kW) after all other steps were exhausted."
+   },
+   {
+    "time": "23:30",
+    "text": "Gap 19.8 kW. Held 0.2 kW of appliance rebound. Inverter relays carried 0.3 kW. Deferred 0.1 kW of appliances. Band 500 W applied to 11 homes because earlier steps left 1.4 kW uncovered. Disconnected 85 homes (17.9 kW) after all other steps were exhausted."
+   }
+  ],
+  "peak_gap_kw": 26.620534339725353,
+  "blocks": 15,
+  "homes_banded_max": 11,
+  "homes_shed_max": 85,
+  "battery_kwh": 73.1697334262285,
+  "relay_kwh": 7.7823792544119295,
+  "appliance_kwh": 0.1205116151099284,
+  "lowest_band_w": 500,
+  "end": "23:45"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0704-18",
+  "date": "2023-07-04",
+  "start": "04:30",
+  "entries": [
+   {
+    "time": "04:30",
+    "text": "Gap 7.5 kW. Inverter relays carried 1.3 kW. Community battery 6.2 kW (essential only). Band 500 W applied to 0 homes because earlier steps left 0.0 kW uncovered."
+   }
+  ],
+  "peak_gap_kw": 7.528526556171315,
+  "blocks": 3,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 4.476023053284138,
+  "relay_kwh": 1.048372084252666,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": 500,
+  "end": "05:15"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0705-78",
+  "date": "2023-07-05",
+  "start": "19:30",
+  "entries": [
+   {
+    "time": "19:30",
+    "text": "Gap 11.9 kW. Inverter relays carried 2.8 kW. Community battery 9.0 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 18.59148852950488,
+  "blocks": 18,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 58.981660481238684,
+  "relay_kwh": 8.858050486638957,
+  "appliance_kwh": 0.07778503658533814,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0706-82",
+  "date": "2023-07-06",
+  "start": "20:30",
+  "entries": [
+   {
+    "time": "20:30",
+    "text": "Gap 20.1 kW. Inverter relays carried 3.0 kW. Community battery 17.2 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 21.01114406705058,
+  "blocks": 14,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 58.25113763303726,
+  "relay_kwh": 7.699459311122825,
+  "appliance_kwh": 0.0875081661585054,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0707-66",
+  "date": "2023-07-07",
+  "start": "16:30",
+  "entries": [
+   {
+    "time": "16:30",
+    "text": "Gap 14.4 kW. Inverter relays carried 1.1 kW. Community battery 13.3 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 30.104287794801834,
+  "blocks": 14,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 61.305075693166245,
+  "relay_kwh": 6.382194181319572,
+  "appliance_kwh": 0.38796609504637586,
+  "lowest_band_w": null,
+  "end": "20:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0708-19",
+  "date": "2023-07-08",
+  "start": "04:45",
+  "entries": [
+   {
+    "time": "04:45",
+    "text": "Gap 6.7 kW. Inverter relays carried 1.3 kW. Community battery 5.3 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 6.660923473288584,
+  "blocks": 3,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 3.696227593201369,
+  "relay_kwh": 1.1067021837619144,
+  "appliance_kwh": 0.02182546996099821,
+  "lowest_band_w": null,
+  "end": "05:30"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0708-61",
+  "date": "2023-07-08",
+  "start": "15:15",
+  "entries": [
+   {
+    "time": "15:15",
+    "text": "Gap 13.0 kW. Inverter relays carried 1.2 kW. Community battery 11.9 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 23.17612491455349,
+  "blocks": 15,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 46.92926298413584,
+  "relay_kwh": 5.403284489225065,
+  "appliance_kwh": 0.18855306911310193,
+  "lowest_band_w": null,
+  "end": "19:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0709-11",
+  "date": "2023-07-09",
+  "start": "02:45",
+  "entries": [
+   {
+    "time": "02:45",
+    "text": "Gap 10.2 kW. Inverter relays carried 1.3 kW. Community battery 8.9 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 10.228099621080869,
+  "blocks": 3,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 6.676373092683309,
+  "relay_kwh": 0.9890074416003292,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "03:30"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0709-80",
+  "date": "2023-07-09",
+  "start": "20:00",
+  "entries": [
+   {
+    "time": "20:00",
+    "text": "Gap 26.2 kW. Inverter relays carried 3.0 kW. Community battery 23.2 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 26.304602039191494,
+  "blocks": 16,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 50.56938176358604,
+  "relay_kwh": 8.293260373081642,
+  "appliance_kwh": 0.12247474609951818,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0710-78",
+  "date": "2023-07-10",
+  "start": "19:30",
+  "entries": [
+   {
+    "time": "19:30",
+    "text": "Gap 17.8 kW. Inverter relays carried 2.8 kW. Community battery 15.0 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 23.451321258432003,
+  "blocks": 14,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 59.76481542286095,
+  "relay_kwh": 7.904348314893083,
+  "appliance_kwh": 0.12500479272933007,
+  "lowest_band_w": null,
+  "end": "23:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0711-86",
+  "date": "2023-07-11",
+  "start": "21:30",
+  "entries": [
+   {
+    "time": "21:30",
+    "text": "Gap 14.2 kW. Inverter relays carried 3.0 kW. Community battery 11.1 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 14.378521681219574,
+  "blocks": 10,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 25.27949470744825,
+  "relay_kwh": 6.018072457819628,
+  "appliance_kwh": 0.2301472464872517,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0712-77",
+  "date": "2023-07-12",
+  "start": "19:15",
+  "entries": [
+   {
+    "time": "19:15",
+    "text": "Gap 13.1 kW. Inverter relays carried 2.8 kW. Community battery 10.3 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 24.43794645602491,
+  "blocks": 19,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 72.59474887181906,
+  "relay_kwh": 9.134489730157282,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0713-81",
+  "date": "2023-07-13",
+  "start": "20:15",
+  "entries": [
+   {
+    "time": "20:15",
+    "text": "Gap 20.2 kW. Inverter relays carried 2.9 kW. Community battery 17.3 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 22.233548581597532,
+  "blocks": 12,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 54.91216164189049,
+  "relay_kwh": 7.315593581869895,
+  "appliance_kwh": 0.16389731102199911,
+  "lowest_band_w": null,
+  "end": "23:15"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0715-78",
+  "date": "2023-07-15",
+  "start": "19:30",
+  "entries": [
+   {
+    "time": "19:30",
+    "text": "Gap 22.6 kW. Inverter relays carried 2.8 kW. Community battery 19.8 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 22.614658110863026,
+  "blocks": 6,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 28.187933022158404,
+  "relay_kwh": 4.357776099388295,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "21:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0717-86",
+  "date": "2023-07-17",
+  "start": "21:30",
+  "entries": [
+   {
+    "time": "21:30",
+    "text": "Gap 17.5 kW. Inverter relays carried 3.0 kW. Community battery 14.5 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 17.492605901456777,
+  "blocks": 3,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 10.877257137378134,
+  "relay_kwh": 2.234240054323479,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "22:15"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0718-87",
+  "date": "2023-07-18",
+  "start": "21:45",
+  "entries": [
+   {
+    "time": "21:45",
+    "text": "Gap 13.3 kW. Inverter relays carried 3.0 kW. Community battery 10.3 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 13.426678927215306,
+  "blocks": 9,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 20.220445714294712,
+  "relay_kwh": 5.441134102363912,
+  "appliance_kwh": 0.21744091558378134,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0720-80",
+  "date": "2023-07-20",
+  "start": "20:00",
+  "entries": [
+   {
+    "time": "20:00",
+    "text": "Gap 21.3 kW. Inverter relays carried 2.9 kW. Community battery 18.3 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 24.072729446350316,
+  "blocks": 11,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 53.97947762007777,
+  "relay_kwh": 7.047410609081957,
+  "appliance_kwh": 0.12022799547605571,
+  "lowest_band_w": null,
+  "end": "22:45"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0721-79",
+  "date": "2023-07-21",
+  "start": "19:45",
+  "entries": [
+   {
+    "time": "19:45",
+    "text": "Gap 26.4 kW. Inverter relays carried 2.8 kW. Deferred 0.8 kW of appliances. Community battery 22.8 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 28.688722651798635,
+  "blocks": 12,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 71.80622254221333,
+  "relay_kwh": 7.342495415815542,
+  "appliance_kwh": 0.3087282864288305,
+  "lowest_band_w": null,
+  "end": "22:45"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0724-83",
+  "date": "2023-07-24",
+  "start": "20:45",
+  "entries": [
+   {
+    "time": "20:45",
+    "text": "Gap 13.0 kW. Inverter relays carried 3.0 kW. Community battery 10.0 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 14.057974882607382,
+  "blocks": 9,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 23.888740937025226,
+  "relay_kwh": 6.216145987202666,
+  "appliance_kwh": 0.03768453726139022,
+  "lowest_band_w": null,
+  "end": "23:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0725-78",
+  "date": "2023-07-25",
+  "start": "19:30",
+  "entries": [
+   {
+    "time": "19:30",
+    "text": "Gap 17.5 kW. Inverter relays carried 2.8 kW. Community battery 14.8 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 17.556767412174906,
+  "blocks": 6,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 21.574636690302494,
+  "relay_kwh": 4.344412552100293,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "21:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0726-79",
+  "date": "2023-07-26",
+  "start": "19:45",
+  "entries": [
+   {
+    "time": "19:45",
+    "text": "Gap 12.2 kW. Inverter relays carried 2.8 kW. Community battery 9.4 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 12.304680604085661,
+  "blocks": 5,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 11.431290779823804,
+  "relay_kwh": 3.6413528552492553,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "21:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0728-83",
+  "date": "2023-07-28",
+  "start": "20:45",
+  "entries": [
+   {
+    "time": "20:45",
+    "text": "Gap 26.2 kW. Inverter relays carried 3.0 kW. Community battery 23.2 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 26.61221802796281,
+  "blocks": 3,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 17.608958805647724,
+  "relay_kwh": 2.2291033459801546,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "21:30"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0729-83",
+  "date": "2023-07-29",
+  "start": "20:45",
+  "entries": [
+   {
+    "time": "20:45",
+    "text": "Gap 15.6 kW. Inverter relays carried 3.0 kW. Community battery 12.6 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 16.7257372293558,
+  "blocks": 13,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 41.180538713996846,
+  "relay_kwh": 7.357841239400511,
+  "appliance_kwh": 0.13472792230249733,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0731-00",
+  "date": "2023-07-31",
+  "start": "00:00",
+  "entries": [
+   {
+    "time": "00:00",
+    "text": "Gap 6.4 kW. Inverter relays carried 1.3 kW. Community battery 5.1 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 8.840584306106607,
+  "blocks": 20,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 26.281019271170553,
+  "relay_kwh": 6.263665821519287,
+  "appliance_kwh": 0.1601592833609084,
+  "lowest_band_w": null,
+  "end": "05:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0731-89",
+  "date": "2023-07-31",
+  "start": "22:15",
+  "entries": [
+   {
+    "time": "22:15",
+    "text": "Gap 21.1 kW. Inverter relays carried 3.0 kW. Community battery 18.1 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 21.110016564105862,
+  "blocks": 7,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 25.412659755177188,
+  "relay_kwh": 4.100680126256801,
+  "appliance_kwh": 0.06594794020743287,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0802-77",
+  "date": "2023-08-02",
+  "start": "19:15",
+  "entries": [
+   {
+    "time": "19:15",
+    "text": "Gap 20.0 kW. Inverter relays carried 2.8 kW. Community battery 17.3 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 21.44940333396528,
+  "blocks": 9,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 38.76897656267978,
+  "relay_kwh": 6.14064827326781,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "21:30"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0804-80",
+  "date": "2023-08-04",
+  "start": "20:00",
+  "entries": [
+   {
+    "time": "20:00",
+    "text": "Gap 18.5 kW. Inverter relays carried 2.9 kW. Community battery 15.6 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 21.53337078665961,
+  "blocks": 15,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 59.16670243682965,
+  "relay_kwh": 8.112666808547907,
+  "appliance_kwh": 0.160895734067749,
+  "lowest_band_w": null,
+  "end": "23:45"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0805-88",
+  "date": "2023-08-05",
+  "start": "22:00",
+  "entries": [
+   {
+    "time": "22:00",
+    "text": "Gap 10.7 kW. Inverter relays carried 2.9 kW. Deferred 0.1 kW of appliances. Community battery 7.7 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 10.880928805052967,
+  "blocks": 8,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 13.024163206521614,
+  "relay_kwh": 4.829819837155175,
+  "appliance_kwh": 0.2295432559716123,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0806-84",
+  "date": "2023-08-06",
+  "start": "21:00",
+  "entries": [
+   {
+    "time": "21:00",
+    "text": "Gap 15.7 kW. Inverter relays carried 3.0 kW. Community battery 12.7 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 21.935015556929294,
+  "blocks": 12,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 43.856612194363116,
+  "relay_kwh": 6.9504070576710335,
+  "appliance_kwh": 0.16166925965000697,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0807-86",
+  "date": "2023-08-07",
+  "start": "21:30",
+  "entries": [
+   {
+    "time": "21:30",
+    "text": "Gap 20.0 kW. Inverter relays carried 3.0 kW. Community battery 17.0 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 20.378931392699677,
+  "blocks": 10,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 37.648860907556696,
+  "relay_kwh": 6.019685565337666,
+  "appliance_kwh": 0.1735836893472724,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0808-88",
+  "date": "2023-08-08",
+  "start": "22:00",
+  "entries": [
+   {
+    "time": "22:00",
+    "text": "Gap 10.3 kW. Inverter relays carried 3.0 kW. Community battery 7.3 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 10.307603196828424,
+  "blocks": 8,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 12.531412027680608,
+  "relay_kwh": 4.80666459824196,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0809-10",
+  "date": "2023-08-09",
+  "start": "02:30",
+  "entries": [
+   {
+    "time": "02:30",
+    "text": "Gap 10.8 kW. Inverter relays carried 2.9 kW. Deferred 0.1 kW of appliances. Community battery 7.8 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 10.813690284610118,
+  "blocks": 11,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 20.80434518870624,
+  "relay_kwh": 3.6574193658382637,
+  "appliance_kwh": 0.15704329821188076,
+  "lowest_band_w": null,
+  "end": "05:15"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0809-75",
+  "date": "2023-08-09",
+  "start": "18:45",
+  "entries": [
+   {
+    "time": "18:45",
+    "text": "Gap 15.0 kW. Inverter relays carried 2.8 kW. Community battery 12.2 kW (full support)."
+   },
+   {
+    "time": "22:45",
+    "text": "Gap 24.6 kW. Held 0.2 kW of appliance rebound. Inverter relays carried 2.9 kW. Deferred 0.1 kW of appliances. Community battery 11.5 kW (essential only). Band 500 W applied to 8 homes because earlier steps left 1.4 kW uncovered. Disconnected 46 homes (8.7 kW) after all other steps were exhausted."
+   }
+  ],
+  "peak_gap_kw": 27.339095093134226,
+  "blocks": 17,
+  "homes_banded_max": 8,
+  "homes_shed_max": 46,
+  "battery_kwh": 72.98828510547818,
+  "relay_kwh": 8.841723150459762,
+  "appliance_kwh": 0.15324982005142573,
+  "lowest_band_w": 500,
+  "end": "23:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0810-75",
+  "date": "2023-08-10",
+  "start": "18:45",
+  "entries": [
+   {
+    "time": "18:45",
+    "text": "Gap 10.3 kW. Inverter relays carried 2.8 kW. Deferred 1.6 kW of appliances. Community battery 6.0 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 14.144618215301776,
+  "blocks": 19,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 44.99376711444724,
+  "relay_kwh": 9.234371330007308,
+  "appliance_kwh": 0.6378432203138348,
+  "lowest_band_w": null,
+  "end": "23:30"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0811-78",
+  "date": "2023-08-11",
+  "start": "19:30",
+  "entries": [
+   {
+    "time": "19:30",
+    "text": "Gap 23.8 kW. Inverter relays carried 2.7 kW. Community battery 21.1 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 23.803281094077164,
+  "blocks": 7,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 33.80541739293878,
+  "relay_kwh": 5.029899824910838,
+  "appliance_kwh": 0.019446259146334535,
+  "lowest_band_w": null,
+  "end": "21:15"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0811-86",
+  "date": "2023-08-11",
+  "start": "21:30",
+  "entries": [
+   {
+    "time": "21:30",
+    "text": "Gap 23.0 kW. Inverter relays carried 4.6 kW. Community battery 18.4 kW (full support)."
+   },
+   {
+    "time": "21:45",
+    "text": "Gap 21.6 kW. Inverter relays carried 1.6 kW. Community battery 17.4 kW (essential only). Band 500 W applied to 10 homes because earlier steps left 2.4 kW uncovered."
+   },
+   {
+    "time": "22:00",
+    "text": "Gap 21.8 kW. Inverter relays carried 2.7 kW. Community battery 19.0 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 22.98558643742424,
+  "blocks": 3,
+  "homes_banded_max": 10,
+  "homes_shed_max": 0,
+  "battery_kwh": 13.71236997947429,
+  "relay_kwh": 1.323947273567854,
+  "appliance_kwh": 0.029169388719501803,
+  "lowest_band_w": 500,
+  "end": "22:15"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0811-90",
+  "date": "2023-08-11",
+  "start": "22:30",
+  "entries": [
+   {
+    "time": "22:30",
+    "text": "Gap 19.6 kW. Inverter relays carried 4.8 kW. Community battery 12.4 kW (essential only). Band 500 W applied to 5 homes because earlier steps left 2.4 kW uncovered."
+   },
+   {
+    "time": "23:15",
+    "text": "Gap 14.2 kW. Inverter relays carried 1.5 kW. Community battery 12.6 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 19.64638056083973,
+  "blocks": 6,
+  "homes_banded_max": 10,
+  "homes_shed_max": 0,
+  "battery_kwh": 18.33663637579297,
+  "relay_kwh": 1.5500422659417328,
+  "appliance_kwh": 0.058338777439003606,
+  "lowest_band_w": 500,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0812-82",
+  "date": "2023-08-12",
+  "start": "20:30",
+  "entries": [
+   {
+    "time": "20:30",
+    "text": "Gap 16.5 kW. Inverter relays carried 3.0 kW. Community battery 13.5 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 16.47997626256086,
+  "blocks": 3,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 10.08142269463757,
+  "relay_kwh": 2.238256329023094,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "21:15"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0812-86",
+  "date": "2023-08-12",
+  "start": "21:30",
+  "entries": [
+   {
+    "time": "21:30",
+    "text": "Gap 13.7 kW. Inverter relays carried 5.2 kW. Community battery 8.5 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 13.66435198256027,
+  "blocks": 10,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 21.251599856327264,
+  "relay_kwh": 4.692174160637915,
+  "appliance_kwh": 0.06547640988299464,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0813-82",
+  "date": "2023-08-13",
+  "start": "20:30",
+  "entries": [
+   {
+    "time": "20:30",
+    "text": "Gap 9.2 kW. Inverter relays carried 3.0 kW. Community battery 6.2 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 9.224436435063339,
+  "blocks": 6,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 9.320099447857475,
+  "relay_kwh": 4.43991053502353,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "22:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0816-89",
+  "date": "2023-08-16",
+  "start": "22:15",
+  "entries": [
+   {
+    "time": "22:15",
+    "text": "Gap 16.5 kW. Inverter relays carried 3.0 kW. Community battery 13.5 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 16.470014924975644,
+  "blocks": 7,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 19.27497353410938,
+  "relay_kwh": 4.110018531792689,
+  "appliance_kwh": 0.12458871290425622,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0819-77",
+  "date": "2023-08-19",
+  "start": "19:15",
+  "entries": [
+   {
+    "time": "19:15",
+    "text": "Gap 21.8 kW. Inverter relays carried 2.8 kW. Deferred 0.8 kW of appliances. Community battery 18.2 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 23.47521212292878,
+  "blocks": 6,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 25.66702780558446,
+  "relay_kwh": 4.317902472721051,
+  "appliance_kwh": 0.18855306911310193,
+  "lowest_band_w": null,
+  "end": "20:45"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0822-83",
+  "date": "2023-08-22",
+  "start": "20:45",
+  "entries": [
+   {
+    "time": "20:45",
+    "text": "Gap 26.7 kW. Inverter relays carried 3.0 kW. Community battery 23.8 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 27.547542580392587,
+  "blocks": 13,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 72.1461759629528,
+  "relay_kwh": 7.309871415659014,
+  "appliance_kwh": 0.13472792230249733,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0825-75",
+  "date": "2023-08-25",
+  "start": "18:45",
+  "entries": [
+   {
+    "time": "18:45",
+    "text": "Gap 23.1 kW. Inverter relays carried 2.8 kW. Community battery 20.3 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 26.439510914918593,
+  "blocks": 7,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 38.40045389884845,
+  "relay_kwh": 4.911270238511481,
+  "appliance_kwh": 0.19941302593327392,
+  "lowest_band_w": null,
+  "end": "20:30"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0827-09",
+  "date": "2023-08-27",
+  "start": "02:15",
+  "entries": [
+   {
+    "time": "02:15",
+    "text": "Gap 6.1 kW. Inverter relays carried 1.3 kW. Community battery 4.7 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 10.583719019723045,
+  "blocks": 22,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 38.71644411646582,
+  "relay_kwh": 7.01682746574044,
+  "appliance_kwh": 0.029169388719501803,
+  "lowest_band_w": null,
+  "end": "07:45"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0827-75",
+  "date": "2023-08-27",
+  "start": "18:45",
+  "entries": [
+   {
+    "time": "18:45",
+    "text": "Gap 24.0 kW. Inverter relays carried 2.8 kW. Deferred 0.8 kW of appliances. Community battery 20.4 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 29.014198277593742,
+  "blocks": 11,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 65.74646608448901,
+  "relay_kwh": 6.999745975630144,
+  "appliance_kwh": 0.21885928507960845,
+  "lowest_band_w": null,
+  "end": "21:30"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0827-93",
+  "date": "2023-08-27",
+  "start": "23:15",
+  "entries": [
+   {
+    "time": "23:15",
+    "text": "Gap 20.9 kW. Inverter relays carried 5.0 kW. Community battery 13.5 kW (essential only). Band 500 W applied to 4 homes because earlier steps left 2.4 kW uncovered."
+   }
+  ],
+  "peak_gap_kw": 20.94122997191319,
+  "blocks": 2,
+  "homes_banded_max": 4,
+  "homes_shed_max": 0,
+  "battery_kwh": 6.792830084393943,
+  "relay_kwh": 0.9477738506222142,
+  "appliance_kwh": 0.019446259146334535,
+  "lowest_band_w": 500,
+  "end": "23:45"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0829-08",
+  "date": "2023-08-29",
+  "start": "02:00",
+  "entries": [
+   {
+    "time": "02:00",
+    "text": "Gap 7.9 kW. Inverter relays carried 1.3 kW. Community battery 6.6 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 8.043261276127424,
+  "blocks": 17,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 26.671331312463828,
+  "relay_kwh": 5.72458157932941,
+  "appliance_kwh": 0.07638914486349374,
+  "lowest_band_w": null,
+  "end": "06:15"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0829-80",
+  "date": "2023-08-29",
+  "start": "20:00",
+  "entries": [
+   {
+    "time": "20:00",
+    "text": "Gap 16.0 kW. Inverter relays carried 3.0 kW. Community battery 13.1 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 16.024158632578192,
+  "blocks": 5,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 16.103238009406912,
+  "relay_kwh": 3.713151137752256,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "21:15"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0830-75",
+  "date": "2023-08-30",
+  "start": "18:45",
+  "entries": [
+   {
+    "time": "18:45",
+    "text": "Gap 15.5 kW. Inverter relays carried 2.8 kW. Community battery 12.7 kW (full support)."
+   },
+   {
+    "time": "23:30",
+    "text": "Gap 13.2 kW. Inverter relays carried 1.1 kW. Community battery 3.8 kW (essential only). Band 500 W applied to 4 homes because earlier steps left 0.6 kW uncovered. Disconnected 80 homes (7.6 kW) after all other steps were exhausted."
+   }
+  ],
+  "peak_gap_kw": 19.96311796193705,
+  "blocks": 20,
+  "homes_banded_max": 4,
+  "homes_shed_max": 80,
+  "battery_kwh": 72.8995150440439,
+  "relay_kwh": 9.39785858844023,
+  "appliance_kwh": 0.0875081661585054,
+  "lowest_band_w": 500,
+  "end": "23:45"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0831-84",
+  "date": "2023-08-31",
+  "start": "21:00",
+  "entries": [
+   {
+    "time": "21:00",
+    "text": "Gap 12.6 kW. Inverter relays carried 3.0 kW. Community battery 9.7 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 13.16044391238934,
+  "blocks": 7,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 17.214600560110398,
+  "relay_kwh": 5.111166792120823,
+  "appliance_kwh": 0.07687905081187901,
+  "lowest_band_w": null,
+  "end": "22:45"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0901-90",
+  "date": "2023-09-01",
+  "start": "22:30",
+  "entries": [
+   {
+    "time": "22:30",
+    "text": "Gap 10.6 kW. Inverter relays carried 2.9 kW. Community battery 7.6 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 10.570054810123239,
+  "blocks": 6,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 9.33508501826534,
+  "relay_kwh": 3.386569718742963,
+  "appliance_kwh": 0.06547640988299464,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0902-88",
+  "date": "2023-09-02",
+  "start": "22:00",
+  "entries": [
+   {
+    "time": "22:00",
+    "text": "Gap 20.4 kW. Inverter relays carried 3.0 kW. Deferred 0.1 kW of appliances. Community battery 17.3 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 21.107622209792815,
+  "blocks": 8,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 31.094666429462052,
+  "relay_kwh": 4.812456948160914,
+  "appliance_kwh": 0.2404559909521114,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0905-76",
+  "date": "2023-09-05",
+  "start": "19:00",
+  "entries": [
+   {
+    "time": "19:00",
+    "text": "Gap 26.3 kW. Inverter relays carried 2.8 kW. Community battery 23.5 kW (full support)."
+   },
+   {
+    "time": "21:45",
+    "text": "Gap 29.2 kW. Inverter relays carried 1.5 kW. Community battery 23.9 kW (essential only). Band 500 W applied to 7 homes because earlier steps left 3.4 kW uncovered. Disconnected 3 homes (0.4 kW) after all other steps were exhausted."
+   },
+   {
+    "time": "22:00",
+    "text": "Gap 29.1 kW. Inverter relays carried 2.5 kW. Band 500 W applied to 6 homes because earlier steps left 2.0 kW uncovered. Disconnected 69 homes (24.6 kW) after all other steps were exhausted."
+   }
+  ],
+  "peak_gap_kw": 29.180776087100327,
+  "blocks": 20,
+  "homes_banded_max": 12,
+  "homes_shed_max": 131,
+  "battery_kwh": 72.87862802531556,
+  "relay_kwh": 7.747729484257297,
+  "appliance_kwh": 0.25397670083576945,
+  "lowest_band_w": 500,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0906-84",
+  "date": "2023-09-06",
+  "start": "21:00",
+  "entries": [
+   {
+    "time": "21:00",
+    "text": "Gap 25.2 kW. Inverter relays carried 3.0 kW. Community battery 22.2 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 26.259408372633473,
+  "blocks": 12,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 62.53659948499714,
+  "relay_kwh": 6.961496208339711,
+  "appliance_kwh": 0.1729023655122728,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0907-74",
+  "date": "2023-09-07",
+  "start": "18:30",
+  "entries": [
+   {
+    "time": "18:30",
+    "text": "Gap 9.3 kW. Inverter relays carried 2.4 kW. Community battery 6.9 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 14.24248368629189,
+  "blocks": 15,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 34.57867091063531,
+  "relay_kwh": 8.179914078194079,
+  "appliance_kwh": 0.38796609504637586,
+  "lowest_band_w": null,
+  "end": "22:15"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0908-88",
+  "date": "2023-09-08",
+  "start": "22:00",
+  "entries": [
+   {
+    "time": "22:00",
+    "text": "Gap 26.3 kW. Inverter relays carried 3.0 kW. Community battery 23.4 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 26.340888289480638,
+  "blocks": 8,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 38.729062101361166,
+  "relay_kwh": 4.8058931419324615,
+  "appliance_kwh": 0.058338777439003606,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0910-00",
+  "date": "2023-09-10",
+  "start": "00:00",
+  "entries": [
+   {
+    "time": "00:00",
+    "text": "Gap 7.7 kW. Inverter relays carried 1.3 kW. Community battery 6.4 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 7.7005544242637,
+  "blocks": 2,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 3.1800455294589165,
+  "relay_kwh": 0.6444270364797495,
+  "appliance_kwh": 0.019446259146334535,
+  "lowest_band_w": null,
+  "end": "00:30"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0910-11",
+  "date": "2023-09-10",
+  "start": "02:45",
+  "entries": [
+   {
+    "time": "02:45",
+    "text": "Gap 15.5 kW. Inverter relays carried 1.3 kW. Community battery 14.1 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 16.344067490946223,
+  "blocks": 19,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 62.225052112563844,
+  "relay_kwh": 6.38303833744987,
+  "appliance_kwh": 0.06806190701217088,
+  "lowest_band_w": null,
+  "end": "07:30"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0911-74",
+  "date": "2023-09-11",
+  "start": "18:30",
+  "entries": [
+   {
+    "time": "18:30",
+    "text": "Gap 9.3 kW. Inverter relays carried 2.4 kW. Community battery 6.9 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 13.843954099524822,
+  "blocks": 12,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 27.819709904683357,
+  "relay_kwh": 7.201474686387514,
+  "appliance_kwh": 0.18855306911310193,
+  "lowest_band_w": null,
+  "end": "21:30"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0917-88",
+  "date": "2023-09-17",
+  "start": "22:00",
+  "entries": [
+   {
+    "time": "22:00",
+    "text": "Gap 22.3 kW. Inverter relays carried 3.0 kW. Community battery 19.4 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 22.488774399148213,
+  "blocks": 8,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 32.7999261906453,
+  "relay_kwh": 4.809845423358331,
+  "appliance_kwh": 0.05652680589208532,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0918-85",
+  "date": "2023-09-18",
+  "start": "21:15",
+  "entries": [
+   {
+    "time": "21:15",
+    "text": "Gap 26.8 kW. Inverter relays carried 3.0 kW. Community battery 23.8 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 28.132932253109935,
+  "blocks": 11,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 61.33994390361859,
+  "relay_kwh": 6.578552405753459,
+  "appliance_kwh": 0.09421134315347553,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0920-24",
+  "date": "2023-09-20",
+  "start": "06:00",
+  "entries": [
+   {
+    "time": "06:00",
+    "text": "Gap 10.3 kW. Inverter relays carried 1.6 kW. Community battery 8.7 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 10.624710545462005,
+  "blocks": 13,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 28.525172214638122,
+  "relay_kwh": 4.1344384810669705,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "09:15"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0920-76",
+  "date": "2023-09-20",
+  "start": "19:00",
+  "entries": [
+   {
+    "time": "19:00",
+    "text": "Gap 13.9 kW. Inverter relays carried 2.8 kW. Deferred 0.8 kW of appliances. Community battery 10.3 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 17.973213647111386,
+  "blocks": 19,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 58.33491112929953,
+  "relay_kwh": 9.234242759411526,
+  "appliance_kwh": 0.2285824146527757,
+  "lowest_band_w": null,
+  "end": "23:45"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0922-13",
+  "date": "2023-09-22",
+  "start": "03:15",
+  "entries": [
+   {
+    "time": "03:15",
+    "text": "Gap 6.1 kW. Inverter relays carried 1.3 kW. Community battery 4.7 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 6.090863198942536,
+  "blocks": 1,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 1.1788859139276668,
+  "relay_kwh": 0.33440875149261934,
+  "appliance_kwh": 0.009421134315347555,
+  "lowest_band_w": null,
+  "end": "03:30"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0922-78",
+  "date": "2023-09-22",
+  "start": "19:30",
+  "entries": [
+   {
+    "time": "19:30",
+    "text": "Gap 16.4 kW. Inverter relays carried 2.8 kW. Community battery 13.6 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 17.780136031546824,
+  "blocks": 17,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 58.63661393472928,
+  "relay_kwh": 8.640097150779496,
+  "appliance_kwh": 0.04710567157673777,
+  "lowest_band_w": null,
+  "end": "23:45"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0923-57",
+  "date": "2023-09-23",
+  "start": "14:15",
+  "entries": [
+   {
+    "time": "14:15",
+    "text": "Gap 13.4 kW. Inverter relays carried 1.1 kW. Community battery 12.3 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 13.680822590009178,
+  "blocks": 7,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 21.479161472168794,
+  "relay_kwh": 1.978499053853282,
+  "appliance_kwh": 0.04340896403163987,
+  "lowest_band_w": null,
+  "end": "16:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0923-77",
+  "date": "2023-09-23",
+  "start": "19:15",
+  "entries": [
+   {
+    "time": "19:15",
+    "text": "Gap 20.0 kW. Inverter relays carried 2.8 kW. Community battery 17.2 kW (full support)."
+   },
+   {
+    "time": "22:00",
+    "text": "Gap 22.5 kW. Inverter relays carried 1.5 kW. Community battery 5.9 kW (essential only). Band 500 W applied to 8 homes because earlier steps left 0.5 kW uncovered. Disconnected 38 homes (14.8 kW) after all other steps were exhausted."
+   },
+   {
+    "time": "22:15",
+    "text": "Gap 23.1 kW. Inverter relays carried 2.0 kW. Band 500 W applied to 6 homes because earlier steps left 0.8 kW uncovered. Disconnected 75 homes (20.4 kW) after all other steps were exhausted."
+   }
+  ],
+  "peak_gap_kw": 23.09105837961448,
+  "blocks": 19,
+  "homes_banded_max": 14,
+  "homes_shed_max": 125,
+  "battery_kwh": 51.31262443772983,
+  "relay_kwh": 7.899092828976784,
+  "appliance_kwh": 0.11903839006872387,
+  "lowest_band_w": 500,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0924-73",
+  "date": "2023-09-24",
+  "start": "18:15",
+  "entries": [
+   {
+    "time": "18:15",
+    "text": "Gap 19.3 kW. Inverter relays carried 1.8 kW. Community battery 17.5 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 27.138193272211858,
+  "blocks": 3,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 15.535776826821667,
+  "relay_kwh": 1.7526501048335605,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "19:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0925-89",
+  "date": "2023-09-25",
+  "start": "22:15",
+  "entries": [
+   {
+    "time": "22:15",
+    "text": "Gap 14.5 kW. Inverter relays carried 3.0 kW. Community battery 11.5 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 14.513852649278967,
+  "blocks": 7,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 16.356745324083192,
+  "relay_kwh": 4.109839128015989,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0927-20",
+  "date": "2023-09-27",
+  "start": "05:00",
+  "entries": [
+   {
+    "time": "05:00",
+    "text": "Gap 11.8 kW. Inverter relays carried 1.5 kW. Community battery 10.3 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 11.800108412747658,
+  "blocks": 18,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 44.11307148132006,
+  "relay_kwh": 5.826043367600172,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "09:30"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0929-76",
+  "date": "2023-09-29",
+  "start": "19:00",
+  "entries": [
+   {
+    "time": "19:00",
+    "text": "Gap 19.0 kW. Inverter relays carried 2.8 kW. Community battery 16.2 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 19.00289691046327,
+  "blocks": 1,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 4.046625997935445,
+  "relay_kwh": 0.7040982296803727,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "19:15"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0929-86",
+  "date": "2023-09-29",
+  "start": "21:30",
+  "entries": [
+   {
+    "time": "21:30",
+    "text": "Gap 13.3 kW. Inverter relays carried 2.9 kW. Community battery 10.4 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 13.498793206062295,
+  "blocks": 10,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 23.40319336678022,
+  "relay_kwh": 6.013119586563292,
+  "appliance_kwh": 0.11546957384672837,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-0930-75",
+  "date": "2023-09-30",
+  "start": "18:45",
+  "entries": [
+   {
+    "time": "18:45",
+    "text": "Gap 25.2 kW. Inverter relays carried 2.8 kW. Community battery 22.4 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 27.36243380676153,
+  "blocks": 3,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 17.39508408129016,
+  "relay_kwh": 2.086878843176941,
+  "appliance_kwh": 0.18855306911310193,
+  "lowest_band_w": null,
+  "end": "19:30"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-1003-86",
+  "date": "2023-10-03",
+  "start": "21:30",
+  "entries": [
+   {
+    "time": "21:30",
+    "text": "Gap 13.3 kW. Inverter relays carried 2.6 kW. Community battery 10.7 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 13.379197759975625,
+  "blocks": 2,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 5.3800231670673,
+  "relay_kwh": 1.289147640081445,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "22:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-1004-80",
+  "date": "2023-10-04",
+  "start": "20:00",
+  "entries": [
+   {
+    "time": "20:00",
+    "text": "Gap 10.2 kW. Inverter relays carried 2.5 kW. Community battery 7.6 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 10.688936696736675,
+  "blocks": 7,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 12.697251171660522,
+  "relay_kwh": 4.464686430730972,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "21:45"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-1005-80",
+  "date": "2023-10-05",
+  "start": "20:00",
+  "entries": [
+   {
+    "time": "20:00",
+    "text": "Gap 18.2 kW. Inverter relays carried 2.5 kW. Community battery 15.7 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 18.240911002082854,
+  "blocks": 8,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 27.98347845748923,
+  "relay_kwh": 5.033362408457124,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "22:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-1006-79",
+  "date": "2023-10-06",
+  "start": "19:45",
+  "entries": [
+   {
+    "time": "19:45",
+    "text": "Gap 18.6 kW. Inverter relays carried 2.4 kW. Community battery 16.2 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 18.566497005974824,
+  "blocks": 9,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 33.767285962575,
+  "relay_kwh": 5.609513168414551,
+  "appliance_kwh": 0.009723129573167268,
+  "lowest_band_w": null,
+  "end": "22:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-1007-79",
+  "date": "2023-10-07",
+  "start": "19:45",
+  "entries": [
+   {
+    "time": "19:45",
+    "text": "Gap 22.0 kW. Inverter relays carried 2.4 kW. Community battery 19.6 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 22.7242863624542,
+  "blocks": 13,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 59.03336907773828,
+  "relay_kwh": 7.158317104164337,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "23:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-1012-76",
+  "date": "2023-10-12",
+  "start": "19:00",
+  "entries": [
+   {
+    "time": "19:00",
+    "text": "Gap 20.5 kW. Inverter relays carried 2.3 kW. Community battery 18.2 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 20.857807164049362,
+  "blocks": 4,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 17.687532249469548,
+  "relay_kwh": 2.3821737268129644,
+  "appliance_kwh": 0.18855306911310193,
+  "lowest_band_w": null,
+  "end": "20:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-1019-87",
+  "date": "2023-10-19",
+  "start": "21:45",
+  "entries": [
+   {
+    "time": "21:45",
+    "text": "Gap 13.2 kW. Inverter relays carried 2.6 kW. Community battery 10.6 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 13.757204031947083,
+  "blocks": 9,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 20.39729959161328,
+  "relay_kwh": 4.658753065954012,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-1020-75",
+  "date": "2023-10-20",
+  "start": "18:45",
+  "entries": [
+   {
+    "time": "18:45",
+    "text": "Gap 16.3 kW. Inverter relays carried 2.4 kW. Deferred 0.8 kW of appliances. Community battery 13.2 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 19.775271131716075,
+  "blocks": 19,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 69.1181293960803,
+  "relay_kwh": 8.638222122589577,
+  "appliance_kwh": 0.18855306911310193,
+  "lowest_band_w": null,
+  "end": "23:30"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-1026-73",
+  "date": "2023-10-26",
+  "start": "18:15",
+  "entries": [
+   {
+    "time": "18:15",
+    "text": "Gap 10.3 kW. Inverter relays carried 1.4 kW. Community battery 8.9 kW (full support)."
+   },
+   {
+    "time": "23:30",
+    "text": "Gap 10.4 kW. Inverter relays carried 1.3 kW. Community battery 1.5 kW (essential only). Band 500 W applied to 0 homes because earlier steps left 0.0 kW uncovered. Disconnected 98 homes (7.8 kW) after all other steps were exhausted."
+   },
+   {
+    "time": "23:45",
+    "text": "Gap 10.9 kW. Inverter relays carried 0.5 kW. Band 500 W applied to 0 homes because earlier steps left 0.0 kW uncovered. Disconnected 51 homes (10.4 kW) after all other steps were exhausted."
+   }
+  ],
+  "peak_gap_kw": 18.58572561022423,
+  "blocks": 23,
+  "homes_banded_max": 0,
+  "homes_shed_max": 98,
+  "battery_kwh": 72.72143284556874,
+  "relay_kwh": 9.247978987276728,
+  "appliance_kwh": 0.18855306911310193,
+  "lowest_band_w": 500,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-1027-77",
+  "date": "2023-10-27",
+  "start": "19:15",
+  "entries": [
+   {
+    "time": "19:15",
+    "text": "Gap 26.3 kW. Inverter relays carried 2.4 kW. Community battery 23.9 kW (full support)."
+   },
+   {
+    "time": "22:30",
+    "text": "Gap 22.0 kW. Inverter relays carried 2.0 kW. Community battery 16.1 kW (essential only). Band 500 W applied to 1 homes because earlier steps left 0.5 kW uncovered. Disconnected 13 homes (3.4 kW) after all other steps were exhausted."
+   },
+   {
+    "time": "22:45",
+    "text": "Gap 20.2 kW. Inverter relays carried 1.9 kW. Band 500 W applied to 1 homes because earlier steps left 0.5 kW uncovered. Disconnected 128 homes (17.7 kW) after all other steps were exhausted."
+   }
+  ],
+  "peak_gap_kw": 26.324056602001704,
+  "blocks": 15,
+  "homes_banded_max": 1,
+  "homes_shed_max": 128,
+  "battery_kwh": 72.70979741631344,
+  "relay_kwh": 7.6531385612053136,
+  "appliance_kwh": 0.03273820494149732,
+  "lowest_band_w": 500,
+  "end": "23:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-1028-87",
+  "date": "2023-10-28",
+  "start": "21:45",
+  "entries": [
+   {
+    "time": "21:45",
+    "text": "Gap 18.4 kW. Inverter relays carried 2.6 kW. Community battery 15.8 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 18.365501159022596,
+  "blocks": 1,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 3.939769838328882,
+  "relay_kwh": 0.6516054514267668,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "22:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-1029-83",
+  "date": "2023-10-29",
+  "start": "20:45",
+  "entries": [
+   {
+    "time": "20:45",
+    "text": "Gap 16.4 kW. Inverter relays carried 2.6 kW. Community battery 13.9 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 16.435025396350206,
+  "blocks": 9,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 27.581620791812934,
+  "relay_kwh": 5.571281263395414,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "23:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-1030-20",
+  "date": "2023-10-30",
+  "start": "05:00",
+  "entries": [
+   {
+    "time": "05:00",
+    "text": "Gap 7.6 kW. Inverter relays carried 1.1 kW. Community battery 6.5 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 8.166223877339316,
+  "blocks": 2,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 3.373610767865981,
+  "relay_kwh": 0.5723238242510933,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "05:30"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-1030-76",
+  "date": "2023-10-30",
+  "start": "19:00",
+  "entries": [
+   {
+    "time": "19:00",
+    "text": "Gap 10.4 kW. Inverter relays carried 2.4 kW. Community battery 8.0 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 10.996566072625356,
+  "blocks": 9,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 17.87192430950678,
+  "relay_kwh": 5.503895579523984,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "21:15"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-1101-76",
+  "date": "2023-11-01",
+  "start": "19:00",
+  "entries": [
+   {
+    "time": "19:00",
+    "text": "Gap 24.2 kW. Inverter relays carried 2.4 kW. Community battery 21.8 kW (full support)."
+   },
+   {
+    "time": "22:30",
+    "text": "Gap 21.4 kW. Inverter relays carried 2.4 kW. Community battery 6.4 kW (essential only). Band 500 W applied to 2 homes because earlier steps left 1.5 kW uncovered. Disconnected 67 homes (11.4 kW) after all other steps were exhausted."
+   },
+   {
+    "time": "22:45",
+    "text": "Gap 19.8 kW. Inverter relays carried 0.2 kW. Band 500 W applied to 5 homes because earlier steps left 1.8 kW uncovered. Disconnected 79 homes (17.9 kW) after all other steps were exhausted."
+   }
+  ],
+  "peak_gap_kw": 24.58878964262007,
+  "blocks": 16,
+  "homes_banded_max": 5,
+  "homes_shed_max": 79,
+  "battery_kwh": 72.68972114061366,
+  "relay_kwh": 7.692032425553055,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": 500,
+  "end": "23:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-1104-76",
+  "date": "2023-11-04",
+  "start": "19:00",
+  "entries": [
+   {
+    "time": "19:00",
+    "text": "Gap 17.5 kW. Inverter relays carried 2.4 kW. Community battery 15.1 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 19.513554083790304,
+  "blocks": 15,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 58.37276182930074,
+  "relay_kwh": 7.76729661711451,
+  "appliance_kwh": 0.19941302593327392,
+  "lowest_band_w": null,
+  "end": "22:45"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-1105-77",
+  "date": "2023-11-05",
+  "start": "19:15",
+  "entries": [
+   {
+    "time": "19:15",
+    "text": "Gap 8.8 kW. Inverter relays carried 2.4 kW. Community battery 6.4 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 8.826646913830949,
+  "blocks": 3,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 4.7609827824060895,
+  "relay_kwh": 1.8041778421872146,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "20:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-1107-75",
+  "date": "2023-11-07",
+  "start": "18:45",
+  "entries": [
+   {
+    "time": "18:45",
+    "text": "Gap 22.3 kW. Inverter relays carried 2.4 kW. Community battery 20.0 kW (full support)."
+   },
+   {
+    "time": "22:00",
+    "text": "Gap 24.1 kW. Inverter relays carried 2.0 kW. Community battery 16.1 kW (essential only). Band 500 W applied to 3 homes because earlier steps left 3.3 kW uncovered. Disconnected 11 homes (2.6 kW) after all other steps were exhausted."
+   },
+   {
+    "time": "22:15",
+    "text": "Gap 24.4 kW. Inverter relays carried 2.3 kW. Band 500 W applied to 2 homes because earlier steps left 3.2 kW uncovered. Disconnected 132 homes (18.9 kW) after all other steps were exhausted."
+   }
+  ],
+  "peak_gap_kw": 24.69342929930274,
+  "blocks": 20,
+  "homes_banded_max": 8,
+  "homes_shed_max": 135,
+  "battery_kwh": 72.6679893860933,
+  "relay_kwh": 7.950979807706248,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": 500,
+  "end": "23:45"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-1110-76",
+  "date": "2023-11-10",
+  "start": "19:00",
+  "entries": [
+   {
+    "time": "19:00",
+    "text": "Gap 23.9 kW. Inverter relays carried 2.4 kW. Community battery 21.6 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 25.05177926893099,
+  "blocks": 2,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 10.853624134267587,
+  "relay_kwh": 1.1907199521313878,
+  "appliance_kwh": 0.19941302593327392,
+  "lowest_band_w": null,
+  "end": "19:30"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-1111-75",
+  "date": "2023-11-11",
+  "start": "18:45",
+  "entries": [
+   {
+    "time": "18:45",
+    "text": "Gap 16.3 kW. Inverter relays carried 2.4 kW. Deferred 0.8 kW of appliances. Community battery 13.2 kW (full support)."
+   },
+   {
+    "time": "23:00",
+    "text": "Gap 17.2 kW. Inverter relays carried 2.5 kW. Community battery 0.6 kW (essential only). Band 500 W applied to 1 homes because earlier steps left 0.1 kW uncovered. Disconnected 68 homes (14.2 kW) after all other steps were exhausted."
+   },
+   {
+    "time": "23:15",
+    "text": "Gap 15.1 kW. Inverter relays carried 1.4 kW. Band 500 W applied to 0 homes because earlier steps left 0.0 kW uncovered. Disconnected 165 homes (13.9 kW) after all other steps were exhausted."
+   }
+  ],
+  "peak_gap_kw": 23.418508003490896,
+  "blocks": 21,
+  "homes_banded_max": 1,
+  "homes_shed_max": 165,
+  "battery_kwh": 72.65462592793003,
+  "relay_kwh": 8.746713305116199,
+  "appliance_kwh": 0.19941302593327392,
+  "lowest_band_w": 500,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-1113-79",
+  "date": "2023-11-13",
+  "start": "19:45",
+  "entries": [
+   {
+    "time": "19:45",
+    "text": "Gap 21.1 kW. Inverter relays carried 2.4 kW. Deferred 0.8 kW of appliances. Community battery 17.9 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 21.764500079409274,
+  "blocks": 2,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 9.080906359076693,
+  "relay_kwh": 1.2252112584428823,
+  "appliance_kwh": 0.19941302593327392,
+  "lowest_band_w": null,
+  "end": "20:15"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-1115-05",
+  "date": "2023-11-15",
+  "start": "01:15",
+  "entries": [
+   {
+    "time": "01:15",
+    "text": "Gap 6.0 kW. Inverter relays carried 0.9 kW. Community battery 5.0 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 6.100316868739455,
+  "blocks": 13,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 16.298821295661128,
+  "relay_kwh": 2.978915974485174,
+  "appliance_kwh": 0.10363247746882308,
+  "lowest_band_w": null,
+  "end": "04:30"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-1115-27",
+  "date": "2023-11-15",
+  "start": "06:45",
+  "entries": [
+   {
+    "time": "06:45",
+    "text": "Gap 5.1 kW. Inverter relays carried 1.4 kW. Deferred 2.3 kW of appliances. Community battery 1.5 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 7.200051833468667,
+  "blocks": 15,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 12.855434335337984,
+  "relay_kwh": 2.8972898021871423,
+  "appliance_kwh": 1.12749099509195,
+  "lowest_band_w": null,
+  "end": "10:30"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-1115-77",
+  "date": "2023-11-15",
+  "start": "19:15",
+  "entries": [
+   {
+    "time": "19:15",
+    "text": "Gap 11.8 kW. Inverter relays carried 2.4 kW. Community battery 9.4 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 24.607315722004724,
+  "blocks": 12,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 45.27354949524494,
+  "relay_kwh": 6.768565949946978,
+  "appliance_kwh": 0.20883416024862148,
+  "lowest_band_w": null,
+  "end": "22:15"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-1116-88",
+  "date": "2023-11-16",
+  "start": "22:00",
+  "entries": [
+   {
+    "time": "22:00",
+    "text": "Gap 18.8 kW. Inverter relays carried 2.6 kW. Community battery 16.2 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 18.87394981638181,
+  "blocks": 8,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 26.691339985832805,
+  "relay_kwh": 4.021363937354483,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-1117-22",
+  "date": "2023-11-17",
+  "start": "05:30",
+  "entries": [
+   {
+    "time": "05:30",
+    "text": "Gap 7.0 kW. Inverter relays carried 1.2 kW. Community battery 5.8 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 10.102171909141,
+  "blocks": 10,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 15.192112135338082,
+  "relay_kwh": 2.5466309174314983,
+  "appliance_kwh": 1.7170049556668676,
+  "lowest_band_w": null,
+  "end": "08:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-1127-83",
+  "date": "2023-11-27",
+  "start": "20:45",
+  "entries": [
+   {
+    "time": "20:45",
+    "text": "Gap 15.7 kW. Inverter relays carried 2.6 kW. Community battery 13.1 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 15.695652896864416,
+  "blocks": 13,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 33.41919918309147,
+  "relay_kwh": 6.692539667396054,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-1130-79",
+  "date": "2023-11-30",
+  "start": "19:45",
+  "entries": [
+   {
+    "time": "19:45",
+    "text": "Gap 9.8 kW. Inverter relays carried 2.4 kW. Community battery 7.4 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 9.773786263113998,
+  "blocks": 10,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 16.96126227838694,
+  "relay_kwh": 6.023073718114916,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "22:15"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-1206-29",
+  "date": "2023-12-06",
+  "start": "07:15",
+  "entries": [
+   {
+    "time": "07:15",
+    "text": "Gap 3.1 kW. Inverter relays carried 0.2 kW. Community battery 2.9 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 3.1665235257031625,
+  "blocks": 7,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 4.740529822013963,
+  "relay_kwh": 0.35355995754540065,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "09:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-1209-79",
+  "date": "2023-12-09",
+  "start": "19:45",
+  "entries": [
+   {
+    "time": "19:45",
+    "text": "Gap 10.7 kW. Inverter relays carried 1.9 kW. Community battery 8.8 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 13.774973893173541,
+  "blocks": 17,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 39.04920616887026,
+  "relay_kwh": 6.821653927203199,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-1210-77",
+  "date": "2023-12-10",
+  "start": "19:15",
+  "entries": [
+   {
+    "time": "19:15",
+    "text": "Gap 7.4 kW. Inverter relays carried 1.9 kW. Community battery 5.5 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 7.828319636253056,
+  "blocks": 14,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 17.821257646131887,
+  "relay_kwh": 6.391887665527866,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "22:45"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-1216-91",
+  "date": "2023-12-16",
+  "start": "22:45",
+  "entries": [
+   {
+    "time": "22:45",
+    "text": "Gap 7.6 kW. Inverter relays carried 1.9 kW. Community battery 5.7 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 7.6186054352253905,
+  "blocks": 5,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 5.349381972095441,
+  "relay_kwh": 1.4953381492823579,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-1218-80",
+  "date": "2023-12-18",
+  "start": "20:00",
+  "entries": [
+   {
+    "time": "20:00",
+    "text": "Gap 8.2 kW. Inverter relays carried 2.0 kW. Community battery 6.2 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 9.633888702864368,
+  "blocks": 16,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 23.940080000444738,
+  "relay_kwh": 6.552395000096031,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-1222-86",
+  "date": "2023-12-22",
+  "start": "21:30",
+  "entries": [
+   {
+    "time": "21:30",
+    "text": "Gap 15.4 kW. Inverter relays carried 2.0 kW. Community battery 13.4 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 15.533614127882629,
+  "blocks": 3,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 10.07129201643913,
+  "relay_kwh": 1.523141565635713,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "22:15"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-1225-84",
+  "date": "2023-12-25",
+  "start": "21:00",
+  "entries": [
+   {
+    "time": "21:00",
+    "text": "Gap 7.4 kW. Inverter relays carried 2.1 kW. Community battery 5.3 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 7.413197771632873,
+  "blocks": 10,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 11.084429765908032,
+  "relay_kwh": 4.525954129427813,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "23:30"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-1227-83",
+  "date": "2023-12-27",
+  "start": "20:45",
+  "entries": [
+   {
+    "time": "20:45",
+    "text": "Gap 7.4 kW. Inverter relays carried 2.1 kW. Community battery 5.3 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 16.462112892070206,
+  "blocks": 13,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 22.939442160492426,
+  "relay_kwh": 5.3831982994135865,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "00:00"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-1228-79",
+  "date": "2023-12-28",
+  "start": "19:45",
+  "entries": [
+   {
+    "time": "19:45",
+    "text": "Gap 21.6 kW. Inverter relays carried 1.8 kW. Deferred 0.8 kW of appliances. Community battery 19.0 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 21.594419226237886,
+  "blocks": 3,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 13.736477651228714,
+  "relay_kwh": 1.4774621368495469,
+  "appliance_kwh": 0.19941302593327392,
+  "lowest_band_w": null,
+  "end": "20:30"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-1228-83",
+  "date": "2023-12-28",
+  "start": "20:45",
+  "entries": [
+   {
+    "time": "20:45",
+    "text": "Gap 21.7 kW. Held 0.8 kW of appliance rebound. Inverter relays carried 4.1 kW. Community battery 16.9 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 21.716477001973477,
+  "blocks": 2,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 8.14755231697383,
+  "relay_kwh": 1.024739473902966,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "21:15"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-1229-76",
+  "date": "2023-12-29",
+  "start": "19:00",
+  "entries": [
+   {
+    "time": "19:00",
+    "text": "Gap 8.5 kW. Inverter relays carried 1.8 kW. Community battery 6.7 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 12.196581385949386,
+  "blocks": 18,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 32.16287010479727,
+  "relay_kwh": 7.308324608124462,
+  "appliance_kwh": 0.38796609504637586,
+  "lowest_band_w": null,
+  "end": "23:30"
+ },
+ {
+  "kind": "event",
+  "id": "EV-PER-1230-80",
+  "date": "2023-12-30",
+  "start": "20:00",
+  "entries": [
+   {
+    "time": "20:00",
+    "text": "Gap 15.6 kW. Inverter relays carried 2.2 kW. Community battery 13.4 kW (full support)."
+   }
+  ],
+  "peak_gap_kw": 15.627073184176417,
+  "blocks": 16,
+  "homes_banded_max": 0,
+  "homes_shed_max": 0,
+  "battery_kwh": 41.4239956202953,
+  "relay_kwh": 6.501048822050979,
+  "appliance_kwh": 0.0,
+  "lowest_band_w": null,
+  "end": "00:00"
+ }
+]

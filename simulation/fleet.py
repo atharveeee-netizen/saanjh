@@ -38,6 +38,9 @@ class HomeFleet:
             return rng.random(n) < p
 
         self.has_inverter = draw("inverter")
+        # Of the homes that own an inverter, a share enrol and get a relay node.
+        part = cfg.get("participation", {})
+        self.relay_enrolled = self.has_inverter & (rng.random(n) < part.get("inverter_relay", 1.0))
         self.has_pv = draw("rooftop_pv")
         self.has_actuator = draw("actuator")
         self.critical = draw("critical_load")

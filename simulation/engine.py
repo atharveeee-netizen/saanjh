@@ -102,7 +102,6 @@ class Scenario:
                               self.cfg["simulation"]["step_min"], depth)
 
     def _allocation(self):
-        key = f"{self.name}"
         cache = {}
         if os.path.exists(CALIBRATION_CACHE):
             with open(CALIBRATION_CACHE, "r", encoding="utf-8") as f:
@@ -114,6 +113,7 @@ class Scenario:
                           self.cfg["site"], self.cfg["dispatch"].get("shortfall_depth"), len(self.dates)],
                          sort_keys=True, default=str)
         sig = zlib.crc32(sig.encode())
+        key = f"{self.name}:{sig}"
         if key in cache and cache[key].get("signature") == sig:
             self.alloc = self._make_model(cache[key])
             return cache[key]
@@ -183,6 +183,8 @@ def run(scenario, policy="saanjh", forecaster=None, cb_override=None, record_day
     shed_with_slack = 0
     cb_soc_min, cb_soc_max = np.inf, -np.inf
     overload_blocks, peak_loading = 0, 0.0
+    arbitrage_kwh = 0.0
+    peak_shaved = []
     record = set(range(len(scenario.dates))) if record_days is None else set(record_days)
 
     for di in range(len(scenario.dates)):
@@ -200,9 +202,9 @@ def run(scenario, policy="saanjh", forecaster=None, cb_override=None, record_day
             inv.process_releases(t)
             if saanjh:
                 limit = min(alloc[t], scenario.dt_limit_kw)
-                ev_need = plan["event_energy_kwh"][t] if plan else None
-                target = plan["charge_target_soc"] if plan else None
-                dec = disp.plan(loads, t, hour, limit, pv, temp[t], ev_need, target)
+                ev_need = plan["event_energy_kwh"][t] if plan and plan.get("event_energy_kwh") is not None else None
+                target = plan.get("charge_target_soc") if plan else None
+                dec = disp.plan(loads, t, hour, limit, pv, temp[t], ev_need, target, plan)
                 if dec.gap_kw > 0:
                     inv.cancel_release()
                     inv.open(np.where(dec.open_relays)[0])
@@ -244,7 +246,11 @@ def run(scenario, policy="saanjh", forecaster=None, cb_override=None, record_day
                 if dec.cb_kw > 0:
                     cb_kw = cb.discharge(dec.cb_kw, step_h, temp[t])
                 elif dec.cb_kw < 0:
-                    cb_kw = -cb.charge(-dec.cb_kw, step_h, temp[t], plan["charge_target_soc"] if plan else None)
+                    cb_kw = -cb.charge(-dec.cb_kw, step_h, temp[t], plan.get("charge_target_soc") if plan else None)
+                if cb_kw > 0 and dec.gap_kw <= 0:
+                    arbitrage_kwh += cb_kw * step_h
+                    if dec.peak_before_kw is not None:
+                        peak_shaved.append(dec.peak_before_kw)
             net = float(draw.sum() - cb_kw)
 
             # Correction: if the realised load still exceeds the limit (rebound stagger or
@@ -392,6 +398,7 @@ def run(scenario, policy="saanjh", forecaster=None, cb_override=None, record_day
         }
     if cb is not None:
         ledger["community_battery"] = {
+            "peak_shaving_kwh": arbitrage_kwh,
             "discharged_kwh": cb.discharged_kwh, "charged_kwh": cb.charged_kwh,
             "equivalent_full_cycles": cb.efc, "capacity_kwh_end": cb.capacity_kwh,
             "nameplate_kwh": cb.nameplate_kwh, "soc_end": cb.soc, "fade_loss_kwh": cb.fade_loss_kwh,

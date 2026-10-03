@@ -42,6 +42,9 @@ appliance_flex:
   ac_rebound_share: 0.5           # [ASSUMPTION] share of avoided AC energy that returns later
   rebound_stagger_steps: 4        # deferred appliances restart spread over up to N steps
 
+participation:
+  inverter_relay: 0.6             # [ASSUMPTION] share of inverter owners who enrol and get a relay node
+
 grid:
   lt_feeders: 4                   # [ASSUMPTION] LT feeders ("ways") per DT; the baseline sheds at this granularity
 
