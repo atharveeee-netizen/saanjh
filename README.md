@@ -79,13 +79,17 @@ SAANJH bridges the last-mile gap as a localized edge layer beneath the DISCOM's 
   <img src="docs/diagrams/hardware_bom.jpg" width="800"/>
 </p>
 
-| Component | Unit Cost | Quantity | Total |
-|-----------|-----------|----------|-------|
-| Home Node (ESP32 + LoRa) | ₹350 | 60 | ₹21,000 |
-| Edge Gateway (RPi4) | ₹2,500 | 1 | ₹2,500 |
-| DT Sentinel (CT Clamp) | ₹1,200 | 1 | ₹1,200 |
-| Installation + SIM | ₹105 | 60 | ₹6,300 |
-| **Total** | | | **₹31,000** |
+| Component | Details | Cost |
+|-----------|---------|------|
+| **Home Node Compute** | RAKwireless WisBlock RAK4631 (nRF52840 + SX1262 LoRa) | ₹2,999 |
+| **Home Node Sensors** | DFRobot SCD41 (CO2), BME688, TMP117, INMP441 | ₹7,869 |
+| **Home Node Custom PCB** | Custom "Qashu" PCB (PCBPOWER) | ₹9,318 |
+| **Edge Gateway Compute** | Raspberry Pi CM4 (2GB, 32GB eMMC) | ₹11,275 |
+| **Edge Gateway Radio** | Waveshare SX1262 LoRa HAT | ₹2,809 |
+| **Transformer Sensors** | DS18B20 Temp Probes, CT Clamps | ₹455 |
+| **Power & Solar** | Mini Solar Panel 6V/100mAh + Boost/LiPo Charger | ₹99 |
+| **Misc & Wiring** | Cables, Connectors, Antennas | ₹2,000+ |
+| **Total Physical BOM** | Purchased Hardware Stack for Prototype | **₹42,695** |
 
 ## Project Structure
 ```

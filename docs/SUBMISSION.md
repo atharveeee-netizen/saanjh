@@ -64,8 +64,8 @@ Every evening across Indian cities:
 ![Architecture](docs/diagrams/architecture_1791008183566.jpg)
 
 **Three-Layer Edge Architecture:**
-*   **Layer 1 — Home Nodes:** ESP32 + LoRa module, CT clamp, battery BMS tap.
-*   **Layer 2 — LoRa Gateway:** Raspberry Pi running edge AI forecasting and optimization.
+*   **Layer 1 — Home Nodes:** RAKwireless WisBlock (nRF52840 + SX1262 LoRa) + Custom "Qashu" PCB with environmental/load sensors.
+*   **Layer 2 — LoRa Gateway:** Raspberry Pi CM4 (2GB/32GB) + Waveshare SX1262 LoRa HAT running AI models.
 *   **Layer 3 — DISCOM Interface:** MQTT/REST API pushing aggregated data to utility ADMS.
 
 ---
@@ -84,14 +84,13 @@ Every evening across Indian cities:
 
 ![Money Flow](docs/diagrams/money_flow_1791008227122.jpg)
 
-| Item | Cost |
-|------|------|
-| 60 Home Nodes (ESP32+LoRa) | ₹21,000 |
-| 1 Edge Gateway (RPi4) | ₹2,500 |
-| 1 DT Sentinel (CT Clamp) | ₹1,200 |
-| Installation & SIM | ₹6,300 |
-| **Total CAPEX** | **₹31,000** |
-| **Cost per Dependable kW** | **₹2,083** |
+| Component | Details | Cost |
+|-----------|---------|------|
+| **Home Node Core** | RAKwireless WisBlock RAK4631 + Base + Qashu PCB | ₹13,956 |
+| **Edge Gateway** | RPi CM4 + Waveshare SX1262 LoRa HAT | ₹14,084 |
+| **Sensors** | SCD41, BME688, TMP117, DS18B20 | ₹7,869 |
+| **Power & Misc** | Solar panel, cables, antennas, connectors | ~₹6,786 |
+| **Total Prototype BOM** | Real hardware for live pilot | **₹42,695** |
 
 **vs Community Battery: ₹25,000/kW — SAANJH is 12x cheaper.**
 
