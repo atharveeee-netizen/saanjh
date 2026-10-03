@@ -1,0 +1,70 @@
+{
+  "evening_peak_case": {
+    "scenario": "evening_peak_legacy",
+    "label": "SIMULATED",
+    "description": "The original prototype's 60-home evening case on a 100 kVA DT, kept to show the effect of the accounting fixes. Magnitudes are not calibrated to Indian data.",
+    "transformer_rating_kva": 100,
+    "dispatch_target_kw": 90.25,
+    "voltage_nominal_v": 230,
+    "voltage_low_limit_v": 216.2,
+    "forecast": "one-step-ahead XGBoost trained on UCI (non-Indian) household data",
+    "baseline": {
+      "peak_kw": 151.53696758329318,
+      "peak_loading_pct": 159.5125974560981,
+      "overload_minutes": 90,
+      "energy_above_rating_kwh": 45.003901623107254,
+      "min_voltage_v": 209.0792825801285,
+      "low_voltage_minutes": 75,
+      "line_losses_kwh": 36.71118393431706,
+      "total_energy_kwh": 862.8936467267338
+    },
+    "saanjh": {
+      "peak_kw": 141.2187953844946,
+      "peak_loading_pct": 148.6513635626259,
+      "overload_minutes": 90,
+      "energy_above_rating_kwh": 36.44798982028851,
+      "min_voltage_v": 210.64944873211195,
+      "low_voltage_minutes": 75,
+      "line_losses_kwh": 35.34104329368493,
+      "total_energy_kwh": 863.9219280458265
+    },
+    "flexibility": {
+      "required_kwh": 70.7934894323349,
+      "delivered_kwh": 19.70329158667569,
+      "delivery_ratio": 0.27832067248935777,
+      "peak_delivered_kw": 10.31817219879858,
+      "battery_delivered_kwh": 8.55887888081941,
+      "battery_peak_kw": 6.063139461664741,
+      "sum_inverter_ratings_kw": 9.1,
+      "appliance_deferred_kwh": 8.921535903632025,
+      "ac_setpoint_avoided_kwh": 2.2228768022242518,
+      "rebound_kwh": 10.032974304744151,
+      "recharge_kwh": 10.698598601024267,
+      "battery_losses_kwh": 2.1397197202048552,
+      "pending_deferred_kwh_at_end": 6.245004513516506e-17
+    },
+    "households": {
+      "homes": 60,
+      "homes_with_inverter": 13,
+      "homes_with_actuator": 11,
+      "homes_opted_out": 1,
+      "inverter_homes_dispatched": 13,
+      "actuator_homes_curtailed": 7
+    },
+    "invariants": {
+      "reserve_breaches": 0,
+      "opt_out_dispatches": 0,
+      "battery_peak_within_inverter_ratings": true
+    },
+    "event": {
+      "start": "18:45",
+      "end": "22:15",
+      "duration_minutes": 210,
+      "peak_required_kw": 53.87823677062988,
+      "peak_delivered_kw": 10.31817219879858,
+      "max_relays_open": 13,
+      "max_homes_curtailed": 6
+    },
+    "seed": 42
+  }
+}

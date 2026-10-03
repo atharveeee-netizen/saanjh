@@ -1,146 +1,96 @@
+"""Household load model.
+
+Each home owns a set of appliances drawn from its segment's ownership probabilities.
+A day's load for every appliance is generated up front as an array of kW per step, so a
+baseline run and a SAANJH run on the same seed see exactly the same demand.
+"""
 import numpy as np
-from simulation.config import (LOAD_PROFILES, PROB_AC, PROB_EV, PROB_WATER_HEATER, PROB_WATER_PUMP,
-                               BATTERY_CAPACITY_WH, BATTERY_INVERTER_RATING_W, BATTERY_RESERVE_SOC)
-from simulation.models.battery import Battery
+
 
 class Household:
-    def __init__(self, hid, has_battery, has_solar, opted_out=False):
+    def __init__(self, hid, segment, seg_cfg, rng, has_inverter, has_pv, has_actuator,
+                 opted_out=False, critical_flag=False):
         self.hid = hid
-        self.has_solar = has_solar
+        self.segment = segment
+        self.seg_cfg = seg_cfg
+        self.has_inverter = has_inverter
+        self.has_pv = has_pv
+        self.pv_kwp = seg_cfg.get("pv_kwp", 1.0) if has_pv else 0.0
+        self.has_actuator = has_actuator
         self.opted_out = opted_out
-        self.participating = not opted_out
-        
-        self.battery = Battery(
-            capacity_kwh=BATTERY_CAPACITY_WH / 1000.0,
-            inverter_rating_kw=BATTERY_INVERTER_RATING_W / 1000.0,
-            reserve_soc=BATTERY_RESERVE_SOC
-        ) if has_battery else None
-        
-        self.initial_soc = self.battery.soc if self.battery else 1.0
-        
-        self.has_ac = np.random.rand() < PROB_AC
-        self.has_ev = np.random.rand() < PROB_EV
-        self.has_water_heater = np.random.rand() < PROB_WATER_HEATER
-        self.has_water_pump = np.random.rand() < PROB_WATER_PUMP
-        
-        # State tracking
-        self.participation_count = 0
-        self.is_dispatched = False
-        self.current_dispatch_kw = 0.0
-        self.total_energy_delivered_kwh = 0.0
-        
-        # Invariant monitoring (Must be 0)
-        self.critical_load_violations = 0
-        self.reserve_violations = 0
-        self.opt_out_dispatches = 0
+        self.critical_flag = critical_flag
 
-    def get_base_load(self, hour):
-        """
-        Critical non-deferrable base loads: lighting, fans, TV, refrigeration, cooking.
-        These loads are NEVER shed or curtailed under any circumstances.
-        """
-        load = 0
-        for category, profile in LOAD_PROFILES.items():
-            if profile["deferrable"]:
-                continue
-            
-            if category == "lighting":
-                if hour >= 18:
-                    load += profile["base"] + profile["peak_add"]
-                elif hour >= 17:
-                    load += profile["base"] * 0.5
-            elif category == "fans":
-                load += profile["base"]
-            elif category == "tv":
-                if hour >= 18.5:
-                    load += profile["base"]
-            elif category == "refrigerator":
-                load += profile["base"]
-            elif category == "cooking":
-                if 18.5 <= hour <= 20.5:
-                    cook_start = 18.5 + np.random.rand() * 0.5
-                    if cook_start <= hour <= cook_start + 1.0:
-                        load += profile["peak_add"] * (0.6 + 0.4 * np.random.rand())
-        
-        return load
+        self.owned = {
+            name: (rng.random() < spec.get("own", 1.0))
+            for name, spec in seg_cfg["appliances"].items()
+        }
+        # Per-home scale factors so homes differ even with identical schedules.
+        self.scale = {name: rng.uniform(0.8, 1.2) for name in seg_cfg["appliances"]}
+        self.shift_h = {name: rng.uniform(-0.25, 0.25) for name in seg_cfg["appliances"]}
 
-    def get_deferrable_load(self, hour):
-        """
-        Flexible deferrable loads: AC setpoint adjustment, EV charging deferral,
-        geyser pre-heating, and water pump shifting.
-        """
-        load = 0
-        if self.has_ac and hour >= 18.5:
-            load += LOAD_PROFILES["ac"]["peak_add"] * (0.7 + 0.1 * np.random.rand())
-        
-        if self.has_ev and hour >= 20:
-            load += LOAD_PROFILES["ev_charger"]["peak_add"]
-            
-        if self.has_water_heater and 18 <= hour <= 20:
-            load += LOAD_PROFILES["water_heater"]["peak_add"] * (0.3 + 0.4 * np.random.rand())
-            
-        if self.has_water_pump and 17.5 <= hour <= 19.5:
-            load += LOAD_PROFILES["water_pump"]["peak_add"] * 0.5
-            
-        return load
+        self.loads = {}       # name -> np.ndarray of kW per step for the current day
+        self.inverter = None  # set by the engine when the home has an inverter
+        self.appliance_flex = None
 
-    def get_available_flexibility(self, hour=19.0):
-        """
-        Calculates instantaneous dependable flexibility (kW) available from this home.
-        If home opted out, returns 0.0.
-        """
-        if self.opted_out or not self.participating:
-            return 0.0
-            
-        flex_w = 0
-        if self.has_ac:
-            flex_w += LOAD_PROFILES["ac"]["peak_add"] * 0.7
-        if self.has_ev:
-            flex_w += LOAD_PROFILES["ev_charger"]["peak_add"]
-        if self.has_water_heater:
-            flex_w += LOAD_PROFILES["water_heater"]["peak_add"] * 0.3
-        if self.has_water_pump:
-            flex_w += LOAD_PROFILES["water_pump"]["peak_add"] * 0.5
-            
-        flex_kw = flex_w / 1000.0
-        
-        if self.battery is not None:
-            flex_kw += self.battery.get_available_power()
-            
-        return flex_kw
-        
-    def dispatch_battery(self, power_kw):
-        """Commands battery dispatch while enforcing opt-out and reserve constraints."""
-        if self.opted_out or not self.participating:
-            self.opt_out_dispatches += 1
-            return 0.0
-            
-        if self.battery is not None:
-            safe_kw = min(power_kw, self.battery.get_available_power())
-            self.is_dispatched = True
-            self.current_dispatch_kw = safe_kw
-            return safe_kw
-        return 0.0
-        
-    def step(self, dt_min):
-        """Executes simulation timestep and verifies physical invariants."""
-        if self.is_dispatched and self.battery is not None:
-            actual_delivered_kw = self.battery.discharge(self.current_dispatch_kw, dt_min)
-            energy_delivered_kwh = actual_delivered_kw * (dt_min / 60.0)
-            self.total_energy_delivered_kwh += energy_delivered_kwh
-            self.participation_count += 1
-            
-            # Verify battery didn't drop below reserve
-            if self.battery.soc < (self.battery.min_soc - 1e-5):
-                self.reserve_violations += 1
-                
-            self.is_dispatched = False 
-            self.current_dispatch_kw = 0.0
-            
-        elif self.battery is not None:
-            # Trickle charge when not dispatched
-            self.battery.charge(0.2, dt_min)
-            
     @property
-    def final_soc(self):
-        return self.battery.soc if self.battery is not None else 1.0
+    def label(self):
+        return f"H-{self.hid + 1:03d}"
+
+    # ------------------------------------------------------------------ load generation
+    def generate_day(self, rng, steps_per_day, step_h, multipliers=None, start_hour=0.0):
+        """Generate kW arrays for every owned appliance for one day.
+
+        ``multipliers`` optionally scales appliances by name for the day (e.g. season).
+        ``start_hour`` lets a run start at a clock time other than midnight (the evening
+        case runs noon to noon so that rebound and recharge finish inside the run).
+        """
+        multipliers = multipliers or {}
+        hours = (start_hour + np.arange(steps_per_day) * step_h) % 24
+        self.loads = {}
+        for name, spec in self.seg_cfg["appliances"].items():
+            if not self.owned[name]:
+                continue
+            mult = multipliers.get(name, 1.0) * self.scale[name]
+            if mult <= 0:
+                continue
+            arr = np.zeros(steps_per_day)
+            if "profile" in spec:
+                for start, end, kw in spec["profile"]:
+                    s = start + self.shift_h[name] if 0 < start < 24 else start
+                    e = end + self.shift_h[name] if 0 < end < 24 else end
+                    arr[(hours >= s) & (hours < e)] += kw * mult
+                # Small step-to-step variation around the profile.
+                arr *= rng.uniform(0.9, 1.1, steps_per_day)
+            if "session" in spec:
+                sess = spec["session"]
+                n_sessions = sess.get("per_day", 1)
+                for _ in range(n_sessions):
+                    if rng.random() > sess.get("probability", 1.0):
+                        continue
+                    start_h = rng.normal(sess["start_mean"], sess.get("start_sd", 0.0))
+                    start = int(round(((start_h - start_hour) % 24) / step_h)) % steps_per_day
+                    n = max(1, int(round(sess["duration_min"] / (step_h * 60))))
+                    idx = np.arange(start, min(start + n, steps_per_day))
+                    arr[idx] += sess["kw"] * mult
+            self.loads[name] = arr
+        return self.loads
+
+    # ------------------------------------------------------------------ load queries
+    def _sum(self, t, predicate):
+        return float(sum(arr[t] for name, arr in self.loads.items()
+                         if predicate(self.seg_cfg["appliances"][name])))
+
+    def demand_kw(self, t):
+        """Unmanaged appliance demand at step t (before PV, flexibility or limits)."""
+        return float(sum(arr[t] for arr in self.loads.values()))
+
+    def critical_kw(self, t):
+        return self._sum(t, lambda s: s.get("critical", False))
+
+    def backed_up_kw(self, t):
+        """Load on the circuits wired through the home inverter."""
+        return self._sum(t, lambda s: s.get("backed_up", False))
+
+    def flex_loads(self, kind):
+        return {name: arr for name, arr in self.loads.items()
+                if self.seg_cfg["appliances"][name].get("flex") == kind}

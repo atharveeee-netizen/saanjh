@@ -1,17 +1,16 @@
-import math
-from simulation.config import SOLAR_PANEL_RATING_W
+"""Rooftop PV output.
 
-class SolarPanel:
-    @staticmethod
-    def get_generation(hour):
-        # Simplified curve peaking at 12:00, dropping to zero by 18:30
-        if hour >= 18.5 or hour <= 6:
-            return 0
-        
-        # Scale hour to range [-pi/2, pi/2] around noon
-        # 6 AM = -pi/2, 12 PM = 0, 18 PM = pi/2
-        normalized_time = (hour - 12) / 6
-        if normalized_time > 1 or normalized_time < -1:
-            return 0
-            
-        return SOLAR_PANEL_RATING_W * math.cos(normalized_time * math.pi / 2)
+``clear_sky_profile`` is a SIMULATED stand-in (cosine shape, sunrise 06:00, sunset 18:30).
+Prompt 3 replaces it with NASA POWER irradiance where available.
+"""
+import numpy as np
+
+
+def clear_sky_profile(hours, kwp, sunrise=6.0, sunset=18.5):
+    """kW output per kWp for an array of clock hours."""
+    hours = np.asarray(hours, dtype=float) % 24
+    mid = (sunrise + sunset) / 2
+    half = (sunset - sunrise) / 2
+    x = (hours - mid) / half
+    out = np.where(np.abs(x) < 1, np.cos(x * np.pi / 2), 0.0)
+    return kwp * 0.8 * out   # 0.8 performance ratio

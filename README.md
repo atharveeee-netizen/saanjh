@@ -1,134 +1,55 @@
-# SAANJH ⚡
-## Neighbourhood Flexibility Network for Renewable-Deficit Reliability
-**Schneider Electric Yuva Yodha Tech Hackathon 2026 — Challenge 03**
+# SAANJH
 
-> This README is being rewritten. Result numbers below come from the original prototype and are being corrected; see `docs/PROJECT_BRIEF.md`.
->
-> `archive/` holds the earlier Blender renders, demo videos and video-compilation scripts. They are not part of the core submission.
+An essential-supply layer for a distribution transformer. During renewable-deficit
+windows, SAANJH aims to keep every home's essential loads running instead of
+load-shedding the whole feeder. Built for the Schneider Electric Yuva Yodha 2026
+hackathon, track "Grid Reliability & Renewable Intermittency".
 
+> Work in progress. The project is being rebuilt step by step from
+> `docs/PROJECT_BRIEF.md`. Every number on this page is generated from
+> `simulation/results/results.json` by `scripts/render_results.py`. `archive/` holds the
+> earlier Blender renders, demo videos and video scripts, which are not part of the core
+> submission.
 
----
+## Evening peak case (accounting-corrected)
 
-### Executive Summary (At a Glance)
-- **WHAT:** An edge-intelligence flexibility network that aggregates existing household inverter batteries and deferrable loads into a virtual community battery.
-- **WHY (Challenge 03):** Every evening, urban rooftop solar PV drops to zero while residential demand surges. This renewable-deficit gap overloads 100 kVA distribution transformers by over 150% and causes severe brownout voltage drops.
-- **HOW:** Low-cost LoRa nodes monitor battery states; a pole-mounted Raspberry Pi CM4 edge gateway predicts stress via XGBoost and coordinates staggered battery discharge while enforcing a strict **70% emergency blackout reserve**.
-- **RESULT:** **45.0 kW peak load reduction (29.2%)**, transformer overload duration cut from **90 min to 60 min (33% reduction)**, **6 to 0 voltage violations (100% eliminated)**, and modeled technical losses reduced by **35.3%**.
-- **EVIDENCE:** 100% data-driven, validated independently with PyPSA AC load flow solver, tested across 50 Monte Carlo runs and multi-parameter causal mutation suites.
+This is the original prototype's 60-home evening case, re-run after fixing how
+flexibility is counted. It now counts only what batteries and appliances physically
+deliver, and it adds battery recharge and appliance rebound back onto the feeder.
 
----
+<!-- results:evening_peak:start -->
+*SIMULATED. Scenario `evening_peak_legacy`: 60 homes on a 100 kVA DT, one day, seed 42. Forecast: one-step-ahead XGBoost trained on UCI (non-Indian) household data.*
 
-## 1. The Intermittency Gap (Problem)
-In Indian cities with growing rooftop solar adoption:
-1. **Solar Cliff:** Rooftop solar PV generation declines to zero between 17:00 and 18:30.
-2. **Evening Surge:** High-power appliances (air conditioners, geysers, induction cookers, EV chargers) turn on simultaneously.
-3. **Distribution Bottleneck:** Unmanaged net feeder demand reaches **154.1 kW** on a **95 kW rated transformer**, causing chronic thermal aging, insulation degradation, and tail-end feeder voltage dips below 220V.
+| Metric | Baseline | SAANJH | Change |
+|---|---:|---:|---:|
+| Peak DT load (kW) | 151.5 | 141.2 | −10.3 |
+| Peak DT loading | 160% | 149% | −11 pts |
+| Time above DT rating (min) | 90 | 90 | ±0.0 |
+| Energy above DT rating (kWh) | 45.0 | 36.4 | −8.6 |
+| Minimum tail-end voltage (V) | 209.1 | 210.6 | +1.6 |
+| Time below 216.2 V (min) | 75 | 75 | ±0.0 |
 
-## 2. The Solution: SAANJH Architecture
-Instead of building costly dedicated utility battery energy storage systems (BESS), SAANJH orchestrates assets Indian households already own:
-- A minority of Indian households own inverter batteries (an IIT Madras six-state study found 4–5%, concentrated among affluent homes); SAANJH treats them as optional extra flexibility, not the core mechanism.
-- SAANJH unlocks the top 22% of available energy (~400 Wh per home) during the evening peak, strictly preserving a **70% emergency reserve** for the family.
+| Flexibility ledger | Value |
+|---|---:|
+| Flexibility requested (kWh) | 70.8 |
+| Flexibility delivered (kWh) | 19.7 |
+| … from inverter batteries (kWh) | 8.6 |
+| … from deferred appliances (kWh) | 8.9 |
+| … from AC setpoint raise (kWh) | 2.2 |
+| Rebound added back later (kWh) | 10.0 |
+| Battery recharge added back (kWh) | 10.7 |
+| Battery conversion losses (kWh) | 2.1 |
+| Peak battery output / sum of inverter ratings (kW) | 6.1 / 9.1 |
+| Homes with inverter / with actuator / opted out | 13 / 11 / 1 |
+<!-- results:evening_peak:end -->
 
-```mermaid
-graph TD
-    UTILITY["DISCOM ADMS / SCADA"] -->|Flexibility Request / Price Signal| GW["SAANJH Edge Gateway (RPi CM4)"]
-    GW -->|Local 865 MHz LoRa Mesh| N1["WisBlock Node 1 (Home A)"]
-    GW -->|Local 865 MHz LoRa Mesh| N2["WisBlock Node 2 (Home B)"]
-    GW -->|Local 865 MHz LoRa Mesh| N3["WisBlock Node 3 (Home C)"]
-    N1 -->|Reserve Lock ≥70%| B1["Inverter Battery & Load Shift"]
-    N2 -->|Reserve Lock ≥70%| B2["Inverter Battery & Load Shift"]
-    N3 -->|Reserve Lock ≥70%| B3["Inverter Battery & Load Shift"]
-    B1 & B2 & B3 -->|Aggregated Dependable Relief| FEEDER["100 kVA Feeder (FDR-023)"]
-    FEEDER -->|CT Feedback / Health Telemetry| GW
-```
-
----
-
-## 3. Real-World Data vs. Digital-Twin Simulation (Clear Separation)
-To ensure rigorous scientific integrity:
-- **REAL-WORLD DATA:** Public household electricity consumption data (UCI benchmark) was used strictly to train and evaluate the machine learning load forecasting component (`artifacts/models/real_xgboost_model.pkl`).
-- **SIMULATED DIGITAL TWIN:** A 60-home Indian distribution feeder topology, inverter battery fleet, thermal transformer dynamics, and intervention results were modeled using the SAANJH physical grid simulator (`simulation/feeder_sim.py`) and validated independently by PyPSA.
-
----
-
-## 4. Quantified Reliability Scorecard (Simulation Results)
-*Based on 60 homes on a 100 kVA distribution transformer (FDR-023), 5-minute timestep resolution:*
-
-| Metric | Baseline (Unmanaged) | With SAANJH Intervention | Quantified Impact | Validation Source |
-|---|---|---|---|---|
-| **Peak Feeder Demand** | 154.14 kW | 109.18 kW | **-44.95 kW (-29.2%)** | Simulator (`feeder_sim.py`) |
-| **Transformer Overload Duration** | 90 mins | 60 mins | **-33% reduction** | Thermal Model (IEEE C57.91) |
-| **Dependable Flexibility Delivered**| 0.0 kW | 56.25 kW | **56.25 kW dependable** | Virtual Battery Aggregator |
-| **Delivery Ratio ($P_{del} / P_{req}$)** | N/A | 0.985 | **98.5% compliance** | Event Dispatcher |
-| **Voltage Violations (<220V)** | 6 timesteps | 0 timesteps | **100% eliminated** | PyPSA AC Power Flow |
-| **Modeled Technical Losses** | 25.87 kWh | 16.74 kWh | **-35.3% reduction** | PyPSA Line Loss Proxy ($I^2R$) |
-| **Critical Load Violations** | 0 | 0 | **Zero compromise** | Household Invariant Check |
-| **Battery Reserve Breaches (<70%)** | 0 | 0 | **Zero compromise** | Battery State Machine |
-| **Opt-Out Violations** | 0 | 0 | **Zero compromise** | Fairness Invariant Check |
-
----
-
-## 5. DISCOM Operator Decision Interface
-SAANJH is not just an analytics dashboard—it delivers direct operational decisions to the utility operator:
-
-```json
-{
-    "feeder_id": "FDR-023",
-    "forecast_status": "HIGH STRESS (SOLAR PV DROP-OFF AT 18:30)",
-    "required_flexibility_kw": 56.2,
-    "recommended_action": "DISPATCH 56.2 kW FOR 45 MINUTES VIA SAANJH EDGE",
-    "expected_impact": "PREVENTS TRANSFORMER THERMAL OVERLOAD & RESTORES FEEDER VOLTAGE > 0.90 p.u."
-}
-```
-
----
-
-## 6. Illustrative Unit Economics
-
-| Stakeholder | CAPEX | OPEX | Annual Revenue / Savings | Net Annual Value |
-|---|---|---|---|---|
-| **Household** | ₹0 | ₹0 | ₹1,200 – ₹1,800 (Bill Credit) | +₹1,500 / year |
-| **Local Operator / RWA**| ₹0 | ₹6,000 / yr | ₹12,000 / yr (Aggregator Fee) | +₹6,000 / year |
-| **DISCOM (Utility)** | ₹3,17,767 (60 homes + GW)| ₹18,000 / yr | ₹1,45,000 / yr (Peaking Power Avoidance) | Payback in **2.4 Years** |
-
-**Capital Efficiency:** SAANJH achieves dependable capacity at **₹7,068 per kW**, compared to **₹45,000–₹65,000 per kW** for utility-scale battery banks (over 6x cheaper).
-
----
-
-## 7. Physical Hardware Prototype
-- **Home Sensing Node:** RAKwireless WisBlock RAK4631 (Nordic nRF52840 MCU + Semtech SX1262 LoRa transceiver) with non-invasive split-core CT clamp and ambient sensors.
-- **Edge Gateway:** Raspberry Pi CM4 + Waveshare SX1262 LoRa HAT.
-- **Physical Demonstration:** Physical prototype demonstration of local sensor acquisition, edge state evaluation, and LoRa packet transmission recorded in `artifacts/video/saanjh_final_presentation.mp4`.
-
----
-
-## 8. Reproducibility & Quick Start
+## Quick start
 
 ```bash
-# 1. Clone repository
-git clone https://github.com/atharveeee-netizen/saanjh.git
-cd saanjh
-
-# 2. Install dependencies in virtual environment
 python -m venv .venv
-.\.venv\Scripts\activate
+.venv\Scripts\activate            # Windows; use `source .venv/bin/activate` elsewhere
 pip install -r requirements.txt
-
-# 3. Run canonical simulation & PyPSA validator
-python simulation/feeder_sim.py
-
-# 4. Run automated test suite & multi-vector mutation tests
+python simulation/feeder_sim.py   # writes simulation/results/results.json
+python scripts/render_results.py  # refreshes the tables above
 pytest
-python scripts/mutation_test.py
-python simulation/run_monte_carlo.py
-
-# 5. Launch interactive DISCOM Operator Dashboard
-streamlit run dashboard/app.py
 ```
-
----
-
-## 9. Engineering Limitations & Scope
-- **Simulated Distribution Feeder:** Results reflect a calibrated 60-home digital-twin model; physical field pilot is targeted for Stage 2.
-- **Single Feeder Boundary:** Phase 1 focuses on radial low-voltage distribution substations. Multi-feeder mesh coordination is planned for Stage 3.
-- **Resistive Loss Proxy:** Line losses are modeled using PyPSA AC power flow on standard ACSR conductor impedances.

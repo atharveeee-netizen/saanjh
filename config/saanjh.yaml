@@ -1,79 +1,80 @@
-# SAANJH Main Configuration File
+# SAANJH configuration
+#
+# Every number carries a label:
+#   [SOURCE: ...]  taken from a cited source (see docs/PROJECT_BRIEF.md, docs/DATA_SOURCES.md)
+#   [ASSUMPTION]   engineering assumption, varied in sensitivity runs where it matters
+#   [SIMULATED]    a modelling choice with no external basis
+
+electrical:
+  voltage_nominal_v: 230          # [SOURCE: IS 12360, LV single-phase nominal 230 V]
+  voltage_low_limit_pu: 0.94      # [SOURCE: CEA Distribution Code, LV +/-6%]
+  power_factor: 0.95              # [ASSUMPTION] residential aggregate
+  lt_feeder:                      # [ASSUMPTION] lumped balanced 3-phase LT feeder equivalent
+    r_ohm: 0.08
+    x_ohm: 0.02
+    s_nom_mva: 0.25
 
 transformer:
-  rating_kva: 100
-  rated_temp_c: 65
-  ambient_c: 35
-  voltage_nominal: 230
+  rating_kva: 100                 # [ASSUMPTION] typical urban DT size
+  dispatch_target_pct: 95         # [ASSUMPTION] dispatcher keeps loading below this
 
-neighbourhood:
-  num_homes: 60
-  homes_with_inverter_battery: 42
-  homes_with_solar: 15
+simulation:
+  step_min: 15                    # DISCOM scheduling resolution
+  report_window_h: [16, 24]       # evening window used for peak-case reporting
 
-probabilities:
-  ac: 0.55
-  ev: 0.08
-  water_heater: 0.6
-  water_pump: 0.3
+inverter_battery:
+  capacity_kwh: 1.8               # [ASSUMPTION] 150 Ah x 12 V lead-acid
+  inverter_kw: 0.7                # [ASSUMPTION] ~900 VA home inverter
+  initial_soc: 1.0                # [ASSUMPTION] battery on float charge is full while grid is present
+  reserve_soc: 0.70               # household backup reserve that SAANJH never touches
+  target_soc: 1.0                 # inverter recharges back to full
+  round_trip_efficiency: 0.80     # [ASSUMPTION] lead-acid incl. inverter losses
+  charge_kw: 0.2                  # [ASSUMPTION] ~15 A at 13.5 V charger
+  outage_floor_soc: 0.20          # [ASSUMPTION] inverter low-battery cut-off during real outages
+  release_stagger_steps: 2        # relays re-close spread over up to N steps after an event
 
-battery:
-  capacity_wh: 1800
-  inverter_rating_w: 800
-  reserve_soc: 0.70
-  available_soc: 0.22
+appliance_flex:
+  max_defer_min:                  # [ASSUMPTION] longest a deferred appliance may wait
+    water_heater: 60
+    water_pump: 90
+    ev_charger: 120
+  ac_setpoint_reduction: 0.10     # [ASSUMPTION] ~1 degC setpoint raise (JVVNL pilot style)
+  ac_rebound_share: 0.5           # [ASSUMPTION] share of avoided AC energy that returns later
+  rebound_stagger_steps: 4        # deferred appliances restart spread over up to N steps
 
-solar:
-  panel_rating_w: 1000
+forecast:
+  model_path: artifacts/models/real_xgboost_model.pkl   # trained on UCI (non-Indian) data
 
-dispatch:
-  max_event_duration_min: 120
-  stagger_groups: 4
-  rebound_recovery_min: 30
+# ---------------------------------------------------------------------------
+# Household segments. Load shapes are piecewise (start_h, end_h, kW) profiles
+# or sessions (start time distribution, duration, kW). Each home gets random
+# jitter so homes are not identical.
+# ---------------------------------------------------------------------------
+segments:
+  legacy:
+    label: "SIMULATED: original prototype magnitudes, not calibrated to Indian data"
+    ownership:
+      inverter: 0.20              # [ASSUMPTION] replaces the earlier unsupported 70% figure
+      rooftop_pv: 0.25
+      actuator: 0.25              # smart plug / contactor / smart AC installed
+    pv_kwp: 1.0
+    appliances:
+      lighting:     {own: 1.0, critical: true,  backed_up: true,  profile: [[0, 5, 0.02], [5, 7, 0.06], [17, 18, 0.05], [18, 23, 0.18], [23, 24, 0.04]]}
+      fans:         {own: 1.0, critical: true,  backed_up: true,  profile: [[0, 24, 0.15]]}
+      tv:           {own: 1.0, critical: true,  backed_up: true,  profile: [[18.5, 23, 0.12]]}
+      fridge:       {own: 1.0, critical: true,  backed_up: false, profile: [[0, 24, 0.20]]}
+      cooking:      {own: 1.0, critical: true,  backed_up: false, session: {start_mean: 18.75, start_sd: 0.25, duration_min: 60, kw: 0.65}}
+      ac:           {own: 0.55, critical: false, flex: setpoint, session: {start_mean: 18.75, start_sd: 0.30, duration_min: 300, kw: 1.10}}
+      water_heater: {own: 0.60, critical: false, flex: defer,    session: {start_mean: 18.50, start_sd: 0.50, duration_min: 45,  kw: 2.00}}
+      water_pump:   {own: 0.30, critical: false, flex: defer,    session: {start_mean: 18.00, start_sd: 0.50, duration_min: 30,  kw: 0.75}}
+      ev_charger:   {own: 0.08, critical: false, flex: defer,    session: {start_mean: 20.00, start_sd: 0.50, duration_min: 180, kw: 1.50}}
 
-load_profiles:
-  lighting:
-    base: 100
-    peak_add: 80
-    deferrable: false
-  fans:
-    base: 150
-    peak_add: 0
-    deferrable: false
-  tv:
-    base: 120
-    peak_add: 0
-    deferrable: false
-  refrigerator:
-    base: 200
-    peak_add: 0
-    deferrable: false
-  cooking:
-    base: 0
-    peak_add: 800
-    deferrable: false
-  water_heater:
-    base: 0
-    peak_add: 2000
-    deferrable: true
-    duration_min: 20
-  ac:
-    base: 0
-    peak_add: 1500
-    deferrable: true
-    duration_min: 60
-  washing_machine:
-    base: 0
-    peak_add: 500
-    deferrable: true
-    duration_min: 45
-  ev_charger:
-    base: 0
-    peak_add: 1500
-    deferrable: true
-    duration_min: 120
-  water_pump:
-    base: 0
-    peak_add: 750
-    deferrable: true
-    duration_min: 30
+scenarios:
+  evening_peak_legacy:
+    label: SIMULATED
+    description: >
+      The original prototype's 60-home evening case on a 100 kVA DT, kept to show the
+      effect of the accounting fixes. Magnitudes are not calibrated to Indian data.
+    num_homes: 60
+    segment_mix: {legacy: 1.0}
+    opted_out_homes: 1
