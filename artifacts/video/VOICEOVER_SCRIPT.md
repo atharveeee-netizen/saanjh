@@ -1,68 +1,34 @@
-# SAANJH Digital Twin — Voiceover Script
+# SAANJH Digital Twin — Event Narrative Script
 
-**Target Duration**: 2 minutes
-**Target Video**: `saanjh_digital_twin_voiceover_ready.mp4`
+**00:00 - 00:10 | Hero Neighbourhood**
+"This is a SAANJH-enabled neighbourhood distribution network. It is currently operating within normal parameters. The 100 kVA distribution transformer is handling steady baseline load."
 
----
+**00:10 - 00:25 | Network Overview**
+"We are looking at 60 individual households. 66% of these homes are equipped with rooftop solar and local battery storage, actively generating and consuming energy behind the meter."
 
-## 00:00–00:10
-**VISUAL**: 
-Shot 1 — Establishing. Wide view of the 60-home neighbourhood digital twin. The central transformer is connected via the LV feeder to the homes. The HUD displays "SAANJH DIGITAL TWIN — SIMULATED EVENT".
+**00:25 - 00:40 | Normal Operation**
+"During the afternoon, solar generation meets local demand, and excess energy charges the household batteries. The feeder stress remains low, and the network operates comfortably below rating."
 
-**VOICEOVER**: 
-"Welcome to SAANJH. This is a digital twin of an Indian neighbourhood, simulating sixty homes, connected to a single distribution transformer. As urban loads grow, these transformers face critical thermal stress."
+**00:40 - 00:55 | Solar Decline**
+"As evening approaches, solar generation begins to decline. Simultaneously, residential demand naturally increases as families return home and evening activities commence."
 
----
+**00:55 - 00:70 | Forecast Warning**
+"At this point, the SAANJH predictive engine, powered by our real-data-trained XGBoost model, detects an impending anomaly. It forecasts that the feeder will exceed its thermal rating within the next 30 minutes."
 
-## 00:10–00:25
-**VISUAL**: 
-Shot 3 & 4 — Normal Operation to Evening Stress. The sun visibly sets. Solar generation drops to zero. Energy flow from the grid to the homes accelerates. The Transformer HUD shows load climbing past 85% safety margins. The transformer material begins to glow red.
+**00:70 - 00:90 | Virtual Battery**
+"Without SAANJH, the DISCOM would experience an outage or extreme transformer degradation. Instead, the SAANJH Edge Gateway begins communicating via LoRa to the active nodes, aggregating their available flexibility into a single Virtual Battery."
 
-**VOICEOVER**: 
-"During the evening peak, solar generation vanishes just as residential demand surges. Here, we see the baseline simulation: without intervention, the transformer quickly exceeds its physical limits, triggering voltage violations and reducing asset lifespan."
+**00:90 - 01:15 | Dispatch**
+"The stress event arrives. The network transitions into an active dispatch state. The control UI indicates that the required flexibility is being deployed. Selected homes intelligently discharge their batteries into the network, dynamically compensating for the missing solar power."
 
----
+**01:15 - 01:35 | Transformer Relief**
+"Observe the transformer stress visualization. The injected flexibility drops the peak demand on the transformer from a critical overload state back down to a safe operating band. The heatmap cools."
 
-## 00:25–00:40
-**VISUAL**: 
-Shot 5 — Forecast. The camera focuses on a floating technical HUD. The `RealWorldForecastEngine` (trained on real UCI data) projects the next 60 minutes. A clear trendline crosses the red safety threshold.
+**01:35 - 01:50 | Recovery**
+"As the evening peak subsides, the stress event concludes. The participating households exit dispatch mode and enter a staggered recovery phase, preventing a secondary rebound peak."
 
-**VOICEOVER**: 
-"But SAANJH anticipates the stress. Our edge AI, utilizing an XGBoost model trained on real-world consumption patterns, forecasts the impending overload up to an hour in advance. This gives the local gateway time to act."
+**01:50 - 02:10 | Baseline vs SAANJH**
+"The final metrics confirm the operation. SAANJH successfully mitigated the transformer overload, proving that distributed flexibility can dynamically protect grid infrastructure without requiring expensive hardware upgrades."
 
----
-
-## 00:40–01:00
-**VISUAL**: 
-Shot 6 — Dispatch. SAANJH activates. Participating homes (with batteries and flexible loads) highlight in bright green. The energy flow reverses locally: batteries discharge to offset household demand.
-
-**VOICEOVER**: 
-"Before the overload occurs, SAANJH calculates the exact flexibility required and dispatches a localized signal. Participating inverters seamlessly deploy stored energy. Instead of drawing from the strained grid, these homes become self-sufficient, providing instant relief."
-
----
-
-## 01:00–01:15
-**VISUAL**: 
-Shot 7 & 8 — Transformer Response (Baseline vs SAANJH). Split screen or sequential comparison. The SAANJH transformer cools down (red to grey) as the load drops from 163 kW to 126 kW.
-
-**VOICEOVER**: 
-"The physical results are immediate. In this simulated event, SAANJH shaved peak demand by over twenty-two percent, completely eliminating transformer overloads without requiring expensive infrastructure upgrades."
-
----
-
-## 01:15–01:30
-**VISUAL**: 
-Shot 9 — Economics & Physical Hardware. The HUD shifts to display the actual ₹42,695 BOM cost. A small picture-in-picture window shows the physical Raspberry Pi prototype reading telemetry.
-
-**VOICEOVER**: 
-"This flexibility is highly affordable. Our physical edge gateway, built on a Raspberry Pi CM4 with LoRa communication, achieves this level of protection for a one-time capital expense of roughly twelve-hundred rupees per dependable kilowatt."
-
----
-
-## 01:30–01:50
-**VISUAL**: 
-Shot 10 — Final System View. The camera pulls back to the wide establishing shot. The neighbourhood is stable. 
-TEXT: SAANJH — Neighbourhood-Scale Flexibility.
-
-**VOICEOVER**: 
-"SAANJH bridges the gap between massive ADMS systems and the edge. By unlocking the latent flexibility of everyday appliances, we deliver a resilient, clean, and locally coordinated grid. Thank you."
+**02:10 - 02:16 | Final Hero Shot**
+"SAANJH: Securing the edge, one neighbourhood at a time."

@@ -1,0 +1,47 @@
+1
+00:00:00,000 --> 00:00:05,000
+This is a SAANJH-enabled neighbourhood distribution network.
+
+2
+00:00:05,000 --> 00:00:10,000
+It is currently operating within normal parameters.
+
+3
+00:00:10,000 --> 00:00:17,000
+We are looking at 60 individual households. 66% are equipped with rooftop solar and battery storage.
+
+4
+00:00:25,000 --> 00:00:32,000
+During the afternoon, solar generation meets local demand, keeping feeder stress low.
+
+5
+00:00:40,000 --> 00:00:48,000
+As evening approaches, solar declines, and residential demand naturally increases.
+
+6
+00:00:55,000 --> 00:01:05,000
+The SAANJH predictive engine detects an impending anomaly: the feeder will exceed its thermal rating.
+
+7
+00:01:10,000 --> 00:01:20,000
+The Edge Gateway aggregates available flexibility into a single Virtual Battery via LoRa.
+
+8
+00:01:30,000 --> 00:01:40,000
+The stress event arrives. Selected homes intelligently discharge to dynamically compensate.
+
+9
+00:01:45,000 --> 00:01:55,000
+Observe the transformer stress visualization. The injected flexibility drops peak demand back to a safe band.
+
+10
+00:01:55,000 --> 00:02:00,000
+As the peak subsides, homes enter a staggered recovery phase.
+
+11
+00:02:00,000 --> 00:02:10,000
+Final metrics confirm SAANJH successfully mitigated the overload without expensive hardware upgrades.
+
+12
+00:02:10,000 --> 00:02:16,000
+SAANJH: Securing the edge, one neighbourhood at a time.
