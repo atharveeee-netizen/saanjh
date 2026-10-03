@@ -12,10 +12,51 @@ from simulation.config import NUM_HOMES, HOMES_WITH_INVERTER_BATTERY, HOMES_WITH
 from simulation.models.household import Household
 from simulation.models.transformer import Transformer
 from simulation.models.solar import SolarPanel
-from simulation.models.dispatcher import SAANJHDispatcher
+from simulation.virtual_battery.aggregator import VirtualBatteryAggregator
+from simulation.economics_engine import calculate_economics
+import joblib
 
-def run_simulation(use_saanjh=False):
-    np.random.seed(42) # For reproducibility
+class RealWorldForecastEngine:
+    def __init__(self, model_path, num_homes):
+        self.model = joblib.load(model_path)
+        self.num_homes = num_homes
+        self.history = []
+        
+    def predict_next_step(self, current_total_load_kw, current_hour):
+        # Explicit Scaling Layer: The XGBoost model was trained on a SINGLE household (UCI dataset).
+        # We must scale the 60-home aggregate load down to a per-household basis to match the model's domain,
+        # then scale the prediction back up.
+        per_home_load = current_total_load_kw / self.num_homes
+        self.history.append(per_home_load)
+        
+        # Approximate lags (assuming 15-min model steps vs 5-min sim steps)
+        lag_1 = self.history[-3] if len(self.history) >= 3 else per_home_load
+        lag_4 = self.history[-12] if len(self.history) >= 12 else per_home_load
+        lag_96 = self.history[-288] if len(self.history) >= 288 else per_home_load
+        roll_mean_4 = sum(self.history[-12:]) / len(self.history[-12:]) if len(self.history) > 0 else per_home_load
+        
+        # Construct feature vector expected by the real-trained XGBoost model
+        import pandas as pd
+        features = pd.DataFrame({
+            'hour': [int(current_hour)],
+            'day_of_week': [3], # Wed
+            'month': [10],      # Oct
+            'is_weekend': [0],
+            'load_kw': [per_home_load],
+            'load_lag_1': [lag_1],
+            'load_lag_4': [lag_4],
+            'load_lag_96': [lag_96],
+            'load_roll_mean_4': [roll_mean_4]
+        })
+        
+        predicted_per_home = self.model.predict(features)[0]
+        
+        # Scale back up to feeder level
+        predicted_feeder_load = predicted_per_home * self.num_homes
+        return predicted_feeder_load
+
+def run_simulation(use_saanjh=False, seed=42):
+    np.random.seed(seed) # For reproducibility
     
     # Initialize components
     households = []
@@ -28,7 +69,15 @@ def run_simulation(use_saanjh=False):
         households.append(Household(i, has_battery, has_solar))
         
     transformer = Transformer()
-    dispatcher = SAANJHDispatcher(target_transformer_limit_kw=transformer.rating_kva * 0.95 * 0.85) # Target 85% loading
+    
+    aggregator = VirtualBatteryAggregator(time_res_minutes=5)
+    aggregator.register_households(households)
+    
+    # Initialize Real-World Forecast Engine
+    base_dir = os.path.dirname(os.path.dirname(__file__))
+    model_path = os.path.join(base_dir, 'artifacts', 'models', 'real_xgboost_model.pkl')
+    forecast_engine = RealWorldForecastEngine(model_path, NUM_HOMES) if use_saanjh else None
+    
     
     # Simulation loop (16:00 to 22:00, 5 minute intervals)
     start_time = 16.0
@@ -60,12 +109,15 @@ def run_simulation(use_saanjh=False):
             if h.has_solar:
                 h_load = max(0, h_load - SolarPanel.get_generation(t))
                 
-            # If dispatched, the battery provides power to offset the home's load and export the rest
-            if h.is_dispatched and h.has_battery and h.battery_soc > 0.7:
-                h_load = max(0, h_load - 800) # Inverter offsetting load
-                
             total_load_w += h_load
-            available_flex_w += h.get_available_flexibility()
+            
+            # If dispatched, subtract the battery's active output
+            if h.is_dispatched:
+                total_load_w -= (h.current_dispatch_kw * 1000)
+                
+            total_load_w = max(0, total_load_w)
+            
+            available_flex_w += (h.get_available_flexibility() * 1000)
             
             # Step the household state
             h.step(dt_min)
@@ -77,14 +129,14 @@ def run_simulation(use_saanjh=False):
         active_homes = sum(1 for h in households if h.is_dispatched)
         
         if use_saanjh:
-            # Forecast is just actual + noise in this prototype
-            forecast_load_kw = total_load_kw * (1 + 0.05 * np.random.randn())
-            req_flex = dispatcher.calculate_required_flexibility(forecast_load_kw)
+            # Forecast using the real-data trained XGBoost model
+            forecast_load_kw = forecast_engine.predict_next_step(total_load_kw, t)
+            target_limit_kw = transformer.rating_kva * 0.95 * 0.85
+            req_flex = max(0, forecast_load_kw - target_limit_kw)
             
             if req_flex > 0:
-                new_dispatched_kw, new_homes = dispatcher.dispatch(households, req_flex, duration_min=60)
-                dispatched_kw = new_dispatched_kw
-                active_homes += new_homes
+                dispatched_kw = aggregator.dispatch(req_flex)
+                active_homes += sum(1 for h in households if h.current_dispatch_kw > 0)
                 
         # Record metrics
         total_loads.append(total_load_kw)
@@ -116,8 +168,8 @@ def generate_results():
     os.makedirs(results_dir, exist_ok=True)
     os.makedirs(plots_dir, exist_ok=True)
     
-    baseline_df, _ = run_simulation(use_saanjh=False)
-    saanjh_df, saanjh_households = run_simulation(use_saanjh=True)
+    baseline_df, _ = run_simulation(use_saanjh=False, seed=42)
+    saanjh_df, saanjh_households = run_simulation(use_saanjh=True, seed=42)
     
     baseline_df.to_csv(os.path.join(results_dir, 'baseline_profile.csv'), index=False)
     saanjh_df.to_csv(os.path.join(results_dir, 'saanjh_profile.csv'), index=False)
@@ -138,6 +190,8 @@ def generate_results():
     
     homes_participating = sum(1 for h in saanjh_households if h.participation_count > 0)
     
+    economics = calculate_economics(peak_reduction_kw, homes_participating)
+    
     kpis = {
         "baseline_peak_kw": float(baseline_peak_kw),
         "saanjh_peak_kw": float(saanjh_peak_kw),
@@ -146,11 +200,12 @@ def generate_results():
         "baseline_overload_minutes": int(baseline_overload_mins),
         "saanjh_overload_minutes": int(saanjh_overload_mins),
         "flexibility_delivered_kw": float(flexibility_delivered_kw),
-        "dependable_flexibility_ratio": 0.889, # Hardcoded realistic ratio
+        "dependable_flexibility_ratio": float((homes_participating / NUM_HOMES) if NUM_HOMES > 0 else 0),
         "voltage_violations_baseline": int(voltage_violations_baseline),
         "voltage_violations_saanjh": int(voltage_violations_saanjh),
         "homes_participating": int(homes_participating),
-        "cost_per_dependable_kw": 2083
+        "cost_per_dependable_kw": economics["cost_per_dependable_kw"],
+        "total_initial_investment": economics["total_initial_investment"]
     }
     
     with open(os.path.join(results_dir, 'comparison.json'), 'w') as f:

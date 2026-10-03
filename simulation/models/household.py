@@ -1,12 +1,17 @@
 import numpy as np
 from simulation.config import (LOAD_PROFILES, PROB_AC, PROB_EV, PROB_WATER_HEATER, PROB_WATER_PUMP,
-                               BATTERY_CAPACITY_WH, BATTERY_INVERTER_RATING_W, BATTERY_AVAILABLE_SOC, BATTERY_RESERVE_SOC)
+                               BATTERY_CAPACITY_WH, BATTERY_INVERTER_RATING_W, BATTERY_RESERVE_SOC)
+from simulation.models.battery import Battery
 
 class Household:
     def __init__(self, hid, has_battery, has_solar):
         self.hid = hid
-        self.has_battery = has_battery
         self.has_solar = has_solar
+        self.battery = Battery(
+            capacity_kwh=BATTERY_CAPACITY_WH/1000.0,
+            inverter_rating_kw=BATTERY_INVERTER_RATING_W/1000.0,
+            reserve_soc=BATTERY_RESERVE_SOC
+        ) if has_battery else None
         
         self.has_ac = np.random.rand() < PROB_AC
         self.has_ev = np.random.rand() < PROB_EV
@@ -14,13 +19,12 @@ class Household:
         self.has_water_pump = np.random.rand() < PROB_WATER_PUMP
         
         # Current state
-        self.battery_soc = 1.0 if has_battery else 0.0
+        self.participating = True
         self.participation_count = 0
         self.is_dispatched = False
-        self.dispatch_remaining_min = 0
+        self.current_dispatch_kw = 0.0
 
     def get_base_load(self, hour):
-        """Non-deferrable load that cannot be shifted."""
         load = 0
         for category, profile in LOAD_PROFILES.items():
             if profile["deferrable"]:
@@ -40,7 +44,6 @@ class Household:
                 load += profile["base"]
             elif category == "cooking":
                 if 18.5 <= hour <= 20.5:
-                    # Stochastic: cooking happens at slightly different times per home
                     cook_start = 18.5 + np.random.rand() * 0.5
                     if cook_start <= hour <= cook_start + 1.0:
                         load += profile["peak_add"] * (0.6 + 0.4 * np.random.rand())
@@ -48,10 +51,8 @@ class Household:
         return load
 
     def get_deferrable_load(self, hour):
-        """Load that SAANJH can shift or reduce."""
         load = 0
         if self.has_ac and hour >= 18.5:
-            # AC duty cycle: runs ~70-80% of the time
             load += LOAD_PROFILES["ac"]["peak_add"] * (0.7 + 0.1 * np.random.rand())
         
         if self.has_ev and hour >= 20:
@@ -66,45 +67,39 @@ class Household:
         return load
 
     def get_available_flexibility(self):
-        """Watts this home can shed right now."""
-        flex = 0
+        """kW this home can shed right now."""
+        flex_w = 0
         
-        if self.is_dispatched:
-            return 0
-            
         if self.has_ac:
-            flex += LOAD_PROFILES["ac"]["peak_add"] * 0.7
+            flex_w += LOAD_PROFILES["ac"]["peak_add"] * 0.7
         if self.has_ev:
-            flex += LOAD_PROFILES["ev_charger"]["peak_add"]
+            flex_w += LOAD_PROFILES["ev_charger"]["peak_add"]
         if self.has_water_heater:
-            flex += LOAD_PROFILES["water_heater"]["peak_add"] * 0.3
+            flex_w += LOAD_PROFILES["water_heater"]["peak_add"] * 0.3
         if self.has_water_pump:
-            flex += LOAD_PROFILES["water_pump"]["peak_add"] * 0.5
+            flex_w += LOAD_PROFILES["water_pump"]["peak_add"] * 0.5
             
-        # Battery discharge
-        if self.has_battery and self.battery_soc > BATTERY_RESERVE_SOC:
-            flex += BATTERY_INVERTER_RATING_W
-            
-        return flex
+        flex_kw = flex_w / 1000.0
         
-    def dispatch(self, duration_min):
-        self.is_dispatched = True
-        self.dispatch_remaining_min = duration_min
-        self.participation_count += 1
+        if self.battery is not None:
+            flex_kw += self.battery.get_available_power()
+            
+        return flex_kw
+        
+    def dispatch_battery(self, power_kw):
+        """Called by Aggregator to command a specific kW dispatch"""
+        if self.battery is not None:
+            self.is_dispatched = True
+            self.current_dispatch_kw = power_kw
         
     def step(self, dt_min):
-        if self.is_dispatched:
-            self.dispatch_remaining_min -= dt_min
-            if self.dispatch_remaining_min <= 0:
-                self.is_dispatched = False
-                self.dispatch_remaining_min = 0
+        if self.is_dispatched and self.battery is not None:
+            self.battery.discharge(self.current_dispatch_kw, dt_min)
+            self.participation_count += 1
+            # Reset dispatch for next step. Aggregator must re-dispatch every step.
+            self.is_dispatched = False 
+            self.current_dispatch_kw = 0.0
             
-            # Discharge battery if we're using it for flexibility
-            if self.has_battery and self.battery_soc > BATTERY_RESERVE_SOC:
-                energy_used_wh = BATTERY_INVERTER_RATING_W * (dt_min / 60)
-                self.battery_soc -= energy_used_wh / BATTERY_CAPACITY_WH
-                
-        # Recharge battery slowly if not dispatched
-        elif self.has_battery and self.battery_soc < 1.0:
-            recharge_wh = 200 * (dt_min / 60) # 200W charging
-            self.battery_soc = min(1.0, self.battery_soc + recharge_wh / BATTERY_CAPACITY_WH)
+        elif self.battery is not None:
+            # Trickle charge
+            self.battery.charge(0.2, dt_min)
