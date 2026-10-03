@@ -2,11 +2,10 @@
 ## Neighbourhood Flexibility Network for Renewable-Deficit Reliability
 **Schneider Electric Yuva Yodha Tech Hackathon 2026 — Challenge 03**
 
-[![Challenge 3](https://img.shields.io/badge/Challenge-03-3DCD58.svg)](docs/SUBMISSION.md)
-[![Schneider Electric](https://img.shields.io/badge/Schneider-Electric-blue.svg)](https://www.se.com)
-[![PyPSA](https://img.shields.io/badge/PyPSA-Validated-00d4ff.svg)](simulation/validators/pypsa_validator.py)
-[![XGBoost](https://img.shields.io/badge/XGBoost-Real--Data-orange.svg)](artifacts/models/real_xgboost_model.pkl)
-[![Tests](https://img.shields.io/badge/Tests-100%25%20Passing-brightgreen.svg)](tests/)
+> This README is being rewritten. Result numbers below come from the original prototype and are being corrected; see `docs/PROJECT_BRIEF.md`.
+>
+> `archive/` holds the earlier Blender renders, demo videos and video-compilation scripts. They are not part of the core submission.
+
 
 ---
 
@@ -27,7 +26,7 @@ In Indian cities with growing rooftop solar adoption:
 
 ## 2. The Solution: SAANJH Architecture
 Instead of building costly dedicated utility battery energy storage systems (BESS), SAANJH orchestrates assets Indian households already own:
-- **70% of urban Indian households** already maintain 150Ah/12V inverter batteries for grid blackout backup.
+- A minority of Indian households own inverter batteries (an IIT Madras six-state study found 4–5%, concentrated among affluent homes); SAANJH treats them as optional extra flexibility, not the core mechanism.
 - SAANJH unlocks the top 22% of available energy (~400 Wh per home) during the evening peak, strictly preserving a **70% emergency reserve** for the family.
 
 ```mermaid

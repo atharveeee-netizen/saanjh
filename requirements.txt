@@ -1,5 +1,28 @@
-streamlit
-plotly
-pandas
-numpy
-matplotlib
+# Core simulation and analysis
+numpy==2.4.6
+pandas==3.0.6
+PyYAML==6.0.3
+matplotlib==3.11.2
+
+# Power-flow validation
+pypsa==1.3.0
+
+# Forecasting
+scikit-learn==1.9.1
+xgboost==3.2.0
+joblib==1.6.0
+
+# Data download
+requests==2.34.2
+
+# Backend API
+fastapi==0.142.2
+uvicorn==0.54.0
+httpx==0.28.1
+
+# Legacy Streamlit analysis app (dashboard/)
+streamlit==1.65.0
+plotly==7.1.0
+
+# Tests
+pytest==9.1.1

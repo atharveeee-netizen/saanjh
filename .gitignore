@@ -1,6 +1,32 @@
+# Python
 .venv/
+venv/
 __pycache__/
 *.pyc
-artifacts/video/frames/
-exploration/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Large raw data (download with the scripts in data/)
 data/raw/
+!data/raw/esmi/sample/
+
+# Generated simulation outputs (regenerate with the run scripts).
+# The canonical summary results.json is committed so docs and UI can be checked.
+simulation/results/timeseries/
+simulation/results/montecarlo/
+
+# Node / UI
+node_modules/
+ui/dist/
+ui/test-results/
+ui/playwright-report/
+
+# Model caches
+.cache/
+hf_cache/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

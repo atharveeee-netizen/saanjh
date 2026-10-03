@@ -1,9 +1,0 @@
-{
-    "multi_vector_mutation_tests": "PASS",
-    "vectors_tested": [
-        "battery_fleet_size",
-        "neighborhood_size",
-        "solar_capacity"
-    ],
-    "data_coupling_verified": true
-}

@@ -1,6 +1,0 @@
-{
-    "chronological_split_used": true,
-    "random_shuffle_used": false,
-    "future_data_in_rolling_features": false,
-    "hyperparameter_tuning_on_test_set": false
-}
