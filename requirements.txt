@@ -3,3 +3,9 @@ plotly
 pandas
 numpy
 matplotlib
+xgboost
+pypsa
+scipy
+joblib
+scikit-learn
+pytest

@@ -27,13 +27,15 @@
 
 ## 2. Quantitative Verification Summary
 
-All metrics presented in the slide deck and README are dynamically produced by the simulation engine:
+All metrics presented in the slide deck and README are dynamically produced by the simulation engine and independently validated by PyPSA AC power flow:
 
-- **Peak Feeder Load:** Reduced from 163.27 kW to 162.95 kW (0.32 kW reduction during evening surge)
-- **Transformer Overload Duration:** Slashed from 90 minutes to 45 minutes (**50% reduction**)
-- **Feeder Voltage Violations:** Reduced from 8 to 4 (**50% reduction**)
-- **Participating Fleet:** 42 enrolled inverter-battery homes (70% penetration realistic for urban India)
-- **Hardware Prototype Cost:** ₹22,143 (80%+ cheaper than dedicated neighborhood storage)
+- **Peak Feeder Load:** Reduced from 154.14 kW to 109.18 kW (**-44.95 kW, -29.2% reduction**)
+- **Transformer Overload Duration:** Cut from 90 minutes to 60 minutes (**33% reduction**)
+- **Dependable Flexibility Delivered:** 56.25 kW dispatched (98.5% delivery ratio)
+- **Feeder Voltage Violations:** Reduced from 6 to 0 (**100% eliminated**)
+- **Modeled Technical Losses:** Reduced from 25.87 kWh to 16.74 kWh (**-35.3% reduction**)
+- **Participating Fleet:** 39 active homes (3 opted out, 5% opt-out rate tested)
+- **Hardware Prototype Cost:** ₹22,143 (DISCOM total ₹3,17,767 for 60-home cluster, ₹7,068/kW)
 
 ---
 
