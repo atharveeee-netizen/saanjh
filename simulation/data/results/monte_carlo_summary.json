@@ -1,9 +1,9 @@
 {
-    "mean_peak_reduction_kw": 56.430751042334634,
-    "median_peak_reduction_kw": 56.84533005130379,
-    "min_peak_reduction_kw": 52.55908057208836,
-    "max_peak_reduction_kw": 58.268597105114935,
-    "P10_peak_reduction": 54.109687710379646,
-    "P90_peak_reduction": 58.179217889208765,
-    "mean_overload_mins": 4.0
+    "mean_peak_reduction_kw": 0.13043572512775087,
+    "median_peak_reduction_kw": 0.047671903127564974,
+    "min_peak_reduction_kw": -0.7419354723776905,
+    "max_peak_reduction_kw": 1.0947929797272309,
+    "P10_peak_reduction": -0.5346134457949347,
+    "P90_peak_reduction": 0.8469876362693185,
+    "mean_overload_mins": 44.0
 }

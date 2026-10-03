@@ -24,8 +24,8 @@ def test_scenario(name, modify_households_func):
     soc_violations = 0
     negative_soc = 0
     for h in households:
-        if h.battery_soc > 1.01: soc_violations += 1
-        if h.battery_soc < -0.01: negative_soc += 1
+        if h.battery and h.battery.soc > 1.01: soc_violations += 1
+        if h.battery and h.battery.soc < -0.01: negative_soc += 1
         
     print(f"SOC > 100%: {soc_violations}")
     print(f"SOC < 0%: {negative_soc}")
