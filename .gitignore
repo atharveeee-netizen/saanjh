@@ -38,3 +38,17 @@ ai_forecasting/data/
 ui/e2e/screenshots/
 docs/architecture/mermaid.config.json
 ui/dist-artifact/
+
+# From the team's FUXA/video work
+artifacts/video/frames/
+exploration/
+**/node_modules/
+_appdata/
+*.pdf
+*.tex
+*.aux
+*.log
+*.out
+docs/proposal_pages/
+figs/
+proposal/

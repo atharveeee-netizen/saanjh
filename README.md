@@ -71,7 +71,8 @@ uvicorn backend.main:app --port 8000     # optional API (the UI also runs on the
 | `backend/` | FastAPI replay service and the data exporter |
 | `ui/` | React operator console, field app, household messages, design system |
 | `tests/` | pytest suite |
-| `archive/` | Earlier Blender renders, demo videos and video scripts (not part of the submission) |
+| `frontend/` | FUXA SCADA/HMI platform (MIT, see `docs/OPEN_SOURCE_NOTICES.md`) and the SAANJH tag adapter; its page must be regenerated from the corrected results before use |
+| `archive/` | Earlier Blender renders, demo and walkthrough videos (including the 5-minute submission video) and video scripts |
 
 ## Data sources
 

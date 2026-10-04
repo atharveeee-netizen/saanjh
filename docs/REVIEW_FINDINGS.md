@@ -67,6 +67,8 @@ the minute-wise ESMI data (needs the Dataverse form) and calibrate per location.
 imbalance and the distribution of homes along the line are not modelled. *Fix:* build a
 radial four-feeder model with per-phase loads in PyPSA or pandapower.
 
+**M9. The FUXA SCADA page reads the old results.** `frontend/saanjh_fuxa_adapter.py` and `build_fuxa_frontend.py` read `simulation/data/results/comparison.json`, which held the pre-correction numbers and no longer exists. The generated page (`docs/index.html`) and its test hard-coded those numbers, so both were removed in the merge. *Fix:* point the adapter at `simulation/results/results.json` and `backend/data/`, then regenerate the page.
+
 **M8. Single-home disconnection and load limiting assume capabilities.** These assume
 every RDSS meter has a working load switch and the head-end can act within 15 minutes.
 *Fix:* cite the meter specification (IS 16444) and head-end latency, or keep shedding
