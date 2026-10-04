@@ -1,0 +1,40 @@
+[
+ {
+  "id": "DT-0423",
+  "name": "DT-0423, 100 kVA",
+  "location_label": "Peri-urban ward, Lucknow district",
+  "feeder_11kv": "FDR-11kV-07",
+  "circle": "Demo Circle",
+  "division": "Division 2",
+  "subdivision": "Sub-division 4",
+  "rating_kva": 100.0,
+  "homes": 250,
+  "homes_by_segment": {
+   "Low-income": 175,
+   "Middle": 63,
+   "Affluent": 12
+  },
+  "lt_feeders": 4,
+  "scenario": "peri_urban_low_income",
+  "label": "SIMULATED on inputs calibrated to real data"
+ },
+ {
+  "id": "DT-0187",
+  "name": "DT-0187, 100 kVA",
+  "location_label": "Urban ward, Lucknow",
+  "feeder_11kv": "FDR-11kV-12",
+  "circle": "Demo Circle",
+  "division": "Division 2",
+  "subdivision": "Sub-division 4",
+  "rating_kva": 100.0,
+  "homes": 200,
+  "homes_by_segment": {
+   "Middle": 90,
+   "Low-income": 80,
+   "Affluent": 30
+  },
+  "lt_feeders": 4,
+  "scenario": "mixed_urban",
+  "label": "SIMULATED on inputs calibrated to real data"
+ }
+]

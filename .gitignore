@@ -30,3 +30,10 @@ hf_cache/
 Thumbs.db
 .vscode/
 .idea/
+
+# Generated copies / caches
+ui/public/data/
+ai_forecasting/cache/
+ai_forecasting/data/
+ui/e2e/screenshots/
+docs/architecture/mermaid.config.json

@@ -44,7 +44,6 @@ def _features(df):
     f = pd.DataFrame({
         "block": df["timestamp"].dt.hour * 4 + df["timestamp"].dt.minute // 15,
         "dow": df["timestamp"].dt.dayofweek,
-        "doy": df["timestamp"].dt.dayofyear,
         "temp_c": df["temp_c"],
         "solar": df["solar"],
         "cloudiness": df["cloudiness"],
@@ -69,7 +68,7 @@ class XGBoostQuantile:
         X = _features(df)
         y = df["net_kw"]
         n = self.train_days * STEPS
-        mask = X.notna().all(axis=1).to_numpy()
+        mask = X.notna().all(axis=1).to_numpy().copy()
         mask[n:] = False
         self.models = {}
         for q in QUANTILES:

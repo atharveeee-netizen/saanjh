@@ -17,7 +17,8 @@ import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RESULTS = os.path.join(ROOT, "simulation", "results", "results.json")
-TARGETS = ["README.md", os.path.join("docs", "WRITEUP.md")]
+TARGETS = ["README.md", os.path.join("docs", "WRITEUP.md"), os.path.join("ai_forecasting", "README.md"),
+           os.path.join("docs", "OWNERSHIP_MODEL.md")]
 
 
 def kw(x):
@@ -170,6 +171,12 @@ def render_sensitivity(res):
 
 RENDERERS["annual"] = render_annual
 RENDERERS["sensitivity"] = render_sensitivity
+
+try:
+    from scripts._render_ext import EXTRA
+except ImportError:  # run as a script from scripts/
+    from _render_ext import EXTRA
+RENDERERS.update(EXTRA)
 
 
 def load_results():

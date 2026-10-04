@@ -1,0 +1,20 @@
+flowchart LR
+    subgraph A["A. DISCOM-owned"]
+      AD["DISCOM"] -->|"capex, O&M"| AA["Battery, gateway, nodes"]
+      AD -->|"monthly fee"| AO["Local operator"]
+      AD -->|"credits per kWh lent"| AH["Inverter homes"]
+      AR["Regulator (ARR / DFPO)"] -->|"cost recovery, DFPO credit"| AD
+    end
+    subgraph B["B. Community-owned"]
+      BG["Grant (state / CSR)"] -->|"part of capex"| BC["RWA / cooperative / SHG"]
+      BL["Lender"] -->|"loan"| BC
+      BD["DISCOM"] -->|"availability fee per kW-month"| BC
+      BC -->|"credits"| BH["Inverter homes"]
+      BC -->|"repayments"| BL
+    end
+    subgraph C["C. Third-party aggregator"]
+      CD["DISCOM"] -->|"availability fee per kW-month"| CA["Registered aggregator"]
+      CA -->|"credits"| CH["Inverter homes"]
+      CA -->|"fee"| CO["Local operator"]
+      CI["Investors"] -->|"capital, expects 15%"| CA
+    end

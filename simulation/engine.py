@@ -36,6 +36,21 @@ COOLING = ("fans", "cooler", "ac", "ac_day")
 CALIBRATION_CACHE = repo_path("simulation", "results", "allocation_calibration.json")
 
 
+def _phase_feeder(fleet, draw, banded, shed):
+    """Per-phase load and per-LT-feeder load and counts for one block (recorded days only)."""
+    ph = np.bincount(fleet.phase, weights=draw, minlength=3)
+    k = fleet.n_lt_feeders
+    fkw = np.bincount(fleet.feeder, weights=draw, minlength=k)
+    fb = np.bincount(fleet.feeder, weights=banded.astype(float), minlength=k)
+    fs = np.bincount(fleet.feeder, weights=shed.astype(float), minlength=k)
+    out = {"phase_r_kw": float(ph[0]), "phase_y_kw": float(ph[1]), "phase_b_kw": float(ph[2])}
+    for i in range(k):
+        out[f"feeder_{i + 1}_kw"] = float(fkw[i])
+        out[f"feeder_{i + 1}_banded"] = int(fb[i])
+        out[f"feeder_{i + 1}_shed"] = int(fs[i])
+    return out
+
+
 def _clock(hour):
     return f"{int(hour):02d}:{int(round((hour % 1) * 60)):02d}"
 
@@ -353,6 +368,11 @@ def run(scenario, policy="saanjh", forecaster=None, cb_override=None, record_day
                     "homes_banded": int((banded & grid_on).sum()), "homes_shed": int(shed.sum()),
                     "band_curtailed_kw": float(band_cut.sum()), "unserved_kw": float(unserved.sum()),
                     "loading_pct": abs(net) / scenario.rating_kw * 100,
+                    **_phase_feeder(fleet, draw, banded & grid_on, shed),
+                    **{f"phase_{p}_kw": float(v) for p, v in zip("ryb", np.bincount(fleet.phase, weights=draw, minlength=3))},
+                    "feeder_kw": np.round(np.bincount(fleet.feeder, weights=draw, minlength=fleet.n_lt_feeders), 2).tolist(),
+                    "feeder_banded": np.bincount(fleet.feeder, weights=(banded & grid_on), minlength=fleet.n_lt_feeders).astype(int).tolist(),
+                    "feeder_shed": np.bincount(fleet.feeder, weights=shed, minlength=fleet.n_lt_feeders).astype(int).tolist(),
                 })
         if cb is not None:
             cb.apply_fade()
@@ -365,8 +385,11 @@ def run(scenario, policy="saanjh", forecaster=None, cb_override=None, record_day
     homes = pd.DataFrame({
         "home_id": [f"HH-{i + 1:04d}" for i in range(n)],
         "segment": fleet.segment, "lt_feeder": fleet.feeder + 1,
-        "has_inverter": fleet.has_inverter, "has_pv": fleet.has_pv, "has_actuator": fleet.has_actuator,
+        "phase": np.array(list("RYB"))[fleet.phase],
+        "has_inverter": fleet.has_inverter, "relay_enrolled": fleet.relay_enrolled,
+        "has_pv": fleet.has_pv, "has_actuator": fleet.has_actuator,
         "critical": fleet.critical, "opted_out": fleet.opted_out,
+        "relay_enrolled": fleet.relay_enrolled, "phase": np.array(list("RYB"))[fleet.phase],
         **acc,
         "relay_kwh": inv.relay_kwh, "outage_backup_kwh": inv.outage_kwh,
         "battery_cycles": inv.cell_out_kwh / inv.capacity_kwh,

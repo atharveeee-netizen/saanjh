@@ -22,7 +22,7 @@ from simulation.deficit import ShortfallModel, day_seed
 STEPS = 96
 
 
-def deficit_quantiles(model: ShortfallModel, demand_q, solar_idx, cloudiness, n_samples=300,
+def deficit_quantiles(model: ShortfallModel, demand_q, solar_idx, cloudiness, n_samples=400,
                       seed=0, day=0, window=(68, 96)):
     """Quantiles of the deficit (kW per block) and of deficit energy in ``window``.
 
@@ -55,7 +55,7 @@ def deficit_quantiles(model: ShortfallModel, demand_q, solar_idx, cloudiness, n_
     energy = gaps[:, w0:w1].sum(axis=1) * 0.25
     return {
         "block_q": np.quantile(gaps, [0.1, 0.5, 0.9], axis=0),
-        "window_kwh_q": {q: float(np.quantile(energy, q)) for q in (0.1, 0.5, 0.9)},
+        "window_kwh_q": {q: float(np.quantile(energy, q)) for q in (0.1, 0.5, 0.9, 0.97, 0.995)},
         "p_any_deficit": float((gaps.sum(axis=1) > 0).mean()),
     }
 

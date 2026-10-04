@@ -1,0 +1,16 @@
+flowchart TB
+    subgraph F1["Backhaul to cloud down"]
+      A1["Gateway keeps the last approved plan<br/>and local safety rules"] --> A2["Events still run from DT meter data;<br/>logs sync when the link returns"]
+    end
+    subgraph F2["Gateway down"]
+      B1["No new limits or relay commands"] --> B2["Relays stay closed (fail-safe);<br/>meter limits revert to sanctioned load"] --> B3["DISCOM falls back to its normal<br/>load-shedding schedule"]
+    end
+    subgraph F3["Relay node down"]
+      C1["Relay is normally closed"] --> C2["Inverter stays on grid;<br/>home is simply not counted as flexible"]
+    end
+    subgraph F4["Smart-meter communication delayed"]
+      D1["Band request not acknowledged"] --> D2["Gateway uses battery and relays first,<br/>sheds the smallest blocks if the DT would exceed its limit"] --> D3["Console shows a stale-data warning"]
+    end
+    subgraph F5["Community battery fault"]
+      E1["BMS opens contactor; thermal alarm"] --> E2["Dispatcher drops the battery from plans;<br/>essential band carries the gap"] --> E3["Operator and technician alerted;<br/>fire-safety procedure"]
+    end

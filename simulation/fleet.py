@@ -61,7 +61,10 @@ class HomeFleet:
         k = min(scenario.get("opted_out_homes", 0), n)
         self.opted_out[rng.choice(n, k, replace=False)] = True
         self.n_lt_feeders = n_lt_feeders
-        self.feeder = rng.permutation(n) % n_lt_feeders
+        perm = rng.permutation(n)
+        self.feeder = perm % n_lt_feeders
+        # Single-phase homes spread across R/Y/B within each LT feeder (no extra random draws).
+        self.phase = (perm // n_lt_feeders) % 3
 
     # ------------------------------------------------------------------
     def _spec(self, segment, appliance):

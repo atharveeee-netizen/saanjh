@@ -14,7 +14,7 @@ def train_real_models():
     processed_path = os.path.join(base_dir, 'data', 'processed', 'real_load_dataset.csv')
     artifacts_dir = os.path.join(base_dir, 'artifacts', 'real_data')
     models_dir = os.path.join(base_dir, 'artifacts', 'models')
-    results_dir = os.path.join(base_dir, 'simulation', 'data', 'results')
+    results_dir = artifacts_dir  # training history kept with the other benchmark artifacts
     
     os.makedirs(artifacts_dir, exist_ok=True)
     os.makedirs(models_dir, exist_ok=True)

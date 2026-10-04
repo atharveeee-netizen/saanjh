@@ -1,0 +1,31 @@
+sequenceDiagram
+    autonumber
+    participant SLDC as SLDC / DISCOM ADMS
+    participant CL as SAANJH cloud
+    participant SDO as Sub-division engineer
+    participant GW as DT gateway
+    participant HH as Homes (meters, relays, actuators)
+    participant CB as Community battery
+    participant OP as Local operator
+    CL->>CL: Midnight: day-ahead demand and deficit forecast (P10/P50/P90)
+    CL->>CB: Pre-charge in solar hours, keep P90 reserve for the evening
+    CL->>SDO: Recommended plan for the deficit window
+    SDO->>CL: Approve (or modify) plan
+    CL->>GW: Approved plan (cached locally)
+    CL->>HH: Day-ahead WhatsApp / SMS / IVR notice
+    SLDC->>GW: Shortfall: allocation for the DT (OpenADR-style event)
+    GW->>HH: Hold appliance rebound, open inverter relays
+    GW->>CB: Discharge (full support or essential-only)
+    GW->>HH: If still short: essential band via smart meter load limit
+    GW->>HH: Last resort: disconnect single homes in fair rotation
+    loop every 15 minutes
+      HH-->>GW: Meter and node readings
+      GW->>GW: Re-plan, log every decision with its reason
+    end
+    SLDC->>GW: Shortfall ends
+    GW->>HH: Release relays and appliances, staggered recharge and rebound
+    GW->>CL: Event log and measurements
+    CL->>CL: M&V against baseline (what rotational shedding would have done)
+    CL->>SLDC: Flexibility report (counts toward DFPO)
+    CL->>HH: Credits to inverter homes via billing, monthly summary
+    HH->>OP: Complaints (COMPLAINT keyword or call)

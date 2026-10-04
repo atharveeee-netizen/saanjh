@@ -1,0 +1,92 @@
+flowchart LR
+
+    subgraph HOMES["Homes on the DT (by segment)"]
+      PV["Rooftop PV<br/>(few homes)"]
+      LOADS["Household loads<br/>low-income / middle / affluent"]
+      SM["Smart meter with<br/>load-limit relay (RDSS)"]
+      INV["Inverter + battery"]
+      NODE["SAANJH relay node<br/>(normally closed)"]
+      ACT["Appliance actuator<br/>(geyser / pump / AC)"]
+    end
+    subgraph DTSITE["Distribution transformer site"]
+      DT["100 kVA DT<br/>+ DT meter"]
+      CB["Community battery<br/>second-life pack, BMS, PCS"]
+      GW["SAANJH DT gateway<br/>runs dispatch locally<br/>even if backhaul fails"]
+    end
+    subgraph CLOUD["SAANJH cloud"]
+      FC["Forecasting<br/>(Chronos-2, baselines)"]
+      PLAN["Planning, M&V,<br/>settlement"]
+    end
+    subgraph DISCOM["DISCOM"]
+      FDR["11 kV feeder"]
+      HES["MDM / head-end<br/>(smart meters)"]
+      ADMS["ADMS / DERMS<br/>IEEE 2030.5 / OpenADR"]
+      BILL["Billing (credits)"]
+    end
+    subgraph PEOPLE["People"]
+      OPAPP["Local operator app<br/>(RWA / SHG)"]
+      MSG["Household WhatsApp /<br/>SMS / IVR"]
+    end
+    IES["India Energy Stack<br/>(future integration)"]
+    subgraph LEGEND["Legend"]
+      L1[" "] -->|"energy"| L2[" "]
+      L3[" "] -->|"data"| L4[" "]
+      L5[" "] -->|"money"| L6[" "]
+    end
+
+    FDR --> DT
+    DT --> SM
+    SM --> LOADS
+    PV --> LOADS
+    SM -->|"mains input via relay"| INV
+    INV -->|"backed-up circuits"| LOADS
+    CB -->|"LV bus"| DT
+    DT -->|"charging"| CB
+    DT -->|"DT meter readings"| GW
+    NODE -->|"LoRa"| GW
+    GW -->|"open / close relay"| NODE
+    GW -->|"defer"| ACT
+    GW -->|"set-points"| CB
+    HES -->|"load limit"| SM
+    GW -->|"band requests"| HES
+    ADMS -->|"allocation, events"| GW
+    GW -->|"telemetry"| PLAN
+    FC -->|"P10/P50/P90"| PLAN
+    PLAN -->|"approved plan"| GW
+    PLAN -->|"flexibility reports"| ADMS
+    PLAN -->|"tasks"| OPAPP
+    PLAN -->|"notices"| MSG
+    PLAN --> IES
+    BILL -->|"credits to inverter homes"| LOADS
+    DISCOM -->|"operator fee"| OPAPP
+    ADMS -->|"DFPO value"| PLAN
+    linkStyle 0 stroke:#1D2421,stroke-width:2.5px
+    linkStyle 1 stroke:#1B5E8C,stroke-width:1.5px,stroke-dasharray:6 4
+    linkStyle 2 stroke:#2F7A4F,stroke-width:2px,stroke-dasharray:2 3
+    linkStyle 3 stroke:#1D2421,stroke-width:2.5px
+    linkStyle 4 stroke:#1D2421,stroke-width:2.5px
+    linkStyle 5 stroke:#1D2421,stroke-width:2.5px
+    linkStyle 6 stroke:#1D2421,stroke-width:2.5px
+    linkStyle 7 stroke:#1D2421,stroke-width:2.5px
+    linkStyle 8 stroke:#1D2421,stroke-width:2.5px
+    linkStyle 9 stroke:#1D2421,stroke-width:2.5px
+    linkStyle 10 stroke:#1D2421,stroke-width:2.5px
+    linkStyle 11 stroke:#1B5E8C,stroke-width:1.5px,stroke-dasharray:6 4
+    linkStyle 12 stroke:#1B5E8C,stroke-width:1.5px,stroke-dasharray:6 4
+    linkStyle 13 stroke:#1B5E8C,stroke-width:1.5px,stroke-dasharray:6 4
+    linkStyle 14 stroke:#1B5E8C,stroke-width:1.5px,stroke-dasharray:6 4
+    linkStyle 15 stroke:#1B5E8C,stroke-width:1.5px,stroke-dasharray:6 4
+    linkStyle 16 stroke:#1B5E8C,stroke-width:1.5px,stroke-dasharray:6 4
+    linkStyle 17 stroke:#1B5E8C,stroke-width:1.5px,stroke-dasharray:6 4
+    linkStyle 18 stroke:#1B5E8C,stroke-width:1.5px,stroke-dasharray:6 4
+    linkStyle 19 stroke:#1B5E8C,stroke-width:1.5px,stroke-dasharray:6 4
+    linkStyle 20 stroke:#1B5E8C,stroke-width:1.5px,stroke-dasharray:6 4
+    linkStyle 21 stroke:#1B5E8C,stroke-width:1.5px,stroke-dasharray:6 4
+    linkStyle 22 stroke:#1B5E8C,stroke-width:1.5px,stroke-dasharray:6 4
+    linkStyle 23 stroke:#1B5E8C,stroke-width:1.5px,stroke-dasharray:6 4
+    linkStyle 24 stroke:#1B5E8C,stroke-width:1.5px,stroke-dasharray:6 4
+    linkStyle 25 stroke:#1B5E8C,stroke-width:1.5px,stroke-dasharray:6 4
+    linkStyle 26 stroke:#2F7A4F,stroke-width:2px,stroke-dasharray:2 3
+    linkStyle 27 stroke:#2F7A4F,stroke-width:2px,stroke-dasharray:2 3
+    linkStyle 28 stroke:#2F7A4F,stroke-width:2px,stroke-dasharray:2 3
+    style LEGEND fill:#ffffff,stroke:#C9CFCB

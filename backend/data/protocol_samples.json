@@ -1,0 +1,75 @@
+{
+ "label": "Illustrative payloads in the style of OpenADR 2.0b and IEEE 2030.5; not certified implementations.",
+ "openadr_event": {
+  "eiEvent": {
+   "eventDescriptor": {
+    "eventID": "EV-0423-0404-1900",
+    "modificationNumber": 0,
+    "priority": 1,
+    "marketContext": "http://demo-discom.example/dfpo",
+    "eventStatus": "far",
+    "createdDateTime": "2023-04-04T12:00:00+05:30"
+   },
+   "eiActivePeriod": {
+    "properties": {
+     "dtstart": {
+      "date-time": "2023-04-04T19:00:00+05:30"
+     },
+     "duration": {
+      "duration": "PT180M"
+     }
+    }
+   },
+   "eiEventSignals": {
+    "eiEventSignal": [
+     {
+      "signalName": "LOAD_DISPATCH",
+      "signalType": "delta",
+      "signalID": "SIG-1",
+      "currentValue": {
+       "payloadFloat": {
+        "value": 34.7
+       }
+      },
+      "itemBase": {
+       "itemDescription": "RealPower",
+       "itemUnits": "W",
+       "siScaleCode": "k"
+      }
+     }
+    ]
+   },
+   "eiTarget": {
+    "resourceID": [
+     "DT-0423"
+    ]
+   }
+  }
+ },
+ "ieee2030_5_dercontrol": {
+  "DERControl": {
+   "mRID": "EV042304041900",
+   "description": "SAANJH essential band for DT-0423",
+   "interval": {
+    "start": "2023-04-04T19:00:00+05:30",
+    "duration": 10800
+   },
+   "DERControlBase": {
+    "opModMaxLimW": {
+     "value": 500,
+     "multiplier": 0
+    },
+    "opModConnect": true
+   },
+   "randomizeStart": 120,
+   "randomizeDuration": 0
+  }
+ },
+ "flexibility_report": {
+  "dt_id": "DT-0423",
+  "event_id": "EV-0423-0404-1900",
+  "delivered_kwh": 9.4,
+  "battery_kwh": 73.6,
+  "outage_minutes_avoided": 21375.0
+ }
+}

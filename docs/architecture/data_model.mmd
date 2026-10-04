@@ -1,0 +1,69 @@
+erDiagram
+    DT ||--o{ FEEDER : "has LT feeders"
+    DT ||--o{ HOUSEHOLD : supplies
+    DT ||--o| COMMUNITY_BATTERY : hosts
+    FEEDER ||--o{ HOUSEHOLD : connects
+    HOUSEHOLD ||--|| METER : "has smart meter"
+    HOUSEHOLD ||--o{ DEVICE : "relay node / actuator"
+    HOUSEHOLD ||--o{ ENROLMENT : consents
+    DT ||--o{ FORECAST : "day-ahead"
+    DT ||--o{ EVENT : "deficit event"
+    EVENT ||--|| PLAN : follows
+    PLAN ||--o{ DISPATCH_COMMAND : issues
+    DISPATCH_COMMAND }o--|| DEVICE : targets
+    METER ||--o{ MEASUREMENT : records
+    EVENT ||--o{ MEASUREMENT : "verified by"
+    HOUSEHOLD ||--o{ CREDIT : earns
+    EVENT ||--o{ CREDIT : generates
+    HOUSEHOLD ||--o{ COMPLAINT : raises
+    DT { string dt_id PK
+         float rating_kva
+         string feeder_11kv
+         string subdivision }
+    FEEDER { string feeder_id PK
+             int lt_index }
+    HOUSEHOLD { string household_id PK
+                string segment
+                bool critical_flag
+                int band_w
+                string phase }
+    METER { string meter_no PK
+            bool load_limit_capable }
+    DEVICE { string device_id PK
+             string kind
+             string state }
+    ENROLMENT { string enrolment_id PK
+                date consented_on
+                string language
+                string consent_audio_ref
+                bool opted_out }
+    COMMUNITY_BATTERY { string battery_id PK
+                        float capacity_kwh
+                        float power_kw }
+    FORECAST { string forecast_id PK
+               date for_date
+               string model
+               json quantiles }
+    EVENT { string event_id PK
+            datetime start
+            datetime end
+            float peak_gap_kw
+            string status }
+    PLAN { string plan_id PK
+           float battery_reserve_kwh
+           int band_floor_w
+           string approved_by }
+    DISPATCH_COMMAND { string command_id PK
+                       datetime at
+                       string action
+                       string reason }
+    MEASUREMENT { string measurement_id PK
+                  datetime at
+                  float kw
+                  float voltage_v }
+    CREDIT { string credit_id PK
+             float kwh
+             float amount_rs }
+    COMPLAINT { string complaint_id PK
+                datetime raised_at
+                string status }

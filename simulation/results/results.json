@@ -2111,5 +2111,861 @@
       "saanjh_max_homes_shed": 98,
       "saanjh_max_homes_banded": 0
     }
+  },
+  "forecast": {
+    "label": "Forecasts of SIMULATED DT demand on REAL weather (see ai_forecasting/README.md)",
+    "chronos": "amazon/chronos-2 (zero-shot)",
+    "accuracy": {
+      "peri_urban_low_income": {
+        "seasonal_naive": {
+          "mase": 1.0196535112368466,
+          "mae_kw": 1.1903306988847464,
+          "pinball_kw": 0.4774406710407518,
+          "coverage_p10_p90": 0.5264589515331355,
+          "days": 337
+        },
+        "weekly_naive": {
+          "mase": 1.9057669299267013,
+          "mae_kw": 2.224768371423927,
+          "pinball_kw": 1.1123841857119634,
+          "coverage_p10_p90": null,
+          "days": 337
+        },
+        "xgboost_quantile": {
+          "mase": 1.553971800626515,
+          "mae_kw": 1.814087157159102,
+          "pinball_kw": 0.6527438699319555,
+          "coverage_p10_p90": 0.6883963897131553,
+          "days": 337
+        },
+        "chronos2": {
+          "mase": 0.9933272095863225,
+          "mae_kw": 1.1595977050810895,
+          "pinball_kw": 0.4187745338794134,
+          "coverage_p10_p90": 0.6826162215628091,
+          "days": 337,
+          "uses_covariates": false
+        }
+      },
+      "mixed_urban": {
+        "seasonal_naive": {
+          "mase": 1.0054634903250679,
+          "mae_kw": 1.5825926236099652,
+          "pinball_kw": 0.599644727706903,
+          "coverage_p10_p90": 0.5319609297725025,
+          "days": 337
+        },
+        "weekly_naive": {
+          "mase": 1.5987899563140118,
+          "mae_kw": 2.51648440337324,
+          "pinball_kw": 1.25824220168662,
+          "coverage_p10_p90": null,
+          "days": 337
+        },
+        "xgboost_quantile": {
+          "mase": 1.3782633025059523,
+          "mae_kw": 2.169376965873754,
+          "pinball_kw": 0.7354568976055035,
+          "coverage_p10_p90": 0.6942383778437191,
+          "days": 337
+        },
+        "chronos2": {
+          "mase": 0.8325052421438627,
+          "mae_kw": 1.310357529647894,
+          "pinball_kw": 0.45400752370416264,
+          "coverage_p10_p90": 0.6883345697329377,
+          "days": 337,
+          "uses_covariates": true
+        }
+      }
+    },
+    "deficit_calibration": {
+      "peri_urban_low_income": {
+        "seasonal_naive": {
+          "coverage_p10_p90": 0.8783382789317508,
+          "share_of_days_above_p90": 0.12166172106824925,
+          "mean_p90_kwh": 59.99294220060225,
+          "mean_realised_kwh": 22.87045493261244
+        },
+        "xgboost_quantile": {
+          "coverage_p10_p90": 0.8367952522255193,
+          "share_of_days_above_p90": 0.1632047477744807,
+          "mean_p90_kwh": 53.82738871267304,
+          "mean_realised_kwh": 22.87045493261244
+        },
+        "chronos2": {
+          "coverage_p10_p90": 0.8664688427299704,
+          "share_of_days_above_p90": 0.13353115727002968,
+          "mean_p90_kwh": 57.84713737433282,
+          "mean_realised_kwh": 22.87045493261244
+        }
+      },
+      "mixed_urban": {
+        "seasonal_naive": {
+          "coverage_p10_p90": 0.9050445103857567,
+          "share_of_days_above_p90": 0.09495548961424333,
+          "mean_p90_kwh": 12.624051226147353,
+          "mean_realised_kwh": 4.659337370674875
+        },
+        "xgboost_quantile": {
+          "coverage_p10_p90": 0.9020771513353115,
+          "share_of_days_above_p90": 0.09792284866468842,
+          "mean_p90_kwh": 9.54009790552029,
+          "mean_realised_kwh": 4.659337370674875
+        },
+        "chronos2": {
+          "coverage_p10_p90": 0.9050445103857567,
+          "share_of_days_above_p90": 0.09495548961424333,
+          "mean_p90_kwh": 10.935423787747759,
+          "mean_realised_kwh": 4.659337370674875
+        }
+      }
+    },
+    "decision_value": {
+      "peri_urban_low_income": {
+        "full reserve (no peak shaving)": {
+          "essential_supply_availability": 0.9859393859697944,
+          "outage_hours_per_home": 8.348999999999998,
+          "peak_shaving_kwh": 0.0,
+          "battery_cycles": 75.33501728091352
+        },
+        "fixed 25% reserve (no forecast)": {
+          "essential_supply_availability": 0.9434071524414117,
+          "outage_hours_per_home": 33.544333333333334,
+          "peak_shaving_kwh": 15756.728954289212,
+          "battery_cycles": 231.47267226893496
+        },
+        "fixed 50% reserve (no forecast)": {
+          "essential_supply_availability": 0.9689725533968546,
+          "outage_hours_per_home": 18.388,
+          "peak_shaving_kwh": 9599.09543259693,
+          "battery_cycles": 173.63387416653154
+        },
+        "fixed 75% reserve (no forecast)": {
+          "essential_supply_availability": 0.981139158267685,
+          "outage_hours_per_home": 11.197333333333333,
+          "peak_shaving_kwh": 3694.7854426374383,
+          "battery_cycles": 113.86601362305423
+        },
+        "seasonal_naive P90 reserve": {
+          "essential_supply_availability": 0.9837864645534218,
+          "outage_hours_per_home": 9.628666666666668,
+          "peak_shaving_kwh": 3913.9516165366094,
+          "battery_cycles": 117.20051983535393
+        },
+        "seasonal_naive P97 reserve": {
+          "essential_supply_availability": 0.9858453153579654,
+          "outage_hours_per_home": 8.404333333333334,
+          "peak_shaving_kwh": 1114.5040735482455,
+          "battery_cycles": 87.39252300071762
+        },
+        "seasonal_naive P99.5 reserve": {
+          "essential_supply_availability": 0.9859490336064997,
+          "outage_hours_per_home": 8.343,
+          "peak_shaving_kwh": 235.42911654962515,
+          "battery_cycles": 77.8897206643537
+        },
+        "xgboost_quantile P90 reserve": {
+          "essential_supply_availability": 0.9813597372843385,
+          "outage_hours_per_home": 11.055333333333332,
+          "peak_shaving_kwh": 5165.222201073294,
+          "battery_cycles": 129.94095359470003
+        },
+        "xgboost_quantile P97 reserve": {
+          "essential_supply_availability": 0.9854775750097052,
+          "outage_hours_per_home": 8.626,
+          "peak_shaving_kwh": 1665.9126380200396,
+          "battery_cycles": 93.25406263526827
+        },
+        "xgboost_quantile P99.5 reserve": {
+          "essential_supply_availability": 0.9858609437821504,
+          "outage_hours_per_home": 8.392000000000001,
+          "peak_shaving_kwh": 383.6872137574398,
+          "battery_cycles": 79.46411206859261
+        },
+        "chronos2 P90 reserve": {
+          "essential_supply_availability": 0.9834751584625036,
+          "outage_hours_per_home": 9.808666666666667,
+          "peak_shaving_kwh": 4364.975316103625,
+          "battery_cycles": 122.01293235234425
+        },
+        "chronos2 P97 reserve": {
+          "essential_supply_availability": 0.9857761532229512,
+          "outage_hours_per_home": 8.446,
+          "peak_shaving_kwh": 1313.389398405687,
+          "battery_cycles": 89.52992598629415
+        },
+        "chronos2 P99.5 reserve": {
+          "essential_supply_availability": 0.9859415394613006,
+          "outage_hours_per_home": 8.347666666666667,
+          "peak_shaving_kwh": 320.7895479480804,
+          "battery_cycles": 78.81375004272986
+        }
+      },
+      "mixed_urban": {
+        "full reserve (no peak shaving)": {
+          "essential_supply_availability": 0.9965040234151995,
+          "outage_hours_per_home": 0.6583333333333333,
+          "peak_shaving_kwh": 0.0,
+          "battery_cycles": 18.52314788856719
+        },
+        "fixed 25% reserve (no forecast)": {
+          "essential_supply_availability": 0.9719737254047011,
+          "outage_hours_per_home": 5.47375,
+          "peak_shaving_kwh": 18200.231309769133,
+          "battery_cycles": 213.26791003155628
+        },
+        "fixed 50% reserve (no forecast)": {
+          "essential_supply_availability": 0.9881140553365242,
+          "outage_hours_per_home": 2.3016666666666667,
+          "peak_shaving_kwh": 11331.658568907775,
+          "battery_cycles": 140.61374413312075
+        },
+        "fixed 75% reserve (no forecast)": {
+          "essential_supply_availability": 0.9940848443858776,
+          "outage_hours_per_home": 1.1358333333333333,
+          "peak_shaving_kwh": 4539.568355437078,
+          "battery_cycles": 67.53534869630637
+        },
+        "seasonal_naive P90 reserve": {
+          "essential_supply_availability": 0.9603932464987693,
+          "outage_hours_per_home": 7.68875,
+          "peak_shaving_kwh": 19287.751295206293,
+          "battery_cycles": 224.2925043423168
+        },
+        "seasonal_naive P97 reserve": {
+          "essential_supply_availability": 0.991069790083276,
+          "outage_hours_per_home": 1.6912500000000001,
+          "peak_shaving_kwh": 9117.5525838806,
+          "battery_cycles": 116.94170944630694
+        },
+        "seasonal_naive P99.5 reserve": {
+          "essential_supply_availability": 0.9962895741139622,
+          "outage_hours_per_home": 0.7008333333333333,
+          "peak_shaving_kwh": 2196.1211756598564,
+          "battery_cycles": 42.31629676326187
+        },
+        "xgboost_quantile P90 reserve": {
+          "essential_supply_availability": 0.9538473968003712,
+          "outage_hours_per_home": 8.967916666666667,
+          "peak_shaving_kwh": 20373.432889353553,
+          "battery_cycles": 235.35004614488733
+        },
+        "xgboost_quantile P97 reserve": {
+          "essential_supply_availability": 0.9879472582192782,
+          "outage_hours_per_home": 2.30375,
+          "peak_shaving_kwh": 10591.321083156652,
+          "battery_cycles": 132.55489209416783
+        },
+        "xgboost_quantile P99.5 reserve": {
+          "essential_supply_availability": 0.9960891616262861,
+          "outage_hours_per_home": 0.7354166666666666,
+          "peak_shaving_kwh": 3009.313017664568,
+          "battery_cycles": 51.10679017940877
+        },
+        "chronos2 P90 reserve": {
+          "essential_supply_availability": 0.9564885872587267,
+          "outage_hours_per_home": 8.43375,
+          "peak_shaving_kwh": 19849.055367611283,
+          "battery_cycles": 230.06083473473757
+        },
+        "chronos2 P97 reserve": {
+          "essential_supply_availability": 0.990961710235405,
+          "outage_hours_per_home": 1.7179166666666668,
+          "peak_shaving_kwh": 9711.108052444468,
+          "battery_cycles": 123.35203752683276
+        },
+        "chronos2 P99.5 reserve": {
+          "essential_supply_availability": 0.9959158281083743,
+          "outage_hours_per_home": 0.7654166666666667,
+          "peak_shaving_kwh": 2510.3377336834214,
+          "battery_cycles": 45.704387265502966
+        }
+      }
+    },
+    "decision_value_seeds": 3
+  },
+  "economics": {
+    "label": "Computed from config/economics.yaml and simulation results",
+    "scenarios": {
+      "peri_urban_low_income": {
+        "reliability_only": {
+          "scenario": "peri_urban_low_income",
+          "mode": "reliability_only",
+          "counts": {
+            "homes": 250,
+            "inverter_homes": 22.2,
+            "relay_nodes": 13.3,
+            "actuators": 5.6
+          },
+          "capex": {
+            "community_battery": 1610000.0,
+            "edge_and_integration": 114232.5,
+            "total": 1724232.5
+          },
+          "annual": {
+            "benefit_energy_sales": 71042.54865116102,
+            "benefit_avoided_peak_purchase": 0.0,
+            "benefit_dfpo": 96000,
+            "benefit_dt_deferral": 0.0,
+            "benefits_total": 167042.54865116102,
+            "cost_battery_charging": 28869.529226494513,
+            "cost_household_compensation": 23689.938131377854,
+            "cost_local_operator": 54000,
+            "cost_technician": 7200,
+            "cost_maintenance": 37911.625,
+            "cost_communications": 3600,
+            "opex_total": 155271.09235787237,
+            "net_cash": 11771.456293288647
+          },
+          "battery_life_years": 8,
+          "battery_equivalent_full_cycles_per_year": 76.1531641723224,
+          "discom_npv": -2402978.8790116883,
+          "simple_payback_years": 146.47571694107637,
+          "annualised_cost": 475646.7739742383,
+          "net_cost_per_home_per_month": 102.86807510769243,
+          "cost_per_household_hour_preserved": 9.118324777529226,
+          "net_cost_per_household_hour_preserved": 5.916057268089524,
+          "household_hours_preserved": 52163.833333333336,
+          "capex_per_dfpo_kw": 43105.8125,
+          "home_inverter_cost_per_backup_hour": 21.405302207493722,
+          "utility_bess_per_kw": 40000,
+          "essential_supply_availability": 0.9817970375519786,
+          "outage_hours_per_home": 10.8181,
+          "peak_shaving_kwh": 0.0,
+          "household": {
+            "low_income_upfront": 0.0,
+            "low_income_monthly_charge": 0.0,
+            "inverter_compensation_rate_per_kwh": 20.58389981249825,
+            "inverter_wear_per_kwh": 15.528249843748538,
+            "inverter_charging_loss_per_kwh": 1.625,
+            "inverter_home_annual_payment": 1774.5272008522738,
+            "inverter_home_annual_net": 295.7545334753791
+          },
+          "local_operator": {
+            "annual_fee": 54000,
+            "monthly_fee": 4500
+          },
+          "societal_voll_benefit": 379544.76096876094
+        },
+        "with_peak_shaving": {
+          "scenario": "peri_urban_low_income",
+          "mode": "with_peak_shaving",
+          "counts": {
+            "homes": 250,
+            "inverter_homes": 22.2,
+            "relay_nodes": 13.3,
+            "actuators": 5.6
+          },
+          "capex": {
+            "community_battery": 1610000.0,
+            "edge_and_integration": 114232.5,
+            "total": 1724232.5
+          },
+          "annual": {
+            "benefit_energy_sales": 71042.54865116102,
+            "benefit_avoided_peak_purchase": 51652.22201073294,
+            "benefit_dfpo": 96000,
+            "benefit_dt_deferral": 0.0,
+            "benefits_total": 218694.77066189397,
+            "cost_battery_charging": 50138.09123091396,
+            "cost_household_compensation": 23689.938131377854,
+            "cost_local_operator": 54000,
+            "cost_technician": 7200,
+            "cost_maintenance": 37911.625,
+            "cost_communications": 3600,
+            "opex_total": 176539.6543622918,
+            "net_cash": 42155.116299602174
+          },
+          "battery_life_years": 8,
+          "battery_equivalent_full_cycles_per_year": 130.75910048610893,
+          "discom_npv": -2216284.4411859796,
+          "simple_payback_years": 40.90209330098022,
+          "annualised_cost": 496915.33597865776,
+          "net_cost_per_home_per_month": 92.74018843892128,
+          "cost_per_household_hour_preserved": 9.526050986385671,
+          "net_cost_per_household_hour_preserved": 5.333591255437461,
+          "household_hours_preserved": 52163.833333333336,
+          "capex_per_dfpo_kw": 43105.8125,
+          "home_inverter_cost_per_backup_hour": 21.405302207493722,
+          "utility_bess_per_kw": 40000,
+          "essential_supply_availability": 0.9772173888665227,
+          "outage_hours_per_home": 13.524433333333333,
+          "peak_shaving_kwh": 5165.222201073294,
+          "household": {
+            "low_income_upfront": 0.0,
+            "low_income_monthly_charge": 0.0,
+            "inverter_compensation_rate_per_kwh": 20.58389981249825,
+            "inverter_wear_per_kwh": 15.528249843748538,
+            "inverter_charging_loss_per_kwh": 1.625,
+            "inverter_home_annual_payment": 1774.5272008522738,
+            "inverter_home_annual_net": 295.7545334753791
+          },
+          "local_operator": {
+            "annual_fee": 54000,
+            "monthly_fee": 4500
+          },
+          "societal_voll_benefit": 379544.76096876094
+        },
+        "peak_shaving_policy": "xgboost_quantile P90 reserve",
+        "ownership": {
+          "A_discom": {
+            "name": "A. DISCOM-owned",
+            "owner": "DISCOM",
+            "discom_npv": -2402978.8790116883,
+            "fee_per_kw_month": null,
+            "owner_npv": -2402978.8790116883
+          },
+          "B_community": {
+            "name": "B. Community-owned (RWA / cooperative / SHG)",
+            "owner": "Community-owned (RWA / cooperative / SHG)",
+            "fee_per_kw_month": 1008.2681083943407,
+            "discom_npv": -1947373.955539057,
+            "owner_npv": 0.0,
+            "owner_discount_rate": 0.12,
+            "grant_share": 0.3
+          },
+          "B_community_no_grant": {
+            "name": "B'. Community-owned, no grant",
+            "owner": "Community-owned, no grant",
+            "fee_per_kw_month": 1198.9942632879272,
+            "discom_npv": -2509900.1911662566,
+            "owner_npv": 0.0,
+            "owner_discount_rate": 0.12,
+            "grant_share": 0.0
+          },
+          "C_aggregator": {
+            "name": "C. Third-party aggregator",
+            "owner": "Third-party aggregator",
+            "fee_per_kw_month": 1257.7014522015181,
+            "discom_npv": -2683050.7168623405,
+            "owner_npv": 0.0,
+            "owner_discount_rate": 0.15,
+            "grant_share": 0.0
+          }
+        },
+        "recommended_ownership": "A_discom",
+        "tornado": {
+          "base_npv": -2402978.8790116883,
+          "rows": [
+            {
+              "input": "operations.battery_calendar_life_years",
+              "low_value": 6,
+              "high_value": 10,
+              "npv_at_low": -2560705.024260599,
+              "npv_at_high": -1651901.996874018,
+              "swing": 908803.0273865811,
+              "note": "[ASSUMPTION] second-life pack calendar limit"
+            },
+            {
+              "input": "value_streams.dfpo_value_per_kw_month",
+              "low_value": 100,
+              "high_value": 400,
+              "npv_at_low": -2697918.1000855127,
+              "npv_at_high": -1813100.4368640387,
+              "swing": 884817.663221474,
+              "note": "[ASSUMPTION] value of flexibility counted toward the Demand Flexibility Portfolio Obligation"
+            },
+            {
+              "input": "hardware.second_life_share_of_new",
+              "low_value": 0.4,
+              "high_value": 0.7,
+              "npv_at_low": -2116887.1089934,
+              "npv_at_high": -2689070.6490299776,
+              "swing": 572183.5400365777,
+              "note": "[SOURCE: brief, 40-70% of new LFP pack cost]"
+            },
+            {
+              "input": "hardware.pcs_per_kw",
+              "low_value": 8000,
+              "high_value": 15000,
+              "npv_at_low": -2275826.9812257825,
+              "npv_at_high": -2720858.623476454,
+              "swing": 445031.6422506715,
+              "note": "[ASSUMPTION] bidirectional inverter / PCS"
+            },
+            {
+              "input": "hardware.lfp_new_pack_per_kwh",
+              "low_value": 10000,
+              "high_value": 15000,
+              "npv_at_low": -2228145.0195560674,
+              "npv_at_high": -2665229.6681951196,
+              "swing": 437084.6486390522,
+              "note": "[ASSUMPTION] new LFP pack price, India 2026"
+            },
+            {
+              "input": "hardware.enclosure_fire_safety",
+              "low_value": 150000,
+              "high_value": 400000,
+              "npv_at_low": -2244039.006779306,
+              "npv_at_high": -2641388.6873602625,
+              "swing": 397349.6805809564,
+              "note": "[ASSUMPTION] outdoor enclosure, thermal monitoring, aerosol suppression"
+            },
+            {
+              "input": "hardware.battery_installation_civil",
+              "low_value": 100000,
+              "high_value": 250000,
+              "npv_at_low": -2323508.942895497,
+              "npv_at_high": -2561918.7512440714,
+              "swing": 238409.8083485742,
+              "note": "[ASSUMPTION] plinth, cabling, protection, commissioning"
+            },
+            {
+              "input": "operations.local_operator_fee_per_month",
+              "low_value": 3000,
+              "high_value": 6000,
+              "npv_at_low": -2292376.671109004,
+              "npv_at_high": -2513581.086914373,
+              "swing": 221204.41580536915,
+              "note": "[ASSUMPTION] part-time RWA/SHG operator per DT"
+            },
+            {
+              "input": "general.discount_rate",
+              "low_value": 0.08,
+              "high_value": 0.12,
+              "npv_at_low": -2515077.9741361327,
+              "npv_at_high": -2307973.1436205124,
+              "swing": 207104.8305156203,
+              "note": "[ASSUMPTION] real discount rate"
+            },
+            {
+              "input": "tariffs.residential_tariff_per_kwh",
+              "low_value": 5.5,
+              "high_value": 7.5,
+              "npv_at_low": -2468015.1519507007,
+              "npv_at_high": -2337942.6060726764,
+              "swing": 130072.5458780243,
+              "note": "[ASSUMPTION] average residential energy charge"
+            },
+            {
+              "input": "household_battery.cycle_life_at_shallow_dod",
+              "low_value": 1200,
+              "high_value": 2500,
+              "npv_at_low": -2468866.119578925,
+              "npv_at_high": -2366082.0242940355,
+              "swing": 102784.09528488945,
+              "note": "[ASSUMPTION] cycles to end of life at ~30% depth of discharge"
+            },
+            {
+              "input": "tariffs.solar_hours_purchase_per_kwh",
+              "low_value": 3.0,
+              "high_value": 4.5,
+              "npv_at_low": -2377637.3419199316,
+              "npv_at_high": -2453661.9531952017,
+              "swing": 76024.61127527012,
+              "note": "[ASSUMPTION] DISCOM marginal purchase price in solar hours"
+            },
+            {
+              "input": "hardware.relay_node",
+              "low_value": 1500,
+              "high_value": 4000,
+              "npv_at_low": -2385527.38046863,
+              "npv_at_high": -2429156.126826275,
+              "swing": 43628.74635764491,
+              "note": "[ASSUMPTION] LoRa node + normally-closed relay + enclosure at volume; the hand-built prototype node cost Rs 7,073 [MEASURED]"
+            },
+            {
+              "input": "tariffs.peak_power_purchase_per_kwh",
+              "low_value": 8.0,
+              "high_value": 12.0,
+              "npv_at_low": -2402978.8790116883,
+              "npv_at_high": -2402978.8790116883,
+              "swing": 0.0,
+              "note": "[ASSUMPTION] DISCOM marginal evening purchase price (exchange evening blocks)"
+            }
+          ]
+        }
+      },
+      "mixed_urban": {
+        "reliability_only": {
+          "scenario": "mixed_urban",
+          "mode": "reliability_only",
+          "counts": {
+            "homes": 200,
+            "inverter_homes": 34.6,
+            "relay_nodes": 20.8,
+            "actuators": 10.5
+          },
+          "capex": {
+            "community_battery": 1610000.0,
+            "edge_and_integration": 140070.0,
+            "total": 1750070.0
+          },
+          "annual": {
+            "benefit_energy_sales": 19385.509924882324,
+            "benefit_avoided_peak_purchase": 0.0,
+            "benefit_dfpo": 96000,
+            "benefit_dt_deferral": 0.0,
+            "benefits_total": 115385.50992488232,
+            "cost_battery_charging": 7038.193584861799,
+            "cost_household_compensation": 10894.764194656364,
+            "cost_local_operator": 54000,
+            "cost_technician": 7200,
+            "cost_maintenance": 39203.5,
+            "cost_communications": 3600,
+            "opex_total": 121936.45777951815,
+            "net_cash": -6550.94785463583
+          },
+          "battery_life_years": 8,
+          "battery_equivalent_full_cycles_per_year": 18.552605394264056,
+          "discom_npv": -2541399.620836452,
+          "simple_payback_years": null,
+          "annualised_cost": 446517.07353616104,
+          "net_cost_per_home_per_month": 137.9714848380328,
+          "cost_per_household_hour_preserved": 34.84480984639692,
+          "net_cost_per_household_hour_preserved": 25.840481925582345,
+          "household_hours_preserved": 12814.45,
+          "capex_per_dfpo_kw": 43751.75,
+          "home_inverter_cost_per_backup_hour": 65.9370422260479,
+          "utility_bess_per_kw": 40000,
+          "essential_supply_availability": 0.9964103953812302,
+          "outage_hours_per_home": 0.739,
+          "peak_shaving_kwh": 0.0,
+          "household": {
+            "low_income_upfront": 0.0,
+            "low_income_monthly_charge": 0.0,
+            "inverter_compensation_rate_per_kwh": 20.58389981249825,
+            "inverter_wear_per_kwh": 15.528249843748538,
+            "inverter_charging_loss_per_kwh": 1.625,
+            "inverter_home_annual_payment": 524.7959631337361,
+            "inverter_home_annual_net": 87.4659938556227
+          },
+          "local_operator": {
+            "annual_fee": 54000,
+            "monthly_fee": 4500
+          },
+          "societal_voll_benefit": 117774.86455454523
+        },
+        "with_peak_shaving": {
+          "scenario": "mixed_urban",
+          "mode": "with_peak_shaving",
+          "counts": {
+            "homes": 200,
+            "inverter_homes": 34.6,
+            "relay_nodes": 20.8,
+            "actuators": 10.5
+          },
+          "capex": {
+            "community_battery": 1610000.0,
+            "edge_and_integration": 140070.0,
+            "total": 1750070.0
+          },
+          "annual": {
+            "benefit_energy_sales": 19385.509924882324,
+            "benefit_avoided_peak_purchase": 45395.68355437078,
+            "benefit_dfpo": 96000,
+            "benefit_dt_deferral": 0.0,
+            "benefits_total": 160781.1934792531,
+            "cost_battery_charging": 25730.53387195565,
+            "cost_household_compensation": 10894.764194656364,
+            "cost_local_operator": 54000,
+            "cost_technician": 7200,
+            "cost_maintenance": 39203.5,
+            "cost_communications": 3600,
+            "opex_total": 140628.798066612,
+            "net_cash": 20152.395412641083
+          },
+          "battery_life_years": 8,
+          "battery_equivalent_full_cycles_per_year": 67.56480620200324,
+          "discom_npv": -2377319.136184002,
+          "simple_payback_years": 86.84178551311204,
+          "annualised_cost": 465209.4138232549,
+          "net_cost_per_home_per_month": 126.84509181000074,
+          "cost_per_household_hour_preserved": 36.30350220440634,
+          "net_cost_per_household_hour_preserved": 23.7566356998546,
+          "household_hours_preserved": 12814.45,
+          "capex_per_dfpo_kw": 43751.75,
+          "home_inverter_cost_per_backup_hour": 65.9370422260479,
+          "utility_bess_per_kw": 40000,
+          "essential_supply_availability": 0.9939912163519083,
+          "outage_hours_per_home": 1.2165,
+          "peak_shaving_kwh": 4539.568355437078,
+          "household": {
+            "low_income_upfront": 0.0,
+            "low_income_monthly_charge": 0.0,
+            "inverter_compensation_rate_per_kwh": 20.58389981249825,
+            "inverter_wear_per_kwh": 15.528249843748538,
+            "inverter_charging_loss_per_kwh": 1.625,
+            "inverter_home_annual_payment": 524.7959631337361,
+            "inverter_home_annual_net": 87.4659938556227
+          },
+          "local_operator": {
+            "annual_fee": 54000,
+            "monthly_fee": 4500
+          },
+          "societal_voll_benefit": 117774.86455454523
+        },
+        "peak_shaving_policy": "fixed 75% reserve (no forecast)",
+        "ownership": {
+          "A_discom": {
+            "name": "A. DISCOM-owned",
+            "owner": "DISCOM",
+            "discom_npv": -2541399.620836452,
+            "fee_per_kw_month": null,
+            "owner_npv": -2541399.620836452
+          },
+          "B_community": {
+            "name": "B. Community-owned (RWA / cooperative / SHG)",
+            "owner": "Community-owned (RWA / cooperative / SHG)",
+            "fee_per_kw_month": 945.4896610207611,
+            "discom_npv": -2079625.8327887852,
+            "owner_npv": 0.0,
+            "owner_discount_rate": 0.12,
+            "grant_share": 0.3
+          },
+          "B_community_no_grant": {
+            "name": "B'. Community-owned, no grant",
+            "owner": "Community-owned, no grant",
+            "fee_per_kw_month": 1139.0738336277725,
+            "discom_npv": -2650581.4835981126,
+            "owner_npv": 0.0,
+            "owner_discount_rate": 0.12,
+            "grant_share": 0.0
+          },
+          "C_aggregator": {
+            "name": "C. Third-party aggregator",
+            "owner": "Third-party aggregator",
+            "fee_per_kw_month": 1198.9796617576508,
+            "discom_npv": -2827267.2664622,
+            "owner_npv": 0.0,
+            "owner_discount_rate": 0.15,
+            "grant_share": 0.0
+          }
+        },
+        "recommended_ownership": "A_discom",
+        "tornado": {
+          "base_npv": -2541399.620836452,
+          "rows": [
+            {
+              "input": "operations.battery_calendar_life_years",
+              "low_value": 6,
+              "high_value": 10,
+              "npv_at_low": -2699125.7660853635,
+              "npv_at_high": -1790322.7386987815,
+              "swing": 908803.027386582,
+              "note": "[ASSUMPTION] second-life pack calendar limit"
+            },
+            {
+              "input": "value_streams.dfpo_value_per_kw_month",
+              "low_value": 100,
+              "high_value": 400,
+              "npv_at_low": -2836338.8419102766,
+              "npv_at_high": -1951521.1786888028,
+              "swing": 884817.6632214738,
+              "note": "[ASSUMPTION] value of flexibility counted toward the Demand Flexibility Portfolio Obligation"
+            },
+            {
+              "input": "hardware.second_life_share_of_new",
+              "low_value": 0.4,
+              "high_value": 0.7,
+              "npv_at_low": -2255307.8508181632,
+              "npv_at_high": -2827491.390854741,
+              "swing": 572183.5400365777,
+              "note": "[SOURCE: brief, 40-70% of new LFP pack cost]"
+            },
+            {
+              "input": "hardware.pcs_per_kw",
+              "low_value": 8000,
+              "high_value": 15000,
+              "npv_at_low": -2414247.7230505464,
+              "npv_at_high": -2859279.3653012174,
+              "swing": 445031.64225067105,
+              "note": "[ASSUMPTION] bidirectional inverter / PCS"
+            },
+            {
+              "input": "hardware.lfp_new_pack_per_kwh",
+              "low_value": 10000,
+              "high_value": 15000,
+              "npv_at_low": -2366565.761380831,
+              "npv_at_high": -2803650.410019884,
+              "swing": 437084.6486390531,
+              "note": "[ASSUMPTION] new LFP pack price, India 2026"
+            },
+            {
+              "input": "hardware.enclosure_fire_safety",
+              "low_value": 150000,
+              "high_value": 400000,
+              "npv_at_low": -2382459.7486040695,
+              "npv_at_high": -2779809.429185027,
+              "swing": 397349.6805809573,
+              "note": "[ASSUMPTION] outdoor enclosure, thermal monitoring, aerosol suppression"
+            },
+            {
+              "input": "hardware.battery_installation_civil",
+              "low_value": 100000,
+              "high_value": 250000,
+              "npv_at_low": -2461929.684720261,
+              "npv_at_high": -2700339.493068835,
+              "swing": 238409.8083485742,
+              "note": "[ASSUMPTION] plinth, cabling, protection, commissioning"
+            },
+            {
+              "input": "general.discount_rate",
+              "low_value": 0.08,
+              "high_value": 0.12,
+              "npv_at_low": -2663860.297393008,
+              "npv_at_high": -2437336.313472966,
+              "swing": 226523.98392004194,
+              "note": "[ASSUMPTION] real discount rate"
+            },
+            {
+              "input": "operations.local_operator_fee_per_month",
+              "low_value": 3000,
+              "high_value": 6000,
+              "npv_at_low": -2430797.412933768,
+              "npv_at_high": -2652001.828739136,
+              "swing": 221204.41580536822,
+              "note": "[ASSUMPTION] part-time RWA/SHG operator per DT"
+            },
+            {
+              "input": "hardware.relay_node",
+              "low_value": 1500,
+              "high_value": 4000,
+              "npv_at_low": -2514261.5601807307,
+              "npv_at_high": -2582106.711820034,
+              "swing": 67845.15163930319,
+              "note": "[ASSUMPTION] LoRa node + normally-closed relay + enclosure at volume; the hand-built prototype node cost Rs 7,073 [MEASURED]"
+            },
+            {
+              "input": "household_battery.cycle_life_at_shallow_dod",
+              "low_value": 1200,
+              "high_value": 2500,
+              "npv_at_low": -2571700.4998609466,
+              "npv_at_high": -2524431.128582735,
+              "swing": 47269.371278211474,
+              "note": "[ASSUMPTION] cycles to end of life at ~30% depth of discharge"
+            },
+            {
+              "input": "tariffs.residential_tariff_per_kwh",
+              "low_value": 5.5,
+              "high_value": 7.5,
+              "npv_at_low": -2558749.423138889,
+              "npv_at_high": -2524049.818534016,
+              "swing": 34699.604604872875,
+              "note": "[ASSUMPTION] average residential energy charge"
+            },
+            {
+              "input": "tariffs.solar_hours_purchase_per_kwh",
+              "low_value": 3.0,
+              "high_value": 4.5,
+              "npv_at_low": -2535221.527581434,
+              "npv_at_high": -2553755.807346488,
+              "swing": 18534.279765053652,
+              "note": "[ASSUMPTION] DISCOM marginal purchase price in solar hours"
+            },
+            {
+              "input": "tariffs.peak_power_purchase_per_kwh",
+              "low_value": 8.0,
+              "high_value": 12.0,
+              "npv_at_low": -2541399.620836452,
+              "npv_at_high": -2541399.620836452,
+              "swing": 0.0,
+              "note": "[ASSUMPTION] DISCOM marginal evening purchase price (exchange evening blocks)"
+            }
+          ]
+        }
+      }
+    }
   }
 }
