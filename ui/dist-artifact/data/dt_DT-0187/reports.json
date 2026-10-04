@@ -1,0 +1,115 @@
+{
+ "dt_id": "DT-0187",
+ "year": 2023,
+ "label": "SIMULATED on inputs calibrated to real data",
+ "months": [
+  {
+   "month": 1,
+   "deficit_hours": 7.5,
+   "baseline_outage_hours_per_home": 3.5,
+   "saanjh_outage_hours_per_home": 0.0,
+   "banded_home_hours": 0.0,
+   "demand_flexibility_kwh": 23.4,
+   "community_battery_kwh": 43.7
+  },
+  {
+   "month": 2,
+   "deficit_hours": 1.0,
+   "baseline_outage_hours_per_home": 0.4,
+   "saanjh_outage_hours_per_home": 0.0,
+   "banded_home_hours": 0.0,
+   "demand_flexibility_kwh": 4.3,
+   "community_battery_kwh": 2.5
+  },
+  {
+   "month": 3,
+   "deficit_hours": 18.5,
+   "baseline_outage_hours_per_home": 7.6,
+   "saanjh_outage_hours_per_home": 0.0,
+   "banded_home_hours": 0.0,
+   "demand_flexibility_kwh": 60.4,
+   "community_battery_kwh": 129.4
+  },
+  {
+   "month": 4,
+   "deficit_hours": 11.2,
+   "baseline_outage_hours_per_home": 4.8,
+   "saanjh_outage_hours_per_home": 0.0,
+   "banded_home_hours": 6.8,
+   "demand_flexibility_kwh": 46.7,
+   "community_battery_kwh": 151.6
+  },
+  {
+   "month": 5,
+   "deficit_hours": 25.5,
+   "baseline_outage_hours_per_home": 12.8,
+   "saanjh_outage_hours_per_home": 0.0,
+   "banded_home_hours": 9.8,
+   "demand_flexibility_kwh": 89.2,
+   "community_battery_kwh": 285.3
+  },
+  {
+   "month": 6,
+   "deficit_hours": 22.8,
+   "baseline_outage_hours_per_home": 11.8,
+   "saanjh_outage_hours_per_home": 0.0,
+   "banded_home_hours": 0.0,
+   "demand_flexibility_kwh": 114.8,
+   "community_battery_kwh": 375.6
+  },
+  {
+   "month": 7,
+   "deficit_hours": 26.5,
+   "baseline_outage_hours_per_home": 13.2,
+   "saanjh_outage_hours_per_home": 0.1,
+   "banded_home_hours": 4.5,
+   "demand_flexibility_kwh": 95.8,
+   "community_battery_kwh": 352.0
+  },
+  {
+   "month": 8,
+   "deficit_hours": 7.5,
+   "baseline_outage_hours_per_home": 2.9,
+   "saanjh_outage_hours_per_home": 0.0,
+   "banded_home_hours": 0.0,
+   "demand_flexibility_kwh": 32.8,
+   "community_battery_kwh": 66.5
+  },
+  {
+   "month": 9,
+   "deficit_hours": 11.2,
+   "baseline_outage_hours_per_home": 5.7,
+   "saanjh_outage_hours_per_home": 0.0,
+   "banded_home_hours": 0.0,
+   "demand_flexibility_kwh": 45.3,
+   "community_battery_kwh": 96.9
+  },
+  {
+   "month": 10,
+   "deficit_hours": 4.5,
+   "baseline_outage_hours_per_home": 1.9,
+   "saanjh_outage_hours_per_home": 0.0,
+   "banded_home_hours": 0.0,
+   "demand_flexibility_kwh": 23.0,
+   "community_battery_kwh": 43.4
+  },
+  {
+   "month": 11,
+   "deficit_hours": 8.0,
+   "baseline_outage_hours_per_home": 4.1,
+   "saanjh_outage_hours_per_home": 0.0,
+   "banded_home_hours": 0.0,
+   "demand_flexibility_kwh": 28.9,
+   "community_battery_kwh": 70.2
+  },
+  {
+   "month": 12,
+   "deficit_hours": 16.8,
+   "baseline_outage_hours_per_home": 7.1,
+   "saanjh_outage_hours_per_home": 0.0,
+   "banded_home_hours": 0.0,
+   "demand_flexibility_kwh": 38.9,
+   "community_battery_kwh": 97.4
+  }
+ ]
+}

@@ -1,0 +1,127 @@
+/*
+  SAANJH design tokens.
+  Layout concept: an engineering drawing sheet. Calm, dense panels separated by 1px rules;
+  the single-line diagram of the transformer is the one bold element.
+  Light "day" theme is the default; the dark "night shift" theme redefines the same names
+  (not an inversion: rules and accents are re-stepped for a dark control room).
+*/
+:root {
+  color-scheme: light;
+  /* colour */
+  --surface: #F3F4F1;          /* drawing sheet */
+  --surface-raised: #FFFFFF;
+  --surface-sunken: #E9EBE7;
+  --ink: #1D2421;
+  --ink-muted: #56605B;
+  --ink-faint: #7A847F;
+  --rule: #C9CFCB;
+  --accent: #1B5E8C;           /* interactive only */
+  --accent-ink: #FFFFFF;
+  --accent-wash: rgba(27, 94, 140, 0.15);
+  --phase-r: #C2362B;
+  --phase-y: #C99A12;
+  --phase-b: #2B5AA6;
+  --status-ok: #2F7A4F;
+  --status-warn: #A35A00;
+  --status-alarm: #B3261E;
+  --status-offline: #6B7470;
+  --chart-grid: #E4E7E3;
+  --chart-bg: #FFFFFF;
+  /* chart series (validated colour-blind-safe set; never used for text) */
+  --series-net: #2a78d6;
+  --series-baseline: #eb6834;
+  --series-battery: #1baf7a;
+  --series-pv: #8a6a00;
+  --shadow-float: 0 6px 24px rgba(29, 36, 33, 0.16), 0 1px 3px rgba(29, 36, 33, 0.12);
+  /* type */
+  --font-sans: "IBM Plex Sans", "Noto Sans Devanagari", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-cond: "IBM Plex Sans Condensed", "IBM Plex Sans", system-ui, sans-serif;
+  --font-deva: "Noto Sans Devanagari", "IBM Plex Sans", sans-serif;
+  /* space: 4px grid */
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --surface: #141917;
+    --surface-raised: #1B211F;
+    --surface-sunken: #101412;
+    --ink: #E2E7E4;
+    --ink-muted: #A1ABA6;
+    --ink-faint: #76817B;
+    --rule: #333D39;
+    --accent: #6BA6D6;
+    --accent-ink: #0B1A26;
+    --accent-wash: rgba(107, 166, 214, 0.18);
+    --phase-r: #E4675C;
+    --phase-y: #DDB441;
+    --phase-b: #7198DC;
+    --status-ok: #5DB585;
+    --status-warn: #E39B42;
+    --status-alarm: #EE6B61;
+    --status-offline: #8A948F;
+    --chart-grid: #2A332F;
+    --chart-bg: #1B211F;
+    --series-net: #3987e5;
+    --series-baseline: #d95926;
+    --series-battery: #199e70;
+    --series-pv: #b08a12;
+    --shadow-float: 0 8px 28px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.4);
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --surface: #141917;
+  --surface-raised: #1B211F;
+  --surface-sunken: #101412;
+  --ink: #E2E7E4;
+  --ink-muted: #A1ABA6;
+  --ink-faint: #76817B;
+  --rule: #333D39;
+  --accent: #6BA6D6;
+  --accent-ink: #0B1A26;
+  --accent-wash: rgba(107, 166, 214, 0.18);
+  --phase-r: #E4675C;
+  --phase-y: #DDB441;
+  --phase-b: #7198DC;
+  --status-ok: #5DB585;
+  --status-warn: #E39B42;
+  --status-alarm: #EE6B61;
+  --status-offline: #8A948F;
+  --chart-grid: #2A332F;
+  --chart-bg: #1B211F;
+  --series-net: #3987e5;
+  --series-baseline: #d95926;
+  --series-battery: #199e70;
+  --series-pv: #b08a12;
+  --shadow-float: 0 8px 28px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 20px;
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+}
+#root { min-height: 100%; }
+h1, h2, h3 { text-wrap: balance; margin: 0; font-weight: 600; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.num { font-variant-numeric: tabular-nums; }
+::selection { background: var(--accent-wash); }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
+@media print {
+  @page { size: A4; margin: 14mm; }
+  body { background: #fff; color: #000; }
+  .no-print { display: none !important; }
+  .print-only { display: block !important; }
+}
+.print-only { display: none; }

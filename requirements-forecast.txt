@@ -1,0 +1,3 @@
+# Optional: only for ai_forecasting/evaluate.py with Chronos-2 (pulls in PyTorch, about 1 GB)
+-r requirements.txt
+chronos-forecasting==2.3.2

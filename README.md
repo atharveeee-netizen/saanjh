@@ -12,7 +12,7 @@ each evening with a probabilistic forecast. Built for the Schneider Electric Yuv
 On the simulated peri-urban low-income DT (250 homes), homes kept their essential supply during 98% of supply-shortfall time with SAANJH, against 59% under today's rotational load shedding, and full disconnection fell from 240 to 10.8 hours per home per year (mean of 30 Monte Carlo runs). On the simulated mixed urban DT (200 homes), homes kept their essential supply during 100% of supply-shortfall time with SAANJH, against 62% under today's rotational load shedding, and full disconnection fell from 78 to 0.7 hours per home per year (mean of 30 Monte Carlo runs). Most of the gain comes from the shared community battery: without it, essential-supply availability is 76% on the peri-urban low-income DT and 82% on the mixed urban DT.
 <!-- results:headline:end -->
 
-**Interactive console:** see the link in [docs/WRITEUP.md](docs/WRITEUP.md#9-design-artefacts) (operator console, local operator app, household messages, service blueprint).
+**Interactive console:** https://claude.ai/artifact/9WvryxJ398FXVrEyR9pKFZ (private link; the owner must share it before others can open it). It covers the operator console, local operator app, household messages and service blueprint, and runs on simulated replay data.
 
 ## Results
 

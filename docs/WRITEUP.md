@@ -298,7 +298,7 @@ credit stays with the party that carries the obligation.
 ## 9. Design artefacts
 
 The operator console, local operator app, household messages and service blueprint are
-in `ui/` and published as an interactive page. They include:
+in `ui/` and published as an interactive page at https://claude.ai/artifact/9WvryxJ398FXVrEyR9pKFZ. They include:
 
 - the DT overview with a live single-line diagram, forecast and plan approval;
 - the event view with its decision log and measurement and verification against the
@@ -311,6 +311,14 @@ in `ui/` and published as an interactive page. They include:
 - the service blueprint (`docs/SERVICE_BLUEPRINT.md`).
 
 ![Operator console overview](figures/ui_overview.png)
+
+![Event list with measurement and verification](figures/ui_events.png)
+
+![Forecast screen](figures/ui_forecast.png)
+
+![Local operator app](figures/ui_operator.png)
+
+![Household messages with SMS length checks](figures/ui_messages.png)
 
 ## 10. How this differs from existing Indian pilots
 

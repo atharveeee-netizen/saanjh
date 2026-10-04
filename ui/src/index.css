@@ -1,0 +1,16 @@
+@import "./design/tokens.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body { background: var(--surface); color: var(--ink); }
+  button { cursor: pointer; }
+  button:disabled { cursor: not-allowed; }
+  input, button, select, textarea { font: inherit; color: inherit; }
+}
+
+/* uPlot: keep its own chrome quiet and token-coloured */
+.uplot, .u-wrap, .u-over { font-family: var(--font-sans); }
+.u-select { background: var(--accent-wash) !important; }
+.u-cursor-x, .u-cursor-y { border-color: var(--ink-faint) !important; }

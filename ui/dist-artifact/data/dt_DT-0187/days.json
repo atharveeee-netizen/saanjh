@@ -1,0 +1,98 @@
+[
+ {
+  "date": "2023-01-10",
+  "day_type": "cloudy",
+  "season": "winter",
+  "deficit_kwh": 42.0,
+  "featured": false,
+  "events": []
+ },
+ {
+  "date": "2023-03-26",
+  "day_type": "clear",
+  "season": "spring",
+  "deficit_kwh": 32.7,
+  "featured": false,
+  "events": [
+   "EV-0187-0326-0530"
+  ]
+ },
+ {
+  "date": "2023-03-30",
+  "day_type": "clear",
+  "season": "spring",
+  "deficit_kwh": 51.6,
+  "featured": false,
+  "events": [
+   "EV-0187-0330-1900"
+  ]
+ },
+ {
+  "date": "2023-04-09",
+  "day_type": "clear",
+  "season": "summer",
+  "deficit_kwh": 34.4,
+  "featured": false,
+  "events": [
+   "EV-0187-0409-2000"
+  ]
+ },
+ {
+  "date": "2023-05-15",
+  "day_type": "heatwave",
+  "season": "summer",
+  "deficit_kwh": 80.0,
+  "featured": true,
+  "events": [
+   "EV-0187-0515-1530"
+  ]
+ },
+ {
+  "date": "2023-06-11",
+  "day_type": "heatwave",
+  "season": "summer",
+  "deficit_kwh": 87.6,
+  "featured": false,
+  "events": [
+   "EV-0187-0611-0145"
+  ]
+ },
+ {
+  "date": "2023-07-03",
+  "day_type": "monsoon",
+  "season": "monsoon",
+  "deficit_kwh": 89.2,
+  "featured": false,
+  "events": [
+   "EV-0187-0703-1845"
+  ]
+ },
+ {
+  "date": "2023-07-10",
+  "day_type": "monsoon",
+  "season": "monsoon",
+  "deficit_kwh": 30.0,
+  "featured": false,
+  "events": [
+   "EV-0187-0710-2130"
+  ]
+ },
+ {
+  "date": "2023-07-11",
+  "day_type": "monsoon",
+  "season": "monsoon",
+  "deficit_kwh": 0.0,
+  "featured": false,
+  "events": []
+ },
+ {
+  "date": "2023-10-04",
+  "day_type": "clear",
+  "season": "post_monsoon",
+  "deficit_kwh": 17.3,
+  "featured": false,
+  "events": [
+   "EV-0187-1004-1915"
+  ]
+ }
+]
