@@ -1,0 +1,833 @@
+{
+ "label": "SIMULATED on inputs CALIBRATED TO REAL DATA (see docs/DATA_SOURCES.md)",
+ "seeds": 1,
+ "window": "17:00-19:00",
+ "scenarios": {
+  "peri_urban_low_income": {
+   "policies": {
+    "baseline": {
+     "essential_supply_availability_pct": {
+      "mean": 59.37204108977222,
+      "p10": 59.37204108977222,
+      "p90": 59.37204108977222,
+      "n": 1
+     },
+     "saidi_hours_per_home": {
+      "mean": 252.688,
+      "p10": 252.688,
+      "p90": 252.688,
+      "n": 1
+     },
+     "saifi_interruptions_per_home": {
+      "mean": 836.944,
+      "p10": 836.944,
+      "p90": 836.944,
+      "n": 1
+     },
+     "brownout_hours_per_home": {
+      "mean": 0.0,
+      "p10": 0.0,
+      "p90": 0.0,
+      "n": 1
+     },
+     "unserved_energy_kwh": {
+      "mean": 12130.403492587659,
+      "p10": 12130.403492587659,
+      "p90": 12130.403492587659,
+      "n": 1
+     },
+     "energy_not_delivered_kwh": {
+      "mean": 12130.403492587659,
+      "p10": 12130.403492587659,
+      "p90": 12130.403492587659,
+      "n": 1
+     },
+     "window_supply_availability_pct": {
+      "mean": 99.00780821917809,
+      "p10": 99.00780821917809,
+      "p90": 99.00780821917809,
+      "n": 1
+     },
+     "window_essential_availability_pct": {
+      "mean": 99.10205479452054,
+      "p10": 99.10205479452054,
+      "p90": 99.10205479452054,
+      "n": 1
+     },
+     "window_deficit_essential_availability_pct": {
+      "mean": 61.44117647058823,
+      "p10": 61.44117647058823,
+      "p90": 61.44117647058823,
+      "n": 1
+     },
+     "dt_peak_loading_pct": {
+      "mean": 84.43423369165639,
+      "p10": 84.43423369165639,
+      "p90": 84.43423369165639,
+      "n": 1
+     },
+     "dt_overload_hours": {
+      "mean": 0.0,
+      "p10": 0.0,
+      "p90": 0.0,
+      "n": 1
+     }
+    },
+    "saanjh": {
+     "essential_supply_availability_pct": {
+      "mean": 98.61384546672622,
+      "p10": 98.61384546672622,
+      "p90": 98.61384546672622,
+      "n": 1
+     },
+     "saidi_hours_per_home": {
+      "mean": 8.632,
+      "p10": 8.632,
+      "p90": 8.632,
+      "n": 1
+     },
+     "saifi_interruptions_per_home": {
+      "mean": 34.176,
+      "p10": 34.176,
+      "p90": 34.176,
+      "n": 1
+     },
+     "brownout_hours_per_home": {
+      "mean": 1.104,
+      "p10": 1.104,
+      "p90": 1.104,
+      "n": 1
+     },
+     "unserved_energy_kwh": {
+      "mean": 416.7478251581481,
+      "p10": 416.7478251581481,
+      "p90": 416.7478251581481,
+      "n": 1
+     },
+     "energy_not_delivered_kwh": {
+      "mean": 460.00179434645474,
+      "p10": 460.00179434645474,
+      "p90": 460.00179434645474,
+      "n": 1
+     },
+     "window_supply_availability_pct": {
+      "mean": 100.0,
+      "p10": 100.0,
+      "p90": 100.0,
+      "n": 1
+     },
+     "window_essential_availability_pct": {
+      "mean": 100.0,
+      "p10": 100.0,
+      "p90": 100.0,
+      "n": 1
+     },
+     "window_deficit_essential_availability_pct": {
+      "mean": 100.0,
+      "p10": 100.0,
+      "p90": 100.0,
+      "n": 1
+     },
+     "dt_peak_loading_pct": {
+      "mean": 93.63537099553044,
+      "p10": 93.63537099553044,
+      "p90": 93.63537099553044,
+      "n": 1
+     },
+     "dt_overload_hours": {
+      "mean": 0.0,
+      "p10": 0.0,
+      "p90": 0.0,
+      "n": 1
+     }
+    }
+   },
+   "by_seed": {
+    "baseline": {
+     "0": {
+      "homes": 250,
+      "period_days": 365.0,
+      "saidi_hours_per_home": 252.688,
+      "saifi_interruptions_per_home": 836.944,
+      "caidi_hours_per_interruption": 0.3019174520636984,
+      "asai_pct": 97.11543378995434,
+      "supply_availability_pct": 97.11543378995434,
+      "brownout_hours_per_home": 0.0,
+      "brownout_share_of_homes_pct": 0.0,
+      "unserved_energy_kwh": 12130.403492587659,
+      "unserved_energy_pct_of_demand": 4.049199839544211,
+      "curtailed_energy_kwh": 0.0,
+      "energy_not_delivered_kwh": 12130.403492587659,
+      "energy_not_delivered_pct_of_demand": 4.049199839544211,
+      "window_hours": "17:00-19:00",
+      "window_hours_per_home": 730.0,
+      "window_supply_availability_pct": 99.00780821917809,
+      "window_essential_availability_pct": 99.10205479452054,
+      "window_deficit_essential_availability_pct": 61.44117647058823,
+      "homes_with_any_interruption_pct": 100.0,
+      "homes_with_any_brownout_pct": 0.0,
+      "essential_supply_availability_pct": 59.37204108977222,
+      "dt_peak_loading_pct": 84.43423369165639,
+      "dt_overload_hours": 0.0
+     }
+    },
+    "saanjh": {
+     "0": {
+      "homes": 250,
+      "period_days": 365.0,
+      "saidi_hours_per_home": 8.632,
+      "saifi_interruptions_per_home": 34.176,
+      "caidi_hours_per_interruption": 0.25257490636704116,
+      "asai_pct": 99.90146118721461,
+      "supply_availability_pct": 99.90146118721461,
+      "brownout_hours_per_home": 1.104,
+      "brownout_share_of_homes_pct": 26.400000000000002,
+      "unserved_energy_kwh": 416.7478251581481,
+      "unserved_energy_pct_of_demand": 0.1391128685696172,
+      "curtailed_energy_kwh": 43.25396918830668,
+      "energy_not_delivered_kwh": 460.00179434645474,
+      "energy_not_delivered_pct_of_demand": 0.15355129720094543,
+      "window_hours": "17:00-19:00",
+      "window_hours_per_home": 730.0,
+      "window_supply_availability_pct": 100.0,
+      "window_essential_availability_pct": 100.0,
+      "window_deficit_essential_availability_pct": 100.0,
+      "homes_with_any_interruption_pct": 98.8,
+      "homes_with_any_brownout_pct": 26.400000000000002,
+      "essential_supply_availability_pct": 98.61384546672622,
+      "dt_peak_loading_pct": 93.63537099553044,
+      "dt_overload_hours": 0.0
+     }
+    }
+   },
+   "delta": {
+    "unserved_energy_kwh": {
+     "mean": 11713.65566742951,
+     "p10": 11713.65566742951,
+     "p90": 11713.65566742951,
+     "n": 1
+    },
+    "saidi_hours_per_home": {
+     "mean": 244.05599999999998,
+     "p10": 244.05599999999998,
+     "p90": 244.05599999999998,
+     "n": 1
+    },
+    "brownout_hours_per_home": {
+     "mean": -1.104,
+     "p10": -1.104,
+     "p90": -1.104,
+     "n": 1
+    },
+    "window_essential_availability_pct": {
+     "mean": 0.8979452054794592,
+     "p10": 0.8979452054794592,
+     "p90": 0.8979452054794592,
+     "n": 1
+    }
+   },
+   "scorecard": [
+    {
+     "key": "essential_supply_availability_pct",
+     "label": "Essential supply available in shortfall windows",
+     "unit": "%",
+     "baseline": {
+      "mean": 59.37204108977222,
+      "p10": 59.37204108977222,
+      "p90": 59.37204108977222,
+      "n": 1
+     },
+     "saanjh": {
+      "mean": 98.61384546672622,
+      "p10": 98.61384546672622,
+      "p90": 98.61384546672622,
+      "n": 1
+     }
+    },
+    {
+     "key": "saidi_hours_per_home",
+     "label": "SAIDI-style outage hours per home",
+     "unit": "h",
+     "baseline": {
+      "mean": 252.688,
+      "p10": 252.688,
+      "p90": 252.688,
+      "n": 1
+     },
+     "saanjh": {
+      "mean": 8.632,
+      "p10": 8.632,
+      "p90": 8.632,
+      "n": 1
+     }
+    },
+    {
+     "key": "saifi_interruptions_per_home",
+     "label": "SAIFI-style interruptions per home",
+     "unit": "n",
+     "baseline": {
+      "mean": 836.944,
+      "p10": 836.944,
+      "p90": 836.944,
+      "n": 1
+     },
+     "saanjh": {
+      "mean": 34.176,
+      "p10": 34.176,
+      "p90": 34.176,
+      "n": 1
+     }
+    },
+    {
+     "key": "brownout_hours_per_home",
+     "label": "Brownout hours per home (on essential band)",
+     "unit": "h",
+     "baseline": {
+      "mean": 0.0,
+      "p10": 0.0,
+      "p90": 0.0,
+      "n": 1
+     },
+     "saanjh": {
+      "mean": 1.104,
+      "p10": 1.104,
+      "p90": 1.104,
+      "n": 1
+     }
+    },
+    {
+     "key": "unserved_energy_kwh",
+     "label": "Unserved energy",
+     "unit": "kWh",
+     "baseline": {
+      "mean": 12130.403492587659,
+      "p10": 12130.403492587659,
+      "p90": 12130.403492587659,
+      "n": 1
+     },
+     "saanjh": {
+      "mean": 416.7478251581481,
+      "p10": 416.7478251581481,
+      "p90": 416.7478251581481,
+      "n": 1
+     }
+    },
+    {
+     "key": "energy_not_delivered_kwh",
+     "label": "Energy not delivered (unserved + above-band)",
+     "unit": "kWh",
+     "baseline": {
+      "mean": 12130.403492587659,
+      "p10": 12130.403492587659,
+      "p90": 12130.403492587659,
+      "n": 1
+     },
+     "saanjh": {
+      "mean": 460.00179434645474,
+      "p10": 460.00179434645474,
+      "p90": 460.00179434645474,
+      "n": 1
+     }
+    },
+    {
+     "key": "window_supply_availability_pct",
+     "label": "Any supply available, 17:00-19:00",
+     "unit": "%",
+     "baseline": {
+      "mean": 99.00780821917809,
+      "p10": 99.00780821917809,
+      "p90": 99.00780821917809,
+      "n": 1
+     },
+     "saanjh": {
+      "mean": 100.0,
+      "p10": 100.0,
+      "p90": 100.0,
+      "n": 1
+     }
+    },
+    {
+     "key": "window_essential_availability_pct",
+     "label": "Essential supply available, 17:00-19:00",
+     "unit": "%",
+     "baseline": {
+      "mean": 99.10205479452054,
+      "p10": 99.10205479452054,
+      "p90": 99.10205479452054,
+      "n": 1
+     },
+     "saanjh": {
+      "mean": 100.0,
+      "p10": 100.0,
+      "p90": 100.0,
+      "n": 1
+     }
+    },
+    {
+     "key": "window_deficit_essential_availability_pct",
+     "label": "Essential supply available, 17:00-19:00 shortfall blocks",
+     "unit": "%",
+     "baseline": {
+      "mean": 61.44117647058823,
+      "p10": 61.44117647058823,
+      "p90": 61.44117647058823,
+      "n": 1
+     },
+     "saanjh": {
+      "mean": 100.0,
+      "p10": 100.0,
+      "p90": 100.0,
+      "n": 1
+     }
+    },
+    {
+     "key": "dt_peak_loading_pct",
+     "label": "DT peak loading",
+     "unit": "%",
+     "baseline": {
+      "mean": 84.43423369165639,
+      "p10": 84.43423369165639,
+      "p90": 84.43423369165639,
+      "n": 1
+     },
+     "saanjh": {
+      "mean": 93.63537099553044,
+      "p10": 93.63537099553044,
+      "p90": 93.63537099553044,
+      "n": 1
+     }
+    },
+    {
+     "key": "dt_overload_hours",
+     "label": "DT overload hours",
+     "unit": "h",
+     "baseline": {
+      "mean": 0.0,
+      "p10": 0.0,
+      "p90": 0.0,
+      "n": 1
+     },
+     "saanjh": {
+      "mean": 0.0,
+      "p10": 0.0,
+      "p90": 0.0,
+      "n": 1
+     }
+    }
+   ]
+  },
+  "mixed_urban": {
+   "policies": {
+    "baseline": {
+     "essential_supply_availability_pct": {
+      "mean": 62.2694099378882,
+      "p10": 62.2694099378882,
+      "p90": 62.2694099378882,
+      "n": 1
+     },
+     "saidi_hours_per_home": {
+      "mean": 75.9375,
+      "p10": 75.9375,
+      "p90": 75.9375,
+      "n": 1
+     },
+     "saifi_interruptions_per_home": {
+      "mean": 221.75,
+      "p10": 221.75,
+      "p90": 221.75,
+      "n": 1
+     },
+     "brownout_hours_per_home": {
+      "mean": 0.0,
+      "p10": 0.0,
+      "p90": 0.0,
+      "n": 1
+     },
+     "unserved_energy_kwh": {
+      "mean": 2994.18524120894,
+      "p10": 2994.18524120894,
+      "p90": 2994.18524120894,
+      "n": 1
+     },
+     "energy_not_delivered_kwh": {
+      "mean": 2994.18524120894,
+      "p10": 2994.18524120894,
+      "p90": 2994.18524120894,
+      "n": 1
+     },
+     "window_supply_availability_pct": {
+      "mean": 99.29794520547945,
+      "p10": 99.29794520547945,
+      "p90": 99.29794520547945,
+      "n": 1
+     },
+     "window_essential_availability_pct": {
+      "mean": 99.44058219178082,
+      "p10": 99.44058219178082,
+      "p90": 99.44058219178082,
+      "n": 1
+     },
+     "window_deficit_essential_availability_pct": {
+      "mean": 60.15853658536585,
+      "p10": 60.15853658536585,
+      "p90": 60.15853658536585,
+      "n": 1
+     },
+     "dt_peak_loading_pct": {
+      "mean": 83.46409706633115,
+      "p10": 83.46409706633115,
+      "p90": 83.46409706633115,
+      "n": 1
+     },
+     "dt_overload_hours": {
+      "mean": 0.0,
+      "p10": 0.0,
+      "p90": 0.0,
+      "n": 1
+     }
+    },
+    "saanjh": {
+     "essential_supply_availability_pct": {
+      "mean": 99.95186335403726,
+      "p10": 99.95186335403726,
+      "p90": 99.95186335403726,
+      "n": 1
+     },
+     "saidi_hours_per_home": {
+      "mean": 0.1125,
+      "p10": 0.1125,
+      "p90": 0.1125,
+      "n": 1
+     },
+     "saifi_interruptions_per_home": {
+      "mean": 0.45,
+      "p10": 0.45,
+      "p90": 0.45,
+      "n": 1
+     },
+     "brownout_hours_per_home": {
+      "mean": 0.105,
+      "p10": 0.105,
+      "p90": 0.105,
+      "n": 1
+     },
+     "unserved_energy_kwh": {
+      "mean": 6.462383643474741,
+      "p10": 6.462383643474741,
+      "p90": 6.462383643474741,
+      "n": 1
+     },
+     "energy_not_delivered_kwh": {
+      "mean": 9.714536584735498,
+      "p10": 9.714536584735498,
+      "p90": 9.714536584735498,
+      "n": 1
+     },
+     "window_supply_availability_pct": {
+      "mean": 100.0,
+      "p10": 100.0,
+      "p90": 100.0,
+      "n": 1
+     },
+     "window_essential_availability_pct": {
+      "mean": 100.0,
+      "p10": 100.0,
+      "p90": 100.0,
+      "n": 1
+     },
+     "window_deficit_essential_availability_pct": {
+      "mean": 100.0,
+      "p10": 100.0,
+      "p90": 100.0,
+      "n": 1
+     },
+     "dt_peak_loading_pct": {
+      "mean": 93.42204650815866,
+      "p10": 93.42204650815866,
+      "p90": 93.42204650815866,
+      "n": 1
+     },
+     "dt_overload_hours": {
+      "mean": 0.0,
+      "p10": 0.0,
+      "p90": 0.0,
+      "n": 1
+     }
+    }
+   },
+   "by_seed": {
+    "baseline": {
+     "0": {
+      "homes": 200,
+      "period_days": 365.0,
+      "saidi_hours_per_home": 75.9375,
+      "saifi_interruptions_per_home": 221.75,
+      "caidi_hours_per_interruption": 0.34244644870349494,
+      "asai_pct": 99.13313356164383,
+      "supply_availability_pct": 99.13313356164383,
+      "brownout_hours_per_home": 0.0,
+      "brownout_share_of_homes_pct": 0.0,
+      "unserved_energy_kwh": 2994.18524120894,
+      "unserved_energy_pct_of_demand": 1.0204291581872447,
+      "curtailed_energy_kwh": 0.0,
+      "energy_not_delivered_kwh": 2994.18524120894,
+      "energy_not_delivered_pct_of_demand": 1.0204291581872447,
+      "window_hours": "17:00-19:00",
+      "window_hours_per_home": 730.0,
+      "window_supply_availability_pct": 99.29794520547945,
+      "window_essential_availability_pct": 99.44058219178082,
+      "window_deficit_essential_availability_pct": 60.15853658536585,
+      "homes_with_any_interruption_pct": 100.0,
+      "homes_with_any_brownout_pct": 0.0,
+      "essential_supply_availability_pct": 62.2694099378882,
+      "dt_peak_loading_pct": 83.46409706633115,
+      "dt_overload_hours": 0.0
+     }
+    },
+    "saanjh": {
+     "0": {
+      "homes": 200,
+      "period_days": 365.0,
+      "saidi_hours_per_home": 0.1125,
+      "saifi_interruptions_per_home": 0.45,
+      "caidi_hours_per_interruption": 0.25,
+      "asai_pct": 99.99871575342466,
+      "supply_availability_pct": 99.99871575342466,
+      "brownout_hours_per_home": 0.105,
+      "brownout_share_of_homes_pct": 17.0,
+      "unserved_energy_kwh": 6.462383643474741,
+      "unserved_energy_pct_of_demand": 0.0022024037158540582,
+      "curtailed_energy_kwh": 3.252152941260756,
+      "energy_not_delivered_kwh": 9.714536584735498,
+      "energy_not_delivered_pct_of_demand": 0.003310749199117132,
+      "window_hours": "17:00-19:00",
+      "window_hours_per_home": 730.0,
+      "window_supply_availability_pct": 100.0,
+      "window_essential_availability_pct": 100.0,
+      "window_deficit_essential_availability_pct": 100.0,
+      "homes_with_any_interruption_pct": 45.0,
+      "homes_with_any_brownout_pct": 17.0,
+      "essential_supply_availability_pct": 99.95186335403726,
+      "dt_peak_loading_pct": 93.42204650815866,
+      "dt_overload_hours": 0.0
+     }
+    }
+   },
+   "delta": {
+    "unserved_energy_kwh": {
+     "mean": 2987.7228575654653,
+     "p10": 2987.7228575654653,
+     "p90": 2987.7228575654653,
+     "n": 1
+    },
+    "saidi_hours_per_home": {
+     "mean": 75.825,
+     "p10": 75.825,
+     "p90": 75.825,
+     "n": 1
+    },
+    "brownout_hours_per_home": {
+     "mean": -0.105,
+     "p10": -0.105,
+     "p90": -0.105,
+     "n": 1
+    },
+    "window_essential_availability_pct": {
+     "mean": 0.5594178082191803,
+     "p10": 0.5594178082191803,
+     "p90": 0.5594178082191803,
+     "n": 1
+    }
+   },
+   "scorecard": [
+    {
+     "key": "essential_supply_availability_pct",
+     "label": "Essential supply available in shortfall windows",
+     "unit": "%",
+     "baseline": {
+      "mean": 62.2694099378882,
+      "p10": 62.2694099378882,
+      "p90": 62.2694099378882,
+      "n": 1
+     },
+     "saanjh": {
+      "mean": 99.95186335403726,
+      "p10": 99.95186335403726,
+      "p90": 99.95186335403726,
+      "n": 1
+     }
+    },
+    {
+     "key": "saidi_hours_per_home",
+     "label": "SAIDI-style outage hours per home",
+     "unit": "h",
+     "baseline": {
+      "mean": 75.9375,
+      "p10": 75.9375,
+      "p90": 75.9375,
+      "n": 1
+     },
+     "saanjh": {
+      "mean": 0.1125,
+      "p10": 0.1125,
+      "p90": 0.1125,
+      "n": 1
+     }
+    },
+    {
+     "key": "saifi_interruptions_per_home",
+     "label": "SAIFI-style interruptions per home",
+     "unit": "n",
+     "baseline": {
+      "mean": 221.75,
+      "p10": 221.75,
+      "p90": 221.75,
+      "n": 1
+     },
+     "saanjh": {
+      "mean": 0.45,
+      "p10": 0.45,
+      "p90": 0.45,
+      "n": 1
+     }
+    },
+    {
+     "key": "brownout_hours_per_home",
+     "label": "Brownout hours per home (on essential band)",
+     "unit": "h",
+     "baseline": {
+      "mean": 0.0,
+      "p10": 0.0,
+      "p90": 0.0,
+      "n": 1
+     },
+     "saanjh": {
+      "mean": 0.105,
+      "p10": 0.105,
+      "p90": 0.105,
+      "n": 1
+     }
+    },
+    {
+     "key": "unserved_energy_kwh",
+     "label": "Unserved energy",
+     "unit": "kWh",
+     "baseline": {
+      "mean": 2994.18524120894,
+      "p10": 2994.18524120894,
+      "p90": 2994.18524120894,
+      "n": 1
+     },
+     "saanjh": {
+      "mean": 6.462383643474741,
+      "p10": 6.462383643474741,
+      "p90": 6.462383643474741,
+      "n": 1
+     }
+    },
+    {
+     "key": "energy_not_delivered_kwh",
+     "label": "Energy not delivered (unserved + above-band)",
+     "unit": "kWh",
+     "baseline": {
+      "mean": 2994.18524120894,
+      "p10": 2994.18524120894,
+      "p90": 2994.18524120894,
+      "n": 1
+     },
+     "saanjh": {
+      "mean": 9.714536584735498,
+      "p10": 9.714536584735498,
+      "p90": 9.714536584735498,
+      "n": 1
+     }
+    },
+    {
+     "key": "window_supply_availability_pct",
+     "label": "Any supply available, 17:00-19:00",
+     "unit": "%",
+     "baseline": {
+      "mean": 99.29794520547945,
+      "p10": 99.29794520547945,
+      "p90": 99.29794520547945,
+      "n": 1
+     },
+     "saanjh": {
+      "mean": 100.0,
+      "p10": 100.0,
+      "p90": 100.0,
+      "n": 1
+     }
+    },
+    {
+     "key": "window_essential_availability_pct",
+     "label": "Essential supply available, 17:00-19:00",
+     "unit": "%",
+     "baseline": {
+      "mean": 99.44058219178082,
+      "p10": 99.44058219178082,
+      "p90": 99.44058219178082,
+      "n": 1
+     },
+     "saanjh": {
+      "mean": 100.0,
+      "p10": 100.0,
+      "p90": 100.0,
+      "n": 1
+     }
+    },
+    {
+     "key": "window_deficit_essential_availability_pct",
+     "label": "Essential supply available, 17:00-19:00 shortfall blocks",
+     "unit": "%",
+     "baseline": {
+      "mean": 60.15853658536585,
+      "p10": 60.15853658536585,
+      "p90": 60.15853658536585,
+      "n": 1
+     },
+     "saanjh": {
+      "mean": 100.0,
+      "p10": 100.0,
+      "p90": 100.0,
+      "n": 1
+     }
+    },
+    {
+     "key": "dt_peak_loading_pct",
+     "label": "DT peak loading",
+     "unit": "%",
+     "baseline": {
+      "mean": 83.46409706633115,
+      "p10": 83.46409706633115,
+      "p90": 83.46409706633115,
+      "n": 1
+     },
+     "saanjh": {
+      "mean": 93.42204650815866,
+      "p10": 93.42204650815866,
+      "p90": 93.42204650815866,
+      "n": 1
+     }
+    },
+    {
+     "key": "dt_overload_hours",
+     "label": "DT overload hours",
+     "unit": "h",
+     "baseline": {
+      "mean": 0.0,
+      "p10": 0.0,
+      "p90": 0.0,
+      "n": 1
+     },
+     "saanjh": {
+      "mean": 0.0,
+      "p10": 0.0,
+      "p90": 0.0,
+      "n": 1
+     }
+    }
+   ]
+  }
+ }
+}

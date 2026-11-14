@@ -1,0 +1,95 @@
+{
+ "label": "SIMULATED; LoRa link modelled as independent per-block packet loss and per-day node dropout",
+ "scenario": "peri_urban_low_income",
+ "seeds": 1,
+ "baseline": {
+  "essential_supply_availability_pct": 59.372041089772225,
+  "saidi_hours_per_home": 252.68800000000002,
+  "brownout_hours_per_home": 0.0,
+  "unserved_energy_kwh": 12130.403492587659,
+  "window_essential_availability_pct": 99.10205479452054
+ },
+ "cases": [
+  {
+   "case": "perfect",
+   "description": "Ideal link (no loss, no dropout)",
+   "packet_loss": 0.0,
+   "node_dropout": 0.0,
+   "essential_supply_availability_pct": 98.61384546672622,
+   "saidi_hours_per_home": 8.632,
+   "brownout_hours_per_home": 1.104,
+   "unserved_energy_kwh": 416.7478251581481,
+   "window_essential_availability_pct": 100.0,
+   "relay_command_delivery_pct": null,
+   "curtail_command_delivery_pct": null,
+   "relay_commands": 0,
+   "node_days_offline": 0
+  },
+  {
+   "case": "loss_5pct",
+   "description": "5% of relay/actuator packets lost per block",
+   "packet_loss": 0.05,
+   "node_dropout": 0.0,
+   "essential_supply_availability_pct": 98.55256811076374,
+   "saidi_hours_per_home": 8.95,
+   "brownout_hours_per_home": 1.046,
+   "unserved_energy_kwh": 450.6744765949575,
+   "window_essential_availability_pct": 99.99643835616439,
+   "relay_command_delivery_pct": 94.49175575285378,
+   "curtail_command_delivery_pct": 94.71403812824957,
+   "relay_commands": 5519,
+   "node_days_offline": 0
+  },
+  {
+   "case": "loss_20pct",
+   "description": "20% of relay/actuator packets lost per block",
+   "packet_loss": 0.2,
+   "node_dropout": 0.0,
+   "essential_supply_availability_pct": 98.37802590442162,
+   "saidi_hours_per_home": 9.882,
+   "brownout_hours_per_home": 1.04,
+   "unserved_energy_kwh": 518.418758669321,
+   "window_essential_availability_pct": 99.99438356164384,
+   "relay_command_delivery_pct": 79.8048780487805,
+   "curtail_command_delivery_pct": 78.01911381407471,
+   "relay_commands": 6150,
+   "node_days_offline": 0
+  },
+  {
+   "case": "dropout_10pct",
+   "description": "10% of nodes offline for a whole day",
+   "packet_loss": 0.0,
+   "node_dropout": 0.1,
+   "essential_supply_availability_pct": 98.12612773559624,
+   "saidi_hours_per_home": 11.313,
+   "brownout_hours_per_home": 1.032,
+   "unserved_energy_kwh": 624.2038431062931,
+   "window_essential_availability_pct": 99.99246575342465,
+   "relay_command_delivery_pct": 58.436815193571945,
+   "curtail_command_delivery_pct": 87.38033072236728,
+   "relay_commands": 8214,
+   "node_days_offline": 9204
+  },
+  {
+   "case": "combined",
+   "description": "20% packet loss plus 10% daily node dropout",
+   "packet_loss": 0.2,
+   "node_dropout": 0.1,
+   "essential_supply_availability_pct": 97.96998660116122,
+   "saidi_hours_per_home": 12.147,
+   "brownout_hours_per_home": 0.953,
+   "unserved_energy_kwh": 679.8109164114389,
+   "window_essential_availability_pct": 99.98328767123287,
+   "relay_command_delivery_pct": 49.27973199329983,
+   "curtail_command_delivery_pct": 68.05194805194805,
+   "relay_commands": 8955,
+   "node_days_offline": 9204
+  }
+ ],
+ "limits": [
+  "Packet loss is independent per node and block; real LoRa fading is bursty and correlated.",
+  "The band is applied by the smart meter, so a radio outage never removes the essential-supply floor.",
+  "A relay node that loses its command leaves the inverter on grid (normally closed), so the failure mode is lost flexibility, not a safety hazard.",
+  "These are Monte Carlo draws, not measurements. The hardware packet-success rate is measured separately by the gateway demo."
+ ]
+}

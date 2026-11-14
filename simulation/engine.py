@@ -65,6 +65,7 @@ class RunResult:
     log: list
     ledger: dict
     calibration: dict
+    actions: pd.DataFrame = None      # per-block device commands (gateway replay/tests)
 
 
 class Scenario:
@@ -165,16 +166,34 @@ class Scenario:
         return events, depth, self.alloc.allocation(depth, total)
 
 
-def run(scenario, policy="saanjh", forecaster=None, cb_override=None, record_days=None):
+def run(scenario, policy="saanjh", forecaster=None, cb_override=None, record_days=None,
+        comms=None):
     """Simulate every day of ``scenario`` under ``policy`` ('baseline' or 'saanjh').
 
     ``forecaster`` (optional) supplies per-day event-energy estimates and battery charge
     targets (Prompt 6). ``record_days`` limits the per-block timeseries kept in memory.
+
+    ``comms`` (optional) models an imperfect LoRa control link:
+        {"packet_loss": 0.0-1.0, "node_dropout": 0.0-1.0}
+    Packet loss is drawn per node per 15-minute block; node dropout is drawn per node per
+    day. Lost packets only affect relay and actuator commands (the essential band is a
+    smart-meter load-limit function, not a LoRa command), so the network degrades
+    gracefully: a relay node that hears nothing leaves its inverter on grid (normally
+    closed), which is the safe state.
     """
     cfg, fleet, step_h, T = scenario.cfg, scenario.fleet, scenario.step_h, scenario.steps
     n = fleet.n
     saanjh = policy == "saanjh"
     rng = np.random.default_rng(zlib.crc32(f"{scenario.name}/{scenario.seed}/{policy}/ops".encode()))
+    win_lo, win_hi = cfg["simulation"].get("reliability_window_h", [17, 19])
+    comms = dict(comms) if comms else None
+    comms_stats = {"packet_loss": (comms or {}).get("packet_loss", 0.0),
+                   "node_dropout": (comms or {}).get("node_dropout", 0.0),
+                   "relay_commands": 0, "relay_delivered": 0,
+                   "curtail_commands": 0, "curtail_delivered": 0,
+                   "node_days_offline": 0}
+    comms_rng = (np.random.default_rng(zlib.crc32(
+        f"{scenario.name}/{scenario.seed}/{policy}/comms".encode())) if comms else None)
 
     inv = InverterFleet(cfg["inverter_battery"], fleet.has_inverter)
     flex = band = cb = disp = None
@@ -190,8 +209,12 @@ def run(scenario, policy="saanjh", forecaster=None, cb_override=None, record_day
 
     feeder_cum = np.zeros(fleet.n_lt_feeders)
     acc = {k: np.zeros(n) for k in ("deficit_blocks", "ess_ok_blocks", "shed_blocks", "shed_deficit_blocks",
-                                    "banded_blocks", "unserved_kwh", "band_curtailed_kwh", "demand_kwh")}
-    rows, log = [], []
+                                    "banded_blocks", "unserved_kwh", "band_curtailed_kwh", "demand_kwh",
+                                    "interruptions", "blocks", "window_blocks", "window_supply_blocks",
+                                    "window_ess_ok_blocks", "window_deficit_blocks",
+                                    "window_deficit_ess_ok_blocks")}
+    prev_shed = np.zeros(n, dtype=bool)
+    rows, log, action_rows = [], [], []
     event = None
     max_balance_err = 0.0
     band_excess_max = 0.0
@@ -206,6 +229,11 @@ def run(scenario, policy="saanjh", forecaster=None, cb_override=None, record_day
         date, info, loads, pvk, temp = scenario.day_inputs(di)
         events, depth, alloc = scenario.shortfall_day(di, loads, pvk)
         plan = forecaster.plan_day(scenario, di, date) if (forecaster and saanjh) else None
+        if comms is not None:
+            node_online = comms_rng.random(n) >= comms.get("node_dropout", 0.0)
+            comms_stats["node_days_offline"] += int((~node_online).sum())
+        else:
+            node_online = np.ones(n, dtype=bool)
         for t in range(T):
             hour = t * step_h
             d = loads.total[:, t]
@@ -220,9 +248,19 @@ def run(scenario, policy="saanjh", forecaster=None, cb_override=None, record_day
                 ev_need = plan["event_energy_kwh"][t] if plan and plan.get("event_energy_kwh") is not None else None
                 target = plan.get("charge_target_soc") if plan else None
                 dec = disp.plan(loads, t, hour, limit, pv, temp[t], ev_need, target, plan)
+                if comms is not None:
+                    link_ok = comms_rng.random(n) >= comms.get("packet_loss", 0.0)
+                    control_ok = node_online & link_ok
+                else:
+                    control_ok = np.ones(n, dtype=bool)
                 if dec.gap_kw > 0:
                     inv.cancel_release()
-                    inv.open(np.where(dec.open_relays)[0])
+                    opens = dec.open_relays
+                    if comms is not None:
+                        comms_stats["relay_commands"] += int(opens.sum())
+                        opens = opens & control_ok
+                        comms_stats["relay_delivered"] += int(opens.sum())
+                    inv.open(np.where(opens)[0])
                 else:
                     inv.schedule_release(t, rng)
                 shed = dec.shed
@@ -242,7 +280,12 @@ def run(scenario, policy="saanjh", forecaster=None, cb_override=None, record_day
             grid_on = ~shed
             served_batt = inv.discharge(t, bu, step_h, grid_on)
             if flex is not None:
-                red, reb = flex.step(loads, t, curtail & grid_on, hold | shed, rng)
+                curtail_ok = curtail & grid_on
+                if comms is not None:
+                    comms_stats["curtail_commands"] += int(curtail_ok.sum())
+                    curtail_ok = curtail_ok & control_ok
+                    comms_stats["curtail_delivered"] += int(curtail_ok.sum())
+                red, reb = flex.step(loads, t, curtail_ok, hold | shed, rng)
             else:
                 red = reb = np.zeros(n)
             pv_on = np.where(grid_on, pv, 0.0)
@@ -308,10 +351,20 @@ def run(scenario, policy="saanjh", forecaster=None, cb_override=None, record_day
             acc["band_curtailed_kwh"] += band_cut * step_h
             acc["shed_blocks"] += shed
             acc["banded_blocks"] += banded & grid_on
+            acc["blocks"] += 1
+            acc["interruptions"] += shed & ~prev_shed
+            prev_shed = shed
+            ess_now = grid_on | (fleet.has_inverter & (served_batt >= 0.99 * bu))
+            if win_lo <= hour < win_hi:
+                acc["window_blocks"] += 1
+                acc["window_supply_blocks"] += grid_on
+                acc["window_ess_ok_blocks"] += ess_now
+                if in_deficit:
+                    acc["window_deficit_blocks"] += 1
+                    acc["window_deficit_ess_ok_blocks"] += ess_now
             if in_deficit:
                 acc["deficit_blocks"] += 1
-                ess_ok = grid_on | (fleet.has_inverter & (served_batt >= 0.99 * bu))
-                acc["ess_ok_blocks"] += ess_ok
+                acc["ess_ok_blocks"] += ess_now
                 acc["shed_deficit_blocks"] += shed
 
             # Energy balance per home (module docstring). Connected homes: appliance demand
@@ -353,6 +406,19 @@ def run(scenario, policy="saanjh", forecaster=None, cb_override=None, record_day
                     event.pop("sig")
                     log.append({"kind": "event", **event})
                     event = None
+
+            if saanjh and di in record:
+                action_rows.append({
+                    "date": str(date), "day": di, "step": t, "hour": hour,
+                    "gap_kw": float(dec.gap_kw), "limit_kw": float(limit),
+                    "band_level_w": dec.band_level_w, "battery_mode": dec.battery_mode,
+                    "n_banded": int((banded & grid_on).sum()), "n_shed": int(shed.sum()),
+                    "relay_open": int(dec.open_relays.sum()), "n_curtailed": int(curtail.sum()),
+                    "cb_kw": float(dec.cb_kw), "relay_kw": float(served_batt[grid_on].sum()),
+                    "appliance_reduction_kw": float(red.sum()), "rebound_kw": float(reb.sum()),
+                    "delivered_kw": float(served_batt[grid_on].sum() + red.sum() + max(cb_kw, 0.0)),
+                    "net_kw": net, "reason": dec.reason,
+                })
 
             if di in record:
                 rows.append({
@@ -412,6 +478,7 @@ def run(scenario, policy="saanjh", forecaster=None, cb_override=None, record_day
             "min_soc_on_relay": float(inv.min_soc_relay[fleet.has_inverter].min()) if fleet.has_inverter.any() else None,
             "sum_inverter_kw": float(fleet.has_inverter.sum() * inv.inverter_kw),
         },
+        "comms": comms_stats if comms is not None else None,
     }
     if flex is not None:
         ledger["appliance"] = {
@@ -428,4 +495,4 @@ def run(scenario, policy="saanjh", forecaster=None, cb_override=None, record_day
             "losses_kwh": (cb.cell_out_kwh - cb.discharged_kwh) + (cb.charged_kwh - cb.cell_in_kwh),
         }
     return RunResult(scenario.name, policy, scenario.seed, pd.DataFrame(rows), homes, log, ledger,
-                     scenario.calibration)
+                     scenario.calibration, pd.DataFrame(action_rows))

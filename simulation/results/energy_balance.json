@@ -1,0 +1,72 @@
+{
+ "label": "SIMULATED (evening_peak_legacy, one day, seed 42)",
+ "scenario": "evening_peak_legacy",
+ "seed": 42,
+ "legacy_claim": {
+  "power_kw": 56.25,
+  "duration_min": 45,
+  "energy_kwh": 42.188,
+  "source": "legacy FUXA console and video title cards (build_fuxa_frontend.py)"
+ },
+ "simulated_event": {
+  "event": {
+   "start": "18:45",
+   "end": "22:15",
+   "duration_minutes": 210,
+   "peak_required_kw": 53.87823677062988,
+   "peak_delivered_kw": 10.31817219879858,
+   "max_relays_open": 13,
+   "max_homes_curtailed": 6
+  },
+  "required_kwh": 70.7934894323349,
+  "delivered_kwh": 19.70329158667569,
+  "battery_delivered_kwh": 8.558878880819412,
+  "appliance_deferred_kwh": 8.921535903632025,
+  "ac_setpoint_avoided_kwh": 2.2228768022242513,
+  "rebound_kwh": 10.032974304744151,
+  "recharge_kwh": 10.698598601024266,
+  "peak_delivered_kw": 10.31817219879858,
+  "delivery_ratio": 0.27832067248935777,
+  "battery_peak_kw": 6.063139461664741,
+  "sum_inverter_ratings_kw": 9.1
+ },
+ "best_45_min": {
+  "start": "18:45",
+  "end": "19:30",
+  "blocks": 3,
+  "battery_kwh": 4.531339963597899,
+  "deferred_kwh": 2.6874942635635746,
+  "delivered_kwh": 7.218834227161474,
+  "peak_delivered_kw": 10.31817219879858,
+  "mean_delivered_kw": 9.625112302881965,
+  "battery_peak_kw": 6.063139461664741,
+  "deferred_peak_kw": 4.278988690120533,
+  "relays_open_max": 13,
+  "homes_curtailed_max": 6
+ },
+ "reconciliation": {
+  "target_kwh": 42.188,
+  "battery_kwh": 4.531,
+  "deferred_kwh": 2.687,
+  "delivered_kwh": 7.219,
+  "unmet_kwh": 34.969,
+  "delivered_pct_of_claim": 17.1,
+  "battery_share_pct": 62.8,
+  "deferred_share_pct": 37.2,
+  "unmet_share_pct": 82.9,
+  "identity": "battery + deferred + unmet = 42.19 kWh",
+  "adds_up": true
+ },
+ "fleet_requirement": {
+  "inverter_kw_each": 0.7,
+  "inverter_homes_for_claim_power": 80,
+  "current_inverter_share": 0.217,
+  "homes_needed_at_current_ownership": 370,
+  "note": "Even at full inverter output the claim needs about 81 inverter homes; the legacy fleet has 13. The remaining energy has to come from deferred appliances and the community battery, which this legacy case does not have."
+ },
+ "notes": [
+  "The 56.25 kW / 42.19 kWh figure is not reproduced by the committed simulation. It is retained only as the legacy claim being audited.",
+  "battery_kwh is AC energy measured at the inverter output; deferred_kwh is appliance load moved out of the window. Rebound and recharge return later and are reported separately.",
+  "The best 45-minute window is an upper bound on what the modelled fleet can deliver, not an operating schedule."
+ ]
+}

@@ -30,6 +30,66 @@ def availability(homes, mask=None):
     return float(h["ess_ok_blocks"].sum() / den) if den else None
 
 
+def _pct(num, den):
+    return float(num / den * 100) if den else None
+
+
+def reliability_metrics(r, step_h=STEP_H):
+    """Standard reliability indices, unserved energy and the 17:00-19:00 window.
+
+    Definitions (all computed per home over the simulated period):
+    * SAIDI-style: total hours fully disconnected / homes.
+    * SAIFI-style: number of disconnection episodes / homes.
+    * CAIDI: SAIDI / SAIFI.
+    * ASAI: fraction of block-time with any supply at the meter.
+    * Brownout: connected but held at an essential band below demand.
+    * Unserved energy: demand not delivered while fully disconnected (including
+      battery-limited backup). Energy curtailed above the band is reported separately;
+      ``energy_not_delivered`` is the sum.
+    * 17:00-19:00 availability is reported over every block in the window, and over
+      deficit blocks only (the latter is the comparable "event" figure).
+    """
+    h = r.homes
+    n = max(len(h), 1)
+    blocks = float(h["blocks"].sum()) if "blocks" in h else float(n)
+    shed_blocks = float(h["shed_blocks"].sum())
+    demand = float(h["demand_kwh"].sum())
+    unserved = float(h["unserved_kwh"].sum())
+    curtailed = float(h["band_curtailed_kwh"].sum())
+    interruptions = float(h["interruptions"].sum()) if "interruptions" in h else 0.0
+    saidi = float(h["shed_blocks"].mean() * step_h)
+    saifi = interruptions / n
+    win_blocks = float(h["window_blocks"].sum()) if "window_blocks" in h else 0.0
+    win_supply = float(h["window_supply_blocks"].sum()) if "window_supply_blocks" in h else 0.0
+    win_ess = float(h["window_ess_ok_blocks"].sum()) if "window_ess_ok_blocks" in h else 0.0
+    win_def = float(h["window_deficit_blocks"].sum()) if "window_deficit_blocks" in h else 0.0
+    win_def_ess = (float(h["window_deficit_ess_ok_blocks"].sum())
+                   if "window_deficit_ess_ok_blocks" in h else 0.0)
+    return {
+        "homes": int(len(h)),
+        "period_days": round(blocks / n * step_h / 24, 1) if n else None,
+        "saidi_hours_per_home": saidi,
+        "saifi_interruptions_per_home": saifi,
+        "caidi_hours_per_interruption": (saidi / saifi) if saifi > 0 else None,
+        "asai_pct": (1 - shed_blocks / blocks) * 100 if blocks else None,
+        "supply_availability_pct": (1 - shed_blocks / blocks) * 100 if blocks else None,
+        "brownout_hours_per_home": float(h["banded_blocks"].mean() * step_h),
+        "brownout_share_of_homes_pct": float((h["banded_blocks"] > 0).mean() * 100),
+        "unserved_energy_kwh": unserved,
+        "unserved_energy_pct_of_demand": _pct(unserved, demand),
+        "curtailed_energy_kwh": curtailed,
+        "energy_not_delivered_kwh": unserved + curtailed,
+        "energy_not_delivered_pct_of_demand": _pct(unserved + curtailed, demand),
+        "window_hours": "17:00-19:00",
+        "window_hours_per_home": win_blocks / n * step_h if n else None,
+        "window_supply_availability_pct": _pct(win_supply, win_blocks),
+        "window_essential_availability_pct": _pct(win_ess, win_blocks),
+        "window_deficit_essential_availability_pct": _pct(win_def_ess, win_def),
+        "homes_with_any_interruption_pct": float((h["shed_blocks"] > 0).mean() * 100),
+        "homes_with_any_brownout_pct": float((h["banded_blocks"] > 0).mean() * 100),
+    }
+
+
 def run_metrics(r, step_h=STEP_H):
     h = r.homes
     burden = (h["shed_blocks"] + h["banded_blocks"]) * step_h
@@ -71,6 +131,9 @@ def run_metrics(r, step_h=STEP_H):
     flex["total_mwh"] = flex["demand_flexibility_mwh"] + flex["community_battery_kwh"] / 1000
     out["flexibility"] = flex
     out["household_battery_cycles_added_per_year"] = float(inv["relay_cycles"].mean()) if len(inv) else 0.0
+    out["reliability"] = reliability_metrics(r, step_h)
+    for k, v in out["reliability"].items():
+        out.setdefault(k, v)
     cb = led.get("community_battery")
     if cb:
         efc = cb["equivalent_full_cycles"]

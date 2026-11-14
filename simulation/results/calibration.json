@@ -1,0 +1,301 @@
+{
+ "label": "REAL DATA (NASA POWER Lucknow 2023) + CALIBRATED load segments + SIMULATED dispatch",
+ "site": {
+  "name": "lucknow",
+  "year": 2023,
+  "latitude": 26.85,
+  "longitude": 80.95
+ },
+ "weather_label": "REAL DATA (NASA POWER hourly, lucknow 2023)",
+ "annual": {
+  "days": 365,
+  "ghi_kwh_m2": 1696.0,
+  "pv_yield_kwh_per_kwp": 1225.0,
+  "day_types": {
+   "clear": 162,
+   "monsoon": 92,
+   "cloudy": 70,
+   "heatwave": 41
+  },
+  "seasons": {
+   "monsoon": 92,
+   "summer": 91,
+   "winter": 90,
+   "post_monsoon": 61,
+   "spring": 31
+  }
+ },
+ "calibration_targets": {
+  "label": "CALIBRATED TO REAL DATA (Prayas eMARC published load patterns)",
+  "stats": {
+   "middle_night_w": 126.09419997944187,
+   "middle_evening_peak_w": 236.42702136370272,
+   "ac_homes_peak_w": 633.1830359165191,
+   "water_heater_homes_peak_w": 466.21115198909877,
+   "low_income_mean_w": 111.49913467420994,
+   "low_income_kwh_per_month": 80.27937696543117,
+   "middle_mean_w": 175.73214143490637,
+   "middle_kwh_per_month": 126.52714183313259,
+   "affluent_mean_w": 262.90804188591295,
+   "affluent_kwh_per_month": 189.29379015785733
+  },
+  "checks": {
+   "middle_night_w": {
+    "value": 126.09419997944187,
+    "target": [
+     100,
+     150
+    ],
+    "ok": true
+   },
+   "middle_evening_peak_w": {
+    "value": 236.42702136370272,
+    "target": [
+     200,
+     250
+    ],
+    "ok": true
+   },
+   "ac_homes_peak_w": {
+    "value": 633.1830359165191,
+    "target": [
+     500,
+     700
+    ],
+    "ok": true
+   },
+   "water_heater_homes_peak_w": {
+    "value": 466.21115198909877,
+    "target": [
+     400,
+     600
+    ],
+    "ok": true
+   }
+  },
+  "n_homes": 600,
+  "n_days": 3
+ },
+ "evening_profile_clear_summer": {
+  "date": "2023-05-10",
+  "peak_hour": "22:00",
+  "peak_over_mean": 1.51,
+  "evening_17_23_share_of_daily_energy_pct": 31.7,
+  "normalised_17_23": [
+   0.81,
+   0.71,
+   0.711,
+   0.763,
+   0.885,
+   0.957,
+   1.211,
+   1.311,
+   1.366,
+   1.455,
+   1.457,
+   1.489,
+   1.42,
+   1.417,
+   1.382,
+   1.367,
+   1.424,
+   1.502,
+   1.501,
+   1.51,
+   1.513,
+   1.507,
+   1.438,
+   1.358
+  ],
+  "hours_17_23": [
+   17.0,
+   17.25,
+   17.5,
+   17.75,
+   18.0,
+   18.25,
+   18.5,
+   18.75,
+   19.0,
+   19.25,
+   19.5,
+   19.75,
+   20.0,
+   20.25,
+   20.5,
+   20.75,
+   21.0,
+   21.25,
+   21.5,
+   21.75,
+   22.0,
+   22.25,
+   22.5,
+   22.75
+  ]
+ },
+ "cases": {
+  "summer_ac_heatwave": {
+   "label": "summer_ac_heatwave",
+   "date": "2023-04-13",
+   "season": "summer",
+   "day_type": "heatwave",
+   "cloudiness": 0.054,
+   "tmax_c": 40.6,
+   "tmean_c": 30.7,
+   "ghi_kwh_m2": 6.87,
+   "pv_yield_kwh_per_kwp": 4.728,
+   "demand_peak_kw": 76.55,
+   "demand_peak_hour": "22:00",
+   "net_peak_kw": 76.55,
+   "net_peak_hour": "22:00",
+   "evening_mean_demand_kw": 46.56,
+   "evening_mean_net_kw": 46.53,
+   "night_evening_share_of_daily_energy_pct": 22.0,
+   "cooling_share_of_peak_pct": 45.2,
+   "pv_share_of_evening_demand_pct": 0.07,
+   "daily_energy_kwh": 1206.1
+  },
+  "cloudy_monsoon": {
+   "label": "cloudy_monsoon",
+   "date": "2023-08-22",
+   "season": "monsoon",
+   "day_type": "monsoon",
+   "cloudiness": 0.781,
+   "tmax_c": 30.1,
+   "tmean_c": 27.5,
+   "ghi_kwh_m2": 1.26,
+   "pv_yield_kwh_per_kwp": 0.971,
+   "demand_peak_kw": 66.01,
+   "demand_peak_hour": "22:00",
+   "net_peak_kw": 66.01,
+   "net_peak_hour": "22:00",
+   "evening_mean_demand_kw": 38.85,
+   "evening_mean_net_kw": 38.84,
+   "night_evening_share_of_daily_energy_pct": 24.5,
+   "cooling_share_of_peak_pct": 35.7,
+   "pv_share_of_evening_demand_pct": 0.02,
+   "daily_energy_kwh": 970.4
+  },
+  "clear_summer_reference": {
+   "label": "clear_summer_reference",
+   "date": "2023-05-10",
+   "season": "summer",
+   "day_type": "clear",
+   "cloudiness": 0.0,
+   "tmax_c": 39.3,
+   "tmean_c": 30.3,
+   "ghi_kwh_m2": 7.89,
+   "pv_yield_kwh_per_kwp": 5.389,
+   "demand_peak_kw": 70.34,
+   "demand_peak_hour": "22:00",
+   "net_peak_kw": 70.34,
+   "net_peak_hour": "22:00",
+   "evening_mean_demand_kw": 42.77,
+   "evening_mean_net_kw": 42.7,
+   "night_evening_share_of_daily_energy_pct": 22.6,
+   "cooling_share_of_peak_pct": 43.0,
+   "pv_share_of_evening_demand_pct": 0.16,
+   "daily_energy_kwh": 1116.2
+  }
+ },
+ "forecast": {
+  "models": [
+   {
+    "scenario": "peri_urban_low_income",
+    "model": "seasonal_naive",
+    "mase": 1.0196535112368466,
+    "mae_kw": 1.1903306988847464,
+    "pinball_kw": 0.4774406710407518,
+    "coverage_p10_p90": 0.5264589515331355,
+    "days": 337
+   },
+   {
+    "scenario": "peri_urban_low_income",
+    "model": "weekly_naive",
+    "mase": 1.9057669299267013,
+    "mae_kw": 2.224768371423927,
+    "pinball_kw": 1.1123841857119634,
+    "coverage_p10_p90": null,
+    "days": 337
+   },
+   {
+    "scenario": "peri_urban_low_income",
+    "model": "xgboost_quantile",
+    "mase": 1.553971800626515,
+    "mae_kw": 1.814087157159102,
+    "pinball_kw": 0.6527438699319555,
+    "coverage_p10_p90": 0.6883963897131553,
+    "days": 337
+   },
+   {
+    "scenario": "peri_urban_low_income",
+    "model": "chronos2",
+    "mase": 0.9933272095863225,
+    "mae_kw": 1.1595977050810895,
+    "pinball_kw": 0.4187745338794134,
+    "coverage_p10_p90": 0.6826162215628091,
+    "days": 337
+   },
+   {
+    "scenario": "mixed_urban",
+    "model": "seasonal_naive",
+    "mase": 1.0054634903250679,
+    "mae_kw": 1.5825926236099652,
+    "pinball_kw": 0.599644727706903,
+    "coverage_p10_p90": 0.5319609297725025,
+    "days": 337
+   },
+   {
+    "scenario": "mixed_urban",
+    "model": "weekly_naive",
+    "mase": 1.5987899563140118,
+    "mae_kw": 2.51648440337324,
+    "pinball_kw": 1.25824220168662,
+    "coverage_p10_p90": null,
+    "days": 337
+   },
+   {
+    "scenario": "mixed_urban",
+    "model": "xgboost_quantile",
+    "mase": 1.3782633025059523,
+    "mae_kw": 2.169376965873754,
+    "pinball_kw": 0.7354568976055035,
+    "coverage_p10_p90": 0.6942383778437191,
+    "days": 337
+   },
+   {
+    "scenario": "mixed_urban",
+    "model": "chronos2",
+    "mase": 0.8325052421438627,
+    "mae_kw": 1.310357529647894,
+    "pinball_kw": 0.45400752370416264,
+    "coverage_p10_p90": 0.6883345697329377,
+    "days": 337
+   }
+  ],
+  "best_model": {
+   "peri_urban_low_income": "chronos2",
+   "mixed_urban": "chronos2"
+  },
+  "best_mase": {
+   "peri_urban_low_income": 0.9933272095863225,
+   "mixed_urban": 0.8325052421438627
+  },
+  "seasonal_naive_mase": {
+   "peri_urban_low_income": 1.0196535112368466,
+   "mixed_urban": 1.0054634903250679
+  },
+  "best_coverage_p10_p90": {
+   "peri_urban_low_income": 0.6826162215628091,
+   "mixed_urban": 0.6883345697329377
+  }
+ },
+ "honest_read": [
+  "The load shapes hit the Prayas eMARC targets (middle-home night 100-150 W, evening 200-250 W; AC homes 500-700 W; water-heater homes 400-600 W), but the segment split below 'middle' is an assumption, not published data.",
+  "NASA POWER is a ~50 km reanalysis grid, not a rooftop sensor. Hourly values are held flat within each hour, and horizontal irradiance understates tilted-module output.",
+  "The best forecast model is not better than seasonal naive on the peri-urban DT (MASE 0.99 vs 1.02); it is only modestly better on the mixed urban DT (MASE 0.83 vs 1.01).",
+  "The 80% P10-P90 interval covers only 68% (peri-urban) and 69% (mixed urban) of realised days, so the intervals are too narrow. This is reported, not hidden.",
+  "The XGBoost model is trained on UCI household data from outside India; the Indian load calibration is in the simulator, not in the ML training set."
+ ]
+}

@@ -21,6 +21,7 @@ transformer:
 simulation:
   step_min: 15                    # DISCOM scheduling resolution
   report_window_h: [16, 24]       # evening window used for peak-case reporting
+  reliability_window_h: [17, 19]  # [ASSUMPTION] evening reliability reporting window, from the brief
 
 inverter_battery:
   capacity_kwh: 1.8               # [ASSUMPTION] 150 Ah x 12 V lead-acid
