@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "action": {
+      "title": "Action",
+      "type": "string"
+    },
+    "already_kw": {
+      "default": 0,
+      "minimum": 0,
+      "title": "Already Kw",
+      "type": "number"
+    },
+    "commanded_kw": {
+      "minimum": 0,
+      "title": "Commanded Kw",
+      "type": "number"
+    },
+    "commands": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Commands",
+      "type": "array"
+    },
+    "expected_relief_kw": {
+      "minimum": 0,
+      "title": "Expected Relief Kw",
+      "type": "number"
+    },
+    "gap_kw": {
+      "minimum": 0,
+      "title": "Gap Kw",
+      "type": "number"
+    },
+    "grid_load_kw": {
+      "minimum": 0,
+      "title": "Grid Load Kw",
+      "type": "number"
+    },
+    "limit_kw": {
+      "minimum": 0,
+      "title": "Limit Kw",
+      "type": "number"
+    },
+    "reason": {
+      "default": "",
+      "title": "Reason",
+      "type": "string"
+    },
+    "residual_kw": {
+      "minimum": 0,
+      "title": "Residual Kw",
+      "type": "number"
+    }
+  },
+  "required": [
+    "grid_load_kw",
+    "limit_kw",
+    "gap_kw",
+    "commanded_kw",
+    "expected_relief_kw",
+    "residual_kw",
+    "action"
+  ],
+  "title": "DispatchDecisionV1",
+  "type": "object"
+}

@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "command_id": {
+      "maximum": 65535,
+      "minimum": 0,
+      "title": "Command Id",
+      "type": "integer"
+    },
+    "node_id": {
+      "maximum": 65535,
+      "minimum": 1,
+      "title": "Node Id",
+      "type": "integer"
+    },
+    "seq": {
+      "maximum": 65535,
+      "minimum": 0,
+      "title": "Seq",
+      "type": "integer"
+    },
+    "soc_pct": {
+      "maximum": 100,
+      "minimum": 0,
+      "title": "Soc Pct",
+      "type": "integer"
+    },
+    "status": {
+      "maximum": 4,
+      "minimum": 0,
+      "title": "Status",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "node_id",
+    "seq",
+    "command_id",
+    "status",
+    "soc_pct"
+  ],
+  "title": "AckV1",
+  "type": "object"
+}

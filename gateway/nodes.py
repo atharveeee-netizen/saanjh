@@ -58,7 +58,7 @@ class NodeState:
             self._stop()
             self.last_ack = ACK_REFUSED_OPT_OUT
             return ACK_REFUSED_OPT_OUT
-        if self.soc < self.reserve_soc:
+        if self.soc <= self.reserve_soc + 1e-9:
             self._stop()
             self.last_ack = ACK_REFUSED_RESERVE
             return ACK_REFUSED_RESERVE

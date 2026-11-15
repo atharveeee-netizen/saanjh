@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "adoption_sweep": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Adoption Sweep",
+      "type": "array"
+    },
+    "baseline": {
+      "additionalProperties": true,
+      "title": "Baseline",
+      "type": "object"
+    },
+    "dispatch_target_pct": {
+      "exclusiveMinimum": 0,
+      "maximum": 100,
+      "title": "Dispatch Target Pct",
+      "type": "number"
+    },
+    "label": {
+      "title": "Label",
+      "type": "string"
+    },
+    "legacy_audit": {
+      "additionalProperties": true,
+      "title": "Legacy Audit",
+      "type": "object"
+    },
+    "limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limits",
+      "type": "array"
+    },
+    "minimum": {
+      "additionalProperties": true,
+      "title": "Minimum",
+      "type": "object"
+    },
+    "scenario": {
+      "title": "Scenario",
+      "type": "string"
+    },
+    "seeds": {
+      "minimum": 1,
+      "title": "Seeds",
+      "type": "integer"
+    },
+    "service_ladder": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Service Ladder",
+      "type": "array"
+    },
+    "storage_sweep_at_60pct_adoption": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Storage Sweep At 60Pct Adoption",
+      "type": "array"
+    },
+    "stress_transformer_kva": {
+      "exclusiveMinimum": 0,
+      "title": "Stress Transformer Kva",
+      "type": "number"
+    },
+    "stress_transformer_rating_kw": {
+      "exclusiveMinimum": 0,
+      "title": "Stress Transformer Rating Kw",
+      "type": "number"
+    }
+  },
+  "required": [
+    "label",
+    "scenario",
+    "seeds",
+    "stress_transformer_kva",
+    "stress_transformer_rating_kw",
+    "dispatch_target_pct",
+    "legacy_audit",
+    "baseline",
+    "adoption_sweep",
+    "storage_sweep_at_60pct_adoption",
+    "minimum",
+    "service_ladder"
+  ],
+  "title": "OverloadBundle",
+  "type": "object"
+}

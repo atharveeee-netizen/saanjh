@@ -37,6 +37,8 @@ from gateway.protocol import (ACK, ACK_ACCEPTED, C_CANCEL, TELEMETRY, Ack,
                               Command, decode_ack, decode_command, decode_frame,
                               decode_telemetry, encode_ack, encode_command,
                               encode_telemetry)
+from gateway.registry import NodeRegistry
+from gateway.safety import SafetySupervisor
 
 DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
 IST = timezone(timedelta(hours=5, minutes=30))
@@ -51,7 +53,8 @@ class Store:
     COMMAND_COLS = ["ts", "node_id", "command_id", "duration_s", "power_w", "delivered",
                     "latency_ms", "reason", "acked", "status"]
 
-    def __init__(self, out_dir=DATA_DIR, reset=True):
+    def __init__(self, out_dir=None, reset=True):
+        out_dir = out_dir or DATA_DIR
         os.makedirs(out_dir, exist_ok=True)
         self.path = os.path.join(out_dir, "gateway.sqlite")
         if reset and os.path.exists(self.path):
@@ -224,12 +227,30 @@ def _relief_kw(nodes):
     return sum(n.relief_w() for n in nodes if n.online and not n.opted_out) / 1000.0
 
 
+def _apply_safety(decision, nodes, supervisor, now, store):
+    """Remove any command the safety supervisor rejects and re-state the decision."""
+    allowed, rejected = supervisor.filter_commands(decision.commands, nodes, now)
+    if not rejected:
+        return decision
+    for item in rejected:
+        store.event(now, "command_blocked",
+                    f"Node {item['node_id']} blocked by safety supervisor: {item['reason']}")
+    decision.commands = allowed
+    decision.commanded_kw = sum(c.power_limit_w for c in allowed) / 1000.0
+    decision.expected_relief_kw = decision.already_kw + decision.commanded_kw
+    decision.residual_kw = max(0.0, decision.gap_kw - decision.expected_relief_kw)
+    decision.reason = (f"{decision.reason} Safety supervisor blocked {len(rejected)} "
+                       f"command(s).")
+    return decision
+
+
 def run_replay(args):
     prof = profile.load_profile()
     nodes = default_nodes(args.nodes, seed=args.seed)
     if len(nodes) >= 3:
         nodes[2].soc = 72.5           # deliberately near the reserve lock
     dispatcher = GatewayDispatcher(duration_min=args.duration_min)
+    supervisor = SafetySupervisor(cfg=dispatcher.cfg)
     store = Store(reset=True)
     rec = Recorder(dispatcher)
     rng = random.Random(args.seed)
@@ -296,6 +317,7 @@ def run_replay(args):
         if t_s >= next_dispatch:
             next_dispatch += DISPATCH_S
             decision = dispatcher.plan(grid_kw, nodes, duration_min=args.duration_min)
+            decision = _apply_safety(decision, nodes, supervisor, now, store)
             rec.dispatch_events += 1
             rec.commanded_kwh += decision.commanded_kw * args.duration_min / 60.0
             for cmd in decision.commands:
@@ -363,6 +385,7 @@ def run_replay(args):
 
     for node in nodes:
         node._stop()
+    supervisor.assert_safe_summary(rec.soc_min, rec.reserve_breaches)
     summary = rec.summary()
     summary.update({
         "mode": "replay",
@@ -432,9 +455,9 @@ def run_live(args):
     else:
         raise SystemExit("live mode needs --transport spi or serial")
     prof = profile.load_profile()
-    nodes = []
-    by_id = {}
     dispatcher = GatewayDispatcher(duration_min=args.duration_min)
+    supervisor = SafetySupervisor(cfg=dispatcher.cfg)
+    registry = NodeRegistry(stale_after_s=30.0)
     store = Store(reset=True)
     rec = Recorder(dispatcher)
     start = datetime.now(IST)
@@ -456,6 +479,7 @@ def run_live(args):
         now = datetime.now(IST)
         hour = (args.start_hour + elapsed / 3600.0) % 24
         grid_kw = profile.at(prof, hour)
+        nodes = registry.all()
 
         raw = driver.recv(timeout_s=0.2)
         if raw is not None:
@@ -466,33 +490,21 @@ def run_live(args):
                 frame = None
             if frame is not None and frame.msg_type == 1:       # TELEMETRY
                 tel = decode_telemetry(frame)
-                node = by_id.get(tel.node_id)
-                if node is None:
-                    node = NodeState(node_id=tel.node_id, capacity_wh=args.capacity_wh,
-                                     max_discharge_w=args.max_discharge_w,
-                                     load_w=max(50, tel.load_w), soc=tel.soc_pct,
-                                     opted_out=tel.opted_out, relay=tel.relay_energised)
-                    nodes.append(node)
-                    by_id[tel.node_id] = node
+                existing = registry.get(tel.node_id)
+                prev_seq = existing.last_seq if existing else None
+                node = registry.update_from_telemetry(
+                    tel, now, capacity_wh=args.capacity_wh,
+                    max_discharge_w=args.max_discharge_w)
                 # Sequence gaps are the honest packet-loss measurement on a live link.
-                if node.last_seq is not None:
-                    missed = (tel.seq - node.last_seq - 1) % 0x10000
+                if prev_seq is not None:
+                    missed = (tel.seq - prev_seq - 1) % 0x10000
                     if 0 < missed < 1000:
                         rec.telemetry_lost += missed
                         rec.telemetry_sent += missed
-                node.last_seq = tel.seq
                 rec.telemetry_sent += 1
                 rec.telemetry_received += 1
-                node.soc = tel.soc_pct
-                node.load_w = max(50, tel.load_w)
-                node.opted_out = tel.opted_out
-                node.relay = tel.relay_energised
-                node.commanded_w = tel.load_w if tel.relay_energised else 0.0
-                node.temp_c = tel.temp_c
-                node.online = True
-                node.last_seen = now
                 rec.soc_min = min(rec.soc_min, node.soc)
-                if node.soc < node.reserve_soc - 0.05:
+                if node.soc < supervisor.reserve_soc - 0.05:
                     rec.reserve_breaches += 1
                 store.telemetry(now, tel)
             elif frame is not None and frame.msg_type == 3:     # ACK
@@ -503,11 +515,24 @@ def run_live(args):
             online = [n for n in nodes if n.online]
             if online:
                 decision = dispatcher.plan(grid_kw, online, duration_min=args.duration_min)
+                decision = _apply_safety(decision, online, supervisor, now, store)
                 rec.dispatch_events += 1
                 rec.commanded_kwh += decision.commanded_kw * args.duration_min / 60.0
                 for cmd in decision.commands:
                     _deliver_live(driver, cmd, now, store, rec, pending)
                 store.dispatch(now, decision, dispatcher.discom_recommendation(decision))
+
+        # Cancel commands whose ACK never arrived; the node's own expiry is the second layer.
+        for command_id, cmd in supervisor.expired(pending, time.monotonic()):
+            pending.pop(command_id, None)
+            if cmd is not None:
+                try:
+                    driver.send(encode_command(supervisor.cancel(
+                        next(n for n in nodes if n.node_id == cmd.node_id), dispatcher)))
+                except Exception:
+                    pass
+            store.event(now, "command_expired",
+                        f"Command {command_id} timed out without an ACK; cancel sent.")
 
         if elapsed >= next_sample:
             next_sample += STEP_S
@@ -518,19 +543,19 @@ def run_live(args):
             rec.delivered_kwh = sum(n.discharged_kwh for n in nodes)
 
         # Mark silent nodes offline after 30 s without a packet.
-        for n in nodes:
-            if n.last_seen is not None and (now - n.last_seen).total_seconds() > 30:
-                n.online = False
+        for n in registry.mark_stale(now):
+            store.event(now, "node_stale",
+                        f"Node {n.node_id} missed the 30 s telemetry window; relay opened.")
 
     # Fail safe: tell every node to open its relay before the process exits.
-    for node in nodes:
-        cmd = Command(node.node_id, 0, dispatcher._new_id(), 0, 0, C_CANCEL)
+    for cmd in supervisor.shutdown_commands(registry.all(), dispatcher):
         try:
             driver.send(encode_command(cmd))
             store.event(datetime.now(IST), "shutdown",
-                        f"Cancel sent to node {node.node_id}; relay returns to grid.")
+                        f"Cancel sent to node {cmd.node_id}; relay returns to grid.")
         except Exception:
             pass
+    nodes = registry.all()
     summary = rec.summary()
     summary.update({"mode": "live", "label": "LIVE LoRa: measured on the gateway radio",
                     "transport": args.transport, "start": start.isoformat(),

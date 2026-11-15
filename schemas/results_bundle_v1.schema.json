@@ -1,0 +1,91 @@
+{
+  "$defs": {
+    "AnnualSection": {
+      "additionalProperties": true,
+      "properties": {
+        "days": {
+          "minimum": 1,
+          "title": "Days",
+          "type": "integer"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "scenarios": {
+          "additionalProperties": true,
+          "title": "Scenarios",
+          "type": "object"
+        },
+        "seeds": {
+          "minimum": 1,
+          "title": "Seeds",
+          "type": "integer"
+        },
+        "site": {
+          "additionalProperties": true,
+          "title": "Site",
+          "type": "object"
+        }
+      },
+      "required": [
+        "label",
+        "seeds",
+        "days",
+        "site",
+        "scenarios"
+      ],
+      "title": "AnnualSection",
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "description": "The canonical annual bundle. Sections are validated by their own modules.",
+  "properties": {
+    "annual": {
+      "$ref": "#/$defs/AnnualSection"
+    },
+    "economics": {
+      "additionalProperties": true,
+      "title": "Economics",
+      "type": "object"
+    },
+    "evening_peak_case": {
+      "additionalProperties": true,
+      "title": "Evening Peak Case",
+      "type": "object"
+    },
+    "figures": {
+      "additionalProperties": true,
+      "title": "Figures",
+      "type": "object"
+    },
+    "forecast": {
+      "additionalProperties": true,
+      "title": "Forecast",
+      "type": "object"
+    },
+    "load_calibration": {
+      "additionalProperties": true,
+      "title": "Load Calibration",
+      "type": "object"
+    },
+    "sensitivity": {
+      "additionalProperties": true,
+      "title": "Sensitivity",
+      "type": "object"
+    }
+  },
+  "required": [
+    "evening_peak_case",
+    "load_calibration",
+    "annual",
+    "sensitivity",
+    "figures",
+    "forecast",
+    "economics"
+  ],
+  "title": "ResultsBundle",
+  "type": "object"
+}

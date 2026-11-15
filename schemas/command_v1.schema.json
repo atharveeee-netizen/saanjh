@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "command_id": {
+      "maximum": 65535,
+      "minimum": 0,
+      "title": "Command Id",
+      "type": "integer"
+    },
+    "duration_s": {
+      "maximum": 65535,
+      "minimum": 0,
+      "title": "Duration S",
+      "type": "integer"
+    },
+    "flags": {
+      "default": 1,
+      "maximum": 255,
+      "minimum": 0,
+      "title": "Flags",
+      "type": "integer"
+    },
+    "node_id": {
+      "maximum": 65535,
+      "minimum": 1,
+      "title": "Node Id",
+      "type": "integer"
+    },
+    "power_limit_w": {
+      "maximum": 65535,
+      "minimum": 0,
+      "title": "Power Limit W",
+      "type": "integer"
+    },
+    "seq": {
+      "maximum": 65535,
+      "minimum": 0,
+      "title": "Seq",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "node_id",
+    "seq",
+    "command_id",
+    "duration_s",
+    "power_limit_w"
+  ],
+  "title": "CommandV1",
+  "type": "object"
+}

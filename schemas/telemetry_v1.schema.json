@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "battery_mv": {
+      "minimum": 0,
+      "title": "Battery Mv",
+      "type": "integer"
+    },
+    "flags": {
+      "default": 0,
+      "maximum": 255,
+      "minimum": 0,
+      "title": "Flags",
+      "type": "integer"
+    },
+    "load_w": {
+      "minimum": 0,
+      "title": "Load W",
+      "type": "integer"
+    },
+    "node_id": {
+      "maximum": 65535,
+      "minimum": 1,
+      "title": "Node Id",
+      "type": "integer"
+    },
+    "reserved": {
+      "default": 0,
+      "maximum": 65535,
+      "minimum": 0,
+      "title": "Reserved",
+      "type": "integer"
+    },
+    "seq": {
+      "maximum": 65535,
+      "minimum": 0,
+      "title": "Seq",
+      "type": "integer"
+    },
+    "soc_pct": {
+      "maximum": 100,
+      "minimum": 0,
+      "title": "Soc Pct",
+      "type": "integer"
+    },
+    "temp_c": {
+      "default": 25,
+      "maximum": 127,
+      "minimum": -128,
+      "title": "Temp C",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "node_id",
+    "seq",
+    "battery_mv",
+    "load_w",
+    "soc_pct"
+  ],
+  "title": "TelemetryV1",
+  "type": "object"
+}

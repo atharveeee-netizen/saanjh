@@ -1,0 +1,136 @@
+{
+  "$defs": {
+    "EnergyReconciliation": {
+      "additionalProperties": true,
+      "properties": {
+        "adds_up": {
+          "title": "Adds Up",
+          "type": "boolean"
+        },
+        "battery_kwh": {
+          "minimum": 0,
+          "title": "Battery Kwh",
+          "type": "number"
+        },
+        "battery_share_pct": {
+          "minimum": 0,
+          "title": "Battery Share Pct",
+          "type": "number"
+        },
+        "deferred_kwh": {
+          "minimum": 0,
+          "title": "Deferred Kwh",
+          "type": "number"
+        },
+        "deferred_share_pct": {
+          "minimum": 0,
+          "title": "Deferred Share Pct",
+          "type": "number"
+        },
+        "delivered_kwh": {
+          "minimum": 0,
+          "title": "Delivered Kwh",
+          "type": "number"
+        },
+        "delivered_pct_of_claim": {
+          "minimum": 0,
+          "title": "Delivered Pct Of Claim",
+          "type": "number"
+        },
+        "identity": {
+          "title": "Identity",
+          "type": "string"
+        },
+        "target_kwh": {
+          "minimum": 0,
+          "title": "Target Kwh",
+          "type": "number"
+        },
+        "unmet_kwh": {
+          "minimum": 0,
+          "title": "Unmet Kwh",
+          "type": "number"
+        },
+        "unmet_share_pct": {
+          "minimum": 0,
+          "title": "Unmet Share Pct",
+          "type": "number"
+        }
+      },
+      "required": [
+        "target_kwh",
+        "battery_kwh",
+        "deferred_kwh",
+        "delivered_kwh",
+        "unmet_kwh",
+        "delivered_pct_of_claim",
+        "battery_share_pct",
+        "deferred_share_pct",
+        "unmet_share_pct",
+        "identity",
+        "adds_up"
+      ],
+      "title": "EnergyReconciliation",
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "best_45_min": {
+      "additionalProperties": true,
+      "title": "Best 45 Min",
+      "type": "object"
+    },
+    "fleet_requirement": {
+      "additionalProperties": true,
+      "title": "Fleet Requirement",
+      "type": "object"
+    },
+    "label": {
+      "title": "Label",
+      "type": "string"
+    },
+    "legacy_claim": {
+      "additionalProperties": true,
+      "title": "Legacy Claim",
+      "type": "object"
+    },
+    "notes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Notes",
+      "type": "array"
+    },
+    "reconciliation": {
+      "$ref": "#/$defs/EnergyReconciliation"
+    },
+    "scenario": {
+      "title": "Scenario",
+      "type": "string"
+    },
+    "seed": {
+      "minimum": 0,
+      "title": "Seed",
+      "type": "integer"
+    },
+    "simulated_event": {
+      "additionalProperties": true,
+      "title": "Simulated Event",
+      "type": "object"
+    }
+  },
+  "required": [
+    "label",
+    "scenario",
+    "seed",
+    "legacy_claim",
+    "simulated_event",
+    "best_45_min",
+    "reconciliation",
+    "fleet_requirement"
+  ],
+  "title": "EnergyBalanceBundle",
+  "type": "object"
+}

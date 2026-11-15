@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "adoption_levels": {
+      "items": {
+        "type": "number"
+      },
+      "title": "Adoption Levels",
+      "type": "array"
+    },
+    "best_case": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Best Case"
+    },
+    "groups": {
+      "additionalProperties": true,
+      "title": "Groups",
+      "type": "object"
+    },
+    "inputs": {
+      "additionalProperties": true,
+      "title": "Inputs",
+      "type": "object"
+    },
+    "label": {
+      "title": "Label",
+      "type": "string"
+    },
+    "notes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Notes",
+      "type": "array"
+    },
+    "scenario": {
+      "title": "Scenario",
+      "type": "string"
+    },
+    "seeds": {
+      "minimum": 1,
+      "title": "Seeds",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "label",
+    "scenario",
+    "seeds",
+    "adoption_levels",
+    "groups",
+    "inputs"
+  ],
+  "title": "LowIncomeBundle",
+  "type": "object"
+}

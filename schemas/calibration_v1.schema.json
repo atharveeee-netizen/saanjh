@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "annual": {
+      "additionalProperties": true,
+      "title": "Annual",
+      "type": "object"
+    },
+    "calibration_targets": {
+      "additionalProperties": true,
+      "title": "Calibration Targets",
+      "type": "object"
+    },
+    "cases": {
+      "additionalProperties": true,
+      "title": "Cases",
+      "type": "object"
+    },
+    "evening_profile_clear_summer": {
+      "additionalProperties": true,
+      "title": "Evening Profile Clear Summer",
+      "type": "object"
+    },
+    "forecast": {
+      "additionalProperties": true,
+      "title": "Forecast",
+      "type": "object"
+    },
+    "honest_read": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Honest Read",
+      "type": "array"
+    },
+    "label": {
+      "title": "Label",
+      "type": "string"
+    },
+    "site": {
+      "additionalProperties": true,
+      "title": "Site",
+      "type": "object"
+    },
+    "weather_label": {
+      "title": "Weather Label",
+      "type": "string"
+    }
+  },
+  "required": [
+    "label",
+    "site",
+    "weather_label",
+    "annual",
+    "calibration_targets",
+    "evening_profile_clear_summer",
+    "cases",
+    "forecast"
+  ],
+  "title": "CalibrationBundle",
+  "type": "object"
+}

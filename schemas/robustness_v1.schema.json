@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "baseline": {
+      "additionalProperties": true,
+      "title": "Baseline",
+      "type": "object"
+    },
+    "cases": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Cases",
+      "type": "array"
+    },
+    "label": {
+      "title": "Label",
+      "type": "string"
+    },
+    "limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limits",
+      "type": "array"
+    },
+    "scenario": {
+      "title": "Scenario",
+      "type": "string"
+    },
+    "seeds": {
+      "minimum": 1,
+      "title": "Seeds",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "label",
+    "scenario",
+    "seeds",
+    "baseline",
+    "cases"
+  ],
+  "title": "RobustnessBundle",
+  "type": "object"
+}

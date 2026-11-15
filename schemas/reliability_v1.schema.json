@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "label": {
+      "title": "Label",
+      "type": "string"
+    },
+    "scenarios": {
+      "additionalProperties": true,
+      "title": "Scenarios",
+      "type": "object"
+    },
+    "seeds": {
+      "minimum": 1,
+      "title": "Seeds",
+      "type": "integer"
+    },
+    "window": {
+      "title": "Window",
+      "type": "string"
+    }
+  },
+  "required": [
+    "label",
+    "seeds",
+    "window",
+    "scenarios"
+  ],
+  "title": "ReliabilityBundle",
+  "type": "object"
+}
