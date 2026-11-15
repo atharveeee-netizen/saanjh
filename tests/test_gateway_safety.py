@@ -1,8 +1,9 @@
 """Safety supervisor and process-image registry."""
 from datetime import datetime, timedelta, timezone
 
+from gateway import service
 from gateway.nodes import NodeState
-from gateway.protocol import C_DISCHARGE, Command
+from gateway.protocol import ACK_DONE, C_DISCHARGE, Ack, Command
 from gateway.registry import NodeRegistry
 from gateway.safety import SafetySupervisor
 
@@ -66,3 +67,32 @@ def test_registry_updates_and_marks_stale():
     assert node.online and node.last_seen == NOW and reg.relief_kw() == 0.0
     assert reg.mark_stale(NOW + timedelta(seconds=31)) == [node]
     assert node.online is False
+
+
+class _Store:
+    def __init__(self):
+        self.acks = []
+        self.events = []
+        self.updates = []
+
+    def ack(self, now, ack):
+        self.acks.append(ack)
+
+    def update_command_ack(self, *args):
+        self.updates.append(args)
+
+    def event(self, now, kind, detail):
+        self.events.append((kind, detail))
+
+
+def test_ack_done_counts_as_completion_not_refusal():
+    rec = service.Recorder()
+    store = _Store()
+    ack = Ack(101, 2, 7, ACK_DONE, 70)
+    service._handle_ack(ack, NOW, store, rec, {})
+    assert rec.acks == 1
+    assert rec.commands_completed == 1
+    assert rec.commands_refused == 0
+    assert rec.commands_accepted == 0
+    assert store.events[0][0] == "command_done"
+    assert rec.summary()["commands_completed"] == 1

@@ -25,6 +25,9 @@ ui/playwright-report/
 .cache/
 hf_cache/
 
+# PlatformIO build artifacts and downloaded frameworks
+**/.pio/
+
 # OS / editor
 .DS_Store
 Thumbs.db

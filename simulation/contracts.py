@@ -200,6 +200,7 @@ class GatewaySummaryV1(ContractModel):
     command_success_pct: Optional[float] = Field(default=None, ge=0, le=100)
     commands_accepted: Optional[int] = Field(default=None, ge=0)
     commands_refused: Optional[int] = Field(default=None, ge=0)
+    commands_completed: Optional[int] = Field(default=None, ge=0)
     acks_received: Optional[int] = Field(default=None, ge=0)
     command_ack_pct: Optional[float] = Field(default=None, ge=0, le=100)
     mean_command_latency_ms: Optional[float] = Field(default=None, ge=0)

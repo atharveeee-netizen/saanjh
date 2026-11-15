@@ -33,10 +33,10 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from gateway import lora_driver, profile
 from gateway.dispatch import GatewayDispatcher
 from gateway.nodes import NodeState, default_nodes
-from gateway.protocol import (ACK, ACK_ACCEPTED, C_CANCEL, TELEMETRY, Ack,
-                              Command, decode_ack, decode_command, decode_frame,
-                              decode_telemetry, encode_ack, encode_command,
-                              encode_telemetry)
+from gateway.protocol import (ACK, ACK_ACCEPTED, ACK_DONE, C_CANCEL, TELEMETRY,
+                              Ack, Command, decode_ack, decode_command,
+                              decode_frame, decode_telemetry, encode_ack,
+                              encode_command, encode_telemetry)
 from gateway.registry import NodeRegistry
 from gateway.safety import SafetySupervisor
 
@@ -162,6 +162,7 @@ class Recorder:
         self.command_losses = 0
         self.commands_accepted = 0
         self.commands_refused = 0
+        self.commands_completed = 0
         self.acks = 0
         self.latencies = []
         self.soc_min = 100.0
@@ -204,6 +205,7 @@ class Recorder:
             "command_success_pct": round(self.command_success_pct(), 2) if self.command_success_pct() is not None else None,
             "commands_accepted": self.commands_accepted,
             "commands_refused": self.commands_refused,
+            "commands_completed": self.commands_completed,
             "acks_received": self.acks,
             "command_ack_pct": round(self.command_ack_pct(), 2) if self.command_ack_pct() is not None else None,
             "mean_command_latency_ms": round(sum(lat) / len(lat), 1) if lat else None,
@@ -440,6 +442,11 @@ def _handle_ack(ack, now, store, rec, pending):
         if entry:
             cmd = entry[1]
             rec.accepted_kwh += cmd.power_limit_w * cmd.duration_s / 3_600_000.0
+    elif ack.status == ACK_DONE:
+        rec.commands_completed += 1
+        store.event(now, "command_done",
+                    f"Node {ack.node_id} completed command {ack.command_id} "
+                    f"at SoC {ack.soc_pct}%")
     else:
         rec.commands_refused += 1
         store.event(now, "command_refused",
