@@ -191,3 +191,46 @@ def decode_ack(frame: Frame) -> Ack:
         raise ValueError("not an ack frame")
     seq, cid, status, soc = ACK_PAYLOAD.unpack(frame.payload[:ACK_PAYLOAD.size])
     return Ack(frame.node_id, seq, cid, status, soc)
+
+
+# --------------------------------------------------------------------------- security
+import hashlib
+import hmac
+
+
+def compute_hmac(data: bytes, key: bytes) -> bytes:
+    """4-byte truncated HMAC-SHA256 for authenticating LoRa P2P frames."""
+    return hmac.new(key, data, hashlib.sha256).digest()[:4]
+
+
+def verify_hmac(data: bytes, key: bytes, token: bytes) -> bool:
+    """Constant-time verification of HMAC token."""
+    expected = compute_hmac(data, key)
+    return hmac.compare_digest(expected, token)
+
+
+class AntiReplayFilter:
+    """Monotonic sequence window tracker for anti-replay protection."""
+
+    def __init__(self, window_size: int = 64):
+        self.window_size = window_size
+        self.last_seq = 0
+        self.seen = set()
+
+    def check_and_update(self, seq: int) -> bool:
+        """Return True if sequence number is valid and not replayed."""
+        if seq in self.seen:
+            return False
+        diff = (seq - self.last_seq) & 0xFFFF
+        if diff == 0 and self.last_seq != 0:
+            return False
+        if diff < 0x8000:
+            self.last_seq = seq
+            self.seen.add(seq)
+            cutoff = (seq - self.window_size) & 0xFFFF
+            self.seen = {s for s in self.seen if ((seq - s) & 0xFFFF) < self.window_size}
+            return True
+        elif ((self.last_seq - seq) & 0xFFFF) < self.window_size:
+            self.seen.add(seq)
+            return True
+        return False

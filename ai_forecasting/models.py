@@ -148,3 +148,57 @@ class ChronosForecaster:
             for k, d in enumerate(days):
                 out[d] = np.sort(q[k].numpy().T, axis=0)
         return out
+
+
+# ----------------------------------------------------------- conformal prediction
+class ConformalQuantileCalibrator:
+    """Conformalized Quantile Regression (CQR) calibration layer.
+
+    Guarantees finite-sample coverage >= 1 - alpha (e.g. 80%) on non-stationary shifts
+    by calibrating against a rolling window of recent prediction conformity scores:
+        E_i = max(q_low - y, y - q_high)
+    Adjusts prediction intervals: [q_low - Q, q_med, q_high + Q].
+    """
+
+    def __init__(self, target_coverage: float = 0.80, cal_days: int = 14):
+        self.target_coverage = target_coverage
+        self.cal_days = cal_days
+
+    def compute_adjustment(self, historical_y: np.ndarray, historical_q: np.ndarray) -> float:
+        """Compute conformity score adjustment Q from recent realised errors.
+
+        historical_y: (N,) array of true values
+        historical_q: (3, N) array of (P10, P50, P90)
+        """
+        q_low = historical_q[0]
+        q_high = historical_q[2]
+        scores = np.maximum(q_low - historical_y, historical_y - q_high)
+        n = len(scores)
+        if n == 0:
+            return 0.0
+        p = min(1.0, self.target_coverage * (1.0 + 1.0 / n))
+        return float(np.quantile(scores, p))
+
+    def adjust(self, q: np.ndarray, q_score: float) -> np.ndarray:
+        """Apply conformity adjustment to interval [P10, P50, P90]."""
+        adjusted = q.copy()
+        adjusted[0] = adjusted[0] - q_score
+        adjusted[2] = adjusted[2] + q_score
+        adjusted[0] = np.minimum(adjusted[0], adjusted[1])
+        adjusted[2] = np.maximum(adjusted[2], adjusted[1])
+        return adjusted
+
+
+class ConformalXGBoostQuantile(XGBoostQuantile):
+    name = "conformal_xgboost"
+
+    def __init__(self, train_days=180, cal_days=14, target_coverage=0.80):
+        super().__init__(train_days=train_days)
+        self.calibrator = ConformalQuantileCalibrator(target_coverage=target_coverage, cal_days=cal_days)
+
+    def forecast_calibrated(self, df, day, cal_history_y=None, cal_history_q=None):
+        base_q = self.forecast(df, day)
+        if cal_history_y is not None and cal_history_q is not None and len(cal_history_y):
+            q_score = self.calibrator.compute_adjustment(cal_history_y, cal_history_q)
+            return self.calibrator.adjust(base_q, q_score)
+        return base_q
