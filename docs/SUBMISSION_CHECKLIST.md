@@ -108,7 +108,7 @@ Acceptance gates:
 * [ ] `LICENSE` is MIT and matches `docs/OPEN_SOURCE_NOTICES.md`.
 * [ ] `README.md` quick start works from a fresh clone.
 * [ ] No secrets, tokens, personal paths or private links in the tree.
-* [ ] The stale FUXA page is either regenerated or clearly marked non-critical.
+* [ ] No stale vendored platforms, generated pages or research notes remain in the tree.
 * [ ] The demo video does not show a private dashboard link or API key.
 * [ ] `docs/LIMITATIONS.md` is linked from the README.
 * [ ] The latest commit is pushed and CI is green.

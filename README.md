@@ -121,7 +121,6 @@ Prototype Phase submission.
 | `docs/OWNERSHIP_MODEL.md` | Ownership, O&M and unit economics |
 | `docs/SERVICE_BLUEPRINT.md` | Service blueprint, enrolment to complaints |
 | `docs/architecture/` | Architecture, event sequence, failure modes, data model, money flows (Mermaid + SVG) |
-| `docs/REVIEW_FINDINGS.md` | Hostile-reviewer pass |
 | `simulation/` | Household fleet, mechanisms, dispatcher, year-long engine, metrics, economics |
 | `simulation/contracts.py` | Pydantic result and protocol contracts; exports `schemas/` |
 | `schemas/` | JSON Schema for every result bundle and protocol frame |
@@ -135,8 +134,6 @@ Prototype Phase submission.
 | `backend/` | FastAPI replay service and the data exporter |
 | `ui/` | React operator console, field app, household messages, design system |
 | `tests/` | pytest suite |
-| `frontend/` | FUXA SCADA/HMI platform (MIT, see `docs/OPEN_SOURCE_NOTICES.md`) and the SAANJH tag adapter; legacy, not on the critical path |
-| `archive/` | Earlier Blender renders, demo and walkthrough videos (including the 5-minute submission video) and video scripts |
 
 ## Data sources
 

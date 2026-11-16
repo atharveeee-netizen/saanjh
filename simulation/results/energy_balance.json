@@ -6,7 +6,7 @@
   "power_kw": 56.25,
   "duration_min": 45,
   "energy_kwh": 42.188,
-  "source": "legacy FUXA console and video title cards (build_fuxa_frontend.py)"
+  "source": "legacy operator-console page and video title cards (artefacts removed)"
  },
  "simulated_event": {
   "event": {

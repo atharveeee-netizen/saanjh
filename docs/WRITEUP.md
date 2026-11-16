@@ -304,7 +304,7 @@ credit stays with the party that carries the obligation.
 ## 9. Design artefacts
 
 The operator console, local operator app, household messages and service blueprint are
-in `ui/` and published as an interactive page at https://claude.ai/artifact/9WvryxJ398FXVrEyR9pKFZ. They include:
+in `ui/`. They include:
 
 - the DT overview with a live single-line diagram, forecast and plan approval;
 - the event view with its decision log and measurement and verification against the

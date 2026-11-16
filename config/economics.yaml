@@ -1,6 +1,6 @@
 # Economics inputs. Every value has [low, base, high] and a note.
 #   [SOURCE: ...]  from a cited source (docs/PROJECT_BRIEF.md)
-#   [MEASURED]     the earlier prototype bill of materials (archive/)
+#   [MEASURED]     the earlier prototype bill of materials
 #   [ASSUMPTION]   engineering or market assumption; varied in the tornado analysis
 # Rupees (INR) unless stated. Simulation outputs (energy, hours, cycles) are not set here;
 # they are read from simulation/results/results.json.

@@ -75,7 +75,7 @@ def build(seed=42):
         "legacy_claim": {
             "power_kw": CLAIM_KW, "duration_min": CLAIM_MIN,
             "energy_kwh": round(claim_kwh, 3),
-            "source": "legacy FUXA console and video title cards (build_fuxa_frontend.py)",
+            "source": "legacy operator-console page and video title cards (artefacts removed)",
         },
         "simulated_event": {
             "event": s["event"],

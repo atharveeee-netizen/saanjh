@@ -168,6 +168,7 @@ The tests cover:
 * One relay, one load. The prototype demonstrates the control path, not a
   whole-home transfer switch.
 * LoRa P2P is deliberate for three nodes. A larger deployment needs an SX130x
-  concentrator and a network server (see `docs/CODE_REUSE_RESEARCH.md`).
+  concentrator and a LoRaWAN network server; the P2P frame format here is not
+  LoRaWAN.
 * The radio is not frequency-hopping; 865.0625 MHz is a single 25 kHz channel
   inside the Indian 865–867 MHz ISM band.
