@@ -31,7 +31,7 @@ On the simulated peri-urban low-income DT (250 homes), homes kept their essentia
 
 ![Essential-supply availability by household segment](docs/figures/availability_by_segment.svg)
 
-![Operator console: DT overview](docs/figures/ui_overview.png)
+![The Streamlit evidence console rendering the committed reliability bundle](docs/figures/streamlit_reliability.png)
 
 ## Quick start
 
