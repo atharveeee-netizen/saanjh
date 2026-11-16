@@ -82,8 +82,8 @@ Open the dashboard at <http://localhost:8501>. Confirm:
   98%;
 * all seven tabs render without an exception.
 
-Have a second terminal ready for the live demo and a third for the serial
-monitor.
+Have a second terminal ready for the firmware tests. If hardware is attached,
+keep a third for the serial monitor.
 
 ## The five-minute script
 
