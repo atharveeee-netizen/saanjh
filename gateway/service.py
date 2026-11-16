@@ -486,7 +486,6 @@ def run_live(args):
         now = datetime.now(IST)
         hour = (args.start_hour + elapsed / 3600.0) % 24
         grid_kw = profile.at(prof, hour)
-        nodes = registry.all()
 
         raw = driver.recv(timeout_s=0.2)
         if raw is not None:
@@ -516,6 +515,10 @@ def run_live(args):
                 store.telemetry(now, tel)
             elif frame is not None and frame.msg_type == 3:     # ACK
                 _handle_ack(decode_ack(frame), now, store, rec, pending)
+
+        # Snapshot only after this cycle's packets: the process image the
+        # dispatcher sees must include the telemetry just decoded.
+        nodes = registry.all()
 
         if elapsed >= next_dispatch:
             next_dispatch += DISPATCH_S

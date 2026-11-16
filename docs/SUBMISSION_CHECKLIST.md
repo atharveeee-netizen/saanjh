@@ -21,7 +21,7 @@ the worst possible moment.
 | 7 | LoRa driver and protocol | `gateway/lora_driver.py`, `gateway/protocol.py`, `firmware/rak4631_node/` | ✅ |
 | 8 | Dashboard: KPI, live node, DISCOM view | `dashboard/app.py`, seven tabs | ✅ |
 | 9 | Ownership, O&M, BOM, limitations | `docs/OWNERSHIP_MODEL.md`, `docs/BOM.md`, `docs/LIMITATIONS.md` | ✅ |
-| 10 | Tests and fresh-clone runnability | 90 Python tests, 34 native C++ tests, CI quickstart job | ✅ |
+| 10 | Tests and fresh-clone runnability | 91 Python tests, 34 native C++ tests, CI quickstart job | ✅ |
 | 11 | 2–3 RAK4631 nodes with battery, dummy load, relay | `firmware/rak4631_node/`, `docs/HARDWARE.md` | ⚠️ builds, not bench-validated |
 | 12 | ~10 s telemetry, command listen, relay transfer, 70% refusal, opt-out | firmware + 34 native tests | ⚠️ logic tested, not bench-validated |
 | 13 | CM4 + SX1262 Python gateway: CSV/SQLite, Streamlit, 154 kW replay | `gateway/`, `gateway/data/`, dashboard tab 6 | ✅ replay; ⚠️ live pending |
@@ -95,7 +95,7 @@ streamlit run dashboard/app.py
 Acceptance gates:
 
 * `run_all.py --quick` ends `All requested stages completed.`
-* `pytest -q` reports **90 passed**.
+* `pytest -q` reports **91 passed**.
 * `pio test -e native` reports **34 tests, 0 failures**.
 * All three firmware images link, each under 6% RAM and 15% flash.
 * Dashboard renders seven tabs with no exception.

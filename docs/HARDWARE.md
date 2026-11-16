@@ -218,6 +218,12 @@ coverage is the CRC check value and golden frames, rejection of bad magic / CRC
 duplicate handling, coulomb counting, OCV interpolation and implausible battery
 handling.
 
+On the Python side, `tests/test_gateway_live.py` replaces the radio with a fake
+driver and exercises the live loop end to end: telemetry decode, dispatch,
+command send, ACK handling, SQLite/CSV logging and `live_summary.json`. It also
+guards the startup ordering that makes the first dispatch use the telemetry just
+received rather than an empty registry.
+
 ## Known hardware limits
 
 * SoC is estimated from OCV plus coulomb counting, not a certified BMS. The

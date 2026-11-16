@@ -48,7 +48,7 @@ streamlit run dashboard/app.py           # evidence console at http://localhost:
 
 `run_all.py --quick` validates every result bundle, regenerates the six-hour
 hardware-in-the-loop replay, re-validates it, checks that the docs match
-`results.json`, and runs the test suite. The expected result is **90 passed**.
+`results.json`, and runs the test suite. The expected result is **91 passed**.
 
 The React console remains available as a secondary UI:
 
@@ -146,7 +146,7 @@ only). Details and limitations: [docs/DATA_SOURCES.md](docs/DATA_SOURCES.md).
 
 ## What this does and does not prove
 
-The control logic and safety interlocks are tested: 90 Python tests and 34
+The control logic and safety interlocks are tested: 91 Python tests and 34
 native C++ tests, including the exact 70.0% reserve boundary and the fail-safe
 relay state. The system-level benefit is **simulated** on inputs calibrated to
 NASA POWER, Prayas eMARC and Prayas ESMI. The hardware is a **≤12 V DC bench
