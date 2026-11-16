@@ -1,3 +1,4 @@
+#include <cstdio>
 #include <string.h>
 
 #include <unity.h>
@@ -143,24 +144,4 @@ void test_status_names() {
   TEST_ASSERT_EQUAL_STRING("refused_opt_out", status_name(ACK_REFUSED_OPT_OUT));
   TEST_ASSERT_EQUAL_STRING("done", status_name(ACK_DONE));
   TEST_ASSERT_EQUAL_STRING("error", status_name(ACK_ERROR));
-}
-
-extern "C" void setUp(void) {}
-extern "C" void tearDown(void) {}
-
-int main(int, char**) {
-  UNITY_BEGIN();
-  RUN_TEST(test_crc16_check_value);
-  RUN_TEST(test_golden_telemetry_frame);
-  RUN_TEST(test_golden_command_frame_decodes);
-  RUN_TEST(test_golden_ack_frame);
-  RUN_TEST(test_bad_crc_rejected);
-  RUN_TEST(test_bad_magic_rejected);
-  RUN_TEST(test_short_frame_rejected);
-  RUN_TEST(test_wrong_type_rejected);
-  RUN_TEST(test_cancel_flag_decodes);
-  RUN_TEST(test_encoder_rejects_small_buffer);
-  RUN_TEST(test_encoder_rejects_node_zero);
-  RUN_TEST(test_status_names);
-  return UNITY_END();
 }

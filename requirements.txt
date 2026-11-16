@@ -20,9 +20,12 @@ fastapi==0.142.2
 uvicorn==0.54.0
 httpx==0.28.1
 
-# Legacy Streamlit analysis app (dashboard/)
+# Primary evidence dashboard (dashboard/)
 streamlit==1.65.0
 plotly==7.1.0
+
+# Gateway: USB RAK4631 radio bridge (--transport serial)
+pyserial==3.5
 
 # Tests
 pytest==9.1.1

@@ -6,7 +6,7 @@ Replay (no radio needed, fully reproducible):
 
 Live (CM4 + SX1262 HAT, or a USB RAK4631 bridge):
 
-    python -m gateway.service --mode live --transport spi --grid-profile 154
+    python -m gateway.service --mode live --transport spi
 
 Both modes use the same packet codec, dispatcher, reserve rule and logger. Replay writes
 ``gateway/data/gateway.sqlite`` plus CSVs and ``replay_summary.json``; live writes the

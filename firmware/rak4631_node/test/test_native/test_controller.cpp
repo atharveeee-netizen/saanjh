@@ -152,25 +152,3 @@ void test_reserve_ok_boundary() {
   TEST_ASSERT_FALSE(c.reserve_ok(70.0f));
   TEST_ASSERT_TRUE(c.reserve_ok(70.001f));
 }
-
-extern "C" void setUp(void) {}
-extern "C" void tearDown(void) {}
-
-int main(int, char**) {
-  UNITY_BEGIN();
-  RUN_TEST(test_accepts_above_reserve);
-  RUN_TEST(test_refuses_exactly_at_reserve);
-  RUN_TEST(test_refuses_below_reserve);
-  RUN_TEST(test_refuses_opted_out_even_at_full_soc);
-  RUN_TEST(test_refuses_without_sensor);
-  RUN_TEST(test_wrong_node_ignored);
-  RUN_TEST(test_cancel_opens_relay);
-  RUN_TEST(test_duplicate_does_not_extend_deadline);
-  RUN_TEST(test_expiry_stops_and_reports_completed);
-  RUN_TEST(test_reserve_stop_during_tick);
-  RUN_TEST(test_fault_stop_during_tick);
-  RUN_TEST(test_opt_out_stops_immediately);
-  RUN_TEST(test_duration_is_clamped);
-  RUN_TEST(test_reserve_ok_boundary);
-  return UNITY_END();
-}

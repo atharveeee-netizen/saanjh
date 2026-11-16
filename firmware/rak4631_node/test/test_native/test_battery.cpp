@@ -65,19 +65,3 @@ void test_soc_is_clamped() {
   TEST_ASSERT_TRUE(b.soc_pct() >= 0.0f);
   TEST_ASSERT_TRUE(b.soc_pct() <= 100.0f);
 }
-
-extern "C" void setUp(void) {}
-extern "C" void tearDown(void) {}
-
-int main(int, char**) {
-  UNITY_BEGIN();
-  RUN_TEST(test_ocv_curve_endpoints);
-  RUN_TEST(test_ocv_curve_is_monotonic);
-  RUN_TEST(test_boot_from_ocv);
-  RUN_TEST(test_low_voltage_is_implausible);
-  RUN_TEST(test_coulomb_counting_discharge);
-  RUN_TEST(test_coulomb_counting_charge);
-  RUN_TEST(test_rest_correction_moves_towards_ocv);
-  RUN_TEST(test_soc_is_clamped);
-  return UNITY_END();
-}

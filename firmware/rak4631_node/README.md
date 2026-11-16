@@ -124,7 +124,8 @@ to **opted out** (conservative). Hold again to opt back in.
 ## Test without hardware
 
 The protocol, controller and battery model are portable C++ and have native
-unit tests:
+unit tests. PlatformIO compiles every file under `test/` into one binary, so
+the three domains share `test/test_native/test_main.cpp`:
 
 ```bash
 pio test -e native
