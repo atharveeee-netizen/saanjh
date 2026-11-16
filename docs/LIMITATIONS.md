@@ -38,6 +38,11 @@ summary itself says its latency and loss are seeded draws.
   rather than faults is assumed at 0.5 and varied in sensitivity runs.
 * **Weather is reanalysis.** NASA POWER is a ~50 km grid, not a rooftop sensor.
   Hourly values are held flat within the hour.
+* **Forecast skill is modest.** The best model beats seasonal naive only
+  narrowly (MASE 0.99 vs 1.02 on the peri-urban DT; 0.83 vs 1.01 on the mixed
+  urban DT). The 80% P10–P90 interval covers only 68–69% of realised days, so
+  the intervals are too narrow. The dispatch results are therefore a test of
+  the mechanism, not proof that the forecast is production-grade.
 * **The annual `results.json` is deliberately frozen.** New analyses are
   separate bundles, so the headline cannot drift silently. Regenerating it
   requires `simulation/run_year.py` and the 30-seed run.
