@@ -70,13 +70,15 @@ uvicorn backend.main:app --port 8000     # optional API (the UI also runs on the
 
 ## Hardware prototype (Phase 1)
 
-The repository includes a working ≤12 V DC bench prototype, not just a
-simulation:
+The repository includes the firmware and gateway for a ≤12 V DC bench prototype,
+not just a simulation. The code builds and its logic is tested; the physical
+bench is not yet assembled:
 
-* **Three RAK4631 nodes** (nRF52840 + SX1262) with a LiFePO4 pack, an INA226
-  current sensor, a 12 V dummy load and a fail-safe relay. Telemetry every 10 s
-  over LoRa P2P at 865.0625 MHz; commands acknowledged; the node refuses to
-  discharge at or below **70% SoC** and on push-button opt-out.
+* **Three RAK4631 node images** (nRF52840 + SX1262), configured for a LiFePO4
+  pack, an INA226 current sensor, a 12 V dummy load and a fail-safe relay.
+  Telemetry every 10 s over LoRa P2P at 865.0625 MHz; commands acknowledged;
+  the node refuses to discharge at or below **70% SoC** and on push-button
+  opt-out.
 * **A CM4 + SX1262 gateway** that logs telemetry, commands, ACKs, dispatch and
   grid samples to CSV and SQLite, serves the Streamlit console, and replays a
   154 kW feeder stress profile.

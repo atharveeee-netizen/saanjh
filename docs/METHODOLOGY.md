@@ -19,7 +19,8 @@ The original prototype used RAKwireless WisBlock RAK4631 nodes (nRF52840 MCU, SX
 radio, 865–867 MHz licence-exempt band) at homes and a Raspberry Pi CM4 with an SX1262 HAT
 as the gateway. The current design relies first on the smart meters already being installed
 under RDSS for load limiting, and uses a LoRa relay node only at homes that offer inverter
-flexibility. No hardware build is part of this submission.
+flexibility. The Prototype Phase includes that bench prototype as firmware and gateway
+software; it has not yet been validated on physical hardware.
 
 ## Fail-safe principle
 

@@ -97,7 +97,8 @@ these constants.
 
 Frames are 19 B telemetry, 17 B command, 14 B ACK, with CRC-16/CCITT-FALSE.
 The three golden frames in `tests/test_protocol.py` and
-`test/test_protocol/test_protocol.cpp` are byte-identical across Python and C++.
+`firmware/rak4631_node/test/test_native/test_protocol.cpp` are byte-identical
+across Python and C++.
 
 ## Gateway pin map (CM4 + Waveshare SX1262 HAT)
 

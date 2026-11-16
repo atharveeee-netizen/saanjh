@@ -1,5 +1,10 @@
 # SAANJH project brief (source of truth for all work in this repo)
 
+> This is the Round 1 brief. The Prototype Phase additionally required a worked
+> hardware prototype, which is now included as firmware and gateway software
+> with a bench checklist in `docs/HARDWARE.md`. The "no hardware" line below is
+> the original Round 1 expectation, not the current deliverable.
+
 ## The hackathon
 Schneider Electric Yuva Yodha 2026, track "Grid Reliability & Renewable Intermittency".
 The solution must:

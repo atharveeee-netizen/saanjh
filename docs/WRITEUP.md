@@ -8,8 +8,12 @@ On the simulated peri-urban low-income DT (250 homes), homes kept their essentia
 
 Every number in this document is produced by code in this repository and rendered from
 `simulation/results/results.json`. Each input is labelled REAL DATA, CALIBRATED TO REAL
-DATA or SIMULATED (see `docs/DATA_SOURCES.md`). No hardware was built for this
-submission.
+DATA or SIMULATED (see `docs/DATA_SOURCES.md`). The annual results are simulated. The
+Prototype Phase also includes a ≤12 V bench prototype — RAK4631 nodes, a relay, a
+LiFePO4 pack and a CM4/SX1262 gateway — whose firmware and gateway logic are built and
+tested, but which has not yet been validated on physical hardware. The replay evidence
+in `gateway/data/` is seeded and labelled as such; there are no live radio measurements
+in this submission.
 
 ## 1. The problem
 
@@ -161,6 +165,8 @@ Household-hours of essential supply preserved per year: 12,814. Flexibility deli
 ![Essential-supply availability by segment](figures/availability_by_segment.svg)
 
 ![A shortfall evening on the peri-urban DT](figures/event_day_peri_urban_low_income.svg)
+
+![The Streamlit console rendering the committed reliability bundle](figures/streamlit_reliability.png)
 
 ### Sensitivity
 
@@ -347,7 +353,51 @@ One DT for three months, with a cooperating sub-division:
    feed, shortfall schedules in advance, a site for the battery, and a named
    sub-division engineer.
 
-## 12. Limitations and what we would validate next
+## 12. Hardware prototype: RAK4631 node and CM4 gateway
+
+The prototype closes the control path that the simulation assumes. It is a ≤12 V DC
+bench, with no mains wiring: a 12 V adapter plays the grid, a 4S LiFePO4 pack plays the
+home battery, and a 12 V dummy load plays the backed-up circuits.
+
+**Node.** A RAK4631 (nRF52840 + SX1262) on a RAK5005-O base measures battery voltage and
+current through an INA226, drives a relay through an IRLZ44N MOSFET, and exposes a
+push-button opt-out. The relay's **normally-closed contact is the grid path**; the battery
+is on the normally-open contact. Reset, firmware fault, missing sensor, opt-out, command
+expiry or a dead radio all de-energise the coil and return the load to grid. The node
+refuses a discharge command at or below **70.0% SoC**, and the gateway independently
+refuses to transmit one. The opt-out survives a power cycle because it is stored in
+flash. Three node images (101, 102, 103) build from the same source with different IDs.
+
+**Radio and protocol.** LoRa point-to-point at 865.0625 MHz, SF9, 125 kHz, coding rate
+4/5, sync word 0x1424, 14 dBm. Frames carry a 6-byte header (magic, version, type, node
+ID) and CRC-16/CCITT-FALSE: 19 B telemetry every 10 s, 17 B command and 14 B ACK. The
+same golden frames are tested in Python and C++. A duplicate command is acknowledged
+but does not extend its deadline, and the duration is clamped before it is accepted.
+
+**Gateway.** A Raspberry Pi CM4 with a Waveshare SX1262 HAT runs the Python service. It
+keeps a node registry, applies the reserve and opt-out rules in `gateway/safety.py`,
+and records every telemetry frame and command to CSV and SQLite for the Streamlit
+console. The SPI backend prefers LoRaRF-Python and falls back to the in-tree SX1262
+register driver. For demonstrations without radios, `--mode replay` drives the same
+command path over a 154 kW feeder profile with a fixed 2% packet loss.
+
+**What is verified.** All three firmware images link at 14,328 B RAM (5.8%) and 121,740 B
+flash (14.9%). Thirty-four native C++ tests cover the CRC check value and golden frames,
+bad-magic/CRC/short-frame rejection, the exact 70.0% boundary, opt-out refusal, expiry,
+duplicates, coulomb counting and OCV interpolation. A six-hour, three-node replay sends
+6,480 telemetry frames and receives 6,343 (**97.89%**), delivers 33 of 34 commands
+(**97.06%**), acknowledges with a mean latency of **154.2 ms** (p95 **220.5 ms**), and
+holds the SoC floor at **70.0%** with zero reserve breaches.
+
+**What is not verified.** No node has been assembled or measured on a bench yet, so
+`gateway/data/live_summary.json` does not exist and `docs/HARDWARE.md` has an empty
+evidence table. Every committed gateway number is a seeded replay, not a radio
+measurement. The replay also commands at most about 1.1 kW against a 154 kW feeder, so it
+exercises the control path, not the system benefit. Wiring, pin maps, the radio
+configuration and the seven-step bench checklist are in `docs/HARDWARE.md`; the BOM and
+the five-minute demo script are in `docs/BOM.md` and `docs/DEMO.md`.
+
+## 13. Limitations and what we would validate next
 
 - **Simulated demand:** results come from a calibrated simulation, not metered DT data.
   The eMARC calibration fits averages, not the full spread between homes.
@@ -362,8 +412,12 @@ One DT for three months, with a cooperating sub-division:
   household behaviour under the band (switching off heavy appliances) is assumed.
 - **Economics:** the economics use assumed prices with ranges. Second-life battery cost
   and degradation are the largest uncertainties.
+- **Hardware:** the bench prototype is specified, built in firmware and tested in native
+  code, but not assembled or measured. There is no live radio evidence and no bench
+  evidence table. The 70% refusal and fail-safe relay are proven in logic, not on a
+  physical pack. `docs/HARDWARE.md` lists the checks and the evidence still missing.
 
-## 13. References
+## 14. References
 
 - Prayas (Energy Group), electricity load patterns (eMARC): https://energy.prayaspune.org/electricity-load-patterns
 - Prayas (Energy Group), ESMI in Uttar Pradesh: https://energy.prayaspune.org/our-work/article-and-blog/esmi-in-uttar-pradesh
