@@ -31,6 +31,8 @@ def test_annual_rows_have_both_policies():
     assert rows["saanjh"].notna().all()
     availability = rows[rows["metric"] == "Essential supply availability"].iloc[0]
     assert availability["baseline"] < availability["saanjh"]
+    # The bundle stores a fraction; the dashboard must show a percentage.
+    assert 90.0 <= availability["saanjh"] <= 100.0
 
 
 def test_scorecard_and_robustness_are_populated():

@@ -168,7 +168,8 @@ def annual_rows(data: DashboardData, scenario: str) -> pd.DataFrame:
     baseline = block.get("baseline", {})
     saanjh = block.get("saanjh", {})
     rows = [
-        ("Essential supply availability", "essential_supply_availability", "%", 1.0),
+        # Stored as a fraction (0.986), displayed as a percentage.
+        ("Essential supply availability", "essential_supply_availability", "%", 100.0),
         ("Outage hours per home", "outage_hours_per_home", "h", 1.0),
         ("Outage hours inside deficit", "outage_hours_in_deficit_per_home", "h", 1.0),
         ("Banded (partial-service) hours", "banded_hours_per_home", "h", 1.0),
