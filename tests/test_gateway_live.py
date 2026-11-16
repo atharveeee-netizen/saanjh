@@ -20,6 +20,8 @@ class FakeRadio:
         self.sent = []
         self.acked = set()
         self.closed = False
+        self.summary_path = None
+        self.saw_summary = False
         self.telemetry = protocol.encode_telemetry(
             protocol.Telemetry(
                 node_id=101,
@@ -35,6 +37,8 @@ class FakeRadio:
 
     def recv(self, timeout_s=0.2):
         time.sleep(min(timeout_s, 0.02))  # keep the test loop from spinning
+        if self.summary_path is not None and self.summary_path.exists():
+            self.saw_summary = True
         if self.first:
             self.first = False
             return self.telemetry
@@ -66,6 +70,7 @@ class FakeRadio:
 
 def test_live_mode_logs_telemetry_command_and_ack(tmp_path, monkeypatch, capsys):
     radio = FakeRadio()
+    radio.summary_path = tmp_path / "live_summary.json"
     monkeypatch.setattr(service, "DATA_DIR", str(tmp_path))
     monkeypatch.setattr(service.lora_driver, "from_env", lambda transport: radio)
     monkeypatch.setattr(service.signal, "signal", lambda *args: None)
@@ -93,6 +98,7 @@ def test_live_mode_logs_telemetry_command_and_ack(tmp_path, monkeypatch, capsys)
     assert summary["soc_min_pct"] == 80.0
     assert summary["reserve_breaches"] == 0
     assert radio.closed
+    assert radio.saw_summary
 
     # The final transmissions are shutdown cancels, so no node is left energised.
     last = protocol.decode_command(protocol.decode_frame(radio.sent[-1]))
@@ -100,7 +106,9 @@ def test_live_mode_logs_telemetry_command_and_ack(tmp_path, monkeypatch, capsys)
 
     written = json.loads((tmp_path / "live_summary.json").read_text(encoding="utf-8"))
     assert written["mode"] == "live"
+    assert written["session_open"] is False
     assert written["commands_accepted"] >= 1
+    assert written["pending_commands_at_exit"] == 0
 
     db = sqlite3.connect(tmp_path / "gateway.sqlite")
     assert db.execute("select count(*) from telemetry").fetchone()[0] == 1

@@ -124,9 +124,11 @@ export SAANJH_RADIO_BACKEND=auto          # lorarf first, in-tree driver fallbac
 python -m gateway.service --mode live --transport spi --nodes 3
 ```
 
-The service writes the same CSVs, SQLite and `live_summary.json`. The dashboard
-switches to **🟢 LIVE LoRa evidence** when `gateway/data/live_summary.json`
-exists.
+The service writes the same CSVs and SQLite, and refreshes
+`live_summary.json` every 10 s so a running session is visible in the dashboard.
+The badge reads **🟢 LIVE LoRa evidence (session in progress)** while the run is
+open, then **🟢 LIVE LoRa evidence** after a clean shutdown. A crashed run still
+leaves the last partial summary, clearly marked as in progress.
 
 ### Gateway, USB RAK4631 bridge (Windows bench)
 
@@ -195,7 +197,7 @@ Expected replay headline:
 | Node not joining | check antenna, 865.0625 MHz, SF9, sync 0x1424, TCXO 1.8 V |
 | Relay chatters | check the 1N4007 flyback diode and the 10 kΩ gate pulldown |
 | Upload fails | double-tap reset for DFU, retry `pio run -e node101 -t upload` |
-| Live run has no summary | the service writes `live_summary.json` on clean shutdown; stop with Ctrl-C and wait |
+| Live run has no summary | the service refreshes `live_summary.json` every 10 s; stop with Ctrl-C and wait for the final write |
 
 Never demo with the battery below 70% and `SAANJH_ALLOW_NO_SENSOR=1`. That build
 flag disables the reserve and must not be used in a submission demo.

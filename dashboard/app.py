@@ -126,6 +126,8 @@ st.title("⚡ SAANJH — reliability, economics and hardware-in-the-loop")
 mode = data.mode
 badge = {"live": "🟢 LIVE LoRa evidence", "replay": "🟡 Replay evidence",
          "no gateway run": "⚪ No gateway run yet"}[mode]
+if data.live_summary.get("session_open"):
+    badge += " (session in progress)"
 st.caption(
     f"{badge} · {SCENARIO_LABELS[scenario_key]} · "
     f"{scenario.get('homes', 'n/a')} homes · {scenario.get('transformer_kva', 'n/a')} kVA DT · "
@@ -448,6 +450,8 @@ with tab_hil:
     else:
         kpi = replay_kpis(summary)
         source = "LIVE radio" if data.live_summary else "Seeded replay"
+        if data.live_summary.get("session_open"):
+            source += " (session in progress)"
         st.caption(f"{source} · {kpi['nodes']} nodes · {_num(kpi['hours'], 1, ' h')} · "
                    f"feeder peak {_num(kpi['profile_peak_kw'], 0, ' kW')}")
         _metric_row([

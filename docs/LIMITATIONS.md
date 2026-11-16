@@ -6,7 +6,7 @@ states exactly how far the evidence goes, so reviewers do not have to discover
 the gaps themselves.
 
 The one-line version: **the physics and control logic are tested; the household
-response, the feeder and the hardware at scale are modelled or bench-tested, not
+response, the feeder and the hardware at scale are modelled or logic-tested, not
 field-proven.**
 
 ## Evidence status

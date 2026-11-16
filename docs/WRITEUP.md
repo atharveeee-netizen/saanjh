@@ -379,7 +379,9 @@ keeps a node registry, applies the reserve and opt-out rules in `gateway/safety.
 and records every telemetry frame and command to CSV and SQLite for the Streamlit
 console. The SPI backend prefers LoRaRF-Python and falls back to the in-tree SX1262
 register driver. For demonstrations without radios, `--mode replay` drives the same
-command path over a 154 kW feeder profile with a fixed 2% packet loss.
+command path over a 154 kW feeder profile with a fixed 2% packet loss. While live, the
+service rewrites `live_summary.json` every 10 s, so the console can show an in-progress
+session and a crashed run still leaves the last snapshot instead of nothing.
 
 **What is verified.** All three firmware images link at 14,328 B RAM (5.8%) and 121,740 B
 flash (14.9%). Thirty-four native C++ tests cover the CRC check value and golden frames,

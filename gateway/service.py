@@ -454,6 +454,41 @@ def _handle_ack(ack, now, store, rec, pending):
                     f"status {ack.status}, SoC {ack.soc_pct}%")
 
 
+def _write_live_summary(rec, registry, args, start, pending, complete):
+    """Write live evidence atomically; a partial file is still honest evidence.
+
+    During a run the dashboard needs a summary before the process exits, and a
+    crashed run should leave the last snapshot rather than nothing. The final
+    write marks the session closed.
+    """
+    summary = rec.summary()
+    summary.update({
+        "mode": "live",
+        "label": "LIVE LoRa: measured on the gateway radio",
+        "transport": args.transport,
+        "start": start.isoformat(),
+        "updated": datetime.now(IST).isoformat(),
+        "session_open": not complete,
+        "nodes": [n.summary() for n in registry.all()],
+        "pending_commands_at_exit": len(pending) if complete else None,
+        "note": ("Latency and packet success are measured from the radio, not simulated."
+                 if complete else
+                 "Session in progress: this summary refreshes every 10 s."),
+    })
+    path = os.path.join(DATA_DIR, "live_summary.json")
+    tmp = path + ".tmp"
+    with open(tmp, "w", encoding="utf-8") as f:
+        json.dump(summary, f, indent=1, default=str)
+    try:
+        os.replace(tmp, path)
+    except OSError:
+        # A dashboard read can briefly hold the old file on Windows; never let
+        # evidence writing take the gateway down.
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(summary, f, indent=1, default=str)
+    return summary
+
+
 def run_live(args):
     if args.transport == "spi":
         driver = lora_driver.from_env("spi")
@@ -551,6 +586,7 @@ def run_live(args):
             rec.grid_after.append(max(0.0, grid_kw - relief))
             store.grid(now, grid_kw, relief)
             rec.delivered_kwh = sum(n.discharged_kwh for n in nodes)
+            _write_live_summary(rec, registry, args, start, pending, complete=False)
 
         # Mark silent nodes offline after 30 s without a packet.
         for n in registry.mark_stale(now):
@@ -565,15 +601,7 @@ def run_live(args):
                         f"Cancel sent to node {cmd.node_id}; relay returns to grid.")
         except Exception:
             pass
-    nodes = registry.all()
-    summary = rec.summary()
-    summary.update({"mode": "live", "label": "LIVE LoRa: measured on the gateway radio",
-                    "transport": args.transport, "start": start.isoformat(),
-                    "nodes": [n.summary() for n in nodes],
-                    "pending_commands_at_exit": len(pending),
-                    "note": "Latency and packet success are measured from the radio, not simulated."})
-    with open(os.path.join(DATA_DIR, "live_summary.json"), "w", encoding="utf-8") as f:
-        json.dump(summary, f, indent=1, default=str)
+    summary = _write_live_summary(rec, registry, args, start, pending, complete=True)
     store.close()
     driver.close()
     print(json.dumps(summary, indent=1))
