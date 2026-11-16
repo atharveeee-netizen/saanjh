@@ -1,0 +1,122 @@
+[
+  {
+    "feature": "load_kw",
+    "importance": 0.44981512427330017
+  },
+  {
+    "feature": "load_roll_mean_4",
+    "importance": 0.15932312607765198
+  },
+  {
+    "feature": "is_evening_peak",
+    "importance": 0.07937868684530258
+  },
+  {
+    "feature": "hour_load_interaction",
+    "importance": 0.060022808611392975
+  },
+  {
+    "feature": "peak_load_interaction",
+    "importance": 0.02903631515800953
+  },
+  {
+    "feature": "load_roll_max_4",
+    "importance": 0.02345113828778267
+  },
+  {
+    "feature": "load_roll_min_4",
+    "importance": 0.02037178725004196
+  },
+  {
+    "feature": "load_diff_1",
+    "importance": 0.016695326194167137
+  },
+  {
+    "feature": "cos_hour",
+    "importance": 0.012133671902120113
+  },
+  {
+    "feature": "load_roll_mean_96",
+    "importance": 0.010124596767127514
+  },
+  {
+    "feature": "sin_hour",
+    "importance": 0.008810525760054588
+  },
+  {
+    "feature": "load_lag_1",
+    "importance": 0.008623226545751095
+  },
+  {
+    "feature": "load_diff_4",
+    "importance": 0.007935360074043274
+  },
+  {
+    "feature": "load_ratio_daily",
+    "importance": 0.0076873707585036755
+  },
+  {
+    "feature": "load_lag_4",
+    "importance": 0.007478340528905392
+  },
+  {
+    "feature": "load_lag_3",
+    "importance": 0.007469425443559885
+  },
+  {
+    "feature": "sin_dow",
+    "importance": 0.007280388381332159
+  },
+  {
+    "feature": "load_lag_192",
+    "importance": 0.007252741139382124
+  },
+  {
+    "feature": "load_lag_2",
+    "importance": 0.0072354404255747795
+  },
+  {
+    "feature": "hour",
+    "importance": 0.006979651749134064
+  },
+  {
+    "feature": "load_roll_mean_12",
+    "importance": 0.006871761754155159
+  },
+  {
+    "feature": "load_lag_12",
+    "importance": 0.006841682363301516
+  },
+  {
+    "feature": "month",
+    "importance": 0.006801491137593985
+  },
+  {
+    "feature": "load_roll_std_4",
+    "importance": 0.006664840970188379
+  },
+  {
+    "feature": "load_diff_96",
+    "importance": 0.006346974056214094
+  },
+  {
+    "feature": "load_lag_96",
+    "importance": 0.006262336857616901
+  },
+  {
+    "feature": "is_weekend",
+    "importance": 0.006079890765249729
+  },
+  {
+    "feature": "load_lag_8",
+    "importance": 0.006072269752621651
+  },
+  {
+    "feature": "cos_dow",
+    "importance": 0.0055047739297151566
+  },
+  {
+    "feature": "day_of_week",
+    "importance": 0.005449041724205017
+  }
+]
