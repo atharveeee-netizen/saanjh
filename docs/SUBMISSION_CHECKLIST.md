@@ -37,7 +37,7 @@ Legend: ✅ done, ⚠️ partial, ⬜ not started.
 | Project brief | `docs/PROJECT_BRIEF.md` | Facts and ground rules |
 | Repository | `https://github.com/atharveeee-netizen/saanjh` | MIT licence |
 | Demo video | _to record_ | 3–5 min, follows `docs/DEMO.md` |
-| Dashboard screenshots | `docs/figures/` | Refresh if the UI changes |
+| Dashboard screenshots | `docs/figures/dashboard/` | One 1920×1080 image per tab, regenerate with `scripts/capture_dashboard.py` |
 | Architecture diagrams | `docs/architecture/*.svg` | Mermaid + SVG |
 | BOM | `docs/BOM.md` | Rough prices, labelled |
 | Limitations | `docs/LIMITATIONS.md` | Do not hide this |

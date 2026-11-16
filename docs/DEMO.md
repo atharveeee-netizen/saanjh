@@ -12,6 +12,57 @@ If the hardware does not cooperate, switch to replay without apologising. The
 replay evidence is clearly labelled and is still end-to-end through the packet
 codec.
 
+## Recording setup
+
+Target **1920×1080, 30 fps, one take**. The video should feel like a working
+demo, not a slide deck.
+
+* Run the dashboard at 100% browser zoom, full screen, with bookmarks hidden.
+* Put the terminal on a second desktop or behind the browser. Use a large font
+  (18 pt or more) and a dark background; the native-test output must be readable
+  at 1080p.
+* Open the architecture SVG in a third tab before recording so there is no
+  waiting on load.
+* Record a ten-second test and play it back. If the KPI text is not readable on
+  a phone, it will not be readable for a reviewer either.
+* Run the replay immediately before recording. If a number is stale, stop and
+  rerun it rather than editing the video.
+* Say the words **"simulated"** and **"replay evidence"** out loud. Never let a
+  replay look like a field measurement.
+
+Reset the evidence between takes:
+
+```bash
+python -m gateway.service --mode replay --nodes 3 --hours 6 \
+  --duration-min 45 --packet-loss 0.02
+```
+
+Then refresh the dashboard and confirm the badge is **🟡 Replay evidence**.
+
+## Shot list
+
+| Time | Screen | Action |
+|---|---|---|
+| 0:00–0:40 | Dashboard tab 1 | Headline row: 59% → 98%, 240 → 10.8 h |
+| 0:40–1:30 | Architecture SVG | Three layers and the fail-safe relay |
+| 1:30–2:30 | Tabs 1 and 2 | Reliability scorecard, then the energy correction |
+| 2:30–3:15 | Tab 3 | The three low-income routes and payback |
+| 3:15–4:00 | Tabs 4 and 5 | Packet loss, node dropout, Indian calibration |
+| 4:00–4:40 | Tab 6 + terminal | Replay badge, then 34 native tests |
+| 4:40–5:00 | Tab 1 or `LIMITATIONS.md` | Bench gap and the next step |
+
+Dashboard screenshots for the edit are in `docs/figures/dashboard/`. The
+architecture diagrams are `docs/architecture/system_architecture.svg` and
+`docs/architecture/deficit_event_sequence.svg`. Design mockups for the operator,
+household and field-app screens are in `docs/figures/ui_*.png`.
+
+Regenerate the tab screenshots after a UI change:
+
+```bash
+pip install playwright
+python scripts/capture_dashboard.py --url http://localhost:8501
+```
+
 ## Pre-flight (10 minutes before)
 
 ```bash
@@ -92,17 +143,36 @@ Dashboard tabs **4 · Overload & robustness** and **5 · India calibration**.
 > NASA POWER Lucknow 2023; load shapes are calibrated to Prayas eMARC; outages
 > to Prayas ESMI."
 
-### 4:00–5:00 — the hardware
+### 4:00–5:00 — the control path and the gap
 
-Dashboard tab **6 · HIL gateway**.
+Dashboard tab **6 · HIL gateway**, then a terminal.
 
-> "This is the physical loop: three RAK4631 nodes, a 12 V dummy load, a relay
-> that moves the load between a 12 V grid adapter and a battery, and a CM4
-> gateway with an SX1262 HAT. Telemetry every 10 seconds, commands acknowledged,
-> and the node refuses below 70% SoC or when the household presses opt-out."
+> "We built the node firmware and the CM4 gateway, but the physical bench is
+> not assembled yet. What is tested is the control path: the packet codec, the
+> exact 70% reserve, push-button opt-out, command expiry and the fail-safe relay
+> return. Thirty-four native tests cover those, and all three node images link.
+> The gateway tab you are looking at is a seeded replay, not a radio
+> measurement. We label it that way. The next step is the bench, then 20–50
+> homes on a measured feeder."
+
+Show the replay badge explicitly. Then run:
+
+```bash
+cd firmware/rak4631_node
+pio test -e native
+```
+
+Point at `34 Tests 0 Failures` and the three build sizes (5.8% RAM, 14.9%
+flash). If hardware is attached, use the live insert below instead.
+
+> "In the live build this is the physical loop: three RAK4631 nodes, a 12 V
+> dummy load, a relay that moves the load between a 12 V grid adapter and a
+> battery, and a CM4 gateway with an SX1262 HAT. Telemetry every 10 seconds,
+> commands acknowledged, and the node refuses below 70% SoC or when the
+> household presses opt-out."
 
 If live hardware is attached, show the serial monitor and the relay click. If
-not, say plainly:
+not, do not imply it is connected. Say plainly:
 
 > "The committed evidence is a seeded replay, not a radio measurement. The
 > firmware builds and 34 native tests cover the protocol, reserve and battery
