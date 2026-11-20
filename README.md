@@ -48,7 +48,7 @@ streamlit run dashboard/app.py           # evidence console at http://localhost:
 
 `run_all.py --quick` validates every result bundle, regenerates the six-hour
 hardware-in-the-loop replay, re-validates it, checks that the docs match
-`results.json`, and runs the test suite. The expected result is **91 passed**.
+`results.json`, and runs the test suite. The expected result is **95 passed**.
 
 The React console remains available as a secondary UI:
 
@@ -121,6 +121,7 @@ Prototype Phase submission.
 | `docs/OWNERSHIP_MODEL.md` | Ownership, O&M and unit economics |
 | `docs/SERVICE_BLUEPRINT.md` | Service blueprint, enrolment to complaints |
 | `docs/architecture/` | Architecture, event sequence, failure modes, data model, money flows (Mermaid + SVG) |
+| `.spec/` | Internal SDD notes: PRD, architecture, schema, rules and implementation tracker |
 | `simulation/` | Household fleet, mechanisms, dispatcher, year-long engine, metrics, economics |
 | `simulation/contracts.py` | Pydantic result and protocol contracts; exports `schemas/` |
 | `schemas/` | JSON Schema for every result bundle and protocol frame |
@@ -143,7 +144,7 @@ only). Details and limitations: [docs/DATA_SOURCES.md](docs/DATA_SOURCES.md).
 
 ## What this does and does not prove
 
-The control logic and safety interlocks are tested: 91 Python tests and 34
+The control logic and safety interlocks are tested: 95 Python tests and 34
 native C++ tests, including the exact 70.0% reserve boundary and the fail-safe
 relay state. The system-level benefit is **simulated** on inputs calibrated to
 NASA POWER, Prayas eMARC and Prayas ESMI. The hardware is a **≤12 V DC bench

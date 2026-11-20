@@ -46,6 +46,8 @@ patterns; see `docs/DATA_SOURCES.md`.
 Feeder voltages and line losses are computed with PyPSA's Newton–Raphson AC power flow on
 a radial low-voltage feeder model. The model is a simplification (balanced three-phase
 equivalent, lumped loads), and its assumptions are stated next to every result that uses it.
+A separate analytical check in `simulation/phase_unbalance.py` covers a single-hour
+three-phase imbalance case; it is not used in the annual results.
 
 ## Third-party components and licences
 

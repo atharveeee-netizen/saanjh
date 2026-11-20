@@ -27,9 +27,11 @@ summary itself says its latency and loss are seeded draws.
 
 ## Simulation limits
 
-* **One lumped feeder.** The power flow is a balanced LT feeder with a single
-  transformer. It does not model per-phase imbalance, voltage unbalance,
-  conductor temperature or protection coordination.
+* **One lumped feeder in the annual run.** The annual power flow is a balanced
+  LT feeder with a single transformer; it does not model voltage unbalance,
+  conductor temperature or protection coordination. A separate analytical
+  module, `simulation/phase_unbalance.py`, tests a single-hour phase-imbalance
+  case, but its result is not part of `results.json` or the dashboard.
 * **Synthetic households.** Appliances, ownership and behaviour come from a
   parameterised fleet, not from metered homes. The segment split below
   "middle" is an assumption.

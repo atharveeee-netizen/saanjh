@@ -14,13 +14,19 @@
 | **M2** | Strict Energy Balance Reconciliation | ✅ Done | Core Engine | `_identity_holds` validator passes in CI |
 | **M3** | Dual Safety Supervisor (Python + C++) | ✅ Done | Firmware/GW | 34 C++ Unity tests + `test_gateway_safety.py` |
 | **M4** | Pydantic Contract Layer & Schema Export | ✅ Done | Architecture | `python -m simulation.contracts` exits 0 |
-| **M5** | Streamlit 7-Tab Evidence Console | ✅ Done | Dashboard | Headless Playwright test passes |
-| **M6** | Python Test Suite (91 tests) | ✅ Done | QA | `pytest -q` reports 91 passed |
-| **M7** | 8-File Spec-Driven Development (`.spec/`) | ✅ Done | SYZYGY | All 8 SDD files created and linked |
-| **M8** | Cryptographic Protocol Extension (HMAC/AES) | 🔄 Next | Protocol | Frame validation with authentication token |
-| **M9** | 3-Phase Unbalanced Power Flow Extension | 🔄 Next | Simulation | Phase-wise neutral shift sensitivity run |
+| **M5** | Streamlit 7-Tab Evidence Console | ✅ Done | Dashboard | Headless Streamlit render test passes |
+| **M6** | Python Test Suite (95 tests) | ✅ Done | QA | `pytest -q` reports 95 passed |
+| **M7** | 8-File Spec-Driven Development (`.spec/`) | ✅ Done | SYZYGY | All 8 SDD files present in `.spec/` |
+| **M8** | Cryptographic Protocol Extension (HMAC) | 🟡 Exploratory | Protocol | HMAC and anti-replay primitives are unit-tested; not wired into the LoRa frame or gateway service |
+| **M9** | 3-Phase Unbalanced Power Flow Extension | 🟡 Exploratory | Simulation | `simulation/phase_unbalance.py` and its unit test cover a single-hour case; the annual `results.json` remains balanced-feeder |
 | **M10**| Physical Hardware Bench Audio/Video Evidence | ⏳ Pending | Hardware | 3x RAK4631 nodes bench recording |
 | **M11**| 3–5 Minute High-Impact Pitch Video | ⏳ Pending | Media | Follow `docs/DEMO.md` video runbook |
+
+**Scope note.** M8 and M9 are post-freeze exploratory modules. They are tested in
+isolation but are not part of the annual result bundle, the dashboard or the live
+radio path. The Prototype Phase gates in `docs/SUBMISSION_CHECKLIST.md` do not
+depend on them. M10 and M11 require physical hardware and a recorded video; both
+are external actions, not code deliverables.
 
 ## 2. YouNoodle Submission Package Deliverables
 - [x] Written Project Report (`docs/WRITEUP.md`)

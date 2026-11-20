@@ -24,8 +24,11 @@ on normal days.
 | Chronos-2 | Amazon's time-series foundation model, zero-shot, with temperature and solar availability as covariates |
 
 Everything runs on CPU. The UCI single-household XGBoost model in
-`artifacts/models/` (trained by `train_real_model.py` on French data) is kept only as
-the one-step forecaster of the legacy evening case and as a methodology benchmark.
+`artifacts/models/real_xgboost_model.pkl` (trained by `train_real_model.py` on French
+data) is kept only as the one-step forecaster of the legacy evening case and as a
+methodology benchmark. The same script also writes optional enhanced XGBoost,
+HistGradientBoosting and conformal-quantile artefacts under `artifacts/models/`; the
+annual simulation and dashboard do not load them.
 
 ## Accuracy (rolling origin)
 
